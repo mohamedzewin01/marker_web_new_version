@@ -14,15 +14,30 @@ class LayoutMobileView extends StatelessWidget {
     return BlocBuilder<LayoutCubit, LayoutState>(
       builder: (context, state) {
         return Scaffold(
-          body: AppConstants.viewOptions[cubit.index],
-          bottomNavigationBar: CustomBottomNavigationBar(
-            currentIndex: cubit.index,
-            onItemTapped: (index) {
-              cubit.changeIndex(index);
-            },
+          body: Stack(
+            children: [
+              IndexedStack(
+                index: cubit.index,
+                children: AppConstants.viewOptions,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: CustomBottomNavigationBar(
+                  currentIndex: cubit.index,
+                  onItemTapped: (index) {
+                    cubit.changeIndex(index);
+                  },
+                ),
+              ),
+            ],
           ),
         );
       },
     );
   }
 }
+
+
+
+
+

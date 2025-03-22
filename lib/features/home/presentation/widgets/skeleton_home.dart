@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fada_alhalij_web/features/home/data/models/response/HomeModelResponseDto.dart';
 import 'package:fada_alhalij_web/features/home/presentation/widgets/product_card_deal.dart';
 import 'package:fada_alhalij_web/features/home/presentation/widgets/search_text_filed.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/widgets/see_all_view.dart';
+import '../../data/models/response/home_model_response_dto.dart';
 import 'carousel.dart';
 import 'grid_categories.dart';
 
@@ -27,7 +27,7 @@ class SkeletonHome extends StatelessWidget {
               categories: List.generate(
                 8,
                 (index) =>
-                    Categories(imageCategory: '', nameCategoryAr: 'ssss'),
+                    Categories(categoryImage: '', categoryName: 'ssss'),
               ),
             ),
             SeeAllView(
@@ -37,22 +37,22 @@ class SkeletonHome extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  ProductCardWidget(
-                      product: Products(
-                          priceOld: 22,
-                          priceNew: 22,
-                          imageProduct: '',
-                          qunantity: 555,
-                          nameProduct: 'asssss',
-                          discount: 25)),
-                  ProductCardWidget(
-                      product: Products(
-                          priceOld: 22,
-                          priceNew: 22,
-                          imageProduct: '',
-                          qunantity: 555,
-                          nameProduct: 'asssss',
-                          discount: 25)),
+                  // ProductCardWidget(
+                  //     product: Products(
+                  //         priceOld: 22,
+                  //         priceNew: 22,
+                  //         imageProduct: '',
+                  //         qunantity: 555,
+                  //         nameProduct: 'asssss',
+                  //         discount: 25)),
+                  // ProductCardWidget(
+                  //     product: Products(
+                  //         priceOld: 22,
+                  //         priceNew: 22,
+                  //         imageProduct: '',
+                  //         qunantity: 555,
+                  //         nameProduct: 'asssss',
+                  //         discount: 25)),
                 ],
               ),
             )

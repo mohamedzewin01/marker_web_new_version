@@ -5,16 +5,16 @@ import 'package:get/get.dart';
 import 'package:fada_alhalij_web/features/home/presentation/widgets/product_detail.dart';
 
 import '../../../../core/resources/cashed_image.dart';
-import '../../data/models/response/HomeModelResponseDto.dart';
+import '../../data/models/response/home_model_response_dto.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  final Products product;
+  final ProductsBestDeals? product;
 
   const ProductCardWidget({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    log('${product.imageProduct}');
+    log('${product?.imageCover}');
     return Material(
       child: GestureDetector(
         onTap: () => Navigator.push(
@@ -34,7 +34,7 @@ class ProductCardWidget extends StatelessWidget {
               child: Column(
                 children: [
                   CustomImage(
-                    url: product.imageProduct ?? '',
+                    url: product?.imageCover ?? '',
                     width: 120,
                     height: 120,
                   ),
@@ -44,7 +44,7 @@ class ProductCardWidget extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      product.priceNew.toString(),
+                      product?.productPriceAfterDiscount.toString()??'',
                       style: TextStyle(
                         color: Color(0xffFF324B),
                         fontSize: 16,
@@ -56,7 +56,7 @@ class ProductCardWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        product.priceOld.toString(),
+                        product?.productPrice.toString()??'',
                         style: TextStyle(
                             decoration: TextDecoration.lineThrough,
                             color: Get.theme.colorScheme.primary,
@@ -67,7 +67,7 @@ class ProductCardWidget extends StatelessWidget {
                         width: 8,
                       ),
                       Text(
-                        "${product.discount}%",
+                        "${product?.descount}%",
                         style: TextStyle(
                             color: Color.fromARGB(255, 27, 133, 185),
                             fontSize: 10,
@@ -78,7 +78,7 @@ class ProductCardWidget extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      product.nameProduct ?? "????",
+                      product?.productName ?? "????",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.black,
@@ -111,7 +111,7 @@ class ProductCardWidget extends StatelessWidget {
                   padding: EdgeInsets.all(8),
                   child: Column(
                     children: [
-                      Text("${product.discount}%",
+                      Text("${product?.descount}%",
                           style: TextStyle(
                               fontSize: 8,
                               fontWeight: FontWeight.bold,

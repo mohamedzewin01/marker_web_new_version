@@ -1,3 +1,4 @@
+import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
@@ -27,7 +28,7 @@ class SeeAllView extends StatelessWidget {
         children: [
           Text(
             name,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: getSemiBoldStyle(color: ColorManager.black, fontSize: 18,),
           ),
           InkResponse(
             onTap: () {

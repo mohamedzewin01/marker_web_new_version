@@ -1,11 +1,18 @@
-import '../../data/models/response/HomeModelResponseDto.dart';
+
+import '../../data/models/response/home_model_response_dto.dart';
+
 
 class HomeEntity {
-  HomeEntity({
+
+  final String? status;
+
+  final Data? data;
+
+  HomeEntity ({
     this.status,
     this.data,
   });
 
-  String? status;
-  Data? data;
+
 }
+

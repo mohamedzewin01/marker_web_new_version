@@ -1,6 +1,10 @@
+import 'package:fada_alhalij_web/core/resources/app_constants.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
+import 'package:fada_alhalij_web/core/resources/color_manager.dart';
+import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../api/api_constants.dart';
 
 class CategoriesView extends StatelessWidget {
   const CategoriesView({
@@ -17,22 +21,30 @@ class CategoriesView extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
+          backgroundImage: NetworkImage(
+            '${ApiConstants.baseUrlImage}$imagePath',
+            scale: 2.5,
+          ),
           backgroundColor: Theme.of(context).cardColor,
           radius: 35,
           child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomImage(url: imagePath)),
-        ),
-        SizedBox(
-          height: 4,
-        ),
-        Center(
-          child: Text(
-            catName,
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-            textAlign: TextAlign.center,
+            padding: const EdgeInsets.all(2.0),
+            child: CustomImage(url: imagePath),
           ),
-        )
+        ),
+        SizedBox(height: 4),
+        Center(
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Text(
+              catName,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: getSemiBoldStyle(color: ColorManager.black, fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
       ],
     );
   }

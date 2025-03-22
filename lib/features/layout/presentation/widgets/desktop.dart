@@ -14,10 +14,10 @@ class DesktopLayout extends StatelessWidget {
         Expanded(
             flex: 1,
             child: Scaffold(
-              backgroundColor: ColorManager.white,
+              backgroundColor: ColorManager.primaryColor,
               body: Center(
                 child: Image.asset(
-                  Assets.imagesAppIcon,
+                  Assets.logo,
                   scale: 2.5,
                 ),
               ),
@@ -26,10 +26,10 @@ class DesktopLayout extends StatelessWidget {
         Expanded(
             flex: 1,
             child: Scaffold(
-              backgroundColor: ColorManager.white,
+              backgroundColor: ColorManager.primaryColor,
               body: Center(
                 child: Image.asset(
-                  Assets.imagesAppIcon,
+                  Assets.logo,
                   scale: 2.5,
                 ),
               ),

@@ -12,7 +12,7 @@ class HomeRepoImpl implements HomeRepo {
   HomeRepoImpl(this.homeDataSourceRepo);
 
   @override
-  Future<Result<HomeEntity?>> getHomeData(int idZone) {
-    return homeDataSourceRepo.getHomeData(idZone);
+  Future<Result<HomeEntity?>> getHomeData() {
+    return homeDataSourceRepo.getHomeData();
   }
 }

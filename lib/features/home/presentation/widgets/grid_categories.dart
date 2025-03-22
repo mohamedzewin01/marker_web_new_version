@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../../core/widgets/categories_view.dart';
-import '../../data/models/response/HomeModelResponseDto.dart';
+import '../../data/models/response/home_model_response_dto.dart';
 
 class GridCategories extends StatelessWidget {
   const GridCategories({
@@ -22,8 +22,8 @@ class GridCategories extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, mainAxisExtent: 85),
         itemBuilder: (context, index) => CategoriesView(
-            imagePath: categories[index].imageCategory ?? '',
-            catName: categories[index].nameCategory ?? ''),
+            imagePath: categories[index].categoryImage ?? '',
+            catName: categories[index].categoryName ?? ''),
       ),
     );
   }

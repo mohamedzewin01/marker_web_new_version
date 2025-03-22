@@ -3,22 +3,21 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
-
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../models/dto/cart.dart';
 import '../../../../views/common_widgets/appBar.dart';
-import '../../data/models/response/HomeModelResponseDto.dart';
+import '../../data/models/response/home_model_response_dto.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key, required this.product});
 
-  final Products product;
 
+  final ProductsBestDeals? product;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
-        title: Text(product.nameProduct ?? ''),
+        title: Text(product?.productName ?? ''),
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
           child: InkWell(
@@ -64,9 +63,9 @@ class ProductDetailScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Hero(
-                        tag: product.idProduct!,
+                        tag: product?.idProduct??'',
                         child: CustomImage(
-                          url: product.imageProduct ?? '',
+                          url: product?.imageCover ?? '',
                           width: 140,
                           height: 180,
                         ),
@@ -83,7 +82,7 @@ class ProductDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "${product.priceNew ?? 0.00} SAR",
+                          "${product?.productPriceAfterDiscount ?? 0.00} SAR",
                           style: TextStyle(
                             color: Color(0xffFF324B),
                             fontSize: 20,
@@ -94,7 +93,7 @@ class ProductDetailScreen extends StatelessWidget {
                           height: 14,
                         ),
                         Text(
-                          product.nameProduct ?? "????",
+                          product?.productName ?? "????",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.normal,
@@ -103,19 +102,19 @@ class ProductDetailScreen extends StatelessWidget {
                         SizedBox(
                           height: 14,
                         ),
-                        Text(
-                          "Quantity : ${product.qunantity}",
-                          style: TextStyle(
-                            color: Get.theme.primaryColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        // Text(
+                        //   "Quantity : ${product.}",
+                        //   style: TextStyle(
+                        //     color: Get.theme.primaryColor,
+                        //     fontSize: 14,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
                         SizedBox(
                           height: 14,
                         ),
                         Text(
-                          "tags: ${product.nameCategory}",
+                          "tags: ${product?.categoryName ?? ''}",
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.normal),
                         ),
@@ -152,7 +151,7 @@ class ProductDetailScreen extends StatelessWidget {
             flex: 0,
             child: Container(
               padding: const EdgeInsets.all(16.0),
-              color: Get.theme.cardColor.withOpacity(0.6),
+              color: Get.theme.cardColor.withAlpha(100),
               child: Column(
                 children: [
                   SizedBox(
@@ -170,7 +169,7 @@ class ProductDetailScreen extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
-                          Text("${product.priceNew ?? 10.00}",
+                          Text("${product?.productPriceAfterDiscount ?? 10.00}",
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.red,

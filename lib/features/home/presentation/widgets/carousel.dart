@@ -15,57 +15,99 @@ class Carousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> imageSliders =
-        imgList
-            .map(
-              (item) => ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                child: Stack(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width - 48,
-                      decoration: BoxDecoration(color: Colors.orange),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(18),
-                                  bottomLeft: Radius.circular(18),
-                                ),
-                                color: Colors.green,
-                                image: DecorationImage(
-                                  image: NetworkImage('https://img.freepik.com/free-vector/bright-origami-banners_23-2147508001.jpg?uid=R149659870&ga=GA1.1.427823544.1742272046&semt=ais_keywords_boost'), // استبدل 'src' برابط الصورة الصحيح
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-
-                          ),
-
-                          Container(
-                           width:  MediaQuery.of(context).size.width /2.5,
-                            decoration: BoxDecoration(
-                                color: Colors.orange,
-
-
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('اشتري الان',style: getSemiBoldStyle(color: Colors.white,fontSize: 18),),
-                              ],
-                            ),
-                          ),
-                        ],
+    final List<Widget> imageSliders =[
+      ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+      child: Stack(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width - 48,
+            decoration: BoxDecoration(color: Colors.orange),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(18),
+                        bottomLeft: Radius.circular(18),
+                      ),
+                      color: Colors.green,
+                      image: DecorationImage(
+                        image: NetworkImage('https://img.freepik.com/free-vector/bright-origami-banners_23-2147508001.jpg?uid=R149659870&ga=GA1.1.427823544.1742272046&semt=ais_keywords_boost'), // استبدل 'src' برابط الصورة الصحيح
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ],
+                  ),
+
                 ),
-              ),
-            )
-            .toList();
+
+                Container(
+                  width:  MediaQuery.of(context).size.width /2.5,
+                  decoration: BoxDecoration(
+                    color: Colors.orange,
+
+
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('اشتري الان',style: getSemiBoldStyle(color: Colors.white,fontSize: 18),),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+      ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+      child: Stack(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width - 48,
+            decoration: BoxDecoration(color: Colors.orange),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(18),
+                        bottomLeft: Radius.circular(18),
+                      ),
+                      color: Colors.green,
+                      image: DecorationImage(
+                        image: NetworkImage('https://img.freepik.com/free-vector/bright-origami-banners_23-2147508001.jpg?uid=R149659870&ga=GA1.1.427823544.1742272046&semt=ais_keywords_boost'), // استبدل 'src' برابط الصورة الصحيح
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+
+                ),
+
+                Container(
+                  width:  MediaQuery.of(context).size.width /2.5,
+                  decoration: BoxDecoration(
+                    color: Colors.orange,
+
+
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('اشتري الان',style: getSemiBoldStyle(color: Colors.white,fontSize: 18),),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    )];
     return RepaintBoundary(
       child: CarouselSlider(
         options: CarouselOptions(
