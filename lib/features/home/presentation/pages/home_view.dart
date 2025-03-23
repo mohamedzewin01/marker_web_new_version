@@ -78,7 +78,6 @@ class _HomeViewState extends State<HomeView> {
                               context: context,
                               name:
                                   '${AppLocalizations.of(context)!.category} 🛍️',
-
                               onTapAction: () {
                                 LayoutCubit.get(context).changeIndex(1);
                               },
@@ -91,7 +90,7 @@ class _HomeViewState extends State<HomeView> {
                               onTapAction: () {
                                 Navigator.pushNamed(
                                   context,
-                                  RoutesManager.allBestDealsView,
+                                  RoutesManager.allBestDealsView,arguments: bestDeals
                                 );
                               },
                             ),

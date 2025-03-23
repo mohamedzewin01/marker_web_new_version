@@ -3,6 +3,10 @@ class Assets {
   static const String logo = 'assets/images/logo.png';
   static const String categories = 'assets/images/categories.png';
   static const String home = 'assets/images/home.png';
+  static const String imagesRial =
+      'assets/images/rial.png';
+  static const String imagesImageDefault = 'assets/images/image_default.jpg';
+
 
   static const String imagesAddIcon = 'assets/images/add_icon.png';
   static const String imagesAppIcon = 'assets/images/app_icon.png';

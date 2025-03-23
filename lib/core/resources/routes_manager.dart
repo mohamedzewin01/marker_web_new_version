@@ -23,11 +23,11 @@ class RouteGenerator {
       case RoutesManager.splashScreen:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case RoutesManager.layout:
-        return MaterialPageRoute(builder: (_) => const LayoutScreen(),fullscreenDialog: true,);
+        return MaterialPageRoute(builder: (_) => const LayoutScreen());
       case RoutesManager.homeScreen:
-        return MaterialPageRoute(builder: (_) => const HomeView(),fullscreenDialog: true,);
+        return MaterialPageRoute(builder: (_) => const HomeView());
       case RoutesManager.allBestDealsView:
-        return MaterialPageRoute(builder: (_) => const AllBestDealsView(),fullscreenDialog: true,);
+        return MaterialPageRoute(builder: (_) => const AllBestDealsView(),);
 
 
 
