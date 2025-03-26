@@ -22,7 +22,11 @@ class _CategoriesState extends State<Categories> {
     viewModel = getIt.get<CategoriesCubit>();
     super.initState();
   }
-
+  @override
+  void dispose() {
+    viewModel.close();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

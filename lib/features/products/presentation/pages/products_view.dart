@@ -23,7 +23,11 @@ class _ProductsViewState extends State<ProductsView> {
     viewModel = getIt<ProductsCubit>();
     super.initState();
   }
-
+  @override
+  void dispose() {
+    viewModel.close();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -36,26 +40,30 @@ class _ProductsViewState extends State<ProductsView> {
                 [];
 
             List<ProductsRelations> productsList = products.reversed.toList();
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ClipRect(
-                child: GridView.builder(
-                  itemCount: productsList.length,
-                  physics: BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics(),
+            return Scaffold(
+              body:    Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ClipRect(
+                  child: GridView.builder(
+                    itemCount: productsList.length,
+                    physics: BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      mainAxisExtent: 210,
+                    ),
+                    itemBuilder:
+                        (context, index) =>
+                        CustomProductCardWidget(product: productsList[index]),
                   ),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    mainAxisExtent: 210,
-                  ),
-                  itemBuilder:
-                      (context, index) =>
-                          CustomProductCardWidget(product: productsList[index]),
                 ),
-              ),
+              ) ,
             );
+
+
           }
 
           return Center(child: CircularProgressIndicator());

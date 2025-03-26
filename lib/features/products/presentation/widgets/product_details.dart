@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
@@ -18,6 +20,8 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Hero Tag: ${product.idProduct}');
+
     return Scaffold(
       appBar: MyAppBar(
         title: Text(product.productName ?? ''),
@@ -46,22 +50,17 @@ class ProductDetails extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.elliptical(
-                          MediaQuery.of(context).size.width,
-                          140.0,
-                        ),
-                      ),
-                    ),
+
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 16.0,
+                        horizontal: 16,
+                      ),
                       child: Hero(
-                        tag: product.idProduct!,
-                        child: CustomImage(
-                          url: product.imageCover ?? '',
-                          width: 140,
-                          height: 180,
+                        tag: '${product.idProduct}55',
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: CustomImage(url: product.imageCover ?? ''),
                         ),
                       ),
                     ),
@@ -99,7 +98,22 @@ class ProductDetails extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        SizedBox(height: 32),
+                        SizedBox(height: 16),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                ' منتج مشابة 🛍️',
+                                style: getSemiBoldStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         ProductsRelation(
                           idCategory: product.categoryId.toString(),
                           idProduct: product.idProduct,
@@ -115,34 +129,26 @@ class ProductDetails extends StatelessWidget {
           Expanded(
             flex: 0,
             child: Container(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 6),
               color: ColorManager.primaryColor.withAlpha(100),
               child: Column(
                 children: [
-                  SizedBox(height: 8),
                   Row(
                     children: [
                       Column(
                         children: [
                           Text(
-                            "Total price (with tax)",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            "السعر ",
+                            style: getSemiBoldStyle(color: ColorManager.black, fontSize: 16,),
                           ),
-                          SizedBox(height: 4),
+
                           Text(
                             "${product.productPriceAfterDiscount ?? 10.00}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: getSemiBoldStyle(color: ColorManager.primaryColor, fontSize: 24,),
                           ),
                         ],
                       ),
-                      SizedBox(width: 8),
+
                     ],
                   ),
                 ],
@@ -188,8 +194,11 @@ class _ProductsRelationState extends State<ProductsRelation> {
             List<ProductsRelations> products =
                 state.productsModelEntity?.productsData?.productsRelations ??
                 [];
-            products.removeWhere((element) => element.idProduct == widget.idProduct);
-            return  SizedBox(
+            products.removeWhere(
+              (element) => element.idProduct == widget.idProduct,
+            );
+            return Container(
+              padding: EdgeInsets.all(8),
               height: 210,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -201,7 +210,16 @@ class _ProductsRelationState extends State<ProductsRelation> {
                       children: [
                         Row(
                           children: [
-                            GestureDetector(child: CustomProductCardWidget(product: products[index],)),
+                            GestureDetector(
+                              onTap: () {
+                                log('messagedddddddddddddddd');
+                                Navigator.pop(context);
+                              },
+
+                              child: CustomProductCardWidget2(
+                                product: products[index],
+                              ),
+                            ),
                             SizedBox(width: 8),
                           ],
                         ),
@@ -214,6 +232,148 @@ class _ProductsRelationState extends State<ProductsRelation> {
           }
           return SizedBox();
         },
+      ),
+    );
+  }
+}
+
+class CustomProductCardWidget2 extends StatelessWidget {
+  const CustomProductCardWidget2({super.key, this.product});
+
+  final ProductsRelations? product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder:
+                  (context) =>
+                      ProductDetails(product: product ?? ProductsRelations()),
+            ),
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Color(0xffF1F1F5)),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          width: (MediaQuery.of(context).size.width / 2) - 34,
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    CustomImage(
+                      url: product?.imageCover ?? '',
+                      width: 120,
+                      height: 120,
+                    ),
+                    SizedBox(height: 8),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        product?.productPriceAfterDiscount.toString() ?? '',
+                        style: TextStyle(
+                          color: Color(0xffFF324B),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          product?.productPrice.toString() ?? '',
+                          style: TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                            color: ColorManager.primaryColor,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          "${product?.descount}%",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 27, 133, 185),
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        product?.productName ?? "????",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: getSemiBoldStyle(
+                          color: ColorManager.black,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      product?.description ?? "",
+
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: getSemiBoldStyle(
+                        color: ColorManager.placeHolderColor2,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Positioned(
+              //   bottom: 48,
+              //   right: 0,
+              //   child: Padding(padding: const EdgeInsets.all(8.0)),
+              // ),
+              Positioned(
+                top: 0, // to shift little up
+                left: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: ColorManager.error,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                    ),
+                  ),
+                  padding: EdgeInsets.all(4),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "${product?.descount}%",
+                        style: getSemiBoldStyle(
+                          color: ColorManager.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        AppLocalizations.of(context)!.discount,
+                        style: getSemiBoldStyle(
+                          color: ColorManager.white,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
