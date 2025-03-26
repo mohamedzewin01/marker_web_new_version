@@ -4,8 +4,12 @@
   "name": "أحمد",
   "home": "الرئيسية",
   "appName": "فضاء الخليج",
-  "category": " الاقسام",
-  "bestDeals": "العروض",
-  "seeAll": "مشاهدة الكل"
+  "category": " القسم",
+  "categories": " الاقسام",
+  "bestDeals": "العروض \uD83D\uDD25",
+  "seeAll": "مشاهدة الكل",
+  "discount": "خصم",
+  "whatAreSearch": "ابحث هنا ..."
+
 
 }

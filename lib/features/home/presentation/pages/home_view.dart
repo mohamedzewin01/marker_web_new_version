@@ -41,83 +41,94 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => viewModel..getHomeData(),
-      child: Scaffold(
-        body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [AppBarBody()];
-          },
-          body: BlocBuilder<HomeCubit, HomeState>(
-            builder: (context, state) {
-              if (state is HomeSuccess) {
-                List<Categories>? categories =
-                    state.homeEntity?.data?.category?.categories ?? [];
-                List<ProductsBestDeals>? bestDeals =
-                    state
-                        .homeEntity
-                        ?.data
-                        ?.bestDeals
-                        ?.productsBestDeals
-                        ?.reversed
-                        .toList() ??
-                    [];
-                return RefreshIndicator(
-                  color: ColorManager.primaryColor,
-                  onRefresh: () => viewModel.getHomeData(),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SearchTextFiled(),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                          child: Carousel(),
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(height: 16),
-                            SeeAllView(
-                              context: context,
-                              name:
-                                  '${AppLocalizations.of(context)!.category} 🛍️',
-                              onTapAction: () {
-                                LayoutCubit.get(context).changeIndex(1);
-                              },
-                            ),
-                            SizedBox(height: 16),
-                            GridCategories(categories: categories),
-                            SeeAllView(
-                              context: context,
-                              name: "${AppLocalizations.of(context)!.bestDeals} 🔥",
-                              onTapAction: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  RoutesManager.allBestDealsView,arguments: bestDeals
-                                );
-                              },
-                            ),
-                            SizedBox(height: 12),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16),
-                              child: SizedBox(
-                                height: 210,
-                                child: BestDealsProductList(
-                                  bestDeals: bestDeals,
+      child: GestureDetector(
+        onTap:  () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          body: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [AppBarBody()];
+            },
+            body: BlocBuilder<HomeCubit, HomeState>(
+              builder: (context, state) {
+                if (state is HomeSuccess) {
+                  List<Categories>? categories =
+                      state.homeEntity?.data?.category?.categories ?? [];
+                  List<ProductsBestDeals>? bestDeals =
+                      state
+                          .homeEntity
+                          ?.data
+                          ?.bestDeals
+                          ?.productsBestDeals
+                          ?.reversed
+                          .toList() ??
+                      [];
+                  List<Banners> banners =
+                      state.homeEntity?.data?.banner?.banners ?? [];
+                  return RefreshIndicator(
+                    color: ColorManager.primaryColor,
+                    onRefresh: () => viewModel.getHomeData(),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 8,),
+                          SearchTextFiled(),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12),
+                            child: Carousel(banners: banners),
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(height: 8),
+                              SeeAllView(
+                                context: context,
+                                name:
+                                    '${AppLocalizations.of(context)!.category} 🛍️',
+                                onTapAction: () {
+                                  LayoutCubit.get(context).changeIndex(1);
+                                },
+                              ),
+                              SizedBox(height: 16),
+                              GridCategories(categories: categories),
+                              SeeAllView(
+                                context: context,
+                                name:
+                                    "${AppLocalizations.of(context)!.bestDeals} 🔥",
+                                onTapAction: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    RoutesManager.bestDealsAdaptive,
+                                    arguments: bestDeals,
+                                  );
+                                },
+                              ),
+                              SizedBox(height: 12),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                child: SizedBox(
+                                  height: 210,
+                                  child: BestDealsProductList(
+                                    bestDeals: bestDeals,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 16),
-                          ],
-                        ),
-                      ],
+
+                            ],
+                          ),
+
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }
-              if (state is HomeLoading) {
-                return SkeletonHome();
-              }
-              if (state is HomeFail) {}
-              return Text('error');
-            },
+                  );
+                }
+                if (state is HomeLoading) {
+                  return SkeletonHome();
+                }
+                if (state is HomeFail) {}
+                return Text('error');
+              },
+            ),
           ),
         ),
       ),

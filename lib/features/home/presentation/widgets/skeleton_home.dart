@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fada_alhalij_web/features/home/presentation/widgets/product_card_deal.dart';
 import 'package:fada_alhalij_web/features/home/presentation/widgets/search_text_filed.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
 import '../../../../core/widgets/see_all_view.dart';
 import '../../data/models/response/home_model_response_dto.dart';
-import 'carousel.dart';
 import 'grid_categories.dart';
 
 class SkeletonHome extends StatelessWidget {
@@ -20,7 +17,7 @@ class SkeletonHome extends StatelessWidget {
             SearchTextFiled(),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                child: Carousel()),
+                child: Container(height: 100,width: double.infinity-50,)),
             SeeAllView(
                 context: context, name: "Categories 🛍️", onTapAction: () {}),
             GridCategories(

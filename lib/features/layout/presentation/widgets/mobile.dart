@@ -23,6 +23,7 @@ class LayoutMobileView extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: CustomBottomNavigationBar(
+
                   currentIndex: cubit.index,
                   onItemTapped: (index) {
                     cubit.changeIndex(index);

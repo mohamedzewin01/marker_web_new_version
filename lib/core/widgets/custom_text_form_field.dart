@@ -240,7 +240,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: ColorManager.placeHolderColor,
-      style: const TextStyle(color: ColorManager.placeHolderColor),
+      style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 16),
       initialValue: initialValue,
       readOnly: enabled ?? false,
       controller: controller,
@@ -269,7 +269,7 @@ class CustomTextFormField extends StatelessWidget {
           fontSize: FontSize.s14,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding: const EdgeInsets.all(AppPadding.p8),
+        contentPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p14, vertical:   AppPadding.p8),
         enabledBorder: outLintInputBorderMethod(
           const BorderSide(
               color: ColorManager.placeHolderColor, width: AppSize.w1_5),

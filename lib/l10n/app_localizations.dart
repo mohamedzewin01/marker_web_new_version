@@ -122,13 +122,19 @@ abstract class AppLocalizations {
   /// No description provided for @category.
   ///
   /// In en, this message translates to:
-  /// **'categories'**
+  /// **'category'**
   String get category;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'categories'**
+  String get categories;
 
   /// No description provided for @bestDeals.
   ///
   /// In en, this message translates to:
-  /// **'Best Deals'**
+  /// **'Best Deals 🔥'**
   String get bestDeals;
 
   /// No description provided for @seeAll.
@@ -136,6 +142,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See All'**
   String get seeAll;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'off'**
+  String get discount;
+
+  /// No description provided for @whatAreSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'What are u looking for ?'**
+  String get whatAreSearch;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

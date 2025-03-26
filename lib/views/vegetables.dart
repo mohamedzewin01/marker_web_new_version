@@ -2,7 +2,7 @@
 // import 'package:get/get.dart';
 //
 // import '../domain/productViewModel.dart';
-// import '../features/home/presentation/widgets/product_card_deal.dart';
+// import '../features/home/presentation/widgets/custom_product_card.dart';
 // import '../generated/assets.dart';
 // import '../models/dto/product.dart';
 // import '../utils/myStates.dart';

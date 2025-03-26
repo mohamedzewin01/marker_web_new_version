@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'l10n/app_localizations.dart';
-import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
 import 'package:fada_alhalij_web/utils/myTheme.dart';
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: [
-              // Locale('en'),
+              Locale('en'),
               Locale('ar'),
             ],
             theme: AppThemes.lightTheme1,

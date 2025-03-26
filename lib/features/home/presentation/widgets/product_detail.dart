@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import '../../../../core/resources/assets_manager.dart';
-import '../../../../models/dto/cart.dart';
 import '../../../../views/common_widgets/appBar.dart';
 import '../../data/models/response/home_model_response_dto.dart';
 
@@ -42,14 +41,6 @@ class ProductDetailScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
-                        // gradient: LinearGradient(
-                        //     colors: [
-                        //       ColorManager.white,
-                        //       ColorManager.white2,
-                        //     ],
-                        //     begin: Alignment.topCenter,
-                        //     end: Alignment.bottomCenter),
-                        // color: Colors.white,
                         border: Border(
                             bottom: BorderSide(
                                 width: 4, color: ColorManager.primaryColor),
@@ -179,18 +170,7 @@ class ProductDetailScreen extends StatelessWidget {
                       SizedBox(
                         width: 8,
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: _buildCartActions(CartItem(
-                            id: '32',
-                            imagefrontsmallurl: '232',
-                            imagefronturl: 'imagefronturl',
-                            productname: 'productname',
-                            quantity: 'quantity',
-                            price: 'price',
-                            categories: 'categories',
-                            itemQuantity: 3)),
-                      )
+
                     ],
                   ),
                 ],
@@ -202,68 +182,5 @@ class ProductDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCartNoActions() {
-    return ElevatedButton(
-      onPressed: () {
-        // cartViewModel.addToCart(CartItem(
-        //   id: product.id,
-        //   productname: product.productname,
-        //   price: product.price,
-        //   quantity: product.quantity,
-        //   itemQuantity: 1,
-        //   imagefrontsmallurl: product.imagefrontsmallurl,
-        //   imagefronturl: product.imagefronturl,
-        //   categories: product.categories,
-        // ));
-      },
-      style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        shape: StadiumBorder(),
-        backgroundColor: Get.theme.primaryColor,
-      ),
-      child: Text(
-        "Add to cart",
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-  }
 
-  Widget _buildCartActions(CartItem cartItem) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        InkResponse(
-          onTap: () {
-            // cartViewModel.addToCart(cartItem);
-          },
-          child: Image.asset(
-            Assets.imagesAddIcon,
-            width: 40,
-            height: 40,
-          ),
-        ),
-        SizedBox(width: 20),
-        Text(
-          (cartItem.itemQuantity).toString(),
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(width: 20),
-        InkResponse(
-          onTap: () {
-            // cartViewModel.removeFromCart(cartItem);
-          },
-          child: Image.asset(
-            Assets.imagesRemoveIcon,
-            width: 40,
-            height: 40,
-          ),
-        ),
-      ],
-    );
-  }
 }

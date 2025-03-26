@@ -32,8 +32,8 @@ class CustomImage extends StatelessWidget {
   Widget build(BuildContext context) {
     // log('${ApiConstants.baseUrlImage}$url');
     return getFileExtensionFromUrl(url) == 'svg'
-        ? SvgPicture.network(
-            url.isNotEmpty ? '${ApiConstants.baseUrlImage}$url' : '',
+        ? SvgPicture.network(Uri.encodeFull( url.isNotEmpty ? '${ApiConstants.baseUrlImage}$url' : '',),
+
             fit: BoxFit.fill,
             placeholderBuilder: (context) => const Center(
               child: CircularProgressIndicator(),
@@ -42,7 +42,7 @@ class CustomImage extends StatelessWidget {
         : CachedNetworkImage(
             height: height,
             width: width ?? MediaQuery.sizeOf(context).width,
-            imageUrl: url.isNotEmpty ? '${ApiConstants.baseUrlImage}$url' : '',
+            imageUrl:Uri.encodeFull(url.isNotEmpty ? '${ApiConstants.baseUrlImage}$url' : '') ,
             fit: boxFit ?? BoxFit.fill,
             placeholder: (context, url) => const Center(
               child: CircularProgressIndicator(),

@@ -21,11 +21,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appName => 'فضاء الخليج';
 
   @override
-  String get category => ' الاقسام';
+  String get category => ' القسم';
 
   @override
-  String get bestDeals => 'العروض';
+  String get categories => ' الاقسام';
+
+  @override
+  String get bestDeals => 'العروض 🔥';
 
   @override
   String get seeAll => 'مشاهدة الكل';
+
+  @override
+  String get discount => 'خصم';
+
+  @override
+  String get whatAreSearch => 'ابحث هنا ...';
 }

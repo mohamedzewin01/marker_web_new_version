@@ -4,8 +4,11 @@
   "name": "Ahmed",
   "home": "home",
   "appName": "Fada Alhalij",
-  "category": "categories",
-  "bestDeals": "Best Deals",
-  "seeAll": "See All"
+  "category": "category",
+  "categories": "categories",
+  "bestDeals": "Best Deals \uD83D\uDD25",
+  "seeAll": "See All",
+  "discount": "off",
+  "whatAreSearch": "What are u looking for ?"
 
 }

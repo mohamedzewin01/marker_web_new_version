@@ -1,122 +1,123 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fada_alhalij_web/core/api/api_constants.dart';
+import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/resources/assets_manager.dart';
+import '../../data/models/response/home_model_response_dto.dart';
 
 class Carousel extends StatelessWidget {
-  Carousel({super.key});
+  const Carousel({super.key, required this.banners});
 
-  final List<AssetImage> imgList = [
-    AssetImage(Assets.imagesBanner1),
-    AssetImage(Assets.imagesBanner2),
-    AssetImage(Assets.imagesBanner3),
-  ];
+  final List<Banners> banners;
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> imageSliders =[
-      ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(16)),
-      child: Stack(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width - 48,
-            decoration: BoxDecoration(color: Colors.orange),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(18),
-                        bottomLeft: Radius.circular(18),
-                      ),
-                      color: Colors.green,
-                      image: DecorationImage(
-                        image: NetworkImage('https://img.freepik.com/free-vector/bright-origami-banners_23-2147508001.jpg?uid=R149659870&ga=GA1.1.427823544.1742272046&semt=ais_keywords_boost'), // استبدل 'src' برابط الصورة الصحيح
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+    // قائمة الألوان
+    final List<Color> colors = [
+      Colors.orange,
+      Colors.red,
+      Colors.blue,
+      Colors.green,
+      Colors.purple,
 
+    ];
+
+    // مولد عشوائي
+    final Random random = Random();
+
+    // بناء العناصر
+    final List<Widget> imageSliders = banners
+        .map(
+          (items) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          child: Stack(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width - 48,
+                decoration: BoxDecoration(
+                  // اختيار لون عشوائي من القائمة
+                  color: colors[random.nextInt(colors.length)],
                 ),
-
-                Container(
-                  width:  MediaQuery.of(context).size.width /2.5,
-                  decoration: BoxDecoration(
-                    color: Colors.orange,
-
-
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('اشتري الان',style: getSemiBoldStyle(color: Colors.white,fontSize: 18),),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-      ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(16)),
-      child: Stack(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width - 48,
-            decoration: BoxDecoration(color: Colors.orange),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(18),
-                        bottomLeft: Radius.circular(18),
-                      ),
-                      color: Colors.green,
-                      image: DecorationImage(
-                        image: NetworkImage('https://img.freepik.com/free-vector/bright-origami-banners_23-2147508001.jpg?uid=R149659870&ga=GA1.1.427823544.1742272046&semt=ais_keywords_boost'), // استبدل 'src' برابط الصورة الصحيح
-                        fit: BoxFit.cover,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(18),
+                            bottomLeft: Radius.circular(18),
+                          ),
+                          color: Colors.green,
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              '${ApiConstants.baseUrlImage}${items.bannersUrlImage}',
+                            ),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            items.bannersTitle ?? '',
+                            maxLines: 1,
+                            textDirection: TextDirection.rtl,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontFamily: GoogleFonts.cairo(
+                                fontWeight: FontWeight.w900,
+                              ).fontFamily,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            items.bannersDescription ?? '',
+                            maxLines: 1,
+                            textDirection: TextDirection.rtl,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontFamily: GoogleFonts.cairo(
+                                fontWeight: FontWeight.w900,
+                              ).fontFamily,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-
-                Container(
-                  width:  MediaQuery.of(context).size.width /2.5,
-                  decoration: BoxDecoration(
-                    color: Colors.orange,
-
-
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('اشتري الان',style: getSemiBoldStyle(color: Colors.white,fontSize: 18),),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
-    )];
+    )
+        .toList();
+
     return RepaintBoundary(
       child: CarouselSlider(
         options: CarouselOptions(
           viewportFraction: 0.9,
-          aspectRatio: 4,
+          aspectRatio: 4.5,
           enableInfiniteScroll: true,
-          initialPage: 2,
           autoPlay: false,
-          autoPlayInterval: Duration(seconds: 5),
+          autoPlayInterval: const Duration(seconds: 5),
         ),
         items: imageSliders,
       ),

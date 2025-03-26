@@ -1,6 +1,6 @@
+import 'package:fada_alhalij_web/features/home/domain/entities/home_entities.dart';
+import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import '../../../domain/entities/home_entities.dart';
 
 part 'home_model_response_dto.g.dart';
 
@@ -23,12 +23,9 @@ class HomeModelResponseDto {
   Map<String, dynamic> toJson() {
     return _$HomeModelResponseDtoToJson(this);
   }
-  HomeEntity toHomeEntity(){
-    return HomeEntity(
-      status: status,
-      data: data,
-    );
-  }
+
+  HomeEntity toHomeEntity() => HomeEntity(data: data ,status: status);
+
 }
 
 @JsonSerializable()
@@ -37,6 +34,8 @@ class Data {
   final String? status;
   @JsonKey(name: "store")
   final Store? store;
+  @JsonKey(name: "banner")
+  final Banner? banner;
   @JsonKey(name: "category")
   final Category? category;
   @JsonKey(name: "bestDeals")
@@ -45,6 +44,7 @@ class Data {
   Data ({
     this.status,
     this.store,
+    this.banner,
     this.category,
     this.bestDeals,
   });
@@ -56,7 +56,6 @@ class Data {
   Map<String, dynamic> toJson() {
     return _$DataToJson(this);
   }
-
 }
 
 @JsonSerializable()
@@ -86,6 +85,63 @@ class Store {
 
   Map<String, dynamic> toJson() {
     return _$StoreToJson(this);
+  }
+}
+
+@JsonSerializable()
+class Banner {
+  @JsonKey(name: "status")
+  final String? status;
+  @JsonKey(name: "banners")
+  final List<Banners>? banners;
+
+  Banner ({
+    this.status,
+    this.banners,
+  });
+
+  factory Banner.fromJson(Map<String, dynamic> json) {
+    return _$BannerFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return _$BannerToJson(this);
+  }
+}
+
+@JsonSerializable()
+class Banners {
+  @JsonKey(name: "banners_id")
+  final int? bannersId;
+  @JsonKey(name: "banners_url_image")
+  final String? bannersUrlImage;
+  @JsonKey(name: "banners_title")
+  final String? bannersTitle;
+  @JsonKey(name: "banners_description")
+  final String? bannersDescription;
+  @JsonKey(name: "banners_productId")
+  final int? bannersProductId;
+  @JsonKey(name: "banners_status")
+  final int? bannersStatus;
+  @JsonKey(name: "banners_created_at")
+  final String? bannersCreatedAt;
+
+  Banners ({
+    this.bannersId,
+    this.bannersUrlImage,
+    this.bannersTitle,
+    this.bannersDescription,
+    this.bannersProductId,
+    this.bannersStatus,
+    this.bannersCreatedAt,
+  });
+
+  factory Banners.fromJson(Map<String, dynamic> json) {
+    return _$BannersFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return _$BannersToJson(this);
   }
 }
 
@@ -222,6 +278,23 @@ class ProductsBestDeals {
   Map<String, dynamic> toJson() {
     return _$ProductsBestDealsToJson(this);
   }
+  ProductsRelations toProductsRelations() => ProductsRelations(
+      idProduct: idProduct,
+      productName: productName,
+      productPrice: productPrice,
+      description: description,
+      imageCover: imageCover,
+      productPriceAfterDiscount: productPriceAfterDiscount,
+      category: category,
+      descount: descount,
+      status: status,
+      dateDescount: dateDescount,
+      createdAt: createdAt,
+      categoryId: categoryId,
+      categoryName: categoryName,
+      categoryImage: categoryImage,
+      categoryStatus: categoryStatus,
+      categoryCreatAt: categoryCreatAt);
 }
 
 

@@ -26,6 +26,10 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       json['store'] == null
           ? null
           : Store.fromJson(json['store'] as Map<String, dynamic>),
+  banner:
+      json['banner'] == null
+          ? null
+          : Banner.fromJson(json['banner'] as Map<String, dynamic>),
   category:
       json['category'] == null
           ? null
@@ -39,6 +43,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
   'status': instance.status,
   'store': instance.store,
+  'banner': instance.banner,
   'category': instance.category,
   'bestDeals': instance.bestDeals,
 };
@@ -57,6 +62,39 @@ Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
   'store_descreption': instance.storeDescreption,
   'store_image': instance.storeImage,
   'store_discount_title': instance.storeDiscountTitle,
+};
+
+Banner _$BannerFromJson(Map<String, dynamic> json) => Banner(
+  status: json['status'] as String?,
+  banners:
+      (json['banners'] as List<dynamic>?)
+          ?.map((e) => Banners.fromJson(e as Map<String, dynamic>))
+          .toList(),
+);
+
+Map<String, dynamic> _$BannerToJson(Banner instance) => <String, dynamic>{
+  'status': instance.status,
+  'banners': instance.banners,
+};
+
+Banners _$BannersFromJson(Map<String, dynamic> json) => Banners(
+  bannersId: (json['banners_id'] as num?)?.toInt(),
+  bannersUrlImage: json['banners_url_image'] as String?,
+  bannersTitle: json['banners_title'] as String?,
+  bannersDescription: json['banners_description'] as String?,
+  bannersProductId: (json['banners_productId'] as num?)?.toInt(),
+  bannersStatus: (json['banners_status'] as num?)?.toInt(),
+  bannersCreatedAt: json['banners_created_at'] as String?,
+);
+
+Map<String, dynamic> _$BannersToJson(Banners instance) => <String, dynamic>{
+  'banners_id': instance.bannersId,
+  'banners_url_image': instance.bannersUrlImage,
+  'banners_title': instance.bannersTitle,
+  'banners_description': instance.bannersDescription,
+  'banners_productId': instance.bannersProductId,
+  'banners_status': instance.bannersStatus,
+  'banners_created_at': instance.bannersCreatedAt,
 };
 
 Category _$CategoryFromJson(Map<String, dynamic> json) => Category(

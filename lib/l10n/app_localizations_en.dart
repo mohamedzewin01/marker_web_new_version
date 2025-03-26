@@ -21,11 +21,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'Fada Alhalij';
 
   @override
-  String get category => 'categories';
+  String get category => 'category';
 
   @override
-  String get bestDeals => 'Best Deals';
+  String get categories => 'categories';
+
+  @override
+  String get bestDeals => 'Best Deals 🔥';
 
   @override
   String get seeAll => 'See All';
+
+  @override
+  String get discount => 'off';
+
+  @override
+  String get whatAreSearch => 'What are u looking for ?';
 }

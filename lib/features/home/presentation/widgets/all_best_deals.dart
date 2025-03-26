@@ -1,191 +1,157 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fada_alhalij_web/core/widgets/custom_riyal_saudi.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_product_card.dart';
+import 'package:fada_alhalij_web/l10n/app_localizations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../core/api/api_constants.dart';
-import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/style_manager.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../data/models/response/home_model_response_dto.dart';
 
-class AllBestDealsView extends StatelessWidget {
+class AllBestDealsView extends StatefulWidget {
   const AllBestDealsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<ProductsBestDeals>? bestDeals = ModalRoute.of(context)?.settings.arguments as List<ProductsBestDeals>?;
-
-    return Scaffold(
-      // backgroundColor: Colors.orange,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          int crossAxisCount =
-              constraints.maxWidth > 900
-                  ? 5
-                  : constraints.maxWidth > 700
-                  ? 3
-                  : 2;
-          return CustomScrollView(
-            slivers: [
-              SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => BestDealsItems(bestDeals: bestDeals?[index],),
-                ),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  mainAxisExtent: 100,
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
+  State<AllBestDealsView> createState() => _AllBestDealsViewState();
 }
 
-class BestDealsItems extends StatelessWidget {
-  const BestDealsItems({super.key, required this.bestDeals, });
-  final ProductsBestDeals? bestDeals;
+class _AllBestDealsViewState extends State<AllBestDealsView> {
+  List<ProductsBestDeals>? filteredProducts;
+  List<ProductsBestDeals>? bestDeals;
+  String query = "";
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        bestDeals =
+            ModalRoute.of(context)?.settings.arguments
+                as List<ProductsBestDeals>?;
+        filteredProducts = bestDeals;
+      });
+    });
+  }
+
+  void updateSearch(String searchQuery) {
+    setState(() {
+      query = searchQuery;
+      if (searchQuery.isEmpty) {
+        filteredProducts = bestDeals;
+      } else {
+        filteredProducts =
+            bestDeals
+                ?.where(
+                  (product) =>
+                      product.productName!.toLowerCase().contains(
+                        searchQuery.toLowerCase(),
+                      ) ||
+                      product.description!.toLowerCase().contains(
+                        searchQuery.toLowerCase(),
+                      ),
+                )
+                .toList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    return GestureDetector(
-      onTap: (){},
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: ColorManager.placeHolderColor),
-                borderRadius: BorderRadius.circular(0)),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    clipBehavior: Clip.antiAlias,
-                    padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12),
-                      ),
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: CachedNetworkImage(
-                        imageUrl:
-                        '${ApiConstants.baseUrlImage}${bestDeals?.imageCover}',
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) => Skeletonizer(
-                            child: Image.asset(
-                              Assets.imagesImageDefault,
-                            )),
-                        errorWidget: (context, url, error) => Image.asset(
-                          Assets.imagesImageDefault,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                  ),
+    return SafeArea(
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          // backgroundColor: Colors.orange,
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              int crossAxisCount =
+                  constraints.maxWidth > 900
+                      ? 5
+                      : constraints.maxWidth > 700
+                      ? 3
+                      : 2;
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 14,
                 ),
-                Column(
+                child: Column(
                   children: [
-                    Text(
-                      'product.productName ?? ''',
-                      overflow: TextOverflow.ellipsis,
-                      textDirection: TextDirection.rtl,
-                      style: getSemiBoldStyle(
-                        color: ColorManager.black,
-                        fontSize: 14,
-                      ),
-                      maxLines: 1,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text('',
-                              textDirection: TextDirection.rtl,
-                              maxLines: 1,
-                              textAlign: TextAlign.right,
-                              overflow: TextOverflow.ellipsis,
+                    Expanded(
+                      child: CustomScrollView(
+                        slivers: [
+                          SliverAppBar(
+                            automaticallyImplyLeading: false,
+                            backgroundColor: Colors.transparent,
+                            elevation: 10,
+                            pinned: true,
+                            title: Text(
+                              AppLocalizations.of(context)?.bestDeals ?? '',
                               style: getSemiBoldStyle(
-                                color: ColorManager.primary,
-                                fontSize: 12,
+                                color: ColorManager.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                            actions: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(Icons.arrow_forward_ios, size: 22),
+                              ),
+                            ],
+                          ),
+
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: CustomTextFormField(
+                                controller: searchController,
+                                hintText:
+                                    AppLocalizations.of(context)?.whatAreSearch,
+                                // enabled: false,
+                                onChanged: (value) {
+                                  updateSearch(value);
+                                },
+                                suffix: Icon(
+                                  Icons.search,
+                                  color: ColorManager.placeHolderColor2,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Divider(
-                      color: ColorManager.placeHolderColor,
-                    ),
-                    IntrinsicHeight(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const CustomRiyalSaudi(
-                                color: ColorManager.primary,
-                                size: 12,
+                          SliverToBoxAdapter(child: SizedBox(height: 16)),
+
+                          SliverGrid(
+                            delegate: SliverChildBuilderDelegate(
+                              childCount: filteredProducts?.length,
+                              (context, index) => CustomProductCardWidget(
+                                product:
+                                    filteredProducts?[index]
+                                        .toProductsRelations(),
                               ),
-                              const SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                '30',
-                                style: const TextStyle(
-                                  color: ColorManager.primary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                  decoration: TextDecoration.lineThrough,
-                                  decorationColor: ColorManager.primary,
-                                  decorationThickness: 2,
+                            ),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: crossAxisCount,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10,
+                                  mainAxisExtent: 210,
                                 ),
-                              ),
-                            ],
-                          ),
-                          // product.productPrice != 0
-                          //     ? VerticalDivider(
-                          //   color: ColorManager.placeHolderColor,
-                          // )
-                          //     : SizedBox(),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CustomRiyalSaudi(),
-                              const SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                '55',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 16,
-                                    color: ColorManager.error),
-                              ),
-                            ],
                           ),
                         ],
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
-
-
-        ],
+        ),
       ),
     );
   }
