@@ -157,20 +157,22 @@ $details
 //     }
 //   }
 
-
   static Future<void> launchUrlShareWeb({
     required String title,
     required String urlPreview,
     String? details,
     String? phone,
   }) async {
+    Uri url = Uri.parse('${ApiConstants.baseUrlImage}$urlPreview');
     if (kIsWeb) {
       // دعم للويب
       final shareText = '''
           ${title.trim()}
           $details
+          
           $phone
           ---------------
+          
           تطبيق فضاء الخليج
           https://marketfadaalhalij.artawiya.com/
           ''';

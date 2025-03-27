@@ -10,8 +10,10 @@ import 'package:fada_alhalij_web/features/products/presentation/cubit/products_c
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/di/di.dart';
+import '../../../../core/resources/assets_manager.dart';
 import '../../../../views/common_widgets/appBar.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -160,16 +162,26 @@ class ProductDetails extends StatelessWidget {
                         ],
                       ),
                       Spacer(),
-                      IconButton(
-                        onPressed: () {
-                          CustomLaunchUrl.launchUrlShare(
-                            title: product.productName ?? '',
-                            urlPreview: product.imageCover ?? '',
-                            details: product.description ?? '',
+                      Container(
 
-                          ); //CustomLaunchUrl
-                        },
-                        icon: Icon(Icons.share, color: ColorManager.primaryColor),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ColorManager.white,
+                          border: Border.all(color: Colors.white),
+
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            CustomLaunchUrl.launchUrlShareApp(
+                              title: product.productName ?? '',
+                              urlPreview: product.imageCover ?? '',
+                              details: product.description ?? '',
+
+                            ); //CustomLaunchUrl
+                          },
+                          icon:  SvgPicture.asset(Assets.share,
+                            colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),width: 30,height: 30,),
+                        ),
                       ),
                     ],
                   ),

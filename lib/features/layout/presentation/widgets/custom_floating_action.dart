@@ -1,8 +1,10 @@
 import 'package:fada_alhalij_web/core/functions/launch_url.dart';
+import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomFloatingAction extends StatelessWidget {
   const CustomFloatingAction({
@@ -16,7 +18,8 @@ class CustomFloatingAction extends StatelessWidget {
       child: FloatingActionButton(
         mini: true,
         backgroundColor: ColorManager.primaryColor,
-        child: const Icon(Icons.add, color: Colors.white),
+        child: SvgPicture.asset(Assets.share,
+          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),width: 30,height: 30,),
         onPressed: () async {
           await showDialog(
             context: context,
