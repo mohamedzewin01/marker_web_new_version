@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:fada_alhalij_web/core/functions/launch_url.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
@@ -47,15 +48,10 @@ class ProductDetails extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(vertical: 8),
-
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 16.0,
-                        horizontal: 16,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Hero(
                         tag: '${product.idProduct}55',
                         child: AspectRatio(
@@ -65,7 +61,6 @@ class ProductDetails extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
@@ -73,11 +68,11 @@ class ProductDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "${product.productPriceAfterDiscount ?? 0.00} SAR",
+                          "${product.productPriceAfterDiscount ?? 0.00} ريال ",
                           style: TextStyle(
                             color: Color(0xffFF324B),
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w900,
                           ),
                         ),
                         SizedBox(height: 14),
@@ -89,13 +84,25 @@ class ProductDetails extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 14),
-
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            product.description ?? "????",
+                            style: getSemiBoldStyle(
+                              color: ColorManager.placeHolderColor2,
+                              fontSize: 22,
+                            ),
+                          ),
+                        ),
                         SizedBox(height: 14),
-                        Text(
-                          "${AppLocalizations.of(context)?.category}: ${product.categoryName}",
-                          style: getSemiBoldStyle(
-                            color: ColorManager.primaryColor,
-                            fontSize: 16,
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "${AppLocalizations.of(context)?.category}: ${product.categoryName}",
+                            style: getSemiBoldStyle(
+                              color: ColorManager.primaryColor,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                         SizedBox(height: 16),
@@ -125,11 +132,10 @@ class ProductDetails extends StatelessWidget {
               ),
             ),
           ),
-
           Expanded(
             flex: 0,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
               color: ColorManager.primaryColor.withAlpha(100),
               child: Column(
                 children: [
@@ -139,16 +145,32 @@ class ProductDetails extends StatelessWidget {
                         children: [
                           Text(
                             "السعر ",
-                            style: getSemiBoldStyle(color: ColorManager.black, fontSize: 16,),
+                            style: getSemiBoldStyle(
+                              color: ColorManager.black,
+                              fontSize: 16,
+                            ),
                           ),
-
                           Text(
-                            "${product.productPriceAfterDiscount ?? 10.00}",
-                            style: getSemiBoldStyle(color: ColorManager.primaryColor, fontSize: 24,),
+                            "${product.productPriceAfterDiscount} ريال",
+                            style: getSemiBoldStyle(
+                              color: ColorManager.primaryColor,
+                              fontSize: 26,
+                            ),
                           ),
                         ],
                       ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          CustomLaunchUrl.launchUrlShare(
+                            title: product.productName ?? '',
+                            urlPreview: product.imageCover ?? '',
+                            details: product.description ?? '',
 
+                          ); //CustomLaunchUrl
+                        },
+                        icon: Icon(Icons.share, color: ColorManager.primaryColor),
+                      ),
                     ],
                   ),
                 ],
@@ -212,7 +234,6 @@ class _ProductsRelationState extends State<ProductsRelation> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                log('messagedddddddddddddddd');
                                 Navigator.pop(context);
                               },
 

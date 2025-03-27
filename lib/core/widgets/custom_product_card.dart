@@ -45,8 +45,8 @@ class CustomProductCardWidget extends StatelessWidget {
                     children: [
                       CustomImage(
                         url: product?.imageCover ?? '',
-                        width: 120,
-                        height: 120,
+                        width: 110,
+                        height: 110,
                       ),
                       SizedBox(height: 8),
                       Container(

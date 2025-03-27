@@ -43,15 +43,11 @@ class CacheService {
 
 class CacheConstants {
   static const String defaultLanguage = 'defaultLanguage';
-  static const String userToken = 'userToken';
-  static const String userFirstName = 'userFirstName';
-  static const String userLastName = 'userLastName';
-  static const String userEmail = 'userEmail';
-  static const String userPhone = 'userPhone';
-  static const String age = 'age';
-  static const String weight = 'weight';
-  static const String height = 'height';
-  static const String activityLevel = 'activityLevel';
-  static const String goal = 'goal';
+
   static const String userImage = 'userImage';
+  static const String storeName = 'storeName';
+  static const String storeUrlImage = 'storeUrlImage';
+  static const String storeDescription = 'storeDescription';
+  static const String storePhone = 'storePhone';
+  static const String storeId = 'storeId';
 }

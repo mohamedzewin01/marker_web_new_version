@@ -220,7 +220,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.initialValue,
     this.onChanged,
-    this.inputAction,
+    this.inputAction, this.onTap,
   });
 
   final TextEditingController controller;
@@ -235,10 +235,12 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction? inputAction;
   final void Function(String)? onChanged;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap:onTap ,
       cursorColor: ColorManager.placeHolderColor,
       style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 16),
       initialValue: initialValue,

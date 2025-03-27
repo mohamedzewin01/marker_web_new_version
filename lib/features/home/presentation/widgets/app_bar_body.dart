@@ -1,4 +1,5 @@
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/features/home/data/models/response/home_model_response_dto.dart';
 import 'package:fada_alhalij_web/localization/locale_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,13 +8,13 @@ import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 
 class AppBarBody extends StatelessWidget {
-  const AppBarBody({super.key});
-
+  const AppBarBody({super.key,  this.store});
+final Store? store;
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       title: Text(
-        'فضاء الخليج',
+        store?.storeName ?? '',
         style: getSemiBoldStyle(color: ColorManager.primaryColor, fontSize: 18),
       ),
       centerTitle: true,

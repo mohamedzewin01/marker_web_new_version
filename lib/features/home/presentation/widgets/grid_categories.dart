@@ -15,7 +15,7 @@ class GridCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 160,
+      height: 180,
       // color: ColorManager.primaryColor,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,
@@ -33,7 +33,7 @@ class GridCategories extends StatelessWidget {
                 Navigator.pushNamed(
                   context,
                   RoutesManager.categoriesAdaptive,
-                  arguments: categories[index].categoryId,
+                  arguments: categories[index],
                 );
 
               },

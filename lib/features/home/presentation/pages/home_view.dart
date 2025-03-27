@@ -1,10 +1,12 @@
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
+import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:fada_alhalij_web/features/home/presentation/widgets/skeleton_home.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import '../../../../core/di/di.dart';
+import '../../../../core/functions/launch_url.dart';
 import '../../../../core/widgets/see_all_view.dart';
 import '../../../layout/presentation/cubit/layout_cubit.dart';
 import '../../data/models/response/home_model_response_dto.dart';
@@ -41,36 +43,33 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => viewModel..getHomeData(),
-      child: GestureDetector(
-        onTap:  () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
-          body: NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [AppBarBody()];
-            },
-            body: BlocBuilder<HomeCubit, HomeState>(
-              builder: (context, state) {
-                if (state is HomeSuccess) {
-                  List<Categories>? categories =
-                      state.homeEntity?.data?.category?.categories ?? [];
-                  List<ProductsBestDeals>? bestDeals =
-                      state
-                          .homeEntity
-                          ?.data
-                          ?.bestDeals
-                          ?.productsBestDeals
-                          ?.reversed
-                          .toList() ??
-                      [];
-                  List<Banners> banners =
-                      state.homeEntity?.data?.banner?.banners ?? [];
-                  return RefreshIndicator(
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          if (state is HomeSuccess) {
+            List<Categories>? categories =
+                state.homeEntity?.data?.category?.categories ?? [];
+            List<ProductsBestDeals>? bestDeals =
+                state.homeEntity?.data?.bestDeals?.productsBestDeals?.reversed
+                    .toList() ??
+                [];
+            Store? store = state.homeEntity?.data!.store;
+            List<Banners> banners =
+                state.homeEntity?.data?.banner?.banners ?? [];
+
+            return GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: Scaffold(
+                body: NestedScrollView(
+                  headerSliverBuilder: (context, innerBoxIsScrolled) {
+                    return [AppBarBody(store: store)];
+                  },
+                  body: RefreshIndicator(
                     color: ColorManager.primaryColor,
                     onRefresh: () => viewModel.getHomeData(),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          SizedBox(height: 8,),
+                          SizedBox(height: 8),
                           SearchTextFiled(),
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
@@ -101,36 +100,30 @@ class _HomeViewState extends State<HomeView> {
                                   );
                                 },
                               ),
-                              SizedBox(height: 12),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                ),
-                                child: SizedBox(
-                                  height: 210,
-                                  child: BestDealsProductList(
-                                    bestDeals: bestDeals,
-                                  ),
-                                ),
-                              ),
 
+                              BestDealsProductList(
+                                bestDeals: bestDeals,
+                              ),
                             ],
                           ),
-
                         ],
                       ),
                     ),
-                  );
-                }
-                if (state is HomeLoading) {
-                  return SkeletonHome();
-                }
-                if (state is HomeFail) {}
-                return Text('error');
-              },
-            ),
-          ),
-        ),
+                  ),
+                ),
+              ),
+            );
+          }
+
+          if (state is HomeLoading) {
+            return SkeletonHome();
+          }
+          if (state is HomeFail) {}
+          if (state is HomeLoading) {
+            return SkeletonHome();
+          }
+          return Text('error');
+        },
       ),
     );
   }

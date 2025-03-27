@@ -20,8 +20,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      elevation: 0,
-      backgroundColor: ColorManager.white.withAlpha(200),
+      elevation: 6,
+      backgroundColor: ColorManager.white.withAlpha(240),
       items: [
         BottomNavigationBarItem(
           icon: buildIcon(Assets.home, 0, currentIndex),
@@ -32,9 +32,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: AppLocalizations.of(context)!.category,
         ),
       ],
-      selectedFontSize: AppSize.s12,
-      selectedLabelStyle: getLightStyle(color: ColorManager.lightGrey2),
-      unselectedLabelStyle: getMediumStyle(color: ColorManager.lightGrey2),
+      selectedFontSize: AppSize.s14,
+      selectedLabelStyle: getSemiBoldStyle(color: ColorManager.lightGrey2),
+      unselectedLabelStyle: getSemiBoldStyle(color: ColorManager.lightGrey2),
       currentIndex: currentIndex,
       onTap: onItemTapped,
       type: BottomNavigationBarType.fixed,

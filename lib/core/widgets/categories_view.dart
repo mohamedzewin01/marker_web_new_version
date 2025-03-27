@@ -28,19 +28,6 @@ class CategoriesView extends StatelessWidget {
             elevation: 6,
             child: CustomImage(url: imagePath,height: 50,width: 50,),
           ),
-          // Material(
-          //   elevation: 4, // ارتفاع الظل
-          //   shape: CircleBorder(), // يجعل الظل دائريًا
-          //   child: CircleAvatar(
-          //     backgroundImage: NetworkImage('${ApiConstants.baseUrlImage}$imagePath'),
-          //     backgroundColor: ColorManager.white,
-          //     radius: 25,
-          //     child: Padding(
-          //       padding: const EdgeInsets.all(2.0),
-          //       child: CustomImage(url: imagePath),
-          //     ),
-          //   ),
-          // ),
 
           SizedBox(height: 4),
           Center(

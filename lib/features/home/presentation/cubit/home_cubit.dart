@@ -1,6 +1,7 @@
 
 
 import 'package:bloc/bloc.dart';
+import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import '../../../../core/common/api_result.dart';
@@ -22,6 +23,22 @@ class HomeCubit extends Cubit<HomeState> {
       case Success<HomeEntity?>():
         {
           if (!isClosed) {
+            CacheService.setData(
+              key: CacheConstants.storeName,
+              value: result.data?.data?.store?.storeName ?? '',
+            );
+            CacheService.setData(
+              key: CacheConstants.storeDescription,
+              value: result.data?.data?.store?.storeDescreption ?? '',
+            );
+            CacheService.setData(
+              key: CacheConstants.storeUrlImage,
+              value: result.data?.data?.store?.storeImage ?? '',
+            );
+            CacheService.setData(
+              key: CacheConstants.storeId,
+              value: result.data?.data?.store?.storeId ?? '',
+            );
             emit(HomeSuccess(result.data));
           }
 

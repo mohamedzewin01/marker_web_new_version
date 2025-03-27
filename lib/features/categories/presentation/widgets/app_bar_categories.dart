@@ -1,4 +1,6 @@
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/features/categories/presentation/pages/categories.dart';
+import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,12 +8,17 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
-import '../../../layout/presentation/cubit/layout_cubit.dart';
+import '../../../app_search/presentation/bloc/search_cubit.dart';
+import '../cubit/categories_cubit.dart';
+
 
 class AppBarCategories extends StatelessWidget {
   const AppBarCategories({
     super.key,
   });
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +40,12 @@ class AppBarCategories extends StatelessWidget {
           ),
           Expanded(
             child: CustomTextFormField(
-              controller: TextEditingController(),
+              controller: SearchCubit.get(context).searchController,
               hintText: AppLocalizations.of(context)?.whatAreSearch,
+              onChanged: (value) {
+                SearchCubit.get(context).updateSearch(value);
+
+              },
               prefixIcon: Padding(
                 padding: EdgeInsets.all(16),
                 child: SvgPicture.asset(
