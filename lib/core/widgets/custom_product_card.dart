@@ -1,12 +1,24 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/features/app_search/presentation/bloc/search_cubit.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/product_details.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../resources/cashed_image.dart';
+
+
+
+
+
+
+
 
 class CustomProductCardWidget extends StatelessWidget {
   const CustomProductCardWidget({super.key, this.product});
@@ -65,7 +77,7 @@ class CustomProductCardWidget extends StatelessWidget {
                         ),
                       ),
                       product?.productPriceAfterDiscount == 0
-                          ? SizedBox(height: 10,)
+                          ? SizedBox(height: 10)
                           : Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [

@@ -51,6 +51,14 @@ dependencies:
   http:
   share_plus:
   auto_size_text: ^3.0.0
+  open_filex:
+  pdf:
+  path_provider:
+
+
+
+
+
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -78,3 +86,4 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/fonts/

@@ -6,6 +6,9 @@ import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../core/functions/create_pdf.dart';
+import '../../../app_search/presentation/bloc/search_cubit.dart';
+
 class CustomFloatingAction extends StatelessWidget {
   const CustomFloatingAction({
     super.key,
@@ -21,6 +24,7 @@ class CustomFloatingAction extends StatelessWidget {
         child: SvgPicture.asset(Assets.share,
           colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),width: 30,height: 30,),
         onPressed: () async {
+          // createPdf(products: SearchCubit.get(context).filteredProducts);
           await showDialog(
             context: context,
             barrierDismissible: false,

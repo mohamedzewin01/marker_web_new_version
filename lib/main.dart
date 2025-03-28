@@ -1,3 +1,4 @@
+import 'package:fada_alhalij_web/pdf.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RouteGenerator.getRoute,
             initialRoute: RoutesManager.splashScreen,
+            // home: ProductScreen(),
             // home: SplashScreen(),
           );
         },
