@@ -7,6 +7,7 @@ class Assets {
       'assets/images/rial.png';
   static const String imagesImageDefault = 'assets/images/image_default.jpg';
   static const String share = 'assets/images/share.svg';
+  static const String emptyList = 'assets/images/emptyList.svg';
 
 
   static const String imagesAddIcon = 'assets/images/add_icon.png';

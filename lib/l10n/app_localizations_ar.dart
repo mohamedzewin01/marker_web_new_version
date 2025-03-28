@@ -37,4 +37,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get whatAreSearch => 'ابحث هنا ...';
+
+  @override
+  String get waiting => 'انتظر قليلاُ';
 }

@@ -1,9 +1,7 @@
+
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
-import 'package:fada_alhalij_web/features/home/presentation/widgets/best_deals_adaptive.dart';
-import 'package:fada_alhalij_web/features/products/presentation/pages/products_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/widgets/categories_view.dart';
 import '../../data/models/response/home_model_response_dto.dart';
 
@@ -17,7 +15,7 @@ class GridCategories extends StatelessWidget {
     return SizedBox(
       height: 180,
       // color: ColorManager.primaryColor,
-      child: GridView.builder(
+      child:categories.isNotEmpty? GridView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         physics: BouncingScrollPhysics(),
@@ -42,7 +40,7 @@ class GridCategories extends StatelessWidget {
                 catName: categories[index].categoryName ?? '',
               ),
             ),
-      ),
+      ):SizedBox(),
     );
   }
 }

@@ -72,82 +72,83 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
                       : constraints.maxWidth > 700
                       ? 3
                       : 2;
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 14,
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: CustomScrollView(
-                        slivers: [
-                          SliverAppBar(
-                            automaticallyImplyLeading: false,
-                            backgroundColor: Colors.transparent,
-                            elevation: 10,
-                            pinned: true,
-                            title: Text(
-                              AppLocalizations.of(context)?.bestDeals ?? '',
-                              style: getSemiBoldStyle(
-                                color: ColorManager.black,
-                                fontSize: 20,
+              return Column(
+                children: [
+                  Expanded(
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverAppBar(
+                          automaticallyImplyLeading: false,
+                          backgroundColor: ColorManager.teal,
+                          elevation: 10,
+                          pinned: false,
+                          floating: true,
+                          snap: true,
+                          title: Text(
+                            AppLocalizations.of(context)?.bestDeals ?? '',
+                            style: getSemiBoldStyle(
+                              color: ColorManager.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                          actions: [
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 22,
+                                color: Colors.white,
                               ),
                             ),
-                            actions: [
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: Icon(Icons.arrow_forward_ios, size: 22),
-                              ),
-                            ],
-                          ),
+                          ],
+                        ),
 
-                          SliverToBoxAdapter(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              child: CustomTextFormField(
-                                controller: searchController,
-                                hintText:
-                                    AppLocalizations.of(context)?.whatAreSearch,
-                                // enabled: false,
-                                onChanged: (value) {
-                                  updateSearch(value);
-                                },
-                                suffix: Icon(
-                                  Icons.search,
-                                  color: ColorManager.placeHolderColor2,
-                                ),
+                        SliverToBoxAdapter(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 16,right: 16,left: 16),
+                            child: CustomTextFormField(
+                              controller: searchController,
+                              hintText:
+                                  AppLocalizations.of(context)?.whatAreSearch,
+                              // enabled: false,
+                              onChanged: (value) {
+                                updateSearch(value);
+                              },
+                              suffix: Icon(
+                                Icons.search,
+                                color: ColorManager.placeHolderColor2,
                               ),
                             ),
                           ),
-                          SliverToBoxAdapter(child: SizedBox(height: 16)),
+                        ),
+                        // SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-                          SliverGrid(
-                            delegate: SliverChildBuilderDelegate(
-                              childCount: filteredProducts?.length,
-                              (context, index) => CustomProductCardWidget(
+                        SliverGrid(
+                          delegate: SliverChildBuilderDelegate(
+                            childCount: filteredProducts?.length,
+                            (context, index) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomProductCardWidget(
                                 product:
                                     filteredProducts?[index]
                                         .toProductsRelations(),
                               ),
                             ),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: crossAxisCount,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10,
-                                  mainAxisExtent: 210,
-                                ),
                           ),
-                        ],
-                      ),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: crossAxisCount,
+                                // crossAxisSpacing: 10,
+                                // mainAxisSpacing: 10,
+                                mainAxisExtent: 230,
+                              ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               );
             },
           ),

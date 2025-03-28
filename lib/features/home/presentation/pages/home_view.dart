@@ -1,12 +1,9 @@
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
-import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
-import 'package:fada_alhalij_web/features/home/presentation/widgets/skeleton_home.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import '../../../../core/di/di.dart';
-import '../../../../core/functions/launch_url.dart';
 import '../../../../core/widgets/see_all_view.dart';
 import '../../../layout/presentation/cubit/layout_cubit.dart';
 import '../../data/models/response/home_model_response_dto.dart';
@@ -81,7 +78,7 @@ class _HomeViewState extends State<HomeView> {
                               SeeAllView(
                                 context: context,
                                 name:
-                                    '${AppLocalizations.of(context)!.category} 🛍️',
+                                    '${AppLocalizations.of(context)!.categories} 🛍️',
                                 onTapAction: () {
                                   LayoutCubit.get(context).changeIndex(1);
                                 },
@@ -116,12 +113,10 @@ class _HomeViewState extends State<HomeView> {
           }
 
           if (state is HomeLoading) {
-            return SkeletonHome();
+            return Center(child: CircularProgressIndicator(color:ColorManager.orange));
           }
           if (state is HomeFail) {}
-          if (state is HomeLoading) {
-            return SkeletonHome();
-          }
+
           return Text('error');
         },
       ),

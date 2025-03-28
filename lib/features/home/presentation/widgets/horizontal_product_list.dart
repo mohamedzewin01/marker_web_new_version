@@ -18,7 +18,7 @@ class BestDealsProductList extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
+        // crossAxisSpacing: 8,
         mainAxisExtent: 220,
       ),
       itemBuilder: (context, index) => FittedBox(

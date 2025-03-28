@@ -1,3 +1,5 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fada_alhalij_web/core/resources/curve_clipper.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/features/home/data/models/response/home_model_response_dto.dart';
 import 'package:fada_alhalij_web/localization/locale_cubit.dart';
@@ -8,22 +10,38 @@ import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 
 class AppBarBody extends StatelessWidget {
-  const AppBarBody({super.key,  this.store});
-final Store? store;
+  const AppBarBody({super.key, this.store});
+
+  final Store? store;
+
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      title: Text(
-        store?.storeName ?? '',
-        style: getSemiBoldStyle(color: ColorManager.primaryColor, fontSize: 18),
+      backgroundColor: ColorManager.indigoDark2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(4),
+        ),
+      ),
+      title: AutoSizeText(
+        '${store?.storeName} ${PromotionalMessages.goldenOpportunityDontMiss}' ?? '',
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: getSemiBoldStyle(color: ColorManager.white, fontSize: 18),
       ),
       centerTitle: true,
       floating: true,
       snap: true,
+      automaticallyImplyLeading: false,
+      flexibleSpace: ClipPath(
+        clipper: InwardCurveClipper(),
+        child: Container(
+          color: ColorManager.indigoDark,
+        ),
+      ),
       leading: StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
-          String lang =
-              context.read<LocaleCubit>().state.languageCode;
+          String lang = context.read<LocaleCubit>().state.languageCode;
           String title = lang == 'ar' ? 'EN' : 'AR';
           String lang2 = lang == 'ar' ? 'en' : 'ar';
 
@@ -37,7 +55,10 @@ final Store? store;
               child: Center(
                 child: Text(
                   title,
-                  style:  getSemiBoldStyle(color: ColorManager.orange, fontSize: 20),
+                  style: getSemiBoldStyle(
+                    color: ColorManager.white,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
@@ -64,3 +85,6 @@ final Store? store;
     );
   }
 }
+
+
+

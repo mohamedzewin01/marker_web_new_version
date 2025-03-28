@@ -29,7 +29,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: buildIcon(Assets.categories, 1, currentIndex),
-          label: AppLocalizations.of(context)!.category,
+          label: AppLocalizations.of(context)!.categories,
         ),
       ],
       selectedFontSize: AppSize.s14,

@@ -54,7 +54,7 @@ class ProductsRelations {
   int? productPrice;
   String? description;
   String? imageCover;
-  double? productPriceAfterDiscount;
+  num? productPriceAfterDiscount;
   int? category;
   int? descount;
   int? status;

@@ -8,6 +8,8 @@ class LocaleCubit extends Cubit<Locale> {
     _loadSavedLanguage();
   }
 
+
+
   void changeLanguage(String languageCode) async {
     emit(Locale(languageCode));
     await CacheService.setData(

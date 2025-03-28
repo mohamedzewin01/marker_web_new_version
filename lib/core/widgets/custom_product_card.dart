@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
@@ -51,8 +52,11 @@ class CustomProductCardWidget extends StatelessWidget {
                       SizedBox(height: 8),
                       Container(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          product?.productPriceAfterDiscount.toString() ?? '',
+                        child: AutoSizeText(
+                          product?.productPriceAfterDiscount != 0
+                              ? product?.productPriceAfterDiscount.toString() ??
+                                  ''
+                              : product?.productPrice.toString() ?? '',
                           style: TextStyle(
                             color: Color(0xffFF324B),
                             fontSize: 16,
@@ -60,32 +64,34 @@ class CustomProductCardWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            product?.productPrice.toString() ?? '',
-                            style: TextStyle(
-                              decoration: TextDecoration.lineThrough,
-                              color: Get.theme.colorScheme.primary,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      product?.productPriceAfterDiscount == 0
+                          ? SizedBox(height: 10,)
+                          : Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              AutoSizeText(
+                                product?.productPrice.toString() ?? '',
+                                style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  color: Get.theme.colorScheme.primary,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              AutoSizeText(
+                                "${product?.descount}%",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 27, 133, 185),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 8),
-                          Text(
-                            "${product?.descount}%",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 27, 133, 185),
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
                       Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
+                        alignment: Alignment.center,
+                        child: AutoSizeText(
                           product?.productName ?? "????",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
@@ -95,7 +101,7 @@ class CustomProductCardWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
+                      AutoSizeText(
                         product?.description ?? "",
 
                         overflow: TextOverflow.ellipsis,
@@ -109,38 +115,40 @@ class CustomProductCardWidget extends StatelessWidget {
                   ),
                 ),
 
-                Positioned(
-                  top: 0, // to shift little up
-                  left: 0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: ColorManager.error,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8),
+                product?.productPriceAfterDiscount == 0
+                    ? SizedBox()
+                    : Positioned(
+                      top: 0, // to shift little up
+                      left: 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: ColorManager.error,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8),
+                          ),
+                        ),
+                        padding: EdgeInsets.all(4),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            AutoSizeText(
+                              "${product?.descount}%",
+                              style: getSemiBoldStyle(
+                                color: ColorManager.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                            AutoSizeText(
+                              AppLocalizations.of(context)!.discount,
+                              style: getSemiBoldStyle(
+                                color: ColorManager.white,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    padding: EdgeInsets.all(4),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "${product?.descount}%",
-                          style: getSemiBoldStyle(
-                            color: ColorManager.white,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.discount,
-                          style: getSemiBoldStyle(
-                            color: ColorManager.white,
-                            fontSize: 10,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

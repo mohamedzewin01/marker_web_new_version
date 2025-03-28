@@ -1,4 +1,5 @@
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
@@ -23,17 +24,23 @@ class CategoriesView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          
 
           Card(
             elevation: 6,
-            child: CustomImage(url: imagePath,height: 50,width: 50,),
+            clipBehavior: Clip.antiAlias,
+
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: CustomImage(url: imagePath,height: 50,width: 50,),
+            ),
           ),
 
           SizedBox(height: 4),
           Center(
             child: FittedBox(
               fit: BoxFit.contain,
-              child: Text(
+              child: AutoSizeText(
                 catName,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,

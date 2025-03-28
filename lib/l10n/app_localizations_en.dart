@@ -37,4 +37,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatAreSearch => 'What are u looking for ?';
+
+  @override
+  String get waiting => 'Wait';
 }

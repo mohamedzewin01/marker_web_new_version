@@ -1,10 +1,16 @@
 import 'package:fada_alhalij_web/core/di/di.dart';
+import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
+import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_product_card.dart';
 import 'package:fada_alhalij_web/features/app_search/presentation/bloc/search_cubit.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/features/products/presentation/cubit/products_cubit.dart';
+import 'package:fada_alhalij_web/features/products/presentation/widgets/products_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../../core/resources/style_manager.dart';
 
 class ProductsView extends StatefulWidget {
   const ProductsView({super.key, required this.idCategory});
@@ -41,53 +47,33 @@ class _ProductsViewState extends State<ProductsView> {
                 state.productsModelEntity?.productsData?.productsRelations ??
                 [];
             SearchCubit.get(context).searchProducts(products.reversed.toList());
-            return ProductsBody();
+            return products.isNotEmpty ? ProductsBody(): Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 24,),
+                  Text(
+                    'لا يوجد منتجات',
+                    style: getSemiBoldStyle(
+                      color: ColorManager.indigoDark,
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 24),
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: SvgPicture.asset(Assets.emptyList),
+                  ),
+                ],
+              ),
+            );
           }
 
-          return Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator(color:ColorManager.orange));
         },
       ),
     );
   }
 }
 
-class ProductsBody extends StatelessWidget {
-  const ProductsBody({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ClipRect(
-          child: BlocBuilder<SearchCubit, SearchState>(
-            builder: (context, state) {
-              return GridView.builder(
-                itemCount:
-                    SearchCubit.get(context).filteredProducts.length,
-                physics: BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics(),
-                ),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  mainAxisExtent: 220,
-                ),
-                itemBuilder:
-                    (context, index) => CustomProductCardWidget(
-                      product:
-                          SearchCubit.get(
-                            context,
-                          ).filteredProducts[index],
-                    ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-}
