@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/best_deals/presention/pages/best_deals_view.dart';
 import '../../features/home/presentation/pages/home_view.dart';
 import '../../features/home/presentation/widgets/all_best_deals.dart';
 import '../../features/home/presentation/widgets/best_deals_adaptive.dart';
@@ -12,10 +13,10 @@ class RoutesManager {
   static const String homeScreen = '/home';
   static const String layout = '/layout';
   static const String categories = '/categories';
-  static const String allBestDealsView = '/AllBestDealsView';
+  static const String allBestDealsView = '/AllBestDeals';
   static const String bestDealsAdaptive = '/BestDealsAdaptive';
   static const String categoriesAdaptive = '/CategoriesAdaptive';
-  static const String profile = '/profile';
+  static const String bestDealsView = '/BestDeals';
 }
 
 class RouteGenerator {
@@ -35,6 +36,11 @@ class RouteGenerator {
       case RoutesManager.categoriesAdaptive:
         return MaterialPageRoute(
           builder: (_) => const CategoriesAdaptive(),
+          settings: settings,
+        );
+      case RoutesManager.bestDealsView:
+        return MaterialPageRoute(
+          builder: (_) => const BestDealsView(),
           settings: settings,
         );
       case RoutesManager.allBestDealsView:

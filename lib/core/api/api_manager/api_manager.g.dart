@@ -77,6 +77,36 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<BestDealsByCategoriesModel?> getBestDealsByCategories() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<BestDealsByCategoriesModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'bestDeals/fetchBestDealsByCate.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late BestDealsByCategoriesModel? _value;
+    try {
+      _value =
+          _result.data == null
+              ? null
+              : BestDealsByCategoriesModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ProductsModelResponse> getProductsByCategory(String idCategory) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

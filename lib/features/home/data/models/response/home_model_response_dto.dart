@@ -70,13 +70,15 @@ class Store {
   final String? storeImage;
   @JsonKey(name: "store_discount_title")
   final String? storeDiscountTitle;
-
+  @JsonKey(name: "store_phone")
+  final String? storePhone;
   Store ({
     this.storeId,
     this.storeName,
     this.storeDescreption,
     this.storeImage,
     this.storeDiscountTitle,
+    this.storePhone
   });
 
   factory Store.fromJson(Map<String, dynamic> json) {

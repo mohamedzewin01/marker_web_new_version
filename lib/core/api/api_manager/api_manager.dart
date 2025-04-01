@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:fada_alhalij_web/core/api/api_constants.dart';
+import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_categories_model.dart';
 import 'package:fada_alhalij_web/features/categories/data/models/categories_zone_response.dart';
 import 'package:fada_alhalij_web/features/home/data/models/response/home_model_response_dto.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
@@ -22,6 +23,12 @@ abstract class ApiService {
 
   @POST(ApiConstants.categories)
   Future<CategoriesZoneResponse> getCategories();
+
+
+
+  @POST(ApiConstants.fetchBestDealsByCate)
+  Future<BestDealsByCategoriesModel?> getBestDealsByCategories();
+
 
   @POST(ApiConstants.fetchProductsByCategories)
   Future<ProductsModelResponse> getProductsByCategory(

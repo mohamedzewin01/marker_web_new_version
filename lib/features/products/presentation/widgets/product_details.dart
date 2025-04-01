@@ -163,7 +163,7 @@ class ProductDetails extends StatelessWidget {
             flex: 0,
 
             child: Container(
-              height: 60,
+              height: 50,
               color: ColorManager.indigoDark2,
               clipBehavior: Clip.none,
               child: Stack(
@@ -173,45 +173,47 @@ class ProductDetails extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${product.productPriceAfterDiscount} ريال",
-                                  style: getSemiBoldStyle(
-                                    color: ColorManager.white,
-                                    fontSize: 24,
+                        Expanded(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "${product.productPriceAfterDiscount} ريال",
+                                    style: getSemiBoldStyle(
+                                      color: ColorManager.white,
+                                      fontSize: 18,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Spacer(),
-                            Container(
-                              padding: EdgeInsets.all(8),
-
-                              child: IconButton(
-                                onPressed: () {
-                                  CustomLaunchUrl.launchUrlShareApp(
-                                    title: product.productName ?? '',
-                                    urlPreview: product.imageCover ?? '',
-                                    details: product.description ?? '',
-                                  );
-                                },
-                                icon: SvgPicture.asset(
-                                  Assets.share,
-                                  colorFilter: const ColorFilter.mode(
-                                    Colors.white,
-                                    BlendMode.srcIn,
+                                ],
+                              ),
+                                    Spacer(),
+                              Container(
+                                padding: EdgeInsets.all(8),
+                                child: IconButton(
+                                  onPressed: () {
+                                    CustomLaunchUrl.launchUrlShareApp(
+                                      title: product.productName ?? '',
+                                      urlPreview: product.imageCover ?? '',
+                                      details: product.description ?? '',
+                                    );
+                                  },
+                                  icon: SvgPicture.asset(
+                                    Assets.share,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
+                                    width: 20,
+                                    height: 20,
                                   ),
-                                  width: 25,
-                                  height: 25,
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),

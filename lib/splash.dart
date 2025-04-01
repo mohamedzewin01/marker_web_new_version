@@ -22,35 +22,50 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.primaryColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              Assets.logo,
-              scale: 2.5,
+      backgroundColor: ColorManager.indigoDark,
+      body: Stack(
+        children: [
+          Image.asset(
+            Assets.welcome,
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.fill,
+          ),
+
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Spacer(),
+                Image.asset(
+                  Assets.logo,
+                  scale: 2.5,
+                ),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    "تموينات فضاء الخليج",
+                    style: getSemiBoldStyle(
+                      color: ColorManager.white,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 150,),
+                Spacer(),
+              ],
             ),
-             FittedBox(
-               fit: BoxFit.scaleDown,
-               child: Text(
-                "تموينات فضاء الخليج",
-                style:getSemiBoldStyle(color: ColorManager.white, fontSize: 24),),
-             )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   void movedToNextPage() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        if (mounted) {
-          Navigator.pushReplacementNamed(context, RoutesManager.layout);
-        }
-      },
-    );
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, RoutesManager.layout);
+      }
+    });
   }
 }

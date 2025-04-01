@@ -101,6 +101,7 @@ class _HomeViewState extends State<HomeView> {
                               BestDealsProductList(
                                 bestDeals: bestDeals,
                               ),
+                              SizedBox(height: 75),
                             ],
                           ),
                         ],

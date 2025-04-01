@@ -54,6 +54,7 @@ Store _$StoreFromJson(Map<String, dynamic> json) => Store(
   storeDescreption: json['store_descreption'] as String?,
   storeImage: json['store_image'] as String?,
   storeDiscountTitle: json['store_discount_title'] as String?,
+  storePhone: json['store_phone'] as String?,
 );
 
 Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
@@ -62,6 +63,7 @@ Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
   'store_descreption': instance.storeDescreption,
   'store_image': instance.storeImage,
   'store_discount_title': instance.storeDiscountTitle,
+  'store_phone': instance.storePhone,
 };
 
 Banner _$BannerFromJson(Map<String, dynamic> json) => Banner(

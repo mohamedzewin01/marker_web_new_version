@@ -2,6 +2,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import '../../../../core/common/api_result.dart';
@@ -15,6 +16,8 @@ class HomeCubit extends Cubit<HomeState> {
   final HomeUseCase _homeUseCase;
 
   HomeCubit(this._homeUseCase) : super(HomeInitial());
+
+  static HomeCubit get(context) => BlocProvider.of(context);
 
   Future<void> getHomeData() async {
     emit(HomeLoading());
@@ -38,6 +41,10 @@ class HomeCubit extends Cubit<HomeState> {
             CacheService.setData(
               key: CacheConstants.storeId,
               value: result.data?.data?.store?.storeId ?? '',
+            );
+            CacheService.setData(
+              key: CacheConstants.storePhone,
+              value: result.data?.data?.store?.storePhone ?? '',
             );
             emit(HomeSuccess(result.data));
           }

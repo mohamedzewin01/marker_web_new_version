@@ -10,4 +10,5 @@ class ApiConstants {
   static const String fetchBestDeals = "bestDeals/fetchBestDeals";
   static const String fetchBanners = "banners/fetchBanners.php";
   static const String fetchProductsByCategories = "products/fetchProductsByCategories.php";
+  static const String fetchBestDealsByCate = "bestDeals/fetchBestDealsByCate.php";
 }

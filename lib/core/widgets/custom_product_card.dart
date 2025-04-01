@@ -40,6 +40,7 @@ class CustomProductCardWidget extends StatelessWidget {
                       ProductDetails(product: product ?? ProductsRelations()),
             ),
           );
+
         },
         child: Hero(
           tag: '${product?.idProduct}55',

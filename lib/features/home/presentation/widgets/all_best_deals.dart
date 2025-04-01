@@ -3,7 +3,6 @@ import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/style_manager.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -79,7 +78,7 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
                       slivers: [
                         SliverAppBar(
                           automaticallyImplyLeading: false,
-                          backgroundColor: ColorManager.teal,
+                          backgroundColor: ColorManager.indigoDark2,
                           elevation: 10,
                           pinned: false,
                           floating: true,

@@ -110,12 +110,13 @@ class _CategoryProductViewState extends State<CategoryProductView> {
                                   width: 35,
                                 ),
                               ),
+                              SizedBox(width: 8,),
 
                               AutoSizeText(
                                 widget.category.categoryName ?? '',
                                 style: getSemiBoldStyle(
                                   color: ColorManager.white,
-                                  fontSize: 20,
+                                  fontSize: 16,
                                 ),
                               ),
 

@@ -14,7 +14,7 @@ class SearchTextFiled extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: CustomTextFormField(
-        onTap: () => LayoutCubit.get(context).changeIndex(1),
+        onTap: () => LayoutCubit.get(context).changeIndex(2),
         controller: TextEditingController(),
         hintText: AppLocalizations.of(context)?.whatAreSearch,
         enabled: true,

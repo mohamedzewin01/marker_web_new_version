@@ -92,7 +92,7 @@ Widget buildIcon(String assetPath, int index, int currentIndex) {
         horizontal: AppPadding.p20, vertical: AppPadding.p4),
     decoration: BoxDecoration(
       color: isSelected
-          ? ColorManager.placeHolderColor.withAlpha(100)
+          ? ColorManager.indigoDark2.withAlpha(100)
           : Colors.transparent,
       borderRadius: BorderRadius.circular(12),
     ),

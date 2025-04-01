@@ -51,7 +51,7 @@ class ProductsData {
 class ProductsRelations {
   int? idProduct;
   String? productName;
-  int? productPrice;
+  num? productPrice;
   String? description;
   String? imageCover;
   num? productPriceAfterDiscount;

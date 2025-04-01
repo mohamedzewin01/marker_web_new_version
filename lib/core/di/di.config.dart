@@ -13,6 +13,15 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/best_deals/data/data_sources/best_deals_data_sources.dart'
+    as _i573;
+import '../../features/best_deals/data/repo_impl/best_deals_repo_impl.dart'
+    as _i95;
+import '../../features/best_deals/domain/repo/best_deals_repo.dart' as _i988;
+import '../../features/best_deals/domain/use_cases/best_deals_use_cases.dart'
+    as _i148;
+import '../../features/best_deals/presention/cubit/best_deals_categories_cubit.dart'
+    as _i123;
 import '../../features/categories/data/data_sources/categorieS_zone_data_sourse.dart'
     as _i426;
 import '../../features/categories/data/repo_impl/categories_zone_repo_impl.dart'
@@ -58,17 +67,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i645.ProductsDataSource>(
       () => _i645.ProductsDataSource(gh<_i680.ApiService>()),
     );
+    gh.factory<_i573.BestDealsDataSources>(
+      () => _i573.BestDealsDataSources(gh<_i680.ApiService>()),
+    );
+    gh.factory<_i988.BestDealsRepo>(
+      () => _i95.BestDealsRepoImpl(gh<_i573.BestDealsDataSources>()),
+    );
     gh.factory<_i645.HomeDataSourceRepo>(
       () => _i985.HomeDataSourceRepoImpl(gh<_i680.ApiService>()),
     );
     gh.factory<_i482.ProductsRepo>(
       () => _i249.ProductsRepoImpl(gh<_i645.ProductsDataSource>()),
     );
+    gh.factory<_i148.BestDealsUseCases>(
+      () => _i148.BestDealsUseCases(gh<_i988.BestDealsRepo>()),
+    );
     gh.factory<_i280.HomeRepo>(
       () => _i886.HomeRepoImpl(gh<_i645.HomeDataSourceRepo>()),
     );
     gh.factory<_i83.CategoriesZoneRepo>(
       () => _i106.CategoriesZoneRepoImpl(gh<_i426.CategoriesZoneDataSource>()),
+    );
+    gh.factory<_i123.BestDealsCategoriesCubit>(
+      () => _i123.BestDealsCategoriesCubit(gh<_i148.BestDealsUseCases>()),
     );
     gh.factory<_i388.CategoriesZoneUseCase>(
       () => _i388.CategoriesZoneUseCase(gh<_i83.CategoriesZoneRepo>()),
