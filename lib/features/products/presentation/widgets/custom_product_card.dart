@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
@@ -5,6 +6,8 @@ import 'package:fada_alhalij_web/features/products/data/models/products_model_re
 import 'package:fada_alhalij_web/features/products/presentation/widgets/product_details.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class CustomProductCard extends StatelessWidget {
   const CustomProductCard({super.key, this.product});
@@ -32,7 +35,7 @@ class CustomProductCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           width: (MediaQuery.of(context).size.width / 2) - 34,
-          child: Stack(
+          child:  Stack(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -40,14 +43,17 @@ class CustomProductCard extends StatelessWidget {
                   children: [
                     CustomImage(
                       url: product?.imageCover ?? '',
-                      width: 120,
-                      height: 120,
+                      width: 110,
+                      height: 110,
                     ),
                     SizedBox(height: 8),
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        product?.productPriceAfterDiscount.toString() ?? '',
+                      child: AutoSizeText(
+                        product?.productPriceAfterDiscount != 0
+                            ? product?.productPriceAfterDiscount.toString() ??
+                            ''
+                            : product?.productPrice.toString() ?? '',
                         style: TextStyle(
                           color: Color(0xffFF324B),
                           fontSize: 16,
@@ -55,20 +61,22 @@ class CustomProductCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Row(
+                    product?.productPriceAfterDiscount == 0
+                        ? SizedBox(height: 10)
+                        : Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
+                        AutoSizeText(
                           product?.productPrice.toString() ?? '',
                           style: TextStyle(
                             decoration: TextDecoration.lineThrough,
-                            color: ColorManager.primaryColor,
+                            color: Get.theme.colorScheme.primary,
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(width: 8),
-                        Text(
+                        AutoSizeText(
                           "${product?.descount}%",
                           style: TextStyle(
                             color: Color.fromARGB(255, 27, 133, 185),
@@ -79,8 +87,8 @@ class CustomProductCard extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
                         product?.productName ?? "????",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
@@ -90,7 +98,7 @@ class CustomProductCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(
+                    AutoSizeText(
                       product?.description ?? "",
 
                       overflow: TextOverflow.ellipsis,
@@ -103,12 +111,10 @@ class CustomProductCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // Positioned(
-              //   bottom: 48,
-              //   right: 0,
-              //   child: Padding(padding: const EdgeInsets.all(8.0)),
-              // ),
-              Positioned(
+
+              product?.productPriceAfterDiscount == 0
+                  ? SizedBox()
+                  : Positioned(
                 top: 0, // to shift little up
                 left: 0,
                 child: Container(
@@ -122,14 +128,14 @@ class CustomProductCard extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
+                      AutoSizeText(
                         "${product?.descount}%",
                         style: getSemiBoldStyle(
                           color: ColorManager.white,
                           fontSize: 14,
                         ),
                       ),
-                      Text(
+                      AutoSizeText(
                         AppLocalizations.of(context)!.discount,
                         style: getSemiBoldStyle(
                           color: ColorManager.white,

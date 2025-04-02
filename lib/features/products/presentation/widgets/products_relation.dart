@@ -1,4 +1,5 @@
 import 'package:fada_alhalij_web/core/di/di.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_product_card.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/features/products/presentation/cubit/products_cubit.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/custom_product_card.dart';
@@ -61,7 +62,6 @@ class _ProductsRelationState extends State<ProductsRelation> {
                               onTap: () {
                                 Navigator.pop(context);
                               },
-
                               child: CustomProductCard(
                                 product: products[index],
                               ),

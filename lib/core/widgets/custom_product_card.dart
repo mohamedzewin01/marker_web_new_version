@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/features/app_search/presentation/bloc/search_cubit.dart';
+import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/product_details.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
@@ -32,6 +33,7 @@ class CustomProductCardWidget extends StatelessWidget {
     return Material(
       child: GestureDetector(
         onTap: () {
+
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -40,6 +42,15 @@ class CustomProductCardWidget extends StatelessWidget {
                       ProductDetails(product: product ?? ProductsRelations()),
             ),
           );
+                //   Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder:
+          //         (context) =>
+          //         ProductDetails(product: product ?? ProductsRelations()),
+          //   ),
+          // );
+
 
         },
         child: Hero(
@@ -53,6 +64,7 @@ class CustomProductCardWidget extends StatelessWidget {
             width: (MediaQuery.of(context).size.width / 2) - 34,
             child: Stack(
               children: [
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

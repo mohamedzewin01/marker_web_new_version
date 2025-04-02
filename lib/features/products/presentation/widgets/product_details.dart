@@ -95,7 +95,7 @@ class ProductDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "${product.productPriceAfterDiscount ?? 0.00} ريال ",
+                          product.productPriceAfterDiscount==0?"${product.productPrice ?? 0.00} ريال ": "${product.productPriceAfterDiscount ?? 0.00} ريال ",
                           style: TextStyle(
                             color: Color(0xffFF324B),
                             fontSize: 24,
@@ -182,7 +182,7 @@ class ProductDetails extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "${product.productPriceAfterDiscount} ريال",
+                                    product.productPriceAfterDiscount==0?"${product.productPrice ?? 0.00} ريال ": "${product.productPriceAfterDiscount ?? 0.00} ريال ",
                                     style: getSemiBoldStyle(
                                       color: ColorManager.white,
                                       fontSize: 18,
