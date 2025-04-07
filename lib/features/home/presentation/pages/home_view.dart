@@ -1,9 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import '../../../../core/di/di.dart';
+import '../../../../core/resources/style_manager.dart';
 import '../../../../core/widgets/see_all_view.dart';
 import '../../../layout/presentation/cubit/layout_cubit.dart';
 import '../../data/models/response/home_model_response_dto.dart';
@@ -101,6 +103,13 @@ class _HomeViewState extends State<HomeView> {
                               BestDealsProductList(
                                 bestDeals: bestDeals,
                               ),
+
+                              AutoSizeText(
+
+                                  'v1.1.6',
+                                  style: getSemiBoldStyle(color: ColorManager.grey, fontSize: 12),
+                                ),
+
                               SizedBox(height: 75),
                             ],
                           ),
