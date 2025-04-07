@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/di/di.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
@@ -8,13 +9,12 @@ import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_c
 import 'package:fada_alhalij_web/features/best_deals/presention/cubit/best_deals_categories_cubit.dart';
 import 'package:fada_alhalij_web/features/best_deals/presention/widgets/sk_best_deals.dart';
 import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
-import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../core/resources/assets_manager.dart';
+
 
 class BestDealsView extends StatefulWidget {
   const BestDealsView({super.key});
@@ -67,7 +67,7 @@ class BestDealsBody extends StatelessWidget {
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: Column(
+                  child:bestDealsCategories.isNotEmpty? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: List.generate(bestDealsCategories.length, (
                       index,
@@ -151,6 +151,14 @@ class BestDealsBody extends StatelessWidget {
                         ),
                       );
                     }),
+                  ):Center(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        'جاري تجهز العروض ...',
+                        style: getSemiBoldStyle(color: ColorManager.red, fontSize: 16),
+                      ),
+                    ),
                   ),
                 ),
                 SliverToBoxAdapter(
@@ -164,7 +172,6 @@ class BestDealsBody extends StatelessWidget {
           }
           return SkBestDeals();
 
-          Center(child: CircularProgressIndicator(color: ColorManager.orange));
         },
       ),
     );

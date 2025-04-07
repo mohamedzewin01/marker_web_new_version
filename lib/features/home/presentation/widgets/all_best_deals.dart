@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_product_card.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
@@ -124,7 +125,7 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
                         ),
                         // SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-                        SliverGrid(
+                        filteredProducts?.length !=0?  SliverGrid(
                           delegate: SliverChildBuilderDelegate(
                             childCount: filteredProducts?.length,
                             (context, index) => Padding(
@@ -143,7 +144,12 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
                                 // mainAxisSpacing: 10,
                                 mainAxisExtent: 230,
                               ),
-                        ),
+                        ):SliverToBoxAdapter(child: Center(
+                          child: AutoSizeText(
+                            'جاري تجهز العروض ...',
+                            style: getSemiBoldStyle(color: ColorManager.red, fontSize: 16),
+                          ),
+                        )),
                       ],
                     ),
                   ),
