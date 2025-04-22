@@ -61,14 +61,14 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.lazySingleton<_i361.Dio>(() => dioModule.providerDio());
     gh.factory<_i680.ApiService>(() => _i680.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i573.BestDealsDataSources>(
+      () => _i573.BestDealsDataSources(gh<_i680.ApiService>()),
+    );
     gh.factory<_i426.CategoriesZoneDataSource>(
       () => _i426.CategoriesZoneDataSource(gh<_i680.ApiService>()),
     );
     gh.factory<_i645.ProductsDataSource>(
       () => _i645.ProductsDataSource(gh<_i680.ApiService>()),
-    );
-    gh.factory<_i573.BestDealsDataSources>(
-      () => _i573.BestDealsDataSources(gh<_i680.ApiService>()),
     );
     gh.factory<_i988.BestDealsRepo>(
       () => _i95.BestDealsRepoImpl(gh<_i573.BestDealsDataSources>()),

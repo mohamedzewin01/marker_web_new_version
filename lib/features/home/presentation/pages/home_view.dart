@@ -37,7 +37,6 @@ class _HomeViewState extends State<HomeView> {
     viewModel.close();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -103,10 +102,10 @@ class _HomeViewState extends State<HomeView> {
                               BestDealsProductList(
                                 bestDeals: bestDeals,
                               ),
-
+                              SizedBox(height: 12),
                               AutoSizeText(
 
-                                  'v1.1.6',
+                                  'v1.1.8',
                                   style: getSemiBoldStyle(color: ColorManager.grey, fontSize: 12),
                                 ),
 

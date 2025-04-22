@@ -50,4 +50,7 @@ class CacheConstants {
   static const String storeDescription = 'storeDescription';
   static const String storePhone = 'storePhone';
   static const String storeId = 'storeId';
+  static const String deviceId = 'deviceId';
+  static const String id = 'id';
+  static const String deviceName='deviceName';
 }

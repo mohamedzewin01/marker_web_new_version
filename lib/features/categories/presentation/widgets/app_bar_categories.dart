@@ -1,5 +1,6 @@
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/features/categories/presentation/pages/categories.dart';
+import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -11,50 +12,68 @@ import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../app_search/presentation/bloc/search_cubit.dart';
 import '../cubit/categories_cubit.dart';
 
-
 class AppBarCategories extends StatelessWidget {
-  const AppBarCategories({
-    super.key,
-  });
-
-
-
+  const AppBarCategories({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Row(
-        children: [
-          Column(
-            children: [
-              Image.asset(Assets.logo,height: 40,width: 40,),
-              Text(
-                'فضاء الخليج',
-                style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 10),
-              )
-            ],
-          ),
-          SizedBox(
-            width: 14,
-          ),
-          Expanded(
-            child: CustomTextFormField(
-              controller: SearchCubit.get(context).searchController,
-              hintText: AppLocalizations.of(context)?.whatAreSearch,
-              onChanged: (value) {
-                SearchCubit.get(context).updateSearch(value);
-
+    var searchCubit = SearchCubit.get(context);
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult:
+          (didPop, result) =>  LayoutCubit.get(context).changeIndex(0),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            InkWell(
+              onTap: () {
+                LayoutCubit.get(context).changeIndex(0);
               },
-              prefixIcon: Padding(
-                padding: EdgeInsets.all(16),
-                child: SvgPicture.asset(
-                  Assets.imagesSearch,
+              child: Container(
+                height: 45,
+                width: 45,
+                padding: EdgeInsets.only(right: 7),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.grey.shade200),
+                  color: Colors.white,
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 22,
+                    color: Colors.grey.shade700,
+                  ),
                 ),
               ),
             ),
-          )
-        ],
+
+
+            SizedBox(width: 14),
+            Expanded(
+              child: CustomTextFormField(
+
+                controller: searchCubit.searchController,
+                hintText: AppLocalizations.of(context)?.whatAreSearch,
+                onChanged: (value) {
+                  searchCubit.updateSearch();
+                },
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: SvgPicture.asset(Assets.imagesSearch),
+                ),
+                suffix: IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
+                    SearchCubit.get(context).clearSearch(); // مسح النص
+                  },
+                ),// إخفاء أيقونة المسح إذا كان الحقل فارغًا
+              )
+
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/features/analytics/analytics_helper.dart';
 import 'package:fada_alhalij_web/features/app_search/presentation/bloc/search_cubit.dart';
 import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
@@ -13,13 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../resources/cashed_image.dart';
-
-
-
-
-
-
-
 
 class CustomProductCardWidget extends StatelessWidget {
   const CustomProductCardWidget({super.key, this.product});
@@ -33,7 +27,7 @@ class CustomProductCardWidget extends StatelessWidget {
     return Material(
       child: GestureDetector(
         onTap: () {
-
+          AnalyticsHelper.sendProductVisit(productId: product?.idProduct ?? 0);
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -42,7 +36,7 @@ class CustomProductCardWidget extends StatelessWidget {
                       ProductDetails(product: product ?? ProductsRelations()),
             ),
           );
-                //   Navigator.pushReplacement(
+          //   Navigator.pushReplacement(
           //   context,
           //   MaterialPageRoute(
           //     builder:
@@ -50,8 +44,6 @@ class CustomProductCardWidget extends StatelessWidget {
           //         ProductDetails(product: product ?? ProductsRelations()),
           //   ),
           // );
-
-
         },
         child: Hero(
           tag: '${product?.idProduct}55',
@@ -64,7 +56,6 @@ class CustomProductCardWidget extends StatelessWidget {
             width: (MediaQuery.of(context).size.width / 2) - 34,
             child: Stack(
               children: [
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

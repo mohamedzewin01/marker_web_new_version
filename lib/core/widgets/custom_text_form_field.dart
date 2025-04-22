@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../resources/color_manager.dart';
 import '../resources/font_manager.dart';
@@ -244,6 +245,9 @@ class CustomTextFormField extends StatelessWidget {
       cursorColor: ColorManager.placeHolderColor,
       style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 16),
       initialValue: initialValue,
+      textDirection: TextDirection.rtl,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp('[\u0600-\u06FF0-9\s]')),       ],
       readOnly: enabled ?? false,
       controller: controller,
       keyboardType: keyboardType,

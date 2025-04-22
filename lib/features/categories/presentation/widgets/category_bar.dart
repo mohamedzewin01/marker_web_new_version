@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/features/products/presentation/pages/products_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
@@ -85,9 +87,10 @@ class _CategoryBarState extends State<CategoryBar> {
                       children:
                           tabs.map((e) {
                             int currentIndex = tabs.indexOf(e);
-                            int? idCategory = categoriesZone[currentIndex].categoryId;
+                            int? idCategory =
+                                categoriesZone[currentIndex].categoryId;
                             String id = idCategory?.toString() ?? '';
-                            return ProductsView(idCategory:id ,);
+                            return ProductsView(idCategory: id);
                           }).toList(),
                     ),
                   ),
@@ -97,10 +100,25 @@ class _CategoryBarState extends State<CategoryBar> {
           );
         }
         if (state is CategoriesLoading) {
-          return SliverToBoxAdapter(child: Lottie.asset(Assets.imagesLoading));
+          return SliverToBoxAdapter(
+            child: Skeletonizer(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  spacing: 12,
+                  children: [
+                    Expanded(child: AutoSizeText('الكل')),
+                    Expanded(child: AutoSizeText('الكلالكلالكل')),
+                    Expanded(child: AutoSizeText('الكلالكل')),
+                    Expanded(child: AutoSizeText('الكلالكل')),
+                  ],
+                ),
+              ),
+            ),
+          );
         }
         if (state is CategoriesFail) {}
-        return SliverToBoxAdapter(child: Center(child: Text('error')));
+        return SliverToBoxAdapter(child: Center(child: AutoSizeText('error')));
       },
     );
   }

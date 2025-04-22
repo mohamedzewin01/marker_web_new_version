@@ -1,16 +1,14 @@
-import 'package:fada_alhalij_web/pdf.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'features/analytics/analytics_helper.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
 import 'package:fada_alhalij_web/utils/myTheme.dart';
-import 'package:device_preview/device_preview.dart';
 import 'core/di/di.dart';
 import 'core/utils/cashed_data_shared_preferences.dart';
 import 'core/utils/my_bloc_observer.dart';
-
 import 'localization/locale_cubit.dart';
 
 Future<void> main() async {
@@ -18,7 +16,7 @@ Future<void> main() async {
   await CacheService.cacheInitialization();
   configureDependencies();
   Bloc.observer = MyBlocObserver();
-  // await initDependencies();
+  AnalyticsHelper.sendAnalytics();
   runApp(
     MyApp(),
   );

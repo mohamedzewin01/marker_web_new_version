@@ -46,133 +46,142 @@ class BestDealsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<BestDealsCategoriesCubit, BestDealsCategoriesState>(
-        builder: (context, state) {
-          if (state is BestDealsCategoriesSuccess) {
-            List<CategoryList>? bestDealsCategories =
-                state.bestDealsByCategoriesEntity.categoryList?.reversed
-                    .toList() ??
-                [];
-            return CustomScrollView(
-              slivers: [
-                CustomSliverAppBar(
-                  onPressed: () => LayoutCubit.get(context).changeIndex(0),
-                  title: AppLocalizations.of(context)!.bestDeals,
-                  leading: Center(
-                    child: Text(
-                      PromotionalMessages.exclusiveSurprisesOnOrder,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child:bestDealsCategories.isNotEmpty? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(bestDealsCategories.length, (
-                      index,
-                    ) {
-                      List<DiscountedProducts>? products =
-                          bestDealsCategories[index]
-                              .discountedProducts
-                              ?.reversed
-                              .toList() ??
-                          [];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          spacing: 16,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 12),
-                              child: Row(
-
-                                // mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.all(8),
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-
-                                      shape: BoxShape.circle,
-                                      color: ColorManager.placeHolderColor,
-                                    ),
-                                    child: CustomImage(
-                                      url: bestDealsCategories[index].categoryImage ?? '',
-                                      height: 30,
-                                      width: 30,
-                                    ),
-                                  ),
-                          SizedBox(width: 16,),
-                                  Text(
-                                    bestDealsCategories[index].categoryName ?? '',
-                                    style: getSemiBoldStyle(
-                                      color: ColorManager.indigoDark2,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  SizedBox(width: 8,),
-                                  SizedBox(
-                                    width: 24,
-                                    child: Divider(
-                                      color: ColorManager.indigoDark2,
-                                      thickness: 1,),
-                                  )
-
-
-                                ],
-                              ),
-                            ),
-
-
-
-
-                            SizedBox(
-                              height: 220,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: products.length,
-                                itemBuilder: (context, productIndex) {
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 4,
-                                    ),
-                                    child: CustomProductCardWidget(
-                                      product:
-                                          products[productIndex]
-                                              .toProductsRelations(),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-                  ):Center(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: AutoSizeText(
-                        'جاري تجهز العروض ...',
-                        style: getSemiBoldStyle(color: ColorManager.red, fontSize: 16),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult:
+          (didPop, result) =>  LayoutCubit.get(context).changeIndex(0),
+      child: Scaffold(
+        body: BlocBuilder<BestDealsCategoriesCubit, BestDealsCategoriesState>(
+          builder: (context, state) {
+            if (state is BestDealsCategoriesSuccess) {
+              List<CategoryList>? bestDealsCategories =
+                  state.bestDealsByCategoriesEntity.categoryList?.reversed
+                      .toList() ??
+                  [];
+              return CustomScrollView(
+                slivers: [
+                  CustomSliverAppBar(
+                    onPressed: () => LayoutCubit.get(context).changeIndex(0),
+                    title: AppLocalizations.of(context)!.bestDeals,
+                    leading: Center(
+                      child: Text(
+                        PromotionalMessages.exclusiveSurprisesOnOrder,
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 60,
+                  SliverToBoxAdapter(
+                    child:bestDealsCategories.isNotEmpty? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(bestDealsCategories.length, (
+                        index,
+                      ) {
+                        List<DiscountedProducts>? products =
+                            bestDealsCategories[index]
+                                .discountedProducts
+                                ?.reversed
+                                .toList() ??
+                            [];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            spacing: 16,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 12),
+                                child: Row(
+
+                                  // mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(8),
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+
+                                        shape: BoxShape.circle,
+                                        color: ColorManager.placeHolderColor,
+                                      ),
+                                      child: CustomImage(
+                                        url: bestDealsCategories[index].categoryImage ?? '',
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                    ),
+                            SizedBox(width: 16,),
+                                    Text(
+                                      bestDealsCategories[index].categoryName ?? '',
+                                      style: getSemiBoldStyle(
+                                        color: ColorManager.indigoDark2,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    SizedBox(width: 8,),
+                                    SizedBox(
+                                      width: 24,
+                                      child: Divider(
+                                        color: ColorManager.indigoDark2,
+                                        thickness: 1,),
+                                    )
+
+
+                                  ],
+                                ),
+                              ),
+
+
+
+
+                              SizedBox(
+                                height: 220,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: products.length,
+                                  itemBuilder: (context, productIndex) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 4,
+                                      ),
+                                      child: CustomProductCardWidget(
+                                        product:
+                                            products[productIndex]
+                                                .toProductsRelations(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                    ):Center(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            AutoSizeText(
+                              'جاري تجهز العروض ...',
+                              style: getSemiBoldStyle(color: ColorManager.red, fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                )
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 60,
+                    ),
+                  )
 
-              ],
-            );
-          }
-          return SkBestDeals();
+                ],
+              );
+            }
+            return SkBestDeals();
 
-        },
+          },
+        ),
       ),
     );
   }

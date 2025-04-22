@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/functions/launch_url.dart';
@@ -6,17 +5,13 @@ import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
-import 'package:fada_alhalij_web/features/products/presentation/cubit/products_cubit.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/products_relation.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../core/di/di.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/curve_clipper.dart';
-import '../../../../views/common_widgets/appBar.dart';
+
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key, required this.product});

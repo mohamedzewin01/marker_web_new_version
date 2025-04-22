@@ -21,10 +21,7 @@ class LayoutMobileView extends StatelessWidget {
           // floatingActionButton: CustomFloatingAction(),
           body: Stack(
             children: [
-              IndexedStack(
-                index: cubit.index,
-                children: AppConstants.viewOptions,
-              ),
+              AppConstants.viewOptions[cubit.index],
               Align(
                 alignment: Alignment.bottomCenter,
                 child: CustomBottomNavigationBar(

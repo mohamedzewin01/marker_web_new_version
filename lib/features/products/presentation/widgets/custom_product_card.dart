@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/features/analytics/analytics_helper.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/product_details.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
@@ -19,6 +20,8 @@ class CustomProductCard extends StatelessWidget {
     return Material(
       child: GestureDetector(
         onTap: () {
+          AnalyticsHelper.sendProductVisit(productId: product?.idProduct ?? 0);
+
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -100,7 +103,6 @@ class CustomProductCard extends StatelessWidget {
                     ),
                     AutoSizeText(
                       product?.description ?? "",
-
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: getSemiBoldStyle(
