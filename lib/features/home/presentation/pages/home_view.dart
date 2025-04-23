@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fada_alhalij_web/core/resources/app_constants.dart';
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
+import 'package:fada_alhalij_web/features/home/presentation/widgets/custom_card.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,6 +55,7 @@ class _HomeViewState extends State<HomeView> {
             Store? store = state.homeEntity?.data!.store;
             List<Banners> banners =
                 state.homeEntity?.data?.banner?.banners ?? [];
+            List<Discounts>? discount = state.homeEntity?.data?.discount?.discounts ?? [];
 
             return GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -67,8 +70,9 @@ class _HomeViewState extends State<HomeView> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          SizedBox(height: 8),
-                          SearchTextFiled(),
+                          // SizedBox(height: 8),
+                        //  SearchTextFiled(),
+
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
                             child: Carousel(banners: banners),
@@ -86,6 +90,9 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               SizedBox(height: 16),
                               GridCategories(categories: categories),
+                              SizedBox(height: 16),
+                              CustomCard(discounts: discount,),
+                              SizedBox(height: 16),
                               SeeAllView(
                                 context: context,
                                 name:
@@ -98,14 +105,14 @@ class _HomeViewState extends State<HomeView> {
                                   );
                                 },
                               ),
-
+                              SizedBox(height: 16),
                               BestDealsProductList(
                                 bestDeals: bestDeals,
                               ),
                               SizedBox(height: 12),
                               AutoSizeText(
 
-                                  'v1.1.8',
+                                AppConstants.version,
                                   style: getSemiBoldStyle(color: ColorManager.grey, fontSize: 12),
                                 ),
 

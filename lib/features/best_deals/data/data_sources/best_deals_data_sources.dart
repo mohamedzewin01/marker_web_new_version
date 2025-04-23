@@ -17,6 +17,12 @@ class BestDealsDataSources {
       return response?.toBestDealsByCategoriesEntity();
     });
   }
-
+  Future<Result<BestDealsByDiscountEntity?>> getBestDealsByDiscount(int? discount) {
+    return executeApi(() async {
+      var response = await apiService.fetchBestDealsByDiscount(discount);
+      return response?.toBestDealsByDiscountEntity();
+    });
+    
+  }
 
 }

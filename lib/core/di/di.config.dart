@@ -20,6 +20,8 @@ import '../../features/best_deals/data/repo_impl/best_deals_repo_impl.dart'
 import '../../features/best_deals/domain/repo/best_deals_repo.dart' as _i988;
 import '../../features/best_deals/domain/use_cases/best_deals_use_cases.dart'
     as _i148;
+import '../../features/best_deals/presention/cubit/best_by_discount/best_discount_by_discount_cubit.dart'
+    as _i989;
 import '../../features/best_deals/presention/cubit/best_deals_categories_cubit.dart'
     as _i123;
 import '../../features/categories/data/data_sources/categorieS_zone_data_sourse.dart'
@@ -90,6 +92,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i123.BestDealsCategoriesCubit>(
       () => _i123.BestDealsCategoriesCubit(gh<_i148.BestDealsUseCases>()),
+    );
+    gh.factory<_i989.BestDiscountByDiscountCubit>(
+      () => _i989.BestDiscountByDiscountCubit(gh<_i148.BestDealsUseCases>()),
     );
     gh.factory<_i388.CategoriesZoneUseCase>(
       () => _i388.CategoriesZoneUseCase(gh<_i83.CategoriesZoneRepo>()),

@@ -128,10 +128,6 @@ class BestDealsBody extends StatelessWidget {
                                   ],
                                 ),
                               ),
-
-
-
-
                               SizedBox(
                                 height: 220,
                                 child: ListView.builder(

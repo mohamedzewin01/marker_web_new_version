@@ -26,6 +26,10 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       json['store'] == null
           ? null
           : Store.fromJson(json['store'] as Map<String, dynamic>),
+  discount:
+      json['discount'] == null
+          ? null
+          : Discount.fromJson(json['discount'] as Map<String, dynamic>),
   banner:
       json['banner'] == null
           ? null
@@ -43,6 +47,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
   'status': instance.status,
   'store': instance.store,
+  'discount': instance.discount,
   'banner': instance.banner,
   'category': instance.category,
   'bestDeals': instance.bestDeals,
@@ -53,8 +58,8 @@ Store _$StoreFromJson(Map<String, dynamic> json) => Store(
   storeName: json['store_name'] as String?,
   storeDescreption: json['store_descreption'] as String?,
   storeImage: json['store_image'] as String?,
-  storeDiscountTitle: json['store_discount_title'] as String?,
   storePhone: json['store_phone'] as String?,
+  storeDiscountTitle: json['store_discount_title'] as String?,
 );
 
 Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
@@ -62,8 +67,47 @@ Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
   'store_name': instance.storeName,
   'store_descreption': instance.storeDescreption,
   'store_image': instance.storeImage,
-  'store_discount_title': instance.storeDiscountTitle,
   'store_phone': instance.storePhone,
+  'store_discount_title': instance.storeDiscountTitle,
+};
+
+Discount _$DiscountFromJson(Map<String, dynamic> json) => Discount(
+  status: json['status'] as String?,
+  discounts:
+      (json['discounts'] as List<dynamic>?)
+          ?.map((e) => Discounts.fromJson(e as Map<String, dynamic>))
+          .toList(),
+);
+
+Map<String, dynamic> _$DiscountToJson(Discount instance) => <String, dynamic>{
+  'status': instance.status,
+  'discounts': instance.discounts,
+};
+
+Discounts _$DiscountsFromJson(Map<String, dynamic> json) => Discounts(
+  idDiscount: (json['id_discount'] as num?)?.toInt(),
+  title: json['title'] as String?,
+  subtitle: json['subtitle'] as String?,
+  imageUrl: json['image_url'] as String?,
+  discountPercentage: (json['discount_percentage'] as num?)?.toInt(),
+  status: (json['status'] as num?)?.toInt(),
+  createdAt: json['created_at'] as String?,
+  updatedAt: json['updated_at'] as String?,
+  imageIcon: json['image_icon'] as String?,
+  expiryDatetime: json['expiry_datetime'] as String?,
+);
+
+Map<String, dynamic> _$DiscountsToJson(Discounts instance) => <String, dynamic>{
+  'id_discount': instance.idDiscount,
+  'title': instance.title,
+  'subtitle': instance.subtitle,
+  'image_url': instance.imageUrl,
+  'image_icon': instance.imageIcon,
+  'discount_percentage': instance.discountPercentage,
+  'status': instance.status,
+  'created_at': instance.createdAt,
+  'updated_at': instance.updatedAt,
+  'expiry_datetime': instance.expiryDatetime,
 };
 
 Banner _$BannerFromJson(Map<String, dynamic> json) => Banner(
@@ -146,7 +190,7 @@ ProductsBestDeals _$ProductsBestDealsFromJson(Map<String, dynamic> json) =>
     ProductsBestDeals(
       idProduct: (json['id_product'] as num?)?.toInt(),
       productName: json['product_name'] as String?,
-      productPrice: (json['product_price'] as num?)?.toInt(),
+      productPrice: (json['product_price'] as num?)?.toDouble(),
       description: json['description'] as String?,
       imageCover: json['image_cover'] as String?,
       productPriceAfterDiscount:

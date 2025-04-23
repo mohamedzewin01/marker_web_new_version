@@ -29,7 +29,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'home/home_view_v2',
+            'home/home_view_3',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -203,6 +203,42 @@ class _ApiService implements ApiService {
     );
     final _result = await _dio.fetch(_options);
     final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<BestDealsByDiscountDto?> fetchBestDealsByDiscount(
+    int? numDiscount,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (numDiscount != null) {
+      _data.fields.add(MapEntry('discount', numDiscount.toString()));
+    }
+    final _options = _setStreamType<BestDealsByDiscountDto>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'bestDeals/fetchBestDealsByDiscount',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late BestDealsByDiscountDto? _value;
+    try {
+      _value =
+          _result.data == null
+              ? null
+              : BestDealsByDiscountDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 

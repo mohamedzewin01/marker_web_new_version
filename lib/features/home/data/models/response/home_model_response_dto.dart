@@ -23,9 +23,7 @@ class HomeModelResponseDto {
   Map<String, dynamic> toJson() {
     return _$HomeModelResponseDtoToJson(this);
   }
-
   HomeEntity toHomeEntity() => HomeEntity(data: data ,status: status);
-
 }
 
 @JsonSerializable()
@@ -34,6 +32,8 @@ class Data {
   final String? status;
   @JsonKey(name: "store")
   final Store? store;
+  @JsonKey(name: "discount")
+  final Discount? discount;
   @JsonKey(name: "banner")
   final Banner? banner;
   @JsonKey(name: "category")
@@ -44,6 +44,7 @@ class Data {
   Data ({
     this.status,
     this.store,
+    this.discount,
     this.banner,
     this.category,
     this.bestDeals,
@@ -68,17 +69,18 @@ class Store {
   final String? storeDescreption;
   @JsonKey(name: "store_image")
   final String? storeImage;
-  @JsonKey(name: "store_discount_title")
-  final String? storeDiscountTitle;
   @JsonKey(name: "store_phone")
   final String? storePhone;
+  @JsonKey(name: "store_discount_title")
+  final String? storeDiscountTitle;
+
   Store ({
     this.storeId,
     this.storeName,
     this.storeDescreption,
     this.storeImage,
+    this.storePhone,
     this.storeDiscountTitle,
-    this.storePhone
   });
 
   factory Store.fromJson(Map<String, dynamic> json) {
@@ -87,6 +89,72 @@ class Store {
 
   Map<String, dynamic> toJson() {
     return _$StoreToJson(this);
+  }
+}
+
+@JsonSerializable()
+class Discount {
+  @JsonKey(name: "status")
+  final String? status;
+  @JsonKey(name: "discounts")
+  final List<Discounts>? discounts;
+
+  Discount ({
+    this.status,
+    this.discounts,
+  });
+
+  factory Discount.fromJson(Map<String, dynamic> json) {
+    return _$DiscountFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return _$DiscountToJson(this);
+  }
+}
+
+@JsonSerializable()
+class Discounts {
+  @JsonKey(name: "id_discount")
+  final int? idDiscount;
+  @JsonKey(name: "title")
+  final String? title;
+  @JsonKey(name: "subtitle")
+  final String? subtitle;
+  @JsonKey(name: "image_url")
+  final String? imageUrl;
+  @JsonKey(name: "image_icon")
+  final String? imageIcon;
+  @JsonKey(name: "discount_percentage")
+  final int? discountPercentage;
+  @JsonKey(name: "status")
+  final int? status;
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+  @JsonKey(name: "expiry_datetime")
+  final String? expiryDatetime;
+
+  Discounts ({
+    this.idDiscount,
+    this.title,
+    this.subtitle,
+    this.imageUrl,
+    this.discountPercentage,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.imageIcon,
+    this.expiryDatetime,
+  });
+
+  factory Discounts.fromJson(Map<String, dynamic> json) {
+    return _$DiscountsFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return _$DiscountsToJson(this);
   }
 }
 
@@ -226,7 +294,7 @@ class ProductsBestDeals {
   @JsonKey(name: "product_name")
   final String? productName;
   @JsonKey(name: "product_price")
-  final int? productPrice;
+  final double? productPrice;
   @JsonKey(name: "description")
   final String? description;
   @JsonKey(name: "image_cover")

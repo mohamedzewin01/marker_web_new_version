@@ -53,18 +53,17 @@ class AppBarCategories extends StatelessWidget {
             SizedBox(width: 14),
             Expanded(
               child: CustomTextFormField(
-
                 controller: searchCubit.searchController,
                 hintText: AppLocalizations.of(context)?.whatAreSearch,
                 onChanged: (value) {
-                  searchCubit.updateSearch();
+                  searchCubit.updateSearch(value);
                 },
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(16),
                   child: SvgPicture.asset(Assets.imagesSearch),
                 ),
                 suffix: IconButton(
-                  icon: Icon(Icons.clear),
+                  icon: Icon(Icons.clear,size: 16,),
                   onPressed: () {
                     SearchCubit.get(context).clearSearch(); // مسح النص
                   },

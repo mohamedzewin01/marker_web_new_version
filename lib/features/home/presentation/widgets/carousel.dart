@@ -155,13 +155,13 @@ class Carousel extends StatelessWidget {
                 ),
               ),
             )
-            .toList();
+            .toList().reversed.toList();
 
     return RepaintBoundary(
       child: CarouselSlider(
         options: CarouselOptions(
           viewportFraction: 0.9,
-          aspectRatio: 4.5,
+          aspectRatio: 3,
           enableInfiniteScroll: true,
           autoPlay: true,
           autoPlayInterval: const Duration(seconds: 5),

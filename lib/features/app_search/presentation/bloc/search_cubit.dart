@@ -16,15 +16,15 @@ class SearchCubit extends Cubit<SearchState> {
   List<ProductsRelations> filteredProducts = [];
 
   TextEditingController searchController = TextEditingController();
-  void updateSearch() {
-    if (searchController.text.isEmpty) {
+  void updateSearch(String query) {
+    if (query.isEmpty) {
       filteredProducts = List.from(allProducts);
 
     } else {
       filteredProducts = allProducts
           .where((product) =>
-      product.productName!.toLowerCase().contains(searchController.text.toLowerCase()) ||
-          product.description!.toLowerCase().contains(searchController.text.toLowerCase()))
+      product.productName!.toLowerCase().contains(query.toLowerCase()) ||
+          product.description!.toLowerCase().contains(query.toLowerCase()))
           .toList();
 
     }

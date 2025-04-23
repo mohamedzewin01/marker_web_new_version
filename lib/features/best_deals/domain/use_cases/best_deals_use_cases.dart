@@ -12,4 +12,6 @@ class BestDealsUseCases {
 
   Future<Result<BestDealsByCategoriesEntity?>> getBestDealsByCategories() =>
       bestDealsRepo.getBestDealsByCategories();
+  Future<Result<BestDealsByDiscountEntity?>> getBestDealsByDiscount(int? discount) =>
+      bestDealsRepo.getBestDealsByDiscount(discount);
 }

@@ -2,7 +2,9 @@ import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../l10n/app_localizations.dart';
 
@@ -21,7 +23,11 @@ class SearchTextFiled extends StatelessWidget {
         onChanged: (value) {
           // updateSearch(value);
         },
-        suffix: Icon(Icons.search, color: ColorManager.placeHolderColor2),
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(16),
+          child: SvgPicture.asset(Assets.imagesSearch),
+        ),
+        // suffix: Icon(Icons.search, color: ColorManager.placeHolderColor2),
       ),
     );
   }
