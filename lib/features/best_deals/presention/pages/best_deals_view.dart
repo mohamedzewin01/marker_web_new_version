@@ -51,6 +51,7 @@ class BestDealsBody extends StatelessWidget {
       onPopInvokedWithResult:
           (didPop, result) =>  LayoutCubit.get(context).changeIndex(0),
       child: Scaffold(
+
         body: BlocBuilder<BestDealsCategoriesCubit, BestDealsCategoriesState>(
           builder: (context, state) {
             if (state is BestDealsCategoriesSuccess) {

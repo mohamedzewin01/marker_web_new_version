@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
             themeMode: ThemeMode.light,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: RoutesManager.splashScreen,
+            initialRoute: RoutesManager.layout,
             // home: ProductScreen(),
             // home: SplashScreen(),
           );

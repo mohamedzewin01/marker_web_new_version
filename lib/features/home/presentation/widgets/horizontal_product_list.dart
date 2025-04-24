@@ -17,23 +17,36 @@ class BestDealsProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<ProductsBestDeals>? bestDeals10 = bestDeals?.toList().reversed.toList() ?? [];
     return
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-        itemCount: bestDeals10.length,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          mainAxisExtent: 220,
+      bestDeals10.isNotEmpty
+              ? SizedBox(
+        height: 500,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.builder(
+          itemCount: bestDeals10.length,
+          scrollDirection: Axis.horizontal,
+        //  shrinkWrap: true,
+        //  physics: NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            mainAxisExtent: 220,
+          ),
+          itemBuilder: (context, index) => CustomProductCardWidget(
+            product: bestDeals10[index].toProductsRelations(),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 8), // تأكد من إزالة أي padding
+              ),
         ),
-        itemBuilder: (context, index) => CustomProductCardWidget(
-          product: bestDeals10[index].toProductsRelations(),
+      )  : Center(
+        child: AutoSizeText(
+          'جاري تجهز العروض ...',
+          style: getSemiBoldStyle(
+            color: ColorManager.red,
+            fontSize: 16,
+          ),
         ),
-        padding: EdgeInsets.symmetric(vertical: 8), // تأكد من إزالة أي padding
-            ),
       );
     // SizedBox(
     //   height: 220,

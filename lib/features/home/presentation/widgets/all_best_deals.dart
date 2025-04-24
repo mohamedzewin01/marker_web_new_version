@@ -63,7 +63,16 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
-          // backgroundColor: Colors.orange,
+          floatingActionButtonLocation:
+          FloatingActionButtonLocation.startFloat,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: ColorManager.pink,
+            onPressed: () => Navigator.pop(context),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Center(child: Icon(Icons.arrow_back_ios)),
+            ),
+          ),
           body: LayoutBuilder(
             builder: (context, constraints) {
               int crossAxisCount =
@@ -79,7 +88,7 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
                       slivers: [
                         SliverAppBar(
                           automaticallyImplyLeading: false,
-                          backgroundColor: ColorManager.indigoDark2,
+                          backgroundColor: ColorManager.pink,
                           elevation: 10,
                           pinned: false,
                           floating: true,
@@ -116,6 +125,7 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
                               onChanged: (value) {
                                 updateSearch(value);
                               },
+
                               suffix: Icon(
                                 Icons.search,
                                 color: ColorManager.placeHolderColor2,

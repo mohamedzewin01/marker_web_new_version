@@ -137,8 +137,19 @@ class CustomCard extends StatelessWidget {
                                       CustomElevatedButton(
                                         title: "اكتشف العروض",
                                         onPressed: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => BestDealsByDiscountView(discount: discount.discountPercentage),));
-
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (
+                                                    context,
+                                                  ) => BestDealsByDiscountView(
+                                                    discount:
+                                                        discount
+                                                            .discountPercentage,
+                                                  ),
+                                            ),
+                                          );
                                         },
                                         buttonColor: ColorManager.pink,
                                       ),

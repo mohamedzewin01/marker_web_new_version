@@ -72,11 +72,11 @@ class _HomeViewState extends State<HomeView> {
                         children: [
                           // SizedBox(height: 8),
                         //  SearchTextFiled(),
-
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
-                            child: Carousel(banners: banners),
+                            child: CustomCard(discounts: discount,),
                           ),
+
                           Column(
                             children: [
                               SizedBox(height: 8),
@@ -91,7 +91,11 @@ class _HomeViewState extends State<HomeView> {
                               SizedBox(height: 16),
                               GridCategories(categories: categories),
                               SizedBox(height: 16),
-                              CustomCard(discounts: discount,),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: Carousel(banners: banners),
+                              ),
+
                               SizedBox(height: 16),
                               SeeAllView(
                                 context: context,
@@ -111,7 +115,6 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               SizedBox(height: 12),
                               AutoSizeText(
-
                                 AppConstants.version,
                                   style: getSemiBoldStyle(color: ColorManager.grey, fontSize: 12),
                                 ),

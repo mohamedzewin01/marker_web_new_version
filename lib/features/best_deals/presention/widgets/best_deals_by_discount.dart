@@ -34,12 +34,21 @@ class _BestDealsByDiscountViewState extends State<BestDealsByDiscountView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: viewModel..getBestDealsByCategories(widget.discount ),
+      value: viewModel..getBestDealsByCategories(widget.discount),
       child: SafeArea(
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: Scaffold(
-            // backgroundColor: Colors.orange,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.startFloat,
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: ColorManager.pink,
+              onPressed: () => Navigator.pop(context),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Center(child: Icon(Icons.arrow_back_ios)),
+              ),
+            ),
             body: LayoutBuilder(
               builder: (context, constraints) {
                 int crossAxisCount =
@@ -65,7 +74,6 @@ class _BestDealsByDiscountViewState extends State<BestDealsByDiscountView> {
                         child: GridView.builder(
                           itemCount: bestDealsByDiscount.length,
 
-
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -85,8 +93,10 @@ class _BestDealsByDiscountViewState extends State<BestDealsByDiscountView> {
                         ),
                       );
                     }
-                    return CircularProgressIndicator(
-                      color: ColorManager.orange,
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: ColorManager.orange,
+                      ),
                     );
                   },
                 );

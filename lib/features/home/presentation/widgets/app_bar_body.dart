@@ -20,7 +20,7 @@ class AppBarBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: ColorManager.indigoDark2,
+      backgroundColor: ColorManager.pink,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(4)),
       ),
@@ -37,7 +37,7 @@ class AppBarBody extends StatelessWidget {
       automaticallyImplyLeading: false,
       flexibleSpace: ClipPath(
         clipper: InwardCurveClipper(),
-        child: Container(color: ColorManager.indigoDark),
+        child: Container(color: ColorManager.pinkLight),
       ),
       leading: GestureDetector(
         onTap: () async {
