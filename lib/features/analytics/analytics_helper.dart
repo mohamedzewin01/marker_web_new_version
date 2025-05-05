@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:html' as html;
+// import 'dart:html' as html;
 import 'package:dio/dio.dart';
 import 'package:fada_alhalij_web/core/api/api_extentions.dart';
 import 'package:fada_alhalij_web/core/api/api_manager/api_manager.dart';
@@ -11,7 +11,8 @@ import 'model/device_response.dart';
 class WebDeviceInfoHelper {
   static String getDeviceName() {
     // جلب معلومات المتصفح (userAgent)
-    final userAgent = html.window.navigator.userAgent;
+    final userAgent = "Android Device";
+        // html.window.navigator.userAgent;
 
     if (userAgent.contains("Windows")) {
       return "Windows Device";
@@ -30,13 +31,15 @@ class WebDeviceInfoHelper {
 
   static String getDeviceId() {
     // جلب sessionId كمثال (غير فريد لكنه ثابت خلال الجلسة)
-    return html.window.sessionStorage['deviceId'] ??
-        (html.window.sessionStorage['deviceId'] = _generateRandomId());
+    return "";
+      // html.window.sessionStorage['deviceId'] ??
+      //   (html.window.sessionStorage['deviceId'] = _generateRandomId());
   }
 
   static String _generateRandomId() {
     // final now = DateTime.now().millisecondsSinceEpoch;
-    return "web-${html.window.navigator.userAgent.hashCode}";
+    return "";
+      // "web-${html.window.navigator.userAgent.hashCode}";
   }
 }
 
