@@ -10,5 +10,6 @@ class Assets {
   static const String bestDeals = 'assets/images/bestdeals.png';
   static const String welcome = 'assets/images/welcome_bg.webp';
   static const String imagesSearch = 'assets/images/search.svg';
+  static const String cart = 'assets/images/cart.svg';
 
 }

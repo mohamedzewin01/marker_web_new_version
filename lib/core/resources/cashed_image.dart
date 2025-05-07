@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../api/api_constants.dart';
 
@@ -59,12 +60,19 @@ class CustomImage extends StatelessWidget {
           ),
           fit: boxFit ?? BoxFit.fill,
           placeholder:
-              (context, url) => Center(
-                child: SizedBox(
-                  width: sizeIndicator ?? 20,
-                  height: sizeIndicator ?? 20,
-
-                  child: CircularProgressIndicator(color: ColorManager.orange),
+              (context, url) => Skeletonizer(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: Container(
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        color: ColorManager.placeHolderColor.withAlpha(50),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
                 ),
               ),
           errorWidget:

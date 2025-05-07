@@ -6,8 +6,10 @@ class ApiConstants {
   /// TODO: change v1 to v2  and change location image to upload in v2
 
   // static const String home = "home/home_view_v2";
-   static const String home = "home/home_view_3";
 
+  static const String home = "home/home_view_3";
+  static const String signUp = "auth/signup";
+  static const String signIn = "auth/signin";
   static const String categories = "categories/fetchCategories.php";
   static const String fetchBestDeals = "bestDeals/fetchBestDeals";
   static const String fetchBanners = "banners/fetchBanners.php";
@@ -16,4 +18,5 @@ class ApiConstants {
   static const String addDevice = "analytics/device/add_device";
   static const String productVisit = "analytics/product_visits/add_product_visit";
   static const String fetchBestDealsByDiscount = "bestDeals/fetchBestDealsByDiscount";
+  static const String addToCart = "cart/addtoCart";
 }

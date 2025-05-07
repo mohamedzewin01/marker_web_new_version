@@ -308,28 +308,130 @@ class CustomTextFormFieldRegister extends StatelessWidget {
 //     );
 //   }
 // }
+// class CustomTextFormField extends StatelessWidget {
+//   const CustomTextFormField({
+//     super.key,
+//     required this.controller,
+//     this.labelText,
+//     this.hintText,
+//     this.obscureText,
+//     this.validator,
+//     this.suffix,
+//     this.keyboardType,
+//     this.enabled,
+//     this.prefixIcon,
+//     this.initialValue,
+//     this.onChanged,
+//     this.inputAction, this.onTap,
+//   });
+//
+//   final TextEditingController controller;
+//   final String? labelText;
+//   final String? hintText;
+//   final String? initialValue;
+//   final bool? obscureText;
+//   final bool? enabled;
+//   final String? Function(String?)? validator;
+//   final Widget? suffix;
+//   final Widget? prefixIcon;
+//   final TextInputType? keyboardType;
+//   final TextInputAction? inputAction;
+//   final void Function(String)? onChanged;
+//   final void Function()? onTap;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextFormField(
+//       onTap:onTap ,
+//       cursorColor: ColorManager.placeHolderColor,
+//       style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 16),
+//       initialValue: initialValue,
+//       readOnly: enabled ?? false,
+//       controller: controller,
+//       keyboardType: keyboardType,
+//       decoration: InputDecoration(
+//         errorStyle: TextStyle(fontSize: 14),
+//         prefixIcon: prefixIcon,
+//         prefixIconColor: ColorManager.placeHolderColor,
+//         suffixIcon: suffix != null
+//             ? Row(
+//           mainAxisSize: MainAxisSize.min,
+//           children: [
+//             suffix!,
+//           ],
+//         )
+//             : null,
+//         suffixIconColor: ColorManager.placeHolderColor,
+//         labelText: labelText,
+//         labelStyle: getRegularStyle(
+//           color: ColorManager.placeHolderColor,
+//           fontSize: FontSize.s16,
+//         ),
+//         hintText: hintText,
+//         hintStyle: getRegularStyle(
+//           color: ColorManager.placeHolderColor2,
+//           fontSize: FontSize.s14,
+//         ),
+//         floatingLabelBehavior: FloatingLabelBehavior.always,
+//         contentPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p14, vertical:   AppPadding.p8),
+//         enabledBorder: outLintInputBorderMethod(
+//           const BorderSide(
+//               color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+//           const BorderRadius.all(Radius.circular(AppSize.s40)),
+//         ),
+//         focusedBorder: outLintInputBorderMethod(
+//           const BorderSide(
+//               color: ColorManager.primaryColor, width: AppSize.w1_5),
+//           const BorderRadius.all(Radius.circular(AppSize.s40)),
+//         ),
+//         errorBorder: outLintInputBorderMethod(
+//           const BorderSide(
+//               color: ColorManager.primaryColor, width: AppSize.w1_5),
+//           const BorderRadius.all(Radius.circular(AppSize.s40)),
+//         ),
+//         focusedErrorBorder: outLintInputBorderMethod(
+//           const BorderSide(
+//               color: ColorManager.primaryColor, width: AppSize.w1_5),
+//           const BorderRadius.all(Radius.circular(AppSize.s40)),
+//         ),
+//         disabledBorder: outLintInputBorderMethod(
+//             const BorderSide(
+//                 color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+//             const BorderRadius.all(Radius.circular(AppSize.s40))),
+//       ),
+//       obscureText: obscureText ?? false,
+//       validator: validator,
+//       onChanged: onChanged,
+//       autovalidateMode: AutovalidateMode.onUserInteraction,
+//     );
+//   }
+// }
+
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     required this.controller,
     this.labelText,
     this.hintText,
-    this.obscureText,
+    this.obscureText = false,
     this.validator,
     this.suffix,
     this.keyboardType,
     this.enabled,
     this.prefixIcon,
-    this.initialValue,
     this.onChanged,
-    this.inputAction, this.onTap,
+    this.inputAction,
+    this.onTap,
+    this.onToggle,
+    this.isPassword = false, this.onFieldSubmitted,
   });
 
   final TextEditingController controller;
   final String? labelText;
   final String? hintText;
-  final String? initialValue;
   final bool? obscureText;
+  final bool? isPassword;
+  final VoidCallback? onToggle;
   final bool? enabled;
   final String? Function(String?)? validator;
   final Widget? suffix;
@@ -337,46 +439,54 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction? inputAction;
   final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
   final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onTap:onTap ,
-      cursorColor: ColorManager.placeHolderColor,
-      style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 16),
-      initialValue: initialValue,
-      readOnly: enabled ?? false,
+      onTap: onTap,
       controller: controller,
+      cursorColor: ColorManager.placeHolderColor,
+      style: getSemiBoldStyle(color: ColorManager.primaryColor, fontSize: 16),
       keyboardType: keyboardType,
+      textInputAction: inputAction,
+      textDirection: TextDirection.ltr,
+      readOnly: enabled ?? false,
+      obscureText: obscureText ?? false,
+      validator: validator,
+      onChanged: onChanged,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      onFieldSubmitted:onFieldSubmitted ,
       decoration: InputDecoration(
-        errorStyle: TextStyle(fontSize: 14),
+        errorStyle: const TextStyle(fontSize: 14),
         prefixIcon: prefixIcon,
         prefixIconColor: ColorManager.placeHolderColor,
-        suffixIcon: suffix != null
-            ? Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            suffix!,
-          ],
+        suffixIcon: isPassword==true
+            ? IconButton(
+          icon: Icon(
+            obscureText! ? Icons.visibility : Icons.visibility_off,
+          ),
+          onPressed: onToggle,
         )
-            : null,
-        suffixIconColor: ColorManager.placeHolderColor,
+            : suffix,
+        suffixIconColor: ColorManager.cyanDark,
         labelText: labelText,
         labelStyle: getRegularStyle(
-          color: ColorManager.placeHolderColor,
+          color: ColorManager.black,
           fontSize: FontSize.s16,
         ),
         hintText: hintText,
         hintStyle: getRegularStyle(
-          color: ColorManager.placeHolderColor2,
+          color: ColorManager.black.withAlpha(150),
           fontSize: FontSize.s14,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p14, vertical:   AppPadding.p8),
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: AppPadding.p14, vertical: AppPadding.p8),
         enabledBorder: outLintInputBorderMethod(
-          const BorderSide(
-              color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+           BorderSide(
+              color: ColorManager.black.withAlpha(150), width: AppSize.w1_5),
           const BorderRadius.all(Radius.circular(AppSize.s40)),
         ),
         focusedBorder: outLintInputBorderMethod(
@@ -399,10 +509,6 @@ class CustomTextFormField extends StatelessWidget {
                 color: ColorManager.placeHolderColor, width: AppSize.w1_5),
             const BorderRadius.all(Radius.circular(AppSize.s40))),
       ),
-      obscureText: obscureText ?? false,
-      validator: validator,
-      onChanged: onChanged,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import '../resources/style_manager.dart';
 import '../resources/color_manager.dart';
@@ -24,14 +25,14 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: ColorManager.orange,
-        minimumSize: Size(width ?? 31, 38),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppSize.s24)),
-        ),
+        minimumSize: Size(width ?? 25, 33),
+        // shape: const RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.all(Radius.circular(AppSize.s24)),
+        // ),
       ),
-      child: Text(title,
+      child: AutoSizeText(title,
           style: style ??
-              getSemiBoldStyle(color: ColorManager.white, fontSize: 16)),
+              getSemiBoldStyle(color: ColorManager.white, fontSize: 12)),
     );
   }
 }

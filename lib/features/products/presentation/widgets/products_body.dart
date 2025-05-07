@@ -26,7 +26,7 @@ class ProductsBody extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,
-                  mainAxisExtent: 220,
+                  mainAxisExtent: 250,
                 ),
                 itemBuilder:
                     (context, index) => CustomProductCardWidget(

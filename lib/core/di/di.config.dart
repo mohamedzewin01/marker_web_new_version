@@ -13,6 +13,14 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/auth/data/data_sources/auth_data_sources_repo.dart'
+    as _i69;
+import '../../features/auth/data/data_sources/auth_data_sources_rpo_impl.dart'
+    as _i552;
+import '../../features/auth/data/repo_impl/auth_repo_impl.dart' as _i279;
+import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
+import '../../features/auth/domain/use_cases/auth_use_case.dart' as _i283;
+import '../../features/auth/presentation/cubit/auth_cubit.dart' as _i117;
 import '../../features/best_deals/data/data_sources/best_deals_data_sources.dart'
     as _i573;
 import '../../features/best_deals/data/repo_impl/best_deals_repo_impl.dart'
@@ -24,6 +32,14 @@ import '../../features/best_deals/presention/cubit/best_by_discount/best_discoun
     as _i989;
 import '../../features/best_deals/presention/cubit/best_deals_categories_cubit.dart'
     as _i123;
+import '../../features/cart/data/data_sources/cart_data_sources_repo.dart'
+    as _i992;
+import '../../features/cart/data/data_sources/cart_data_sources_repo_impl.dart'
+    as _i248;
+import '../../features/cart/data/repo_impl/cart_repo_impl.dart' as _i966;
+import '../../features/cart/domain/repo/cart_repo.dart' as _i379;
+import '../../features/cart/domain/use_cases/cart_use_case.dart' as _i886;
+import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
 import '../../features/categories/data/data_sources/categorieS_zone_data_sourse.dart'
     as _i426;
 import '../../features/categories/data/repo_impl/categories_zone_repo_impl.dart'
@@ -63,6 +79,12 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.lazySingleton<_i361.Dio>(() => dioModule.providerDio());
     gh.factory<_i680.ApiService>(() => _i680.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i69.AuthDataSourcesRepo>(
+      () => _i552.AuthDataSourcesRpoImpl(gh<_i680.ApiService>()),
+    );
+    gh.factory<_i170.AuthRepo>(
+      () => _i279.AuthRepoImpl(gh<_i69.AuthDataSourcesRepo>()),
+    );
     gh.factory<_i573.BestDealsDataSources>(
       () => _i573.BestDealsDataSources(gh<_i680.ApiService>()),
     );
@@ -71,6 +93,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i645.ProductsDataSource>(
       () => _i645.ProductsDataSource(gh<_i680.ApiService>()),
+    );
+    gh.factory<_i283.AuthUseCase>(
+      () => _i283.AuthUseCase(gh<_i170.AuthRepo>()),
     );
     gh.factory<_i988.BestDealsRepo>(
       () => _i95.BestDealsRepoImpl(gh<_i573.BestDealsDataSources>()),
@@ -84,17 +109,21 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i148.BestDealsUseCases>(
       () => _i148.BestDealsUseCases(gh<_i988.BestDealsRepo>()),
     );
+    gh.factory<_i117.AuthCubit>(() => _i117.AuthCubit(gh<_i283.AuthUseCase>()));
     gh.factory<_i280.HomeRepo>(
       () => _i886.HomeRepoImpl(gh<_i645.HomeDataSourceRepo>()),
+    );
+    gh.factory<_i992.CartDataSourcesRepo>(
+      () => _i248.CartDataSourcesRepoImpl(gh<_i680.ApiService>()),
     );
     gh.factory<_i83.CategoriesZoneRepo>(
       () => _i106.CategoriesZoneRepoImpl(gh<_i426.CategoriesZoneDataSource>()),
     );
-    gh.factory<_i123.BestDealsCategoriesCubit>(
-      () => _i123.BestDealsCategoriesCubit(gh<_i148.BestDealsUseCases>()),
-    );
     gh.factory<_i989.BestDiscountByDiscountCubit>(
       () => _i989.BestDiscountByDiscountCubit(gh<_i148.BestDealsUseCases>()),
+    );
+    gh.factory<_i123.BestDealsCategoriesCubit>(
+      () => _i123.BestDealsCategoriesCubit(gh<_i148.BestDealsUseCases>()),
     );
     gh.factory<_i388.CategoriesZoneUseCase>(
       () => _i388.CategoriesZoneUseCase(gh<_i83.CategoriesZoneRepo>()),
@@ -108,10 +137,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i802.CategoriesCubit>(
       () => _i802.CategoriesCubit(gh<_i388.CategoriesZoneUseCase>()),
     );
+    gh.factory<_i379.CartRepo>(
+      () => _i966.CartRepoImpl(gh<_i992.CartDataSourcesRepo>()),
+    );
     gh.factory<_i911.ProductsCubit>(
       () => _i911.ProductsCubit(gh<_i258.ProductsUseCase>()),
     );
     gh.factory<_i9.HomeCubit>(() => _i9.HomeCubit(gh<_i933.HomeUseCase>()));
+    gh.factory<_i886.CartUseCase>(
+      () => _i886.CartUseCase(gh<_i379.CartRepo>()),
+    );
+    gh.factory<_i499.CartCubit>(() => _i499.CartCubit(gh<_i886.CartUseCase>()));
     return this;
   }
 }

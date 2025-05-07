@@ -130,7 +130,7 @@ class BestDealsBody extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                height: 220,
+                                height: 240,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: products.length,

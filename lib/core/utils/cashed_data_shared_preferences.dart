@@ -53,4 +53,9 @@ class CacheConstants {
   static const String deviceId = 'deviceId';
   static const String id = 'id';
   static const String deviceName='deviceName';
+  static const String userName='userName';
+  static const String userId='userId';
+  static const String userEmail='userEmail';
+  static const String userPhone='userPhone';
 }
+

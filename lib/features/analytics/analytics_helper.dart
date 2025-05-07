@@ -44,12 +44,12 @@ class WebDeviceInfoHelper {
 }
 
 Future<void> getAndSaveDeviceInfo() async {
-  print("إستدعاء getAndSaveDeviceInfo"); // سجل بداية الاستدعاء
+  //print("إستدعاء getAndSaveDeviceInfo"); // سجل بداية الاستدعاء
 
   final deviceName = WebDeviceInfoHelper.getDeviceName();
   final deviceId = WebDeviceInfoHelper.getDeviceId();
 
-  print("deviceId: $deviceId, deviceName: $deviceName");
+  //print("deviceId: $deviceId, deviceName: $deviceName");
 
   await CacheService.setData(key: CacheConstants.deviceId, value: deviceId);
   await CacheService.setData(key: CacheConstants.deviceName, value: deviceName);

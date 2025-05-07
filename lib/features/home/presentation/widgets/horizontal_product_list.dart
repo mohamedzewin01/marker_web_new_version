@@ -15,11 +15,11 @@ class BestDealsProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductsBestDeals>? bestDeals10 = bestDeals?.toList().reversed.toList() ?? [];
+    List<ProductsBestDeals>? bestDeals10 = bestDeals ?? [];
     return
       bestDeals10.isNotEmpty
               ? SizedBox(
-        height: 500,
+        height: 550,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: GridView.builder(
@@ -31,7 +31,7 @@ class BestDealsProductList extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
-            mainAxisExtent: 220,
+            mainAxisExtent: 250,
           ),
           itemBuilder: (context, index) => CustomProductCardWidget(
             product: bestDeals10[index].toProductsRelations(),

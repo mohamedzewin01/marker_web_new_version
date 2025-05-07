@@ -186,7 +186,7 @@ class _CategoryProductViewState extends State<CategoryProductView> {
                                     crossAxisCount: crossAxisCount,
                                     crossAxisSpacing: 10,
                                     mainAxisSpacing: 10,
-                                    mainAxisExtent: 220,
+                                    mainAxisExtent: 250,
                                   ),
                             )
                             : SliverFillRemaining(

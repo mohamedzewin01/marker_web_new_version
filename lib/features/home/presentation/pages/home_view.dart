@@ -16,7 +16,7 @@ import '../widgets/app_bar_body.dart';
 import '../widgets/carousel.dart';
 import '../widgets/grid_categories.dart';
 import '../widgets/horizontal_product_list.dart';
-import '../widgets/search_text_filed.dart';
+
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
