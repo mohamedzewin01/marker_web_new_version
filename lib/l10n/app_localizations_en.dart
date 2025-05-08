@@ -24,6 +24,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get category => 'category';
 
   @override
+  String get cart => 'cart';
+
+  @override
   String get categories => 'categories';
 
   @override

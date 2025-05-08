@@ -24,6 +24,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get category => ' القسم';
 
   @override
+  String get cart => 'السلة';
+
+  @override
   String get categories => ' الاقسام';
 
   @override

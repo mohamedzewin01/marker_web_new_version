@@ -1,4 +1,5 @@
 import 'package:fada_alhalij_web/features/best_deals/presention/pages/best_deals_view.dart';
+import 'package:fada_alhalij_web/features/cart/presentation/pages/cart_view.dart';
 import 'package:flutter/material.dart';
 
 
@@ -13,5 +14,6 @@ class AppConstants {
     HomeView(),
     BestDealsView(),
     Categories(),
+    CartView(),
   ];
 }

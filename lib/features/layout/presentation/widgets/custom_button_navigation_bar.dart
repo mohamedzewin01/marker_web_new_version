@@ -43,6 +43,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
             label: AppLocalizations.of(context)!.categories,
           ),
 
+          BottomNavigationBarItem(
+            icon: buildIcon(Assets.cartIcon, 3, currentIndex),
+            label: AppLocalizations.of(context)!.cart,
+          ),
+
         ],
         selectedFontSize: AppSize.s14,
         selectedLabelStyle: getSemiBoldStyle(color: ColorManager.lightGrey2),

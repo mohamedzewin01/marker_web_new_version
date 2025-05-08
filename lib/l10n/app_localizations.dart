@@ -125,6 +125,12 @@ abstract class AppLocalizations {
   /// **'category'**
   String get category;
 
+  /// No description provided for @cart.
+  ///
+  /// In en, this message translates to:
+  /// **'cart'**
+  String get cart;
+
   /// No description provided for @categories.
   ///
   /// In en, this message translates to:

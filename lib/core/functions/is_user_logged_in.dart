@@ -38,7 +38,7 @@ Future<void> executeIfLoggedIn({
   }
 }
 
-void showAuthOrAddToCartDialog(BuildContext context, {required int idProduct}) async {
+void showAuthOrAddToCartDialog(BuildContext context, { int? idProduct}) async {
   await executeIfLoggedIn(
     context: context,
     onLoggedIn: () async {
@@ -73,8 +73,9 @@ void showAuthOrAddToCartDialog(BuildContext context, {required int idProduct}) a
       );
     },
     onNotLoggedIn: () async {
-
-      context.read<CartCubit>().addToCart(idProduct: idProduct);
+if(idProduct != null) {
+  context.read<CartCubit>().addToCart(idProduct: idProduct);
+}
 
 
 

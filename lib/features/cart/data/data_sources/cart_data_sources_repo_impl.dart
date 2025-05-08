@@ -1,9 +1,10 @@
 import 'package:fada_alhalij_web/core/api/api_extentions.dart';
 import 'package:fada_alhalij_web/core/api/api_manager/api_manager.dart';
 import 'package:fada_alhalij_web/core/common/api_result.dart';
-
+import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
-
+import 'package:fada_alhalij_web/features/cart/data/models/request/get_cart_request.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
 import 'package:fada_alhalij_web/features/cart/domain/entities/cart_entities.dart';
 import 'package:injectable/injectable.dart';
 
@@ -20,6 +21,27 @@ class CartDataSourcesRepoImpl implements CartDataSourcesRepo {
     return executeApi(() async {
       var response = await _apiService.addToCart(addToCartRequest);
       return response?.toAddToCartEntity();
+    });
+  }
+
+  @override
+  Future<Result<CartEntity?>> getCart() {
+    return executeApi(() async {
+      int? userId = await CacheService.getData(key: CacheConstants.userId)??0;
+      var response = await _apiService.getCart(
+        GetCartRequest(userId: userId),
+      );
+      return response?.toCartEntities();
+    });
+  }
+
+  @override
+  Future<Result<UpdateCartItemEntity?>> updateCart(
+    UpdateCartItemRequest updateCartItemRequest,
+  ) {
+    return executeApi(() async {
+      var response = await _apiService.updateCartItem(updateCartItemRequest);
+      return response?.toUpdateCartItemEntity();
     });
   }
 }

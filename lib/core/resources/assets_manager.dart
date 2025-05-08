@@ -11,5 +11,6 @@ class Assets {
   static const String welcome = 'assets/images/welcome_bg.webp';
   static const String imagesSearch = 'assets/images/search.svg';
   static const String cart = 'assets/images/cart.svg';
+  static const String cartIcon = 'assets/images/cart_icon.png';
 
 }

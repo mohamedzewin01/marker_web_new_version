@@ -19,4 +19,6 @@ class ApiConstants {
   static const String productVisit = "analytics/product_visits/add_product_visit";
   static const String fetchBestDealsByDiscount = "bestDeals/fetchBestDealsByDiscount";
   static const String addToCart = "cart/addtoCart";
+  static const String getCart = "cart/cart";
+  static const String updateCartItem = "cart/updateCartItem";
 }

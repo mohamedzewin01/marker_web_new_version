@@ -9,4 +9,16 @@ final class CartAddFail extends CartState {}
 final class CartAddSuccess extends CartState {
 
 }
+final class CartLoading extends CartState {
 
+}
+final class CartFail extends CartState {
+ final Exception exception;
+  CartFail(this.exception);
+}
+final class CartSuccess extends CartState {
+  final CartEntity? cartEntity;
+  CartSuccess(this.cartEntity);
+
+
+}
