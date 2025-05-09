@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:fada_alhalij_web/core/common/api_result.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/cart_dto.dart';
 import 'package:fada_alhalij_web/features/cart/domain/entities/cart_entities.dart';
@@ -23,9 +26,11 @@ class CartCubit extends Cubit<CartState> {
 
   int? idUser = CacheService.getData(key: CacheConstants.userId) ?? 0;
 
+
+  late TabController tabController;
   List<CartItems> cartItems = [];
   Cart? myCart;
-  double total = 0;
+  num total = 0;
 
   Future<void> getCart() async {
     emit(CartLoading());
@@ -108,24 +113,19 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  ///
-
   void updateCartTotals() {
-    double totalPrice = 0;
-    double totalDiscount = 0;
-    double finalPrice = 0;
+    num totalPrice = 0.00;
+    num totalDiscount = 0.00;
+    num finalPrice = 0.00;
 
-    // حساب التوتال بناءً على cartItems
     for (var item in cartItems) {
-      final price = item.product?.price ?? 0;
-      final discount = item.product?.discount ?? 0;
-      final qty = item.quantity ?? 1;
+      final double price = item.product?.price?.toDouble() ?? 0.0;
+      final double discount = item.product?.discount?.toDouble() ?? 0.0;
+      final int qty = item.quantity ?? 1;
 
       totalPrice += price * qty;
       totalDiscount += discount * qty;
       finalPrice += (price - discount) * qty;
-
-      print(finalPrice);
     }
 
     myCart = myCart?.copyWith(
@@ -137,16 +137,38 @@ class CartCubit extends Cubit<CartState> {
     emit(CartSuccess(CartEntity(cart: myCart)));
   }
 
+
   void updateCartItemQuantity(int productId, int newQuantity) async {
     await _cartUseCase.updateCart(
       UpdateCartItemRequest(quantity: newQuantity, productId: productId),
     );
   }
 
-  void removeItemFromCart(int productId) {
-    cartItems.removeWhere((item) => item.product?.id == productId);
+  Future<void> removeItemFromCart({required int productId,required int index}) async{
 
-    updateCartTotals();
+    var result =await _cartUseCase.deleteCart(
+      DeleteItemCartRequest(
+        productId: productId,
+        userId: idUser,
+      ),
+    );
+    switch (result) {
+      case Success<DelItemCartEntity?>():
+        {
+          cartItems.removeAt(index);
+          updateCartTotals();
+          getCart();
+
+        }
+      case Fail<DelItemCartEntity?>():
+        {
+          emit(CartAddFail());
+        }
+    }
+
+
+
+
   }
 
   Future<void> addToCart({required int idProduct}) async {

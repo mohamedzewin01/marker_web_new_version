@@ -1,116 +1,79 @@
-import 'package:flutter/material.dart';
-
-class CustomScaffold extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          IndexedStack(
-            index: 0, // Replace with your cubit.index
-            children: [
-              // Replace with your views
-              Center(child: Text('View 1')),
-              Center(child: Text('View 2')),
-            ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomNavigationBar(
-              currentIndex: 0, // Replace with your cubit.index
-              onItemTapped: (index) {
-                // Replace with your cubit.changeIndex(index)
-              },
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: PositionedFloatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
-  }
-}
-
-class PositionedFloatingActionButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        Positioned(
-          bottom: 30, // Adjust this value to move the button upwards
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              CustomPaint(
-                size: Size(80, 80), // Adjust size as needed
-                painter: FloatingButtonCurvePainter(),
-              ),
-              FloatingActionButton(
-                backgroundColor: Colors.blue, // Replace with your ColorManager.primaryColor
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  // Your action here
-                },
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class FloatingButtonCurvePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.blue.withOpacity(0.2) // Adjust color and opacity as needed
-      ..style = PaintingStyle.fill;
-
-    final path = Path()
-      ..moveTo(0, size.height / 2)
-      ..quadraticBezierTo(size.width / 2, 0, size.width, size.height / 2)
-      ..quadraticBezierTo(size.width / 2, size.height, 0, size.height / 2)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
-
-class CustomBottomNavigationBar extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onItemTapped;
-
-  const CustomBottomNavigationBar({
-    required this.currentIndex,
-    required this.onItemTapped,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomAppBar(
-      shape: CircularNotchedRectangle(),
-      notchMargin: 8.0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            icon: Icon(Icons.home),
-            onPressed: () => onItemTapped(0),
-          ),
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () => onItemTapped(1),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// import 'package:flutter/material.dart';
+//
+// class CartPage extends StatefulWidget {
+//   @override
+//   _CartPageState createState() => _CartPageState();
+// }
+//
+// class _CartPageState extends State<CartPage> {
+//   List<String> cartItems = ['Item 1', 'Item 2', 'Item 3'];
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('سلة التسوق'),
+//       ),
+//       body: ListView.builder(
+//         itemCount: cartItems.length,
+//         itemBuilder: (context, index) {
+//           return Dismissible(
+//             key: Key(cartItems[index]),
+//             direction: DismissDirection.endToStart, // السحب من اليمين لليسار
+//             onDismissed: (direction) {
+//               // عندما يتم السحب، نعرض مربع حوار لتأكيد الحذف
+//               _showDeleteConfirmation(context, index);
+//             },
+//             background: Container(
+//               color: Colors.red,
+//               alignment: Alignment.centerRight,
+//               padding: EdgeInsets.only(right: 20),
+//               child: Icon(Icons.delete, color: Colors.white),
+//             ),
+//             child: ListTile(
+//               title: Text(cartItems[index]),
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+//
+//   // دالة لعرض مربع التأكيد للحذف
+//   void showDeleteConfirmation(BuildContext context, int index) {
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: Text('تأكيد الحذف'),
+//           content: Text('هل أنت متأكد أنك تريد حذف هذا العنصر؟'),
+//           actions: <Widget>[
+//             TextButton(
+//               onPressed: () {
+//                 // إذا ضغط المستخدم على "لا"، نغلق المربع دون حذف
+//                 Navigator.of(context).pop();
+//               },
+//               child: Text('لا'),
+//             ),
+//             TextButton(
+//               onPressed: () {
+//                 // إذا ضغط المستخدم على "نعم"، نقوم بحذف العنصر
+//                 setState(() {
+//                   cartItems.removeAt(index);
+//                 });
+//                 Navigator.of(context).pop(); // نغلق المربع
+//               },
+//               child: Text('نعم'),
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   }
+// }
+//
+// void main() {
+//   runApp(MaterialApp(
+//     home: CartPage(),
+//   ));
+// }

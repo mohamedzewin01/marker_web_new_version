@@ -3,6 +3,7 @@ import 'package:fada_alhalij_web/core/api/api_manager/api_manager.dart';
 import 'package:fada_alhalij_web/core/common/api_result.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/get_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
 import 'package:fada_alhalij_web/features/cart/domain/entities/cart_entities.dart';
@@ -42,6 +43,14 @@ class CartDataSourcesRepoImpl implements CartDataSourcesRepo {
     return executeApi(() async {
       var response = await _apiService.updateCartItem(updateCartItemRequest);
       return response?.toUpdateCartItemEntity();
+    });
+  }
+
+  @override
+  Future<Result<DelItemCartEntity?>> deleteCart(DeleteItemCartRequest deleteItemCartRequest) {
+    return executeApi(() async {
+      var response = await _apiService.deleteCartItem(deleteItemCartRequest);
+      return response?.toDelItemCartEntity();
     });
   }
 }

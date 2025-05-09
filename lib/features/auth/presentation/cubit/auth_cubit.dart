@@ -52,6 +52,10 @@ class AuthCubit extends Cubit<AuthState> {
               key: CacheConstants.userPhone,
               value: result.data?.user?.phone,
             );
+            CacheService.setData(
+              key: CacheConstants.isActive,
+              value: true,
+            );
             emit(AuthSignInSuccess(result.data!));
           }
         }
@@ -94,6 +98,10 @@ class AuthCubit extends Cubit<AuthState> {
               key: CacheConstants.userPhone,
               value: result.data?.user?.phone,
             );
+            CacheService.setData(
+              key: CacheConstants.isActive,
+              value: result.data?.user?.isActive,
+            );
             emit(AuthSignUpSuccess(result.data!));
           }
         }
@@ -104,3 +112,5 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 }
+
+

@@ -6,6 +6,7 @@
 import 'package:fada_alhalij_web/core/common/api_result.dart';
 import 'package:fada_alhalij_web/features/cart/data/data_sources/cart_data_sources_repo.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
 import 'package:fada_alhalij_web/features/cart/domain/entities/cart_entities.dart';
 import 'package:fada_alhalij_web/features/cart/domain/repo/cart_repo.dart';
@@ -33,6 +34,11 @@ class CartRepoImpl extends CartRepo {
   @override
   Future<Result<UpdateCartItemEntity?>> updateCart(UpdateCartItemRequest updateCartItemRequest) {
   return cartDataSourcesRepo.updateCart(updateCartItemRequest);
+  }
+
+  @override
+  Future<Result<DelItemCartEntity?>> deleteCart(DeleteItemCartRequest deleteItemCartRequest) {
+return cartDataSourcesRepo.deleteCart(deleteItemCartRequest);
   }
 
 

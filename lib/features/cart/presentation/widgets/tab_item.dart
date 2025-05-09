@@ -30,19 +30,17 @@ class TabItem extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            // Show underline only if the tab is active
             if (isActive)
               Container(
                 height: 3,
-                width: 60, // Adjust width as needed
+                width: 60,
                 decoration: BoxDecoration(
                   color: activeColor,
                   borderRadius: BorderRadius.circular(
                     1.5,
-                  ), // Optional: Rounded corners for the line
+                  ),
                 ),
               ),
-            // Add placeholder for inactive tabs to maintain height consistency
             if (!isActive) const SizedBox(height: 3),
           ],
         ),

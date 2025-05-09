@@ -55,6 +55,7 @@ dependencies:
   pdf:
   path_provider:
   flutter_html: ^3.0.0
+  flutter_slidable: ^4.0.0
 
 
 

@@ -6,6 +6,7 @@ sealed class CartState {}
 final class CartInitial extends CartState {}
 final class CartAddLoading extends CartState {}
 final class CartAddFail extends CartState {}
+
 final class CartAddSuccess extends CartState {
 
 }
@@ -22,3 +23,4 @@ final class CartSuccess extends CartState {
 
 
 }
+final class CartDelete extends CartState {}

@@ -37,6 +37,9 @@ class ColorManager {
   static const Color highlightColor = Color(0xffFFD700);
   static const Color shadowColor = Color(0xffB0BEC5);
 
+  static const Color darkTextColor = Color(0xFF333333);
+  static const Color lightTextColor = Color(0xFF757575);
+
   static const Color red = Color(0xfff44336);
   static const Color blue = Color(0xff2196f3);
   static const Color green = Color(0xff4caf50);

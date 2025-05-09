@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fada_alhalij_web/core/di/di.dart';
 import 'package:fada_alhalij_web/core/functions/is_user_logged_in.dart';
 import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
@@ -22,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../features/auth/presentation/widgets/signup_form_view.dart';
@@ -34,7 +36,9 @@ class CustomProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CartCubit, CartState>(
+    return BlocProvider(
+  create: (context) => getIt.get<CartCubit>(),
+  child: BlocConsumer<CartCubit, CartState>(
       listener: (context, state) {
         if (state is CartAddLoading) {}
         if (state is CartAddSuccess) {
@@ -258,7 +262,8 @@ class CustomProductCardWidget extends StatelessWidget {
           ),
         );
       },
-    );
+    ),
+);
   }
 }
 

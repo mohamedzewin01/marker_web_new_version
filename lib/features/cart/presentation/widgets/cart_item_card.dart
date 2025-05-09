@@ -1,21 +1,16 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
-import 'package:fada_alhalij_web/features/cart/data/models/response/cart_dto.dart';
+import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/core/widgets/rial_icon.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class CartItemCard extends StatefulWidget {
-  const CartItemCard({
-    super.key,
-    // required this.item,
-    required this.index,
-    required this.viewModel,
-  });
+  const CartItemCard({super.key, required this.index, required this.viewModel});
 
   final CartCubit viewModel;
-
-  // final CartItems item;
   final int index;
 
   @override
@@ -25,122 +20,138 @@ class CartItemCard extends StatefulWidget {
 class _CartItemCardState extends State<CartItemCard> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Stack(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF0F4F8),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey[200]!, width: 1),
-                ),
-                child: CustomImage(
-                  url:
-                      widget
-                          .viewModel
-                          .cartItems[widget.index]
-                          .product
-                          ?.imgCover ??
-                      '',
-                  width: 50,
-                  height: 50,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(width: 8),
-
-          // Product Details
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+    var product = widget.viewModel.cartItems[widget.index].product;
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Stack(
               children: [
-                Text(
-                  widget.viewModel.cartItems[widget.index].product?.title ?? '',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: ColorManager.black,
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF0F4F8),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey[200]!, width: 1),
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  child: CustomImage(
+                    url: product?.imgCover ?? '',
+                    width: 50,
+                    height: 50,
+                  ),
                 ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    Text(
-                      '${widget.viewModel.cartItems[widget.index].product?.priceAfterDiscount?.toStringAsFixed(2)}ريال',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: ColorManager.black,
+                if (product?.discount != 0)
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 2,
+                        horizontal: 4,
                       ),
-                    ),
-                    if (widget
-                            .viewModel
-                            .cartItems[widget.index]
-                            .product
-                            ?.price !=
-                        null) ...[
-                      const SizedBox(width: 8),
-                      Text(
-                        '${widget.viewModel.cartItems[widget.index].product?.price!.toStringAsFixed(0)}da',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: ColorManager.cyanDark,
-                          decoration: TextDecoration.lineThrough,
+                      decoration: BoxDecoration(
+                        color: ColorManager.error.withAlpha(230),
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
                         ),
                       ),
-                    ],
-                  ],
-                ),
+                      child: const Text(
+                        'عرض خاص',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 8),
+                      ),
+                    ),
+                  ),
               ],
             ),
-          ),
-          const SizedBox(width: 10),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AutoSizeText(
+                    product?.title ?? '',
+                    style: getSemiBoldStyle(
+                      color: ColorManager.black,
+                      fontSize: 12,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Text(
+                        '${product?.priceAfterDiscount?.toStringAsFixed(2)}',
+                        style: getSemiBoldStyle(
+                          color: ColorManager.black,
+                          fontSize: 14,
+                        ),
+                      ),
+                      RialIcon(color: ColorManager.black, size: 10),
+                      if (widget
+                              .viewModel
+                              .cartItems[widget.index]
+                              .product
+                              ?.discount !=
+                          0) ...[
+                        Spacer(),
+                        Text(
+                          '${product?.price?.toStringAsFixed(2)}',
+                          style: getSemiBoldStyle(
+                            color: ColorManager.error,
+                            fontSize: 12,
+                          ).copyWith(
+                            decoration: TextDecoration.lineThrough,
+                            decorationColor: ColorManager.error,
+                            decorationThickness: 2,
+                            height: 1.5,
+                          ),
+                        ),
 
-          // Quantity Selector
-          Container(
-            decoration: BoxDecoration(
-              color: ColorManager.primaryColor,
-              borderRadius: BorderRadius.circular(20),
+                        RialIcon(color: ColorManager.error, size: 10),
+                        Spacer(),
+                      ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-            child: Row(
+            const SizedBox(width: 5),
+
+            // Quantity Selector
+            Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 InkWell(
                   onTap: () async {
                     await widget.viewModel.decreaseQuantity(
-                      productId:
-                          widget.viewModel.cartItems[widget.index].product!.id!,
+                      productId: product!.id!,
                       index: widget.index,
                     );
 
                     setState(() {});
                   },
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 6.0,
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: ColorManager.primaryColor),
+                      color: ColorManager.primaryColor,
                     ),
-                    child: Icon(Icons.remove, size: 18, color: Colors.white),
+                    child: Icon(
+                      Icons.remove,
+                      size: 18,
+                      color: ColorManager.white,
+                    ),
                   ),
                 ),
-                Container(
-                  color: Colors.white.withOpacity(0.5),
-                  width: 1,
-                  height: 20,
-                ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 8.0,
@@ -149,44 +160,42 @@ class _CartItemCardState extends State<CartItemCard> {
                   child: Text(
                     '${widget.viewModel.cartItems[widget.index].quantity}',
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: ColorManager.primaryColor,
                     ),
                   ),
                 ),
-                Container(
-                  color: Colors.white.withOpacity(0.5),
-                  width: 1,
-                  height: 20,
-                ),
+
                 InkWell(
                   onTap: () async {
                     await widget.viewModel.increaseQuantity(
-                      productId:
-                      widget.viewModel.cartItems[widget.index].product!.id!,
+                      productId: product!.id!,
                       index: widget.index,
                     );
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(20),
                     bottomRight: Radius.circular(20),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 6.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: ColorManager.primaryColor),
+                      color: ColorManager.primaryColor,
                     ),
-                    child: Icon(Icons.add, size: 18, color: Colors.white),
+                    child: Icon(
+                      Icons.add,
+                      size: 18,
+                      color: ColorManager.white,
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

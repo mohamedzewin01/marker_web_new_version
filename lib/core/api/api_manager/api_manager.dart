@@ -8,10 +8,12 @@ import 'package:fada_alhalij_web/features/auth/data/models/responses/auth_singin
 import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_categories_model.dart';
 import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_discount.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/get_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/add_to_cart_response.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/cart_dto.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/response/del_item_cart_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/update_tart_item_response.dart';
 import 'package:fada_alhalij_web/features/categories/data/models/categories_zone_response.dart';
 import 'package:fada_alhalij_web/features/home/data/models/response/home_model_response_dto.dart';
@@ -83,6 +85,11 @@ abstract class ApiService {
   @PUT(ApiConstants.updateCartItem)
   Future<UpdateCartItemResponseDto?> updateCartItem(
       @Body() UpdateCartItemRequest updateCartItemRequest,
+      );
+
+  @PUT(ApiConstants.cartDeleteItem)
+  Future<DelItemCartDto?> deleteCartItem(
+      @Body() DeleteItemCartRequest deleteItemCartRequest,
       );
 }
 

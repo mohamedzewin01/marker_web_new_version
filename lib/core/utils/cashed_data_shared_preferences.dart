@@ -57,5 +57,7 @@ class CacheConstants {
   static const String userId='userId';
   static const String userEmail='userEmail';
   static const String userPhone='userPhone';
+  static const String isActive='isActive';
 }
 
+final bool isActiveUser = CacheService.getData(key: CacheConstants.isActive) as bool? ?? false;

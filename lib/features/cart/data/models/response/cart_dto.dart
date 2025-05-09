@@ -34,11 +34,11 @@ class Cart {
   @JsonKey(name: "cartItems")
   final List<CartItems>? cartItems;
   @JsonKey(name: "totalPrice")
-  final double? totalPrice;
+  final num? totalPrice;
   @JsonKey(name: "totalDiscount")
-  final double? totalDiscount;
+  final num? totalDiscount;
   @JsonKey(name: "finalPrice")
-  final double? finalPrice;
+  final num? finalPrice;
 
   Cart ({
     this.userId,
@@ -50,9 +50,9 @@ class Cart {
   Cart copyWith({
     int? userId,
     List<CartItems>? cartItems,
-    double? totalPrice,
-    double? totalDiscount,
-    double? finalPrice,
+    num? totalPrice,
+    num? totalDiscount,
+    num? finalPrice,
   }) {
     return Cart(
       userId: userId ?? this.userId,
@@ -76,7 +76,7 @@ class CartItems {
   @JsonKey(name: "product")
   final Product? product;
   @JsonKey(name: "totalProductPrice")
-  final int? totalProductPrice;
+  final double? totalProductPrice;
   @JsonKey(name: "totalProductDiscount")
   final double? totalProductDiscount;
   @JsonKey(name: "totleProductPriceAfterDiscount")
@@ -112,7 +112,7 @@ class Product {
   @JsonKey(name: "imgCover")
   final String? imgCover;
   @JsonKey(name: "price")
-  final int? price;
+  final double? price;
   @JsonKey(name: "priceAfterDiscount")
   final double? priceAfterDiscount;
   @JsonKey(name: "discount")

@@ -49,3 +49,18 @@ class UpdateCartItemEntity {
 
 
 }
+
+
+class DelItemCartEntity {
+
+  final String? status;
+
+  final String? message;
+
+  DelItemCartEntity ({
+    this.status,
+    this.message,
+  });
+
+
+}
