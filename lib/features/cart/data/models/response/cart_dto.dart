@@ -133,7 +133,29 @@ class Product {
     this.category,
     this.createdAt,
   });
-
+  Product copyWith({
+    int? id,
+    String? title,
+    String? description,
+    String? imgCover,
+    double? price,
+    double? priceAfterDiscount,
+    double? discount,
+    int? category,
+    String? createdAt,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      imgCover: imgCover ?? this.imgCover,
+      price: price ?? this.price,
+      priceAfterDiscount: priceAfterDiscount ?? this.priceAfterDiscount,
+      discount: discount ?? this.discount,
+      category: category ?? this.category,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
   factory Product.fromJson(Map<String, dynamic> json) {
     return _$ProductFromJson(json);
   }

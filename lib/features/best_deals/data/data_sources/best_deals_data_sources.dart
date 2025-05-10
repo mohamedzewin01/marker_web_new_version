@@ -25,4 +25,12 @@ class BestDealsDataSources {
     
   }
 
+  Future<Result<FetchBestDealsEntity?>> getAllBestDeals() {
+    return executeApi(() async {
+      var response = await apiService.fetchBestDeals();
+      return response?.toFetchBestDealsEntity();
+    });
+
+  }
+
 }

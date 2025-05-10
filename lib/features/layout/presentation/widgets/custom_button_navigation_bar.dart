@@ -35,19 +35,17 @@ class CustomBottomNavigationBar extends StatelessWidget {
             label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.bestDeals, 1, currentIndex),
-            label: AppLocalizations.of(context)!.bestDeals,
-          ),
-          BottomNavigationBarItem(
-            icon: buildIcon(Assets.categories, 2, currentIndex),
+            icon: buildIcon(Assets.categories, 1, currentIndex),
             label: AppLocalizations.of(context)!.categories,
           ),
-
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.cartIcon, 3, currentIndex),
+            icon: buildIcon(Assets.cartIcon, 2, currentIndex),
             label: AppLocalizations.of(context)!.cart,
           ),
-
+          BottomNavigationBarItem(
+            icon: buildIcon(Assets.user, 3, currentIndex),
+            label: AppLocalizations.of(context)!.user,
+          ),
         ],
         selectedFontSize: AppSize.s14,
         selectedLabelStyle: getSemiBoldStyle(color: ColorManager.lightGrey2),

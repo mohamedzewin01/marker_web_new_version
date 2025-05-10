@@ -7,12 +7,12 @@ Dio dioProvider() {
   // dio.options.headers["Authorization"] =
   // "Bearer ${CacheService.getData(key: CacheConstants.userToken)}";
   // dio.options.contentType = 'multipart/form-data';
-  dio.interceptors.add(PrettyDioLogger(
-      requestBody: true,
-      request: true,
-      responseHeader: true,
-      responseBody: true,
-      requestHeader: true));
+  // dio.interceptors.add(PrettyDioLogger(
+  //     requestBody: true,
+  //     request: true,
+  //     responseHeader: true,
+  //     responseBody: true,
+  //     requestHeader: true));
 
   return dio;
 }

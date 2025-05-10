@@ -17,9 +17,12 @@ class _CartItemsListSectionState extends State<CartItemsListSection> {
   @override
   Widget build(BuildContext context) {
     return SliverList(
+
       delegate: SliverChildBuilderDelegate((context, index) {
         return Slidable(
+
           endActionPane: ActionPane(
+            extentRatio: 0.15,
             motion: const ScrollMotion(),
             children: [
               SlidableAction(
@@ -28,17 +31,14 @@ class _CartItemsListSectionState extends State<CartItemsListSection> {
                     productId: widget.viewModel.cartItems[index].product?.id ?? 0,
                     index: index,
                   );
-
-                  for (var item in widget.viewModel.cartItems) {
-                    print(
-                      'Product ID: ${item.product?.id}, Name: ${item.product?.title}, Quantity: ${item.quantity}',
-                    );
-                  }
+                  // setState(() {
+                  //
+                  // });
                 },
-                backgroundColor: ColorManager.error,
-                foregroundColor: Colors.white,
+                backgroundColor: ColorManager.white,
+                foregroundColor:  ColorManager.error,
                 icon: Icons.delete,
-                label: 'حذف',
+
               ),
             ],
           ),

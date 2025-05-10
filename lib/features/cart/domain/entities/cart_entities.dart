@@ -18,13 +18,11 @@ class CartEntity {
   final String? message;
   final Cart? cart;
 
-  // Constructor
   CartEntity({
     this.message,
     this.cart,
   });
 
-  // يمكن إضافة دالة copyWith لتسهيل التعديل على CartEntity
   CartEntity copyWith({
     String? message,
     Cart? cart,
@@ -35,6 +33,7 @@ class CartEntity {
     );
   }
 }
+
 
 
 class UpdateCartItemEntity {
@@ -64,3 +63,4 @@ class DelItemCartEntity {
 
 
 }
+

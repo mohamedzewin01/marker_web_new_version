@@ -43,4 +43,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get waiting => 'انتظر قليلاُ';
+
+  @override
+  String get user => 'الحساب';
 }

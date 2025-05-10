@@ -8,7 +8,8 @@ final class CartAddLoading extends CartState {}
 final class CartAddFail extends CartState {}
 
 final class CartAddSuccess extends CartState {
-
+final AddToCartEntity? addToCartEntity;
+  CartAddSuccess(this.addToCartEntity);
 }
 final class CartLoading extends CartState {
 

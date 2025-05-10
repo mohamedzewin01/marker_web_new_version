@@ -16,6 +16,7 @@ import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/utils/cashed_data_shared_preferences.dart';
@@ -47,28 +48,32 @@ class CartView extends StatefulWidget {
   State<CartView> createState() => _CartViewState();
 }
 
-class _CartViewState extends State<CartView>  with SingleTickerProviderStateMixin{
+class _CartViewState extends State<CartView>
+    with SingleTickerProviderStateMixin {
   late CartCubit viewModel;
 
   @override
   void initState() {
     viewModel = getIt.get<CartCubit>();
-    viewModel.tabController = TabController(length: 5, vsync: this);
+    viewModel.tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
+
   @override
   void dispose() {
     viewModel.tabController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => viewModel..getCart(),
       child: SafeArea(
         child: Scaffold(
-          appBar:AppBar(
-            backgroundColor: ColorManager.orange, // تغيير اللون هنا
+          appBar: AppBar(
+            backgroundColor: ColorManager.orange,
+            // تغيير اللون هنا
             title: Text(
               "السلة",
               style: getSemiBoldStyle(
@@ -76,6 +81,17 @@ class _CartViewState extends State<CartView>  with SingleTickerProviderStateMixi
                 fontSize: 14,
               ),
             ),
+            actions: [
+              Transform.rotate(
+                angle: 329 * 3.14159 / 180,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 0,top: 24),
+                  child: SvgPicture.asset(Assets.cart, colorFilter: const ColorFilter.mode(
+                      Colors.white, BlendMode.srcIn) ,),
+                ),
+              ),
+
+            ],
             leading: Padding(
               padding: const EdgeInsets.all(4.0),
               child: InkWell(
@@ -106,10 +122,11 @@ class _CartViewState extends State<CartView>  with SingleTickerProviderStateMixi
 
               preferredSize: const Size.fromHeight(35),
               child: Container(
-           decoration: BoxDecoration(
-             borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-             color: ColorManager.white,
-           ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                  color: ColorManager.white,
+                ),
                 child: DefaultTabController(
                   length: 3, // Number of tabs
                   child: TabBar(
@@ -174,7 +191,8 @@ class _CartViewState extends State<CartView>  with SingleTickerProviderStateMixi
                             );
                           }
                         }
-                        return CircularProgressIndicator(color: ColorManager.orange);
+                        return CircularProgressIndicator(
+                            color: ColorManager.orange);
                       },
                     ),
                   ],

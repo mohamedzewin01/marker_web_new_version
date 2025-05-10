@@ -40,6 +40,8 @@ import '../../features/cart/data/repo_impl/cart_repo_impl.dart' as _i966;
 import '../../features/cart/domain/repo/cart_repo.dart' as _i379;
 import '../../features/cart/domain/use_cases/cart_use_case.dart' as _i886;
 import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
+import '../../features/cart/presentation/cubit/cart_update/cart_update_cubit.dart'
+    as _i675;
 import '../../features/categories/data/data_sources/categorieS_zone_data_sourse.dart'
     as _i426;
 import '../../features/categories/data/repo_impl/categories_zone_repo_impl.dart'
@@ -148,6 +150,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i886.CartUseCase(gh<_i379.CartRepo>()),
     );
     gh.factory<_i499.CartCubit>(() => _i499.CartCubit(gh<_i886.CartUseCase>()));
+    gh.factory<_i675.CartUpdateCubit>(
+      () => _i675.CartUpdateCubit(gh<_i886.CartUseCase>()),
+    );
     return this;
   }
 }

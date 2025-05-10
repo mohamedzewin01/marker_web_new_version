@@ -1,4 +1,5 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/analytics/analytics_helper.dart';
@@ -10,12 +11,13 @@ import 'core/di/di.dart';
 import 'core/utils/cashed_data_shared_preferences.dart';
 import 'core/utils/my_bloc_observer.dart';
 import 'localization/locale_cubit.dart';
+import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheService.cacheInitialization();
   configureDependencies();
-  Bloc.observer = MyBlocObserver();
+  // Bloc.observer = MyBlocObserver();
   AnalyticsHelper.sendAnalytics();
   runApp(
     MyApp(),

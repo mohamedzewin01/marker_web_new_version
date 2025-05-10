@@ -40,6 +40,7 @@ class CartCubit extends Cubit<CartState> {
       case Success<CartEntity?>():
         {
           if (!isClosed) {
+
             emit(CartSuccess(result.data));
           }
         }
@@ -47,6 +48,34 @@ class CartCubit extends Cubit<CartState> {
         {
           emit(CartFail(result.exception));
         }
+    }
+  }
+  Future<void> removeItemFromCart({required int productId, required int index}) async {
+    // إجراء الحذف من الخادم أولاً
+    var result = await _cartUseCase.deleteCart(
+      DeleteItemCartRequest(
+        productId: productId,
+        userId: idUser,
+      ),
+    );
+
+    switch (result) {
+      case Success<DelItemCartEntity?>():
+        {
+          cartItems.removeAt(index);
+          updateCartTotals();
+          myCart = myCart?.copyWith(
+            cartItems: cartItems,
+          );
+          getCart();
+        }
+        break;
+
+      case Fail<DelItemCartEntity?>():
+        {
+
+        }
+        break;
     }
   }
 
@@ -80,7 +109,6 @@ class CartCubit extends Cubit<CartState> {
       }
     }
   }
-
   Future<void> increaseQuantity({
     required int index,
     required int productId,
@@ -144,32 +172,9 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  Future<void> removeItemFromCart({required int productId,required int index}) async{
-
-    var result =await _cartUseCase.deleteCart(
-      DeleteItemCartRequest(
-        productId: productId,
-        userId: idUser,
-      ),
-    );
-    switch (result) {
-      case Success<DelItemCartEntity?>():
-        {
-          cartItems.removeAt(index);
-          updateCartTotals();
-          getCart();
-
-        }
-      case Fail<DelItemCartEntity?>():
-        {
-          emit(CartAddFail());
-        }
-    }
 
 
 
-
-  }
 
   Future<void> addToCart({required int idProduct}) async {
     int? userId = await CacheService.getData(key: CacheConstants.userId);
@@ -182,13 +187,13 @@ class CartCubit extends Cubit<CartState> {
     var result = await _cartUseCase.addCart(addToCartRequest);
 
     switch (result) {
-      case Success<AddToCartRequest?>():
+      case Success<AddToCartEntity?>():
         {
           if (!isClosed) {
-            emit(CartAddSuccess());
+            emit(CartAddSuccess(result.data));
           }
         }
-      case Fail<AddToCartRequest?>():
+      case Fail<AddToCartEntity?>():
         {
           emit(CartAddFail());
         }

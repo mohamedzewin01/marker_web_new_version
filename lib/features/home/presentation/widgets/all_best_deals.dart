@@ -152,7 +152,7 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
                                 crossAxisCount: crossAxisCount,
                                 // crossAxisSpacing: 10,
                                 // mainAxisSpacing: 10,
-                                mainAxisExtent: 240,
+                                mainAxisExtent: 275,
                               ),
                         ):SliverToBoxAdapter(child: Center(
                           child: AutoSizeText(

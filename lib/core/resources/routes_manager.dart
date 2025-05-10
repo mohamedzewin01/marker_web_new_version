@@ -3,7 +3,6 @@ import '../../features/best_deals/presention/pages/best_deals_view.dart';
 import '../../features/home/presentation/pages/home_view.dart';
 import '../../features/home/presentation/widgets/all_best_deals.dart';
 import '../../features/home/presentation/widgets/best_deals_adaptive.dart';
-import '../../features/home/presentation/widgets/categories_adaptive.dart';
 import '../../features/layout/presentation/pages/layout_view.dart';
 import '../../splash.dart';
 
@@ -15,7 +14,7 @@ class RoutesManager {
   static const String categories = '/categories';
   static const String allBestDealsView = '/AllBestDeals';
   static const String bestDealsAdaptive = '/BestDealsAdaptive';
-  static const String categoriesAdaptive = '/CategoriesAdaptive';
+  // static const String categoriesAdaptive = '/CategoriesAdaptive';
   static const String bestDealsView = '/BestDeals';
 }
 
@@ -33,16 +32,16 @@ class RouteGenerator {
           builder: (_) => const BestDealsAdaptive(),
           settings: settings,
         );
-      case RoutesManager.categoriesAdaptive:
-        return MaterialPageRoute(
-          builder: (_) => const CategoriesAdaptive(),
-          settings: settings,
-        );
-      case RoutesManager.bestDealsView:
-        return MaterialPageRoute(
-          builder: (_) => const BestDealsView(),
-          settings: settings,
-        );
+      // case RoutesManager.categoriesAdaptive:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const CategoriesAdaptive(),
+      //     settings: settings,
+      //   );
+      // case RoutesManager.bestDealsView:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const BestDealsView(),
+      //     settings: settings,
+      //   );
       case RoutesManager.allBestDealsView:
         return MaterialPageRoute(
           builder: (_) => const AllBestDealsView(),

@@ -166,6 +166,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Wait'**
   String get waiting;
+
+  /// No description provided for @user.
+  ///
+  /// In en, this message translates to:
+  /// **'user'**
+  String get user;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

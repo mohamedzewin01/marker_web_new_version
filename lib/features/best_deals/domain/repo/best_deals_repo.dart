@@ -9,4 +9,5 @@ import 'package:fada_alhalij_web/features/best_deals/domain/entities/best_deals_
 abstract class BestDealsRepo {
   Future<Result<BestDealsByCategoriesEntity?>> getBestDealsByCategories();
   Future<Result<BestDealsByDiscountEntity?>> getBestDealsByDiscount(int? discount);
+  Future<Result<FetchBestDealsEntity?>> getAllBestDeals();
 }

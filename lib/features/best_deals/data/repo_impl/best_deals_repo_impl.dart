@@ -24,4 +24,9 @@ import 'package:injectable/injectable.dart';
   return bestDealsDataSources.getBestDealsByDiscount(discount);
   }
 
+  @override
+  Future<Result<FetchBestDealsEntity?>> getAllBestDeals() {
+  return bestDealsDataSources.getAllBestDeals();
+  }
+
 }

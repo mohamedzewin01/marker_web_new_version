@@ -38,42 +38,49 @@ class _ProductsRelationState extends State<ProductsRelation> {
         builder: (context, state) {
           if (state is ProductsSuccess) {
             List<ProductsRelations> products =
-                state.productsModelEntity?.productsData?.productsRelations?.take(20).toList() ??
-                    [];
+                state.productsModelEntity?.productsData?.productsRelations
+                    ?.take(20)
+                    .toList() ??
+                [];
             products.removeWhere(
-                  (element) => element.idProduct == widget.idProduct,
+              (element) => element.idProduct == widget.idProduct,
             );
-            return Container(
-              padding: EdgeInsets.all(8),
-              height: 210,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: products.length,
-                shrinkWrap: true,
-                // physics: NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                itemBuilder: (context, index) {
-                  return FittedBox(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: CustomProductCard(
-                                product: products[index],
-                              ),
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                double mainAxisExtent =
+                    (constraints.maxWidth > 500) ? 300 : 200;
+                return SizedBox(
+                  height: 310,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: GridView.builder(
+                      itemCount: products.length,
+                      scrollDirection: Axis.horizontal,
+                      // shrinkWrap: true,
+                      // physics: NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        childAspectRatio: 0.80,
+                        mainAxisExtent: mainAxisExtent,
+                      ),
+                      itemBuilder:
+                          (context, index) => GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: CustomProductCardWidget(
+                              product: products[index],
                             ),
-                            SizedBox(width: 8),
-                          ],
-                        ),
-                      ],
+                          ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8,
+                      ), // تأكد من إزالة أي padding
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             );
           }
           return SizedBox();

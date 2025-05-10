@@ -7,6 +7,7 @@ import 'package:fada_alhalij_web/features/auth/data/models/responses/auth_signup
 import 'package:fada_alhalij_web/features/auth/data/models/responses/auth_singin_response_dto.dart';
 import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_categories_model.dart';
 import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_discount.dart';
+import 'package:fada_alhalij_web/features/best_deals/data/models/fetch_best_deals.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/get_cart_request.dart';
@@ -82,15 +83,18 @@ abstract class ApiService {
   Future<CartDto?> getCart(
       @Body() GetCartRequest getCartResponse,
       );
-  @PUT(ApiConstants.updateCartItem)
+  @POST(ApiConstants.updateCartItem)
   Future<UpdateCartItemResponseDto?> updateCartItem(
       @Body() UpdateCartItemRequest updateCartItemRequest,
       );
 
-  @PUT(ApiConstants.cartDeleteItem)
+  @POST(ApiConstants.cartDeleteItem)
   Future<DelItemCartDto?> deleteCartItem(
       @Body() DeleteItemCartRequest deleteItemCartRequest,
       );
+
+  @POST(ApiConstants.fetchBestDeals)
+  Future<FetchBestDeals?> fetchBestDeals();
 }
 
 //  @MultiPart()

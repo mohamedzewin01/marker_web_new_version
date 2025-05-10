@@ -1,3 +1,4 @@
+import 'package:fada_alhalij_web/core/di/di.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:fada_alhalij_web/features/auth/presentation/pages/auth_screen.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
@@ -12,17 +13,14 @@ Future<bool> isUserLoggedIn() async {
     return false;
   }
 
-
   if (userId is String) {
     return userId.isNotEmpty && userId != "0";
   } else if (userId is int) {
     return userId > 0;
   }
 
-
   return false;
 }
-
 
 Future<void> executeIfLoggedIn({
   required BuildContext context,
@@ -38,7 +36,7 @@ Future<void> executeIfLoggedIn({
   }
 }
 
-void showAuthOrAddToCartDialog(BuildContext context, { int? idProduct}) async {
+void showAuthOrAddToCartDialog(BuildContext context, {int? idProduct}) async {
   await executeIfLoggedIn(
     context: context,
     onLoggedIn: () async {
@@ -63,8 +61,7 @@ void showAuthOrAddToCartDialog(BuildContext context, { int? idProduct}) async {
                     top: 24,
                     bottom: MediaQuery.of(context).viewInsets.bottom + 24,
                   ),
-                  child: const
-                  AuthScreen(),
+                  child: const AuthScreen(),
                 ),
               ),
             ),
@@ -73,11 +70,10 @@ void showAuthOrAddToCartDialog(BuildContext context, { int? idProduct}) async {
       );
     },
     onNotLoggedIn: () async {
-if(idProduct != null) {
-  context.read<CartCubit>().addToCart(idProduct: idProduct);
-}
+      if (idProduct != null) {
 
-
+        context.read<CartCubit>().addToCart(idProduct: idProduct);
+      }
 
       print("User not logged in. Adding product to cart or another action.");
     },

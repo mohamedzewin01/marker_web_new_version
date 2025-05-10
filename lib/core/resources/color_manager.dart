@@ -173,3 +173,37 @@ class PromotionalMessages {
   static const String buyNowPayLater = "💰";
   static const String saveMoreWithExclusiveOffers = "🏆";
 }
+List<Color> backgroundColorsCategories = [
+  Color(0xfffef6ed),
+  Color(0xffeef7f1),
+  Color(0xfff4ebf7),
+
+  Color(0xffedf7fc),
+  Color(0xfffff8e5),
+  Color(0xfff0dae2),
+  Color(0xffe7e5f9),
+  Color(0xffe8f5e9),
+  Color(0xffe3f2fd),
+  Color(0xfffff3e0),
+  Color(0xffffebee),
+  Color(0xfffffde7),
+  Color(0xfffde8e4),
+  Color(0xffe5f2f1), // أخضر مائي
+  Color(0xfffbeff5), // وردي مائل للبنفسجي
+  Color(0xfff7f1f5), // رمادي فاتح جدًا
+  Color(0xfffaf3ef), // بيج مائل للبرتقالي
+  Color(0xffedf8f5), // أخضر مائل للأزرق
+  Color(0xfffff4f0), // وردي مائل للبرتقالي
+  Color(0xfff9f8ed), // أصفر مائل للأبيض
+  Color(0xfff2eaf4), // بنفسجي فاتح جدًا
+  Color(0xfff7eef1), // وردي مائل للأبيض
+  Color(0xffe6f7ef), // أخضر فاتح جدًا
+  Color(0xfff9f3f0), // برتقالي فاتح جدًا
+  Color(0xfff0f9f5), // أخضر مائي فاتح جدًا
+  Color(0xfffcf3f8), // وردي فاتح جدًا
+  Color(0xffeef4fa), // أزرق مائل للأبيض
+  Color(0xfffdeeed), // وردي دافئ
+  Color(0xffeaf8f0), // أخضر مائل للنعناع
+  Color(0xfff5edf7), // بنفسجي مائل للأبيض
+  Color(0xfffffbf1), // أصفر كريمي
+];

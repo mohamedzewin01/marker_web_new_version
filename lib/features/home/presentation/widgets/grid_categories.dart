@@ -1,5 +1,6 @@
 
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
+import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/widgets/categories_view.dart';
@@ -27,13 +28,9 @@ class GridCategories extends StatelessWidget {
         itemBuilder:
             (context, index) => GestureDetector(
               onTap: () {
-
-                Navigator.pushNamed(
-                  context,
-                  RoutesManager.categoriesAdaptive,
-                  arguments: categories[index],
-                );
-
+                if(context.mounted) {
+                  LayoutCubit.get(context).changeIndex(1,tabIndex: index+1);
+                }
               },
               child: CategoriesView(
                 imagePath: categories[index].categoryImage ?? '',

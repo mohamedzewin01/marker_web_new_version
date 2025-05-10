@@ -43,4 +43,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get waiting => 'Wait';
+
+  @override
+  String get user => 'user';
 }

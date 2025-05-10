@@ -1,4 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fada_alhalij_web/core/api/api_constants.dart';
+import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:fada_alhalij_web/features/products/presentation/pages/products_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,21 +32,69 @@ class _CategoryBarState extends State<CategoryBar> {
           List<Categories>? categoriesZone =
               state.categoriesZoneEntity?.categories ?? [];
           if (categoriesZone[0].categoryName != 'الكل') {
-            categoriesZone.insert(0, Categories(categoryName: 'الكل'));
+            categoriesZone.insert(0, Categories(categoryName: '  الكل',categoryImage: "all.png"));
           }
           List<Tab> tabs =
-              categoriesZone.map((tab) {
-                return Tab(text: tab.categoryName);
-              }).toList();
+          categoriesZone.asMap().entries.map((entry) {
+            int index = entry.key;
+            var tab = entry.value;
+            return Tab(
+              icon: Card(
+                elevation: 4,
+                child: Container(
+                  height: 35,
+                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: backgroundColorsCategories[index],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min, // ✅ مهم جدًا
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          tab.categoryName ?? '',
+                          style: getSemiBoldStyle(color: ColorManager.black), // ✅ قلل حجم الخط
+                          textAlign: TextAlign.center,
+
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      SizedBox(
+                        height: 35, // ✅ قلل شوية
+                        width: 35,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            '${ApiConstants.baseUrlImage}${tab.categoryImage ?? ''}',
+                            fit: BoxFit.cover,
+                            errorBuilder:
+                                (context, error, stackTrace) =>
+                                Icon(Icons.broken_image, size: 18),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }).toList();
           return SliverFillRemaining(
             hasScrollBody: true,
             child: DefaultTabController(
               length: tabs.length,
+              initialIndex:LayoutCubit.get(context).initialTabIndex ,
               child: Column(
                 children: [
                   TabBar(
+                    indicatorAnimation: TabIndicatorAnimation.linear,
                     tabAlignment: TabAlignment.start,
                     indicatorSize: TabBarIndicatorSize.tab,
+                    labelPadding: EdgeInsets.symmetric(horizontal: 4),
+                    labelColor: ColorManager.primary,
                     dividerColor: Colors.transparent,
                     indicatorPadding: const EdgeInsets.symmetric(
                       horizontal: AppSize.s16,
@@ -69,7 +119,7 @@ class _CategoryBarState extends State<CategoryBar> {
                         width: 4,
                       ),
                     ),
-                    indicatorColor: ColorManager.primaryColor,
+                    indicatorColor: ColorManager.redDark,
                     indicatorWeight: 1,
                     splashBorderRadius: BorderRadius.circular(AppSize.s20),
                     physics: const BouncingScrollPhysics(),

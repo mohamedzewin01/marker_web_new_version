@@ -1,9 +1,10 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fada_alhalij_web/core/functions/is_user_logged_in.dart';
 import 'package:fada_alhalij_web/core/functions/launch_url.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/core/widgets/rial_icon.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/products_relation.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
@@ -12,7 +13,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/curve_clipper.dart';
 
-
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key, required this.product});
 
@@ -20,8 +20,6 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('Hero Tag: ${product.idProduct}');
-
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,7 +30,7 @@ class ProductDetails extends StatelessWidget {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  backgroundColor: ColorManager.indigoDark2,
+                  backgroundColor: ColorManager.pink.withAlpha(200),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       bottom: Radius.circular(4),
@@ -64,7 +62,7 @@ class ProductDetails extends StatelessWidget {
                   automaticallyImplyLeading: false,
                   flexibleSpace: ClipPath(
                     clipper: InwardCurveClipper(),
-                    child: Container(color: ColorManager.indigoDark),
+                    child: Container(color: ColorManager.orange),
                   ),
                 ),
                 SliverToBoxAdapter(
@@ -74,9 +72,39 @@ class ProductDetails extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Hero(
                         tag: '${product.idProduct}55',
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: CustomImage(url: product.imageCover ?? ''),
+                        child: Stack(
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 18 / 12,
+                              child: CustomImage(url: product.imageCover ?? ''),
+                            ),
+                            Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: IconButton(
+                                onPressed: () {
+                                  showAuthOrAddToCartDialog(
+                                    context,
+                                    idProduct: product.idProduct ?? 0,
+                                  );
+                                },
+                                icon: Container(
+                                  padding: EdgeInsets.all(7),
+                                  margin: EdgeInsets.all(4),
+
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: ColorManager.orange,
+                                  ),
+                                  child: Icon(
+                                    size: 20,
+                                    Icons.add,
+                                    color: ColorManager.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -89,13 +117,20 @@ class ProductDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          product.productPriceAfterDiscount==0?"${product.productPrice ?? 0.00} ريال ": "${product.productPriceAfterDiscount ?? 0.00} ريال ",
-                          style: TextStyle(
-                            color: Color(0xffFF324B),
-                            fontSize: 24,
-                            fontWeight: FontWeight.w900,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              product.productPriceAfterDiscount == 0
+                                  ? "${product.productPrice ?? 0.00}"
+                                  : "${product.productPriceAfterDiscount ?? 0.00} ",
+                              style: getSemiBoldStyle(
+                                color: ColorManager.black,
+                                fontSize: 24,
+                              ),
+                            ),
+                            RialIcon(size: 24, color: ColorManager.black),
+                          ],
                         ),
                         SizedBox(height: 14),
                         Text(
@@ -129,7 +164,7 @@ class ProductDetails extends StatelessWidget {
                         ),
                         SizedBox(height: 16),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -143,14 +178,17 @@ class ProductDetails extends StatelessWidget {
                             ],
                           ),
                         ),
-                        ProductsRelation(
-                          idCategory: product.categoryId.toString(),
-                          idProduct: product.idProduct,
-                        ),
+
                       ],
                     ),
                   ),
                 ),
+                SliverToBoxAdapter(
+                  child:  ProductsRelation(
+                    idCategory: product.categoryId.toString(),
+                    idProduct: product.idProduct,
+                  ),
+                )
               ],
             ),
           ),
@@ -159,7 +197,7 @@ class ProductDetails extends StatelessWidget {
 
             child: Container(
               height: 50,
-              color: ColorManager.indigoDark2,
+              color: ColorManager.pink.withAlpha(200),
               clipBehavior: Clip.none,
               child: Stack(
                 clipBehavior: Clip.none,
@@ -177,7 +215,9 @@ class ProductDetails extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    product.productPriceAfterDiscount==0?"${product.productPrice ?? 0.00} ريال ": "${product.productPriceAfterDiscount ?? 0.00} ريال ",
+                                    product.productPriceAfterDiscount == 0
+                                        ? "${product.productPrice ?? 0.00} ريال "
+                                        : "${product.productPriceAfterDiscount ?? 0.00} ريال ",
                                     style: getSemiBoldStyle(
                                       color: ColorManager.white,
                                       fontSize: 18,
@@ -185,7 +225,7 @@ class ProductDetails extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                                    Spacer(),
+                              Spacer(),
                               Container(
                                 padding: EdgeInsets.all(8),
                                 child: IconButton(
@@ -213,8 +253,6 @@ class ProductDetails extends StatelessWidget {
                       ],
                     ),
                   ),
-
-
                 ],
               ),
             ),

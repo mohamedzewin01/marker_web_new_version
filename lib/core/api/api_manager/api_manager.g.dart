@@ -379,7 +379,7 @@ class _ApiService implements ApiService {
     final _data = <String, dynamic>{};
     _data.addAll(updateCartItemRequest.toJson());
     final _options = _setStreamType<UpdateCartItemResponseDto>(
-      Options(method: 'PUT', headers: _headers, extra: _extra)
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             'cart/updateCartItem',
@@ -412,7 +412,7 @@ class _ApiService implements ApiService {
     final _data = <String, dynamic>{};
     _data.addAll(deleteItemCartRequest.toJson());
     final _options = _setStreamType<DelItemCartDto>(
-      Options(method: 'PUT', headers: _headers, extra: _extra)
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             'cart/deleteItem',
@@ -426,6 +426,34 @@ class _ApiService implements ApiService {
     try {
       _value =
           _result.data == null ? null : DelItemCartDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<FetchBestDeals?> fetchBestDeals() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<FetchBestDeals>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'bestDeals/fetchBestDeals',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late FetchBestDeals? _value;
+    try {
+      _value =
+          _result.data == null ? null : FetchBestDeals.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

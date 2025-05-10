@@ -18,35 +18,43 @@ class CartSummarySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
+    return SliverFillRemaining(
+      fillOverscroll: true,
+      hasScrollBody: false,
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(
-              vertical: 8.0,
-              horizontal: 16,
-            ),
-            padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.blue.shade50,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.blue),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(Icons.local_offer, color: Colors.blue),
-                SizedBox(width: 8),
-                Text(
-                  'احصل على خصم عند الشراء فوق 100 ريال!',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
+
+          // Container(
+          //   margin: EdgeInsets.symmetric(
+          //     vertical: 8.0,
+          //     horizontal: 16,
+          //   ),
+          //   padding: EdgeInsets.all(12),
+          //   decoration: BoxDecoration(
+          //     color: Colors.blue.shade50,
+          //     borderRadius: BorderRadius.circular(10),
+          //     border: Border.all(color: Colors.blue),
+          //   ),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: const [
+          //       Icon(Icons.local_offer, color: Colors.blue),
+          //       SizedBox(width: 8),
+          //       Text(
+          //         'احصل على خصم عند الشراء فوق 100 ريال!',
+          //         style: TextStyle(
+          //           color: Colors.blue,
+          //           fontWeight: FontWeight.w500,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+
+          // المساحة الفارغة لملء الارتفاع المتبقي
+          Spacer(), // تأكد أن هذه المسافة ستأخذ الجزء المتبقي من الصفحة
+          Divider(color: Colors.grey.shade300),
+          // العناصر التي تظهر في الأسفل
           Container(
             padding: const EdgeInsets.only(
               top: 16.0,
@@ -54,17 +62,31 @@ class CartSummarySection extends StatelessWidget {
               left: 16.0,
               bottom: 65,
             ),
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
+                Row(
+                  children: [
+                    Text(
+                      'المبلغ قبل الخصم:',
+                      style: getSemiBoldStyle(color:  ColorManager.lightTextColor, fontSize: 14,),
+                    ),
+                    Spacer(),
+                    Text(
+                      viewModel.myCart!.totalPrice!.toStringAsFixed(2),
+                      style:getSemiBoldStyle(color: ColorManager.lightTextColor, fontSize: 16),
+                    ),
+                    RialIcon(color: ColorManager.darkTextColor,size: 14,)
+                  ],
+                ),
+                SizedBox(height: 8),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                         'الخصم:',
-                        style: getSemiBoldStyle(color:  ColorManager.lightTextColor,
-                          fontSize: 14,)
+                        style: getSemiBoldStyle(color:  ColorManager.lightTextColor, fontSize: 14,)
                     ),
                     Spacer(),
                     Text(
@@ -74,25 +96,7 @@ class CartSummarySection extends StatelessWidget {
                     RialIcon(color: ColorManager.darkTextColor,size: 14,)
                   ],
                 ),
-                SizedBox(height: 8),
-                Row(
-                  children: [
-                    Text(
-                      'خدمة التوصيل',
-                      style: getSemiBoldStyle(color:  ColorManager.lightTextColor,
-                        fontSize: 14,),
-                    ),
-                    Spacer(),
-                    Text(
-                      '${20}',
-                      style:getSemiBoldStyle(color: ColorManager.lightTextColor, fontSize: 16),
 
-
-
-                    ),
-                    RialIcon(color: ColorManager.darkTextColor,size: 14,)
-                  ],
-                ),
                 SizedBox(height: 8),
                 Divider(color: Colors.grey.shade300),
                 SizedBox(height: 8),
@@ -101,7 +105,6 @@ class CartSummarySection extends StatelessWidget {
                     Text(
                       'السعر النهائي:',
                       style: getSemiBoldStyle(color: ColorManager.lightTextColor, fontSize: 14),
-
                     ),
                     Spacer(),
                     Text(
@@ -118,7 +121,7 @@ class CartSummarySection extends StatelessWidget {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                /// TODO: Handle button press
+                    /// TODO: Handle button press
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorManager.orange,
@@ -127,9 +130,7 @@ class CartSummarySection extends StatelessWidget {
                       vertical: 15,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        30.0,
-                      ),
+                      borderRadius: BorderRadius.circular(30.0),
                     ),
                     elevation: 2,
                   ),
@@ -154,11 +155,13 @@ class CartSummarySection extends StatelessWidget {
                     ],
                   ),
                 ),
+                SizedBox(height: 20),
               ],
             ),
           ),
         ],
       ),
     );
+
   }
 }
