@@ -5,6 +5,7 @@
 
 import 'package:fada_alhalij_web/core/common/api_result.dart';
 import 'package:fada_alhalij_web/features/cart/data/data_sources/cart_data_sources_repo.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/add_address.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
@@ -39,6 +40,16 @@ class CartRepoImpl extends CartRepo {
   @override
   Future<Result<DelItemCartEntity?>> deleteCart(DeleteItemCartRequest deleteItemCartRequest) {
 return cartDataSourcesRepo.deleteCart(deleteItemCartRequest);
+  }
+
+  @override
+  Future<Result<GetAddressesUserEntity?>> getAddressesUser() {
+return cartDataSourcesRepo.getAddressesUser();
+  }
+
+  @override
+  Future<Result<AddAddressUserEntity?>> addAddressesUser(AddAddressRequest addAddressRequest) {
+    return cartDataSourcesRepo.addAddressesUser(addAddressRequest);
   }
 
 

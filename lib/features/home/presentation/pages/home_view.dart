@@ -85,7 +85,7 @@ class _HomeViewState extends State<HomeView> {
                                 name:
                                     '${AppLocalizations.of(context)!.categories} 🛍️',
                                 onTapAction: () {
-                                  LayoutCubit.get(context).changeIndex(2);
+                                  LayoutCubit.get(context).changeIndex(1);
                                 },
                               ),
                               SizedBox(height: 16),

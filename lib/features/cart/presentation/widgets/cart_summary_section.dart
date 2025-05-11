@@ -1,20 +1,21 @@
+import 'package:fada_alhalij_web/core/di/di.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_text_form_field.dart';
 import 'package:fada_alhalij_web/core/widgets/rial_icon.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/response/addresses_user_dto.dart';
+import 'package:fada_alhalij_web/features/cart/presentation/cubit/address/address_cubit.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:fada_alhalij_web/features/cart/presentation/widgets/addresses_view.dart';
+import 'package:fada_alhalij_web/features/cart/presentation/widgets/check_out.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class CartSummarySection extends StatelessWidget {
-  const CartSummarySection({
-    super.key,
-
-    required this.viewModel,
-
-  });
-
+  const CartSummarySection({super.key, required this.viewModel});
 
   final CartCubit viewModel;
-
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,6 @@ class CartSummarySection extends StatelessWidget {
       hasScrollBody: false,
       child: Column(
         children: [
-
           // Container(
           //   margin: EdgeInsets.symmetric(
           //     vertical: 8.0,
@@ -52,7 +52,7 @@ class CartSummarySection extends StatelessWidget {
           // ),
 
           // المساحة الفارغة لملء الارتفاع المتبقي
-          Spacer(), // تأكد أن هذه المسافة ستأخذ الجزء المتبقي من الصفحة
+          Spacer(),
           Divider(color: Colors.grey.shade300),
           // العناصر التي تظهر في الأسفل
           Container(
@@ -65,19 +65,24 @@ class CartSummarySection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Row(
                   children: [
                     Text(
                       'المبلغ قبل الخصم:',
-                      style: getSemiBoldStyle(color:  ColorManager.lightTextColor, fontSize: 14,),
+                      style: getSemiBoldStyle(
+                        color: ColorManager.lightTextColor,
+                        fontSize: 14,
+                      ),
                     ),
                     Spacer(),
                     Text(
                       viewModel.myCart!.totalPrice!.toStringAsFixed(2),
-                      style:getSemiBoldStyle(color: ColorManager.lightTextColor, fontSize: 16),
+                      style: getSemiBoldStyle(
+                        color: ColorManager.lightTextColor,
+                        fontSize: 16,
+                      ),
                     ),
-                    RialIcon(color: ColorManager.darkTextColor,size: 14,)
+                    RialIcon(color: ColorManager.darkTextColor, size: 14),
                   ],
                 ),
                 SizedBox(height: 8),
@@ -85,18 +90,23 @@ class CartSummarySection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                        'الخصم:',
-                        style: getSemiBoldStyle(color:  ColorManager.lightTextColor, fontSize: 14,)
+                      'الخصم:',
+                      style: getSemiBoldStyle(
+                        color: ColorManager.lightTextColor,
+                        fontSize: 14,
+                      ),
                     ),
                     Spacer(),
                     Text(
                       viewModel.myCart!.totalDiscount!.toStringAsFixed(2),
-                      style:getSemiBoldStyle(color: ColorManager.lightTextColor, fontSize: 16),
+                      style: getSemiBoldStyle(
+                        color: ColorManager.lightTextColor,
+                        fontSize: 16,
+                      ),
                     ),
-                    RialIcon(color: ColorManager.darkTextColor,size: 14,)
+                    RialIcon(color: ColorManager.darkTextColor, size: 14),
                   ],
                 ),
-
                 SizedBox(height: 8),
                 Divider(color: Colors.grey.shade300),
                 SizedBox(height: 8),
@@ -104,7 +114,10 @@ class CartSummarySection extends StatelessWidget {
                   children: [
                     Text(
                       'السعر النهائي:',
-                      style: getSemiBoldStyle(color: ColorManager.lightTextColor, fontSize: 14),
+                      style: getSemiBoldStyle(
+                        color: ColorManager.lightTextColor,
+                        fontSize: 14,
+                      ),
                     ),
                     Spacer(),
                     Text(
@@ -121,7 +134,12 @@ class CartSummarySection extends StatelessWidget {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    /// TODO: Handle button press
+                    showBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return CheckOut();
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorManager.orange,
@@ -134,15 +152,15 @@ class CartSummarySection extends StatelessWidget {
                     ),
                     elevation: 2,
                   ),
-                  child:  Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Expanded(
                         child: Text(
                           'المتابعة لإتمام الشراء',
                           style: getSemiBoldStyle(
-                              color: Colors.white,
-                              fontSize: 16
+                            color: Colors.white,
+                            fontSize: 16,
                           ),
                         ),
                       ),
@@ -162,6 +180,11 @@ class CartSummarySection extends StatelessWidget {
         ],
       ),
     );
-
   }
 }
+
+
+
+
+
+

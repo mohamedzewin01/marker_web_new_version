@@ -2,13 +2,14 @@ import 'package:fada_alhalij_web/core/api/api_extentions.dart';
 import 'package:fada_alhalij_web/core/api/api_manager/api_manager.dart';
 import 'package:fada_alhalij_web/core/common/api_result.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/add_address.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/get_cart_request.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/get_user_address_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
 import 'package:fada_alhalij_web/features/cart/domain/entities/cart_entities.dart';
 import 'package:injectable/injectable.dart';
-
 import 'cart_data_sources_repo.dart';
 
 @Injectable(as: CartDataSourcesRepo)
@@ -51,6 +52,25 @@ class CartDataSourcesRepoImpl implements CartDataSourcesRepo {
     return executeApi(() async {
       var response = await _apiService.deleteCartItem(deleteItemCartRequest);
       return response?.toDelItemCartEntity();
+    });
+  }
+
+  @override
+  Future<Result<GetAddressesUserEntity?>> getAddressesUser() {
+    return executeApi(() async {
+      GetUserAddressRequest getUserAddressRequest = GetUserAddressRequest(
+        userId: await CacheService.getData(key: CacheConstants.userId) ?? 0,
+      );
+      var response = await _apiService.getAddressesUser(getUserAddressRequest);
+      return response?.toAddressesUserEntity();
+    });
+  }
+
+  @override
+  Future<Result<AddAddressUserEntity?>> addAddressesUser(AddAddressRequest addAddressRequest) {
+    return executeApi(() async {
+      var response = await _apiService.addAddressesUser(addAddressRequest);
+      return response?.toAddAddressUserEntity();
     });
   }
 }

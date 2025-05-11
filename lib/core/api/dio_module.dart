@@ -22,17 +22,17 @@ abstract class DioModule {
       // 'Authorization': 'Bearer YOUR_TOKEN',
     };
 
-    // // Add PrettyDioLogger
-    // dio.interceptors.add(
-    //   PrettyDioLogger(
-    //     requestHeader: true,
-    //     requestBody: true,
-    //     responseHeader: true,
-    //     responseBody: true,
-    //     compact: true,
-    //     maxWidth: 90,
-    //   ),
-    // );
+    // Add PrettyDioLogger
+    dio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        responseBody: true,
+        compact: true,
+        maxWidth: 90,
+      ),
+    );
 
     // Add Error Handling
     dio.interceptors.add(

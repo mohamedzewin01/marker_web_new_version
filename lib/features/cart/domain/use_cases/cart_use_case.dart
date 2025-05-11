@@ -3,6 +3,7 @@
 
 
 import 'package:fada_alhalij_web/core/common/api_result.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/add_address.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
@@ -28,5 +29,12 @@ class CartUseCase {
 
   Future<Result<DelItemCartEntity?>> deleteCart(DeleteItemCartRequest deleteItemCartRequest){
     return _cartRepo.deleteCart(deleteItemCartRequest);
+  }
+
+  Future<Result<GetAddressesUserEntity?>> getAddressesUser(){
+    return _cartRepo.getAddressesUser();
+  }
+  Future<Result<AddAddressUserEntity?>> addAddressesUser(AddAddressRequest addAddressRequest){
+    return _cartRepo.addAddressesUser(addAddressRequest);
   }
 }

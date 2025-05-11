@@ -8,11 +8,15 @@ import 'package:fada_alhalij_web/features/auth/data/models/responses/auth_singin
 import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_categories_model.dart';
 import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_discount.dart';
 import 'package:fada_alhalij_web/features/best_deals/data/models/fetch_best_deals.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/add_address.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/get_cart_request.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/request/get_user_address_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/response/add_address_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/add_to_cart_response.dart';
+import 'package:fada_alhalij_web/features/cart/data/models/response/addresses_user_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/cart_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/del_item_cart_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/update_tart_item_response.dart';
@@ -95,6 +99,16 @@ abstract class ApiService {
 
   @POST(ApiConstants.fetchBestDeals)
   Future<FetchBestDeals?> fetchBestDeals();
+
+
+  @POST(ApiConstants.getUserAddresses)
+  Future<AddressesUserDto?> getAddressesUser(
+      @Body() GetUserAddressRequest getUserAddressRequest,
+      );
+  @POST(ApiConstants.addAddress)
+  Future<AddAddressDto?> addAddressesUser(
+      @Body() AddAddressRequest addAddressRequest,
+      );
 }
 
 //  @MultiPart()
