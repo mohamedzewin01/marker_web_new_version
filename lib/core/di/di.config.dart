@@ -59,6 +59,15 @@ import '../../features/home/data/repo_impl/home_repo_impl.dart' as _i886;
 import '../../features/home/domain/repo/home_repo.dart' as _i280;
 import '../../features/home/domain/use_cases/home_use_case.dart' as _i933;
 import '../../features/home/presentation/cubit/home_cubit.dart' as _i9;
+import '../../features/order/data/data_sources/orders_data_sources_repo.dart'
+    as _i74;
+import '../../features/order/data/data_sources/orders_data_sources_repo_impl.dart'
+    as _i981;
+import '../../features/order/data/repo_impl/orders_repo_impl.dart' as _i368;
+import '../../features/order/domain/repo/orders_repo.dart' as _i357;
+import '../../features/order/domain/use_cases/orders_use_cases_impl.dart'
+    as _i35;
+import '../../features/order/presention/cubit/orders_cubit.dart' as _i548;
 import '../../features/products/data/data_sources/products_data_source.dart'
     as _i645;
 import '../../features/products/data/repo_impl/products_repo_impl.dart'
@@ -70,6 +79,7 @@ import '../../features/products/presentation/cubit/products_cubit.dart'
     as _i911;
 import '../api/api_manager/api_manager.dart' as _i680;
 import '../api/dio_module.dart' as _i784;
+import '../uses_cases/orders/add_order_use_case_repo.dart' as _i529;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -108,6 +118,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i482.ProductsRepo>(
       () => _i249.ProductsRepoImpl(gh<_i645.ProductsDataSource>()),
     );
+    gh.factory<_i74.OrdersDataSourcesRepo>(
+      () => _i981.OrdersDataSourcesRepoImpl(gh<_i680.ApiService>()),
+    );
     gh.factory<_i148.BestDealsUseCases>(
       () => _i148.BestDealsUseCases(gh<_i988.BestDealsRepo>()),
     );
@@ -115,11 +128,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i280.HomeRepo>(
       () => _i886.HomeRepoImpl(gh<_i645.HomeDataSourceRepo>()),
     );
+    gh.factory<_i357.OrdersRepo>(
+      () => _i368.OrdersRepoImpl(gh<_i74.OrdersDataSourcesRepo>()),
+    );
     gh.factory<_i992.CartDataSourcesRepo>(
       () => _i248.CartDataSourcesRepoImpl(gh<_i680.ApiService>()),
     );
     gh.factory<_i83.CategoriesZoneRepo>(
       () => _i106.CategoriesZoneRepoImpl(gh<_i426.CategoriesZoneDataSource>()),
+    );
+    gh.factory<_i529.AddOrderUseCaseRepo>(
+      () => _i35.OrdersUseCasesImpl(gh<_i357.OrdersRepo>()),
     );
     gh.factory<_i989.BestDiscountByDiscountCubit>(
       () => _i989.BestDiscountByDiscountCubit(gh<_i148.BestDealsUseCases>()),
@@ -144,6 +163,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i911.ProductsCubit>(
       () => _i911.ProductsCubit(gh<_i258.ProductsUseCase>()),
+    );
+    gh.factory<_i548.OrdersCubit>(
+      () => _i548.OrdersCubit(gh<_i529.AddOrderUseCaseRepo>()),
     );
     gh.factory<_i9.HomeCubit>(() => _i9.HomeCubit(gh<_i933.HomeUseCase>()));
     gh.factory<_i886.CartUseCase>(

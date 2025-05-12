@@ -25,7 +25,7 @@ class CartCubit extends Cubit<CartState> {
   static CartCubit get(context) => BlocProvider.of(context);
 
   int? idUser = CacheService.getData(key: CacheConstants.userId) ?? 0;
-
+  int? idAddress;
 
   late TabController tabController;
   List<CartItems> cartItems = [];
@@ -173,7 +173,10 @@ class CartCubit extends Cubit<CartState> {
   }
 
 
-
+  void setIdAddress(int? id) {
+    idAddress = id;
+    emit(state); // لو عندك state
+  }
 
 
   Future<void> addToCart({required int idProduct}) async {

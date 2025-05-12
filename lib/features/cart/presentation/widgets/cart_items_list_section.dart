@@ -38,7 +38,6 @@ class _CartItemsListSectionState extends State<CartItemsListSection> {
                 backgroundColor: ColorManager.white,
                 foregroundColor:  ColorManager.error,
                 icon: Icons.delete,
-
               ),
             ],
           ),

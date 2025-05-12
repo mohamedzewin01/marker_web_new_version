@@ -1,7 +1,9 @@
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/addresses_user_dto.dart';
+import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListAddressUser extends StatefulWidget {
   const ListAddressUser({super.key, this.addresses});
@@ -19,21 +21,22 @@ class _ListAddressUserState extends State<ListAddressUser> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: ListView.builder(
-        itemCount: widget.addresses?.length,
+      child: ListView.separated(
+        separatorBuilder:(context, index) => Container(height: 1,color: Colors.grey.shade300,),
+
+        itemCount: widget.addresses?.length??0,
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return Card(
-            color:
-            selectedIndex == index
-                ? ColorManager.orange.withAlpha(200)
-                : ColorManager.white,
-            elevation: 4,
+          return SizedBox(
             child: ListTile(
               onTap: () {
+                print('widget.addresses?[index].id');
                 setState(() {
                   selectedIndex == index ? selectedIndex = null : selectedIndex = index;
+                  context.read<CartCubit>().setIdAddress(widget.addresses?[index].id);
+
+                  print(widget.addresses?[index].id);
                 });
 
 
@@ -42,7 +45,7 @@ class _ListAddressUserState extends State<ListAddressUser> {
                 Icons.location_on,
                 color:
                 selectedIndex == index
-                    ? ColorManager.white
+                    ? ColorManager.orange
                     : ColorManager.green,
               ),
 
@@ -56,7 +59,7 @@ class _ListAddressUserState extends State<ListAddressUser> {
                       style: getSemiBoldStyle(
                         color:
                         selectedIndex == index
-                            ? ColorManager.white
+                            ? ColorManager.orange
                             : ColorManager.blue,
                         fontSize: 12,
                       ),
@@ -70,7 +73,7 @@ class _ListAddressUserState extends State<ListAddressUser> {
                       style: getSemiBoldStyle(
                         color:
                         selectedIndex == index
-                            ? ColorManager.white
+                            ? ColorManager.orange
                             : ColorManager.black,
                         fontSize: 12,
                       ),
@@ -85,7 +88,7 @@ class _ListAddressUserState extends State<ListAddressUser> {
                 style: getSemiBoldStyle(
                   color:
                   selectedIndex == index
-                      ? ColorManager.white
+                      ? ColorManager.orange
                       : ColorManager.black,
                   fontSize: 12,
                 ),
@@ -94,12 +97,17 @@ class _ListAddressUserState extends State<ListAddressUser> {
                 value: index,
                 activeColor:
                 selectedIndex == index
-                    ? ColorManager.white
+                    ? ColorManager.orange
                     : ColorManager.black,
                 groupValue: selectedIndex,
                 onChanged: (value) {
                   setState(() {
                     selectedIndex = value;
+                    context.read<CartCubit>().setIdAddress(widget.addresses?[index].id);
+
+
+                    print(widget.addresses?[index].id);
+
                   });
                 },
               ),

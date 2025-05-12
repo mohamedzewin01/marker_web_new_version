@@ -38,45 +38,50 @@ class _AddressesViewState extends State<AddressesView> {
             List<AddressesData>? addresses =
                 state.addressesUserEntity.addressesData ?? [];
             // return Text("data");
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  " التوصيل الي:",
-                  textDirection: TextDirection.rtl,
-                  textAlign: TextAlign.right,
-                  style: getSemiBoldStyle(
-                    fontSize: 14,
-                    color: ColorManager.darkTextColor,
-                  ),
-                ),
-                ListAddressUser(addresses: addresses),
-                Align(
-                  alignment: Alignment.center,
-                  child: CustomElevatedButton(
-                    buttonColor: ColorManager.primaryColor,
-                    title: "اضافة عنوان جديد",
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return AddAddress(viewModel: viewModel);
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+
+                    children: [
+                      Expanded(
+                        child: Text(
+                          " التوصيل الي:",
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          style: getSemiBoldStyle(
+                            fontSize: 14,
+                            color: ColorManager.indigoDark2,
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return AddAddress(viewModel: viewModel);
+                            },
+                          );
                         },
-                      );
-                    },
+                        child: CircleAvatar(
+                          radius: 12,
+                          backgroundColor: ColorManager.orange,
+                          child: Icon(Icons.add, color: ColorManager.white,size: 16,),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+                  ListAddressUser(addresses: addresses),
 
-                Text(
-                  "تفاصيل الطلب التوصيل",
-                  style: getSemiBoldStyle(
-                    color: ColorManager.primaryColor,
-                    fontSize: 20,
-                  ),
-                ),
-
-
-              ],
+                ],
+              ),
             );
           }
 

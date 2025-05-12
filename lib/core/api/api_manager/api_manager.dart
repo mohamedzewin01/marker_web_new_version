@@ -22,6 +22,8 @@ import 'package:fada_alhalij_web/features/cart/data/models/response/del_item_car
 import 'package:fada_alhalij_web/features/cart/data/models/response/update_tart_item_response.dart';
 import 'package:fada_alhalij_web/features/categories/data/models/categories_zone_response.dart';
 import 'package:fada_alhalij_web/features/home/data/models/response/home_model_response_dto.dart';
+import 'package:fada_alhalij_web/features/order/data/models/request/add_order_request.dart';
+import 'package:fada_alhalij_web/features/order/data/models/response/add_order_dto.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -108,6 +110,11 @@ abstract class ApiService {
   @POST(ApiConstants.addAddress)
   Future<AddAddressDto?> addAddressesUser(
       @Body() AddAddressRequest addAddressRequest,
+      );
+
+  @POST(ApiConstants.addOrders)
+  Future<AddOrderDto?> addOrder(
+      @Body() AddOrderRequest addOrderRequest,
       );
 }
 
