@@ -72,14 +72,13 @@ class _AddressesViewState extends State<AddressesView> {
                         },
                         child: CircleAvatar(
                           radius: 12,
-                          backgroundColor: ColorManager.orange,
+                          backgroundColor: ColorManager.primaryColor,
                           child: Icon(Icons.add, color: ColorManager.white,size: 16,),
                         ),
                       ),
                     ],
                   ),
                   ListAddressUser(addresses: addresses),
-
                 ],
               ),
             );

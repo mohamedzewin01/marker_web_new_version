@@ -151,7 +151,7 @@ class CustomCard extends StatelessWidget {
                                             ),
                                           );
                                         },
-                                        buttonColor: ColorManager.pink,
+                                        buttonColor: ColorManager.primaryColor,
                                       ),
                                     ],
                                   ),

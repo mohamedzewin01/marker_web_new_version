@@ -37,7 +37,6 @@ class _CartOrderState extends State<CartOrder> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Text.rich(
                     TextSpan(
                       children: [
@@ -47,7 +46,7 @@ class _CartOrderState extends State<CartOrder> {
                         ),
                         TextSpan(
                           text: '${cartItems.length}',
-                          style: getSemiBoldStyle(color: ColorManager.orange,fontSize: 14), // أو لون مختلف
+                          style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 14), // أو لون مختلف
                         ),
                       ],
                     ),

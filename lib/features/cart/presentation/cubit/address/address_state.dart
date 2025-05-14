@@ -27,3 +27,15 @@ final class AddAddressFailure extends AddressState {
 
   AddAddressFailure(this.exception);
 }
+
+class OrdersWithAddress extends AddressState {
+  final int? idAddress;
+
+  OrdersWithAddress({this.idAddress});
+
+  OrdersWithAddress copyWith({int? idAddress}) {
+    return OrdersWithAddress(
+      idAddress: idAddress ?? this.idAddress,
+    );
+  }
+}

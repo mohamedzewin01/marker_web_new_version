@@ -44,7 +44,7 @@ class AddToCartButton extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   child: LinearProgressIndicator(
-                    color: ColorManager.pink,
+                    color: ColorManager.primaryColor,
                   ),
                 ),
               )
@@ -52,7 +52,7 @@ class AddToCartButton extends StatelessWidget {
                 height: 30,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorManager.pink,
+                    backgroundColor: ColorManager.primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                         100,

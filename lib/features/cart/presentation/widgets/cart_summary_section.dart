@@ -134,15 +134,19 @@ class CartSummarySection extends StatelessWidget {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    showBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return CheckOut();
-                      },
-                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CheckOut()),
+                    ).then((value) {
+                      viewModel.getCart(); // تحديث السلة
+                      if (CartCubit.get(context).shouldGoToTab1) {
+                        CartCubit.get(context).tabController.animateTo(1);
+                        CartCubit.get(context).shouldGoToTab1 = false; // إعادة تعيين بعد الاستخدام
+                      }
+                    });
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorManager.orange,
+                    backgroundColor: ColorManager.primaryColor,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 40,
                       vertical: 15,
@@ -182,9 +186,3 @@ class CartSummarySection extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-

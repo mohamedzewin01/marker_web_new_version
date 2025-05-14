@@ -69,7 +69,7 @@ class _ProductsViewState extends State<ProductsView> {
             );
           }
 
-          return Center(child: CircularProgressIndicator(color:ColorManager.orange));
+          return Center(child: CircularProgressIndicator(color:ColorManager.primaryColor));
         },
       ),
     );

@@ -13,5 +13,7 @@ class Assets {
   static const String cart = 'assets/images/cart.svg';
   static const String cartIcon = 'assets/images/cart_icon.png';
   static const String user = 'assets/images/user.png';
+  static const String cartEmpty = 'assets/images/cart_empty.png';
+  static const String orderEmpty = 'assets/images/order_empty.png';
 
 }

@@ -1,5 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/functions/is_user_logged_in.dart';
+import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
+import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
+import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_elevated_button.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/cart_dto.dart';
@@ -11,15 +15,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartBody extends StatelessWidget {
-  const CartBody({
-    super.key,
-    required this.viewModel,
-  });
+  const CartBody({super.key, required this.viewModel});
 
   final CartCubit viewModel;
 
   @override
   Widget build(BuildContext context) {
+    viewModel.getCart();
     return Column(
       children: [
         BlocConsumer<CartCubit, CartState>(
@@ -52,19 +54,77 @@ class CartBody extends StatelessWidget {
             }
             if (state is CartFail) {
               if (isActiveUser) {
-                return Text('السلة فارغة');
+                return SingleChildScrollView(
+                  child: Stack(
+                    children: [
+                      Image.asset(Assets.cartEmpty),
+                      Positioned(
+                        top: 150,
+                        left: 0,
+                        right: 0,
+                  
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: MediaQuery.sizeOf(context).width * 0.25,
+                          ),
+                  
+                          child: AutoSizeText(
+                            'لا يوجد عناصر في السلة',
+                            textAlign: TextAlign.center,
+                            style: getSemiBoldStyle(
+                              color: ColorManager.primaryColor,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               } else {
-                return CustomElevatedButton(
-                  buttonColor: ColorManager.orange,
-                  title: "تسجيل دخول",
-                  onPressed: () {
-                    showAuthOrAddToCartDialog(context);
-                  },
+                return SingleChildScrollView(
+                  child: Stack(
+                    children: [
+                      Image.asset(Assets.cartEmpty),
+                  
+                      Positioned(
+                        top: 150,
+                        left: 0,
+                        right: 0,
+                  
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: MediaQuery.sizeOf(context).width * 0.25,
+                          ),
+                  
+                          child: Column(
+                            children: [
+                              AutoSizeText(
+                                'قم بالتسجيل الدخول للمتابعة',
+                                textAlign: TextAlign.center,
+                                style: getSemiBoldStyle(
+                                  color: ColorManager.primaryColor,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              SizedBox(height: 20,),
+                              CustomElevatedButton(
+                                buttonColor: ColorManager.primaryColor,
+                                title: "تسجيل دخول",
+                                onPressed: () {
+                                  showAuthOrAddToCartDialog(context);
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               }
             }
-            return CircularProgressIndicator(
-                color: ColorManager.orange);
+            return CircularProgressIndicator(color: ColorManager.primaryColor);
           },
         ),
       ],

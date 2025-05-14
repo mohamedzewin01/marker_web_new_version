@@ -105,7 +105,7 @@ class _SignupFormState extends State<SignupForm> {
           ),
           CustomElevatedButton(
             onPressed: _submit,
-            buttonColor: ColorManager.orange,
+            buttonColor: ColorManager.primaryColor,
             title: 'تسجيل جديد',
           ),
 

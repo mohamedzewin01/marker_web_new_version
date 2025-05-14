@@ -84,7 +84,7 @@ class _SignInFormState extends State<SignInForm> {
           ),
           CustomElevatedButton(
             onPressed: _submit,
-            buttonColor: ColorManager.orange,
+            buttonColor: ColorManager.primaryColor,
             title: 'تسجيل الدخول',
           ),
         ],

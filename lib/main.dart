@@ -17,7 +17,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheService.cacheInitialization();
   configureDependencies();
-  // Bloc.observer = MyBlocObserver();
+  Bloc.observer = MyBlocObserver();
   AnalyticsHelper.sendAnalytics();
   runApp(
     MyApp(),

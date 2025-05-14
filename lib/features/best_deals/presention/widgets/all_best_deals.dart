@@ -67,7 +67,7 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
           floatingActionButtonLocation:
           FloatingActionButtonLocation.startFloat,
           floatingActionButton: FloatingActionButton(
-            backgroundColor: ColorManager.pink,
+            backgroundColor: ColorManager.primaryColor,
             onPressed: () => Navigator.pop(context),
             child: Padding(
               padding: const EdgeInsets.only(right: 8.0),
@@ -89,7 +89,7 @@ class _AllBestDealsViewState extends State<AllBestDealsView> {
                       slivers: [
                         SliverAppBar(
                           automaticallyImplyLeading: false,
-                          backgroundColor: ColorManager.pink,
+                          backgroundColor: ColorManager.primaryColor,
                           elevation: 10,
                           pinned: false,
                           floating: true,

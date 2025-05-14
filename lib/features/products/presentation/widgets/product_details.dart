@@ -30,7 +30,7 @@ class ProductDetails extends StatelessWidget {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  backgroundColor: ColorManager.pink.withAlpha(200),
+                  backgroundColor: ColorManager.primaryColor.withAlpha(200),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       bottom: Radius.circular(4),
@@ -62,7 +62,7 @@ class ProductDetails extends StatelessWidget {
                   automaticallyImplyLeading: false,
                   flexibleSpace: ClipPath(
                     clipper: InwardCurveClipper(),
-                    child: Container(color: ColorManager.orange),
+                    child: Container(color: ColorManager.primaryColor),
                   ),
                 ),
                 SliverToBoxAdapter(
@@ -94,7 +94,7 @@ class ProductDetails extends StatelessWidget {
 
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: ColorManager.orange,
+                                    color: ColorManager.primaryColor,
                                   ),
                                   child: Icon(
                                     size: 20,
@@ -197,7 +197,7 @@ class ProductDetails extends StatelessWidget {
 
             child: Container(
               height: 50,
-              color: ColorManager.pink.withAlpha(200),
+              color: ColorManager.primaryColor.withAlpha(200),
               clipBehavior: Clip.none,
               child: Stack(
                 clipBehavior: Clip.none,

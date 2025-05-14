@@ -6,14 +6,26 @@ sealed class CartState {}
 final class CartInitial extends CartState {}
 final class CartAddLoading extends CartState {}
 final class CartAddFail extends CartState {}
+final class CartLoading extends CartState {}
 
 final class CartAddSuccess extends CartState {
 final AddToCartEntity? addToCartEntity;
   CartAddSuccess(this.addToCartEntity);
 }
-final class CartLoading extends CartState {
-
-}
+// final class CartLoading extends CartState {
+//
+// }
+// class CartStateWithAddress extends CartState {
+//   final int? idAddress;
+//
+//   CartStateWithAddress({this.idAddress});
+//
+//   CartStateWithAddress copyWith({int? idAddress}) {
+//     return CartStateWithAddress(
+//       idAddress: idAddress ?? this.idAddress,
+//     );
+//   }
+// }
 final class CartFail extends CartState {
  final Exception exception;
   CartFail(this.exception);

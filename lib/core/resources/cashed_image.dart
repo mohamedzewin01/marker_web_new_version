@@ -47,7 +47,7 @@ class CustomImage extends StatelessWidget {
                   height: sizeIndicator ?? 20,
 
                   child: const CircularProgressIndicator(
-                    color: ColorManager.orange,
+                    color: ColorManager.primaryColor,
                   ),
                 ),
               ),

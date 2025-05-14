@@ -11,15 +11,25 @@ Future<Result<T>> executeApi<T>(Future<T> Function() apiCall) async {
   } on TimeoutException catch (_) {
     return Fail(NoInternetError());
   } on DioException catch (ex) {
-    print(ex.response?.data['error']);
+    // أولاً، قم بطباعة الخطأ للمساعدة في التصحيح
+    print(ex.response?.data);
+
+    // تحقق من وجود استجابة
     if (ex.response != null) {
+      // استخراج الرسالة من الاستجابة أو استخدام رسالة افتراضية في حال عدم وجود رسالة
+      String message = ex.response?.data['message'] ?? 'Unexpected error occurred';
+
+      // إرجاع الكود مع الرسالة المناسبة
       return Fail(ServerError(
-        ex.response?.statusCode,
-        ex.response?.data['error'] ?? "Unexpected error",
+        ex.response?.statusCode, // الكود الحالة (مثل 400 أو 500)
+        message, // الرسالة المستخرجة من الاستجابة
       ));
     } else {
+      // في حال عدم وجود استجابة، إرجاع استثناء مختلف (DioHttpException)
       return Fail(DioHttpException(ex));
     }
+
+
   } on IOException catch (_) {
     return Fail(NoInternetError());
   } on Exception catch (ex) {

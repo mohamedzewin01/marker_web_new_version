@@ -66,7 +66,7 @@ void validationMethod({
 }) {
   if (formKey.currentState!.validate()) {
     actionPress();
-    updateButtonColor(ColorManager.orange);
+    updateButtonColor(ColorManager.primaryColor);
   } else {
     updateButtonColor(ColorManager.darkGrey);
   }

@@ -1,4 +1,5 @@
 import 'package:fada_alhalij_web/features/cart/domain/entities/cart_entities.dart';
+import 'package:fada_alhalij_web/features/order/data/models/response/get_active_orders_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'cart_dto.g.dart';
@@ -99,6 +100,7 @@ class CartItems {
   Map<String, dynamic> toJson() {
     return _$CartItemsToJson(this);
   }
+
 }
 
 @JsonSerializable()

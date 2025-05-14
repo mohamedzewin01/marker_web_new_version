@@ -15,4 +15,14 @@ class OrdersRepoImpl implements OrdersRepo {
   Future<Result<AddOrderEntity?>> addOrder(AddOrderRequest addOrderRequest) {
     return ordersDataSourcesRepo.addOrder(addOrderRequest);
   }
+
+  @override
+  Future<Result<GetActiveOrdersEntity?>> getActiveOrders() {
+return ordersDataSourcesRepo.getActiveOrders();
+  }
+
+  @override
+  Future<Result<GetActiveOrdersEntity?>> getCompletedOrder() {
+   return ordersDataSourcesRepo.getCompletedOrder();
+  }
 }

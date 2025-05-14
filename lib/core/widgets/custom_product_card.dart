@@ -274,7 +274,7 @@ class _ButtonAddToCartState extends State<ButtonAddToCart> {
             height: 35,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: ColorManager.pink,
+                backgroundColor: ColorManager.primaryColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(12),

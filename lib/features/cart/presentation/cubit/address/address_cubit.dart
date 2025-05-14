@@ -16,6 +16,8 @@ class AddressCubit extends Cubit<AddressState> {
 
   final CartUseCase _cartUseCase;
 
+int? idAddress;
+
   Future<void> getAddress() async {
     emit(AddressLoading());
     final result = await _cartUseCase.getAddressesUser();
@@ -67,4 +69,14 @@ class AddressCubit extends Cubit<AddressState> {
         }
     }
   }
+
+  void setIdAddress(int? idAddress) {
+    if (state is OrdersWithAddress) {
+      emit((state as OrdersWithAddress).copyWith(idAddress: idAddress));
+    } else {
+      // في حال كانت الحالة غير حالة OrdersWithAddress، نقوم بتعيين القيمة فقط
+      emit(OrdersWithAddress(idAddress: idAddress));
+    }
+  }
+
 }

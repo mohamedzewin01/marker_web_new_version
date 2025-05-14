@@ -5,6 +5,8 @@ import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/widgets/cart_body.dart';
 import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
+import 'package:fada_alhalij_web/features/order/presention/pages/active_orders_view.dart';
+import 'package:fada_alhalij_web/features/order/presention/pages/completed_orders_view.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,11 +61,11 @@ class _CartViewState extends State<CartView>
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => viewModel..getCart(),
+      create: (context) => viewModel,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: ColorManager.orange,
+            backgroundColor: ColorManager.primaryColor,
             title: Text(
               "السلة",
               style: getSemiBoldStyle(
@@ -122,7 +124,7 @@ class _CartViewState extends State<CartView>
                   child: TabBar(
 
                     controller: viewModel.tabController,
-                    labelStyle: getSemiBoldStyle(color: ColorManager.orange),
+                    labelStyle: getSemiBoldStyle(color: ColorManager.primaryColor),
                     tabs: [
                       Tab(text: "السلة",),
                       Tab(text: "الطلبات النشطة"),
@@ -139,8 +141,9 @@ class _CartViewState extends State<CartView>
               controller: viewModel.tabController,
               children: [
                 CartBody(viewModel: viewModel),
-                Text("Active Products Tab"), // Tab for Active Products
-                Text("Inactive Products Tab"), // Tab for Inactive Products
+                ActiveOrderView(),
+                CompletedOrdersView() ,// Tab for Active Products
+                 // Tab for Inactive Products
               ],
             ),
           ),

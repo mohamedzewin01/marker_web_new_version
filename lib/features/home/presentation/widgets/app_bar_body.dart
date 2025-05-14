@@ -20,7 +20,7 @@ class AppBarBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: ColorManager.pink,
+      backgroundColor: ColorManager.primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(4)),
       ),
@@ -37,7 +37,7 @@ class AppBarBody extends StatelessWidget {
       automaticallyImplyLeading: false,
       flexibleSpace: ClipPath(
         clipper: InwardCurveClipper(),
-        child: Container(color: ColorManager.pinkLight),
+        child: Container(color: ColorManager.secondaryColor),
       ),
       leading: GestureDetector(
         onTap: () async {
@@ -66,11 +66,11 @@ class AppBarBody extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CircularProgressIndicator(color: ColorManager.orange),
+                      CircularProgressIndicator(color: ColorManager.primaryColor),
                       const SizedBox(height: 16),
                       Text(
                         'جارٍ التحضير...',
-                        style: getSemiBoldStyle(color: ColorManager.orange,fontSize: 16),
+                        style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 16),
                       ),
                     ],
                   ),

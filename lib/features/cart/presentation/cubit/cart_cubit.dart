@@ -26,8 +26,12 @@ class CartCubit extends Cubit<CartState> {
 
   int? idUser = CacheService.getData(key: CacheConstants.userId) ?? 0;
   int? idAddress;
-
+  void updateIdAddress(int? newIdAddress) {
+    idAddress = newIdAddress;
+  }
   late TabController tabController;
+  bool shouldGoToTab1 = false;
+
   List<CartItems> cartItems = [];
   Cart? myCart;
   num total = 0;
@@ -173,10 +177,14 @@ class CartCubit extends Cubit<CartState> {
   }
 
 
-  void setIdAddress(int? id) {
-    idAddress = id;
-    emit(state); // لو عندك state
-  }
+  // void setIdAddress(int? idAddress) {
+  //   if (state is CartStateWithAddress) {
+  //     emit((state as CartStateWithAddress).copyWith(idAddress: idAddress));
+  //   } else {
+  //     // في حال كانت الحالة غير حالة CartStateWithAddress، نقوم بتعيين القيمة فقط
+  //     emit(CartStateWithAddress(idAddress: idAddress));
+  //   }
+  // }
 
 
   Future<void> addToCart({required int idProduct}) async {

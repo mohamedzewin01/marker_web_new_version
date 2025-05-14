@@ -23,7 +23,7 @@ class CustomDialog {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CircularProgressIndicator(
-                  color: ColorManager.orange,
+                  color: ColorManager.primaryColor,
                 ),
                 const SizedBox(height: 20),
                 Text(
@@ -68,7 +68,7 @@ class CustomDialog {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         side: const BorderSide(
-                            color: ColorManager.orange, width: 2),
+                            color: ColorManager.primaryColor, width: 2),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
                         shape: RoundedRectangleBorder(
@@ -156,7 +156,6 @@ class CustomDialog {
       },
     );
   }
-
   static void showErrorDialog(BuildContext context, {String? message}) {
     showDialog(
       context: context,
@@ -175,12 +174,12 @@ class CustomDialog {
               children: [
                 const Icon(
                   Icons.error_outline,
-                  color: ColorManager.orange,
+                  color: ColorManager.primaryColor,
                   size: 60,
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  "An Error Occurred!",
+                  "خطاء !",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -199,14 +198,14 @@ class CustomDialog {
                     Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorManager.orange,
+                    backgroundColor: ColorManager.primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Text("Back",
+                    child: Text("رجوع",
                         style: getBoldStyle(
                             color: ColorManager.white, fontSize: 18)),
                   ),
@@ -218,6 +217,68 @@ class CustomDialog {
       },
     );
   }
+
+  // static void showErrorDialog(BuildContext context, {String? message}) {
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (context) {
+  //       return Dialog(
+  //         backgroundColor: Colors.transparent,
+  //         child: Container(
+  //           padding: const EdgeInsets.all(20),
+  //           decoration: BoxDecoration(
+  //             color: ColorManager.primary.withAlpha(200),
+  //             borderRadius: BorderRadius.circular(20),
+  //           ),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               const Icon(
+  //                 Icons.error_outline,
+  //                 color: ColorManager.orange,
+  //                 size: 60,
+  //               ),
+  //               const SizedBox(height: 10),
+  //               const Text(
+  //                 "An Error Occurred!",
+  //                 style: TextStyle(
+  //                   fontSize: 20,
+  //                   fontWeight: FontWeight.bold,
+  //                   color: Colors.white,
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 10),
+  //               Text(
+  //                 message ?? "Something went wrong. Please try again.",
+  //                 textAlign: TextAlign.center,
+  //                 style: TextStyle(fontSize: 16, color: Colors.white70),
+  //               ),
+  //               const SizedBox(height: 20),
+  //               ElevatedButton(
+  //                 onPressed: () {
+  //                   Navigator.of(context).pop();
+  //                 },
+  //                 style: ElevatedButton.styleFrom(
+  //                   backgroundColor: ColorManager.orange,
+  //                   shape: RoundedRectangleBorder(
+  //                     borderRadius: BorderRadius.circular(10),
+  //                   ),
+  //                 ),
+  //                 child: Padding(
+  //                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  //                   child: Text("Back",
+  //                       style: getBoldStyle(
+  //                           color: ColorManager.white, fontSize: 18)),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   static void showIncompleteDataDialog(BuildContext context,
       {void Function()? onPressed}) {
@@ -238,7 +299,7 @@ class CustomDialog {
               children: [
                 Icon(
                   Icons.warning_amber_rounded,
-                  color: ColorManager.orange,
+                  color: ColorManager.primaryColor,
                   size: 60,
                 ),
                 const SizedBox(height: 10),
@@ -260,7 +321,7 @@ class CustomDialog {
                 ElevatedButton(
                   onPressed: onPressed,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorManager.orange,
+                    backgroundColor: ColorManager.primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -335,7 +396,7 @@ class CustomDialog {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 40, color: ColorManager.orange),
+          Icon(icon, size: 40, color: ColorManager.primaryColor),
           SizedBox(height: 8),
           Text(label, style:getBoldStyle(color: ColorManager.white, fontSize: 16)),
         ],

@@ -7,4 +7,6 @@ import 'package:fada_alhalij_web/features/order/domain/entities/orders_entities.
 abstract class AddOrderUseCaseRepo {
 
   Future<Result<AddOrderEntity?>> addOrder(AddOrderRequest addOrderRequest);
+  Future<Result<GetActiveOrdersEntity?>> getActiveOrders();
+  Future<Result<GetActiveOrdersEntity?>> getCompletedOrder();
 }

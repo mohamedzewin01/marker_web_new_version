@@ -132,7 +132,7 @@ class _HomeViewState extends State<HomeView> {
           }
 
           if (state is HomeLoading) {
-            return Center(child: CircularProgressIndicator(color:ColorManager.orange));
+            return Center(child: CircularProgressIndicator(color:ColorManager.primaryColor));
           }
           if (state is HomeFail) {}
 

@@ -67,6 +67,8 @@ import '../../features/order/data/repo_impl/orders_repo_impl.dart' as _i368;
 import '../../features/order/domain/repo/orders_repo.dart' as _i357;
 import '../../features/order/domain/use_cases/orders_use_cases_impl.dart'
     as _i35;
+import '../../features/order/presention/cubit/active_orders_cubit/active_orders_cubit.dart'
+    as _i381;
 import '../../features/order/presention/cubit/orders_cubit.dart' as _i548;
 import '../../features/products/data/data_sources/products_data_source.dart'
     as _i645;
@@ -166,6 +168,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i548.OrdersCubit>(
       () => _i548.OrdersCubit(gh<_i529.AddOrderUseCaseRepo>()),
+    );
+    gh.factory<_i381.ActiveOrdersCubit>(
+      () => _i381.ActiveOrdersCubit(gh<_i529.AddOrderUseCaseRepo>()),
     );
     gh.factory<_i9.HomeCubit>(() => _i9.HomeCubit(gh<_i933.HomeUseCase>()));
     gh.factory<_i886.CartUseCase>(

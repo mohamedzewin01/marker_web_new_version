@@ -21,8 +21,8 @@ class _CartItemsListSectionState extends State<CartItemsListSection> {
       delegate: SliverChildBuilderDelegate((context, index) {
         return Slidable(
 
-          endActionPane: ActionPane(
-            extentRatio: 0.15,
+          startActionPane: ActionPane(
+            extentRatio: 0.18,
             motion: const ScrollMotion(),
             children: [
               SlidableAction(
@@ -35,9 +35,10 @@ class _CartItemsListSectionState extends State<CartItemsListSection> {
                   //
                   // });
                 },
-                backgroundColor: ColorManager.white,
+                backgroundColor: ColorManager.primaryColor.withAlpha(10),
                 foregroundColor:  ColorManager.error,
                 icon: Icons.delete,
+                borderRadius: BorderRadius.circular(5),
               ),
             ],
           ),

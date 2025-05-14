@@ -17,4 +17,14 @@ class OrdersUseCasesImpl implements AddOrderUseCaseRepo {
    return ordersRepo.addOrder(addOrderRequest);
   }
 
+  @override
+  Future<Result<GetActiveOrdersEntity?>> getActiveOrders() {
+  return ordersRepo.getActiveOrders();
+  }
+
+  @override
+  Future<Result<GetActiveOrdersEntity?>> getCompletedOrder() {
+return ordersRepo.getCompletedOrder();
+  }
+
 }

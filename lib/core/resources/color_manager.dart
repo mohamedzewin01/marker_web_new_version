@@ -2,7 +2,9 @@ import 'dart:ui';
 
 class ColorManager {
   // static const Color orange = Color(0xffFF6A00);
-  static const Color orange = Color(0xffe91e63);
+  // static const Color orange = Color(0xffe91e63);
+  static const Color primaryColor = Color(0xff303f9f);
+  static const Color secondaryColor = Color(0xff0b21af);
   static const Color black = Color(0xff000000);
   static const Color darkGrey = Color(0xff262626);
   static const Color grey = Color(0xff8F8F8F);
@@ -16,10 +18,11 @@ class ColorManager {
   static const Color fieldTextBorder = Color(0xffD3D3D3);
   static const Color basicColor = Color(0xffFF4100);
   static const Color offwhite = Color(0xffD9D9D9);
-  static const Color primaryColor =Color(0xffe91e63);
+  // static const Color primaryColor =Color(0xffe91e63);
+  // static const Color primaryColor = Color(0xff303f9f);
   static const Color cardColor = Color(0xffE9F5FA);
   static const Color lightGrey2 = Color(0xff7D7D7D);
-  static const Color secondaryColor = Color(0xff1B5C7D);
+
   static const Color accentColor = Color(0xffFF9E40);
   static const Color backgroundColor = Color(0xffF5F9FC);
   static const Color textColor = Color(0xff1A1A1A);
@@ -45,7 +48,8 @@ class ColorManager {
   static const Color green = Color(0xff4caf50);
   static const Color purple = Color(0xff9c27b0);
   static const Color teal = Color(0xff009688);
-  static const Color pink = Color(0xffe91e63);
+  // static const Color pink = Color(0xffe91e63);
+  // static const Color primaryColor = Color(0xff303f9f);
   static const Color cyan = Color(0xff00bcd4);
   static const Color indigo = Color(0xff3f51b5);
   static const Color lime = Color(0xffcddc39);

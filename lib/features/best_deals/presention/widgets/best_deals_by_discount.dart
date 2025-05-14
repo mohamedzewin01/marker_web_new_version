@@ -42,7 +42,7 @@ class _BestDealsByDiscountViewState extends State<BestDealsByDiscountView> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.startFloat,
             floatingActionButton: FloatingActionButton(
-              backgroundColor: ColorManager.pink,
+              backgroundColor: ColorManager.primaryColor,
               onPressed: () => Navigator.pop(context),
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
@@ -95,7 +95,7 @@ class _BestDealsByDiscountViewState extends State<BestDealsByDiscountView> {
                     }
                     return Center(
                       child: CircularProgressIndicator(
-                        color: ColorManager.orange,
+                        color: ColorManager.primaryColor,
                       ),
                     );
                   },
