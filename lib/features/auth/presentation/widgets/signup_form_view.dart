@@ -33,12 +33,26 @@ class _SignupFormState extends State<SignupForm> {
           CustomTextFormField(
             controller: widget.viewModel.nameController,
             labelText: "الاسم",
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return 'الاسم مطلوب';
+              }
+              if (value.trim().length < 5) {
+                return 'الاسم يجب أن يكون 5 حروف أو أكثر';
+              }
+              final regex = RegExp(r"^[\u0621-\u064A\s]+$");
+              if (!regex.hasMatch(value.trim())) {
+                return 'الاسم يجب أن يحتوي على حروف عربية فقط';
+              }
+              return null;
+            },
+
           ),
-          CustomTextFormField(
-            controller: widget.viewModel.emailController,
-            labelText: "الايميل",
-            keyboardType: TextInputType.emailAddress,
-          ),
+          // CustomTextFormField(
+          //   controller: widget.viewModel.emailController,
+          //   labelText: "الايميل",
+          //   keyboardType: TextInputType.emailAddress,
+          // ),
           Focus(
             onFocusChange: (hasFocus) {
               if (hasFocus && widget.viewModel.phoneController.text.isEmpty) {
