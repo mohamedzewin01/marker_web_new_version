@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/api/api_constants.dart';
 import 'package:fada_alhalij_web/core/di/di.dart';
@@ -26,6 +27,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../resources/cashed_image.dart';
+
 
 class CustomProductCardWidget extends StatelessWidget {
   const CustomProductCardWidget({super.key, this.product});
@@ -229,43 +231,58 @@ class _ButtonAddToCartState extends State<ButtonAddToCart> {
       child: BlocConsumer<CartCubit, CartState>(
         listener: (context, state) {
           if (state is CartAddSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Row(
-                  children: [
-                    const Icon(
-                      Icons.check_circle,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        "تمت الإضافة المنتج إلى السلة ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                backgroundColor: Colors.green,
-                behavior: SnackBarBehavior.floating,
-                margin: const EdgeInsets.all(16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                duration: const Duration(seconds: 3),
-                animation: CurvedAnimation(
-                  parent: AnimationController(
-                    vsync: Scaffold.of(context),
-                    duration: const Duration(milliseconds: 500),
-                  )..forward(),
-                  curve: Curves.easeInOut,
-                ),
+
+
+// داخل دالة العرض
+            Flushbar(
+              message: "تمت إضافة المنتج إلى السلة",
+              icon: const Icon(
+                Icons.check_circle,
+                color: Colors.white,
               ),
-            );
+              duration: const Duration(seconds: 2),
+              backgroundColor: Colors.green,
+              flushbarPosition: FlushbarPosition.TOP,  // عشان تظهر من فوق
+              margin: const EdgeInsets.all(16),
+              borderRadius: BorderRadius.circular(12),
+            ).show(context);
+
+//             final messenger = ScaffoldMessenger.of(context);
+//
+// // إخفاء أي SnackBar مفتوح حالياً قبل إظهار الجديد
+//             messenger.hideCurrentSnackBar();
+//
+//             messenger.showSnackBar(
+//               SnackBar(
+//                 content: Row(
+//                   children: const [
+//                     Icon(
+//                       Icons.check_circle,
+//                       color: Colors.white,
+//                     ),
+//                     SizedBox(width: 10),
+//                     Expanded(
+//                       child: Text(
+//                         "تمت إضافة المنتج إلى السلة",
+//                         style: TextStyle(
+//                           color: Colors.white,
+//                           fontSize: 16,
+//                           fontWeight: FontWeight.bold,
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 backgroundColor: Colors.green,
+//                 behavior: SnackBarBehavior.floating,
+//                 margin: const EdgeInsets.all(16),
+//                 shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.circular(12),
+//                 ),
+//                 duration: const Duration(seconds: 2),
+//               ),
+//             );
+//
 
           }
         },

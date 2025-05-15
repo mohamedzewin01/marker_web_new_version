@@ -83,25 +83,25 @@ class AuthCubit extends Cubit<AuthState> {
       case Success<AuthSignupEntity?>():
         {
           if (!isClosed) {
-            CacheService.setData(
+            await  CacheService.setData(
               key: CacheConstants.userId,
               value: result.data?.user?.id,
             );
-            CacheService.setData(
+            await  CacheService.setData(
               key: CacheConstants.userName,
               value: result.data?.user?.name,
             );
-            CacheService.setData(
+            await  CacheService.setData(
               key: CacheConstants.userEmail,
               value: result.data?.user?.email,
             );
-            CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.userPhone,
               value: result.data?.user?.phone,
             );
-            CacheService.setData(
+            await  CacheService.setData(
               key: CacheConstants.isActive,
-              value: result.data?.user?.isActive,
+              value: true,
             );
             emit(AuthSignUpSuccess(result.data!));
           }

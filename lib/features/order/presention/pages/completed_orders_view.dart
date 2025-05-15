@@ -166,7 +166,6 @@ class _CompletedOrdersViewState extends State<CompletedOrdersView> {
                 ),
               );
             }
-
           }
 
           return SizedBox();

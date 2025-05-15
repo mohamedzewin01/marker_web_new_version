@@ -43,7 +43,6 @@ class CacheService {
 
 class CacheConstants {
   static const String defaultLanguage = 'defaultLanguage';
-
   static const String userImage = 'userImage';
   static const String storeName = 'storeName';
   static const String storeUrlImage = 'storeUrlImage';
@@ -60,4 +59,4 @@ class CacheConstants {
   static const String isActive='isActive';
 }
 
-final bool isActiveUser = CacheService.getData(key: CacheConstants.isActive) as bool? ?? false;
+ bool isActiveUser = CacheService.getData(key: CacheConstants.isActive) ?? false;

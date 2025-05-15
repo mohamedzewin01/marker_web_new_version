@@ -117,20 +117,7 @@ class AppBarBody extends StatelessWidget {
       //   },
       // ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Container(
-            padding: EdgeInsets.all(1),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: ColorManager.placeHolderColor,
-            ),
-            child: CircleAvatar(
-              backgroundColor: ColorManager.white,
-              child: Image.asset(Assets.logo, scale: 1, fit: BoxFit.fill),
-            ),
-          ),
-        ),
+        Image.asset(Assets.logo3, scale: 1, fit: BoxFit.fill,height: 40,width: 40,),
       ],
     );
   }

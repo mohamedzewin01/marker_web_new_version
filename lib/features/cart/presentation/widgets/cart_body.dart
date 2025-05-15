@@ -38,7 +38,7 @@ class CartBody extends StatelessWidget {
               viewModel.myCart = state.cartEntity?.cart?.copyWith(
                 finalPrice: state.cartEntity?.cart?.finalPrice,
               );
-              return Expanded(
+              return cartItems.isNotEmpty ? Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomScrollView(
@@ -48,12 +48,40 @@ class CartBody extends StatelessWidget {
                     ],
                   ),
                 ),
+              ):SingleChildScrollView(
+                child: Stack(
+                  children: [
+                    Image.asset(Assets.cartEmpty),
+                    Positioned(
+                      top: 150,
+                      left: 0,
+                      right: 0,
+
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.sizeOf(context).width * 0.25,
+                        ),
+
+                        child: AutoSizeText(
+                          'لا يوجد عناصر في السلة',
+                          textAlign: TextAlign.center,
+                          style: getSemiBoldStyle(
+                            color: ColorManager.primaryColor,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               );
             }
             if (state is CartLoading) {
               return SkeCart();
             }
             if (state is CartFail) {
+
+              print('44444444444444444444444$isActiveUser');
               if (isActiveUser) {
                 return SingleChildScrollView(
                   child: Stack(
@@ -63,12 +91,12 @@ class CartBody extends StatelessWidget {
                         top: 150,
                         left: 0,
                         right: 0,
-                  
+
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: MediaQuery.sizeOf(context).width * 0.25,
                           ),
-                  
+
                           child: AutoSizeText(
                             'لا يوجد عناصر في السلة',
                             textAlign: TextAlign.center,
@@ -87,17 +115,16 @@ class CartBody extends StatelessWidget {
                   child: Stack(
                     children: [
                       Image.asset(Assets.cartEmpty),
-                  
                       Positioned(
                         top: 150,
                         left: 0,
                         right: 0,
-                  
+
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: MediaQuery.sizeOf(context).width * 0.25,
                           ),
-                  
+
                           child: Column(
                             children: [
                               AutoSizeText(

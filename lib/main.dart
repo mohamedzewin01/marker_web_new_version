@@ -20,8 +20,6 @@ Future<void> main() async {
   await CacheService.cacheInitialization();
   configureDependencies();
   Bloc.observer = MyBlocObserver();
-  AnalyticsHelper.sendAnalytics();
-
   runApp(
     MyApp(),
   );

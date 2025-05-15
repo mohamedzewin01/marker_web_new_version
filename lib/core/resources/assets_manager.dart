@@ -1,6 +1,8 @@
 class Assets {
   static const String assetsImagesBack = 'assets/images/Back.svg';
   static const String logo = 'assets/images/logo.png';
+  static const String logo2 = 'assets/images/logo2.png';
+  static const String logo3 = 'assets/images/logo3.png';
   static const String categories = 'assets/images/categories.png';
   static const String home = 'assets/images/home.png';
   static const String imagesRial = 'assets/images/rial.png';

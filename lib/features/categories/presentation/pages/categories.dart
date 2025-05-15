@@ -15,6 +15,7 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesState extends State<Categories> {
+
   late CategoriesCubit viewModel;
 
   @override
@@ -29,6 +30,7 @@ class _CategoriesState extends State<Categories> {
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: BlocProvider(
         create: (context) => viewModel..getCategories(),

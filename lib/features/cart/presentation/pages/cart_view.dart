@@ -75,14 +75,17 @@ class _CartViewState extends State<CartView>
               ),
             ),
             actions: [
-              Transform.rotate(
-                angle: 329 * 3.14159 / 180,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 0,top: 24),
-                  child: SvgPicture.asset(Assets.cart, colorFilter: const ColorFilter.mode(
-                      Colors.white, BlendMode.srcIn) ,),
-                ),
-              ),
+              Image.asset(Assets.logo3, ),
+              // Transform.rotate(
+              //   angle: 329 * 3.14159 / 180,
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(left: 0,top: 24),
+              //     child: Image.asset(Assets.logo3, ),
+              //     //
+              //     // SvgPicture.asset(Assets.cart, colorFilter: const ColorFilter.mode(
+              //     //     Colors.white, BlendMode.srcIn) ,),
+              //   ),
+              // ),
 
             ],
             leading: Padding(

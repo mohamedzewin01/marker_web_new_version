@@ -27,6 +27,7 @@ class _CartItemsListSectionState extends State<CartItemsListSection> {
             children: [
               SlidableAction(
                 onPressed: (context) async {
+
                   await widget.viewModel.removeItemFromCart(
                     productId: widget.viewModel.cartItems[index].product?.id ?? 0,
                     index: index,

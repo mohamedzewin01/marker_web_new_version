@@ -108,7 +108,7 @@ class CustomDialog {
   }
 
   static void showSuccessDialog(BuildContext context, {Widget? goto, String? message}) {
-    Navigator.of(context).pop();
+    Navigator.pop(context,true);
     showDialog(
       context: context,
       barrierDismissible: false,

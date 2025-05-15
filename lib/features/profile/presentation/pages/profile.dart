@@ -132,11 +132,12 @@ void showProfileOptions(BuildContext context) {
           ListTile(
             leading: const Icon(Icons.edit, color: Colors.blue),
             title: const Text("تعديل البيانات الشخصية"),
-            onTap: () {
-
+            onTap: ()async {
               CacheService.clearItems();
+              isActiveUser=false;
+              print(isActiveUser);
               Navigator.pop(context);
-              // أضف التنقل إلى صفحة تعديل البيانات
+
             },
           ),
           ListTile(

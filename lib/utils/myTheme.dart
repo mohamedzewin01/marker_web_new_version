@@ -35,7 +35,7 @@ class AppThemes {
         borderRadius: BorderRadius.circular(8.0),
         borderSide: BorderSide(width: 2, color: Color(0xff5e95ac)),
       ),
-      constraints: BoxConstraints.expand(height: 48),
+      // constraints: BoxConstraints.expand(height: 48),
     ),
     dropdownMenuTheme: DropdownMenuThemeData(
         inputDecorationTheme: InputDecorationTheme(

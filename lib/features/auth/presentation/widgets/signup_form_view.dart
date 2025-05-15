@@ -47,25 +47,54 @@ class _SignupFormState extends State<SignupForm> {
             },
             child: CustomTextFormField(
               controller: widget.viewModel.phoneController,
-              labelText: "جوال",
+              labelText: "رقم الجوال",
+              hintText: "5XXXXXXXX",
               keyboardType: TextInputType.phone,
-              onChanged: (value) {
-                if (value.startsWith("+9660")) {
-                  widget.viewModel.phoneController.text =  "+966${value.substring(5)}" ; // إزالة الصفر الأول
+              onTap: () {
+                if (!widget.viewModel.phoneController.text.startsWith('+966')) {
+                  widget.viewModel.phoneController.text = '+966';
                   widget.viewModel.phoneController.selection = TextSelection.fromPosition(
                     TextPosition(offset: widget.viewModel.phoneController.text.length),
-                  ); // تحديث مؤشر الكتابة
+                  );
                 }
               },
+              onChanged: (value) {
+                if (!value.startsWith('+966')) {
+                  final cleaned = value.replaceAll(RegExp(r'[^\d]'), '');
+                  final newText = '+966${cleaned.replaceFirst(RegExp(r'^966*'), '').replaceFirst(RegExp(r'^0'), '')}';
+                  widget.viewModel.phoneController.text = newText;
+                  widget.viewModel.phoneController.selection = TextSelection.fromPosition(
+                    TextPosition(offset: widget.viewModel.phoneController.text.length),
+                  );
+                } else {
+                  if (value.length > 4 && value[4] == '0') {
+                    final newText = value.substring(0, 4) + value.substring(5);
+                    widget.viewModel.phoneController.text = newText;
+                    widget.viewModel.phoneController.selection = TextSelection.fromPosition(
+                      TextPosition(offset: newText.length),
+                    );
+                  }
+                }
+
+                // الحد الأقصى للطول: +966 + 9 أرقام = 13
+                if (widget.viewModel.phoneController.text.length > 13) {
+                  final text = widget.viewModel.phoneController.text.substring(0, 13);
+                  widget.viewModel.phoneController.text = text;
+                  widget.viewModel.phoneController.selection = TextSelection.fromPosition(
+                    TextPosition(offset: text.length),
+                  );
+                }
+              },
+
               validator: (value) {
-                if (value == null || value.isEmpty || value == '+966') {
+                if (value == null || value.trim().isEmpty || value == '+966') {
                   return 'رقم الجوال مطلوب';
                 }
                 if (!value.startsWith('+966')) {
                   return 'رقم الهاتف يجب أن يبدأ بـ +966';
                 }
                 if (value.length != 13) {
-                  return 'رقم الهاتف يجب أن يحتوي على 12 رقمًا ';
+                  return 'رقم الهاتف يجب أن يحتوي على 9 أرقام بعد +966';
                 }
                 return null;
               },

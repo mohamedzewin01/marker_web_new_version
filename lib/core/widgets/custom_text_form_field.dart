@@ -424,6 +424,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onTap,
     this.onToggle,
     this.isPassword = false, this.onFieldSubmitted,
+
   });
 
   final TextEditingController controller;
@@ -446,6 +447,8 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onTap: onTap,
+
+
       controller: controller,
       cursorColor: ColorManager.placeHolderColor,
       style: getSemiBoldStyle(color: ColorManager.primaryColor, fontSize: 16),
@@ -466,6 +469,7 @@ class CustomTextFormField extends StatelessWidget {
             ? IconButton(
           icon: Icon(
             obscureText! ? Icons.visibility : Icons.visibility_off,
+            color: ColorManager.primaryColor,
           ),
           onPressed: onToggle,
         )
@@ -483,7 +487,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: const EdgeInsets.symmetric(
-            horizontal: AppPadding.p14, vertical: AppPadding.p8),
+            horizontal: AppPadding.p18, vertical: AppPadding.p18),
         enabledBorder: outLintInputBorderMethod(
            BorderSide(
               color: ColorManager.black.withAlpha(150), width: AppSize.w1_5),
