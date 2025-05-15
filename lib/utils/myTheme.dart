@@ -5,6 +5,7 @@ import '../core/resources/values_manager.dart';
 
 class AppThemes {
   static final lightTheme1 = ThemeData(
+
     colorScheme: ColorScheme.light(
       surface: Colors.white,
       // background: Colors.white,

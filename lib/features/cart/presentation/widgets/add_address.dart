@@ -1,5 +1,6 @@
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_elevated_button.dart';
+import 'package:fada_alhalij_web/core/widgets/get_location.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/address/address_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -61,32 +62,7 @@ final AddressCubit viewModel;
 
 
 
-void getLocation(AddressCubit viewModel) async {
-  if (kIsWeb) {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
-      viewModel.latController.text = position.latitude.toString();
-      viewModel. longController.text = position.longitude.toString();
-      print("Current Location (Web): ${position.latitude}, ${position.longitude}");
-    } catch (e) {
-      print("Error getting location on Web: $e");
-    }
-  } else {
 
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
-      viewModel.latController.text = position.latitude.toString();
-      viewModel. longController.text = position.longitude.toString();
-      print("Current Location (Mobile): ${position.latitude}, ${position.longitude}");
-    } catch (e) {
-      print("Error getting location on Mobile: $e");
-    }
-  }
-}
 
 
 

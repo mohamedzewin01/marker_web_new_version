@@ -16,6 +16,7 @@ class AuthSignupResponseDto {
     return _$AuthSignupResponseDtoFromJson(json);
   }
 
+
   Map<String, dynamic> toJson() {
     return _$AuthSignupResponseDtoToJson(this);
   }
@@ -27,7 +28,7 @@ class AuthSignupResponseDto {
 @JsonSerializable()
 class User {
   @JsonKey(name: "id")
-  final String? id;
+  final int? id;
   @JsonKey(name: "name")
   final String? name;
   @JsonKey(name: "email")

@@ -1,6 +1,8 @@
 
+import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/analytics/analytics_helper.dart';
 import 'l10n/app_localizations.dart';
@@ -19,6 +21,7 @@ Future<void> main() async {
   configureDependencies();
   Bloc.observer = MyBlocObserver();
   AnalyticsHelper.sendAnalytics();
+
   runApp(
     MyApp(),
   );

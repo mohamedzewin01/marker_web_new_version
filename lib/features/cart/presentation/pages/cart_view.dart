@@ -49,6 +49,7 @@ class _CartViewState extends State<CartView>
   void initState() {
     viewModel = getIt.get<CartCubit>();
     viewModel.tabController = TabController(length: 3, vsync: this);
+    viewModel.getCart();
     super.initState();
   }
 
@@ -60,8 +61,8 @@ class _CartViewState extends State<CartView>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => viewModel,
+    return BlocProvider.value(
+      value:  viewModel,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(

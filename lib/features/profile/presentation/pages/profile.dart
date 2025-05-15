@@ -133,7 +133,9 @@ void showProfileOptions(BuildContext context) {
             leading: const Icon(Icons.edit, color: Colors.blue),
             title: const Text("تعديل البيانات الشخصية"),
             onTap: () {
-              Navigator.pop(context); // إغلاق الـ Bottom Sheet
+
+              CacheService.clearItems();
+              Navigator.pop(context);
               // أضف التنقل إلى صفحة تعديل البيانات
             },
           ),

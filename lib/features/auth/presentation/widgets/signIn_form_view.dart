@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key, required this.viewModel});
-final AuthCubit viewModel;
+
+  final AuthCubit viewModel;
+
   @override
   State<SignInForm> createState() => _SignInFormState();
 }
@@ -18,7 +20,7 @@ class _SignInFormState extends State<SignInForm> {
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
-   widget.viewModel.signIn();
+      widget.viewModel.signIn();
     }
   }
 
@@ -42,30 +44,35 @@ class _SignInFormState extends State<SignInForm> {
               keyboardType: TextInputType.phone,
               onChanged: (value) {
                 if (value.startsWith("+9660")) {
-                  widget.viewModel.loginController.text =  "+966${value.substring(5)}" ; // إزالة الصفر الأول
-                  widget.viewModel.loginController.selection = TextSelection.fromPosition(
-                    TextPosition(offset: widget.viewModel.loginController.text.length),
-                  ); // تحديث مؤشر الكتابة
+                  widget.viewModel.loginController.text =
+                      "+966${value.substring(5)}"; // إزالة الصفر الأول
+                  widget
+                      .viewModel
+                      .loginController
+                      .selection = TextSelection.fromPosition(
+                    TextPosition(
+                      offset: widget.viewModel.loginController.text.length,
+                    ),
+                  );
                 }
               },
               validator: (value) {
-                  if (value == null || value.isEmpty || value == '+966') {
-                    return 'رقم الجوال مطلوب';
-                  }
-                  if (!value.startsWith('+966')) {
-                    return 'رقم الهاتف يجب أن يبدأ بـ +966';
-                  }
-                  if (value.length != 13) {
-                    return 'رقم الهاتف يجب أن يحتوي على 12 رقمًا ';
-                  }
-                  return null;
-                },
-
+                if (value == null || value.isEmpty || value == '+966') {
+                  return 'رقم الجوال مطلوب';
+                }
+                if (!value.startsWith('+966')) {
+                  return 'رقم الهاتف يجب أن يبدأ بـ +966';
+                }
+                if (value.length != 13) {
+                  return 'رقم الهاتف يجب أن يحتوي على 12 رقمًا ';
+                }
+                return null;
+              },
             ),
           ),
-          SizedBox(height: 12,),
+          SizedBox(height: 12),
           CustomTextFormField(
-            controller:  widget.viewModel.passwordSignInController,
+            controller: widget.viewModel.passwordSignInController,
             labelText: "كلمة المرور",
             isPassword: true,
             obscureText: _obscurePassword,

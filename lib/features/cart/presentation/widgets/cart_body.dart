@@ -21,7 +21,8 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    viewModel.getCart();
+
+
     return Column(
       children: [
         BlocConsumer<CartCubit, CartState>(

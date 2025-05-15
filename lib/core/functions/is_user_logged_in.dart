@@ -41,33 +41,16 @@ void showAuthOrAddToCartDialog(BuildContext context, {int? idProduct}) async {
     context: context,
     onLoggedIn: () async {
       print("User is logged in. Showing signup dialog.");
-      showDialog(
-        context: context,
-        barrierDismissible: true, // يتيح إغلاق الـ Dialog عند الضغط خارجها
-        builder: (context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height * 0.8,
-              ),
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 24,
-                    right: 24,
-                    top: 24,
-                    bottom: MediaQuery.of(context).viewInsets.bottom + 24,
-                  ),
-                  child: const AuthScreen(),
-                ),
-              ),
-            ),
-          );
-        },
-      );
+
+       Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) =>  AuthScreen(),
+        ),
+      ).then((value) {
+        if (value==true) {
+          CartCubit.get(context).getCart();
+        }
+      });
     },
     onNotLoggedIn: () async {
       if (idProduct != null) {

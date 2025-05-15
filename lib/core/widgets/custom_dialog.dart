@@ -116,7 +116,7 @@ class CustomDialog {
         Future.delayed(const Duration(seconds: 2), () {
           if (context.mounted) {
 
-            Navigator.of(context).pop();
+            Navigator.pop(context,true);
             if (goto != null) {
               Navigator.push(
                   context,

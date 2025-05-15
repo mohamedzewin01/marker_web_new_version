@@ -166,11 +166,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i911.ProductsCubit>(
       () => _i911.ProductsCubit(gh<_i258.ProductsUseCase>()),
     );
-    gh.factory<_i548.OrdersCubit>(
-      () => _i548.OrdersCubit(gh<_i529.AddOrderUseCaseRepo>()),
-    );
     gh.factory<_i381.ActiveOrdersCubit>(
       () => _i381.ActiveOrdersCubit(gh<_i529.AddOrderUseCaseRepo>()),
+    );
+    gh.factory<_i548.OrdersCubit>(
+      () => _i548.OrdersCubit(gh<_i529.AddOrderUseCaseRepo>()),
     );
     gh.factory<_i9.HomeCubit>(() => _i9.HomeCubit(gh<_i933.HomeUseCase>()));
     gh.factory<_i886.CartUseCase>(
