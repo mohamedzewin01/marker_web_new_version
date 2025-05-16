@@ -17,6 +17,6 @@ abstract class CartRepo {
   Future<Result<DelItemCartEntity?>> deleteCart(DeleteItemCartRequest deleteItemCartRequest);
 
 
-  Future<Result<GetAddressesUserEntity?>> getAddressesUser();
-  Future<Result<AddAddressUserEntity?>> addAddressesUser(AddAddressRequest addAddressRequest);
+
+  // Future<Result<AddAddressUserEntity?>> addAddressesUser(AddAddressRequest addAddressRequest);
 }

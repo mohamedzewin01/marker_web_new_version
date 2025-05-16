@@ -38,6 +38,7 @@ class _SignInFormState extends State<SignInForm> {
             },
             child:CustomTextFormField(
               controller: widget.viewModel.loginController,
+              textDirection: TextDirection.ltr,
               labelText: "رقم الجوال",
               hintText: "5XXXXXXXX",
               keyboardType: TextInputType.phone,
@@ -99,6 +100,7 @@ class _SignInFormState extends State<SignInForm> {
           SizedBox(height: 12,),
           CustomTextFormField(
             controller:  widget.viewModel.passwordSignInController,
+            textDirection: TextDirection.ltr,
             labelText: "كلمة المرور",
             isPassword: true,
             hintText: "x x x x x x x x ",

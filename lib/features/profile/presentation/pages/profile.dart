@@ -80,7 +80,7 @@ class Profile extends StatelessWidget {
               ),
 
               ProfileMenuWidget(
-                title: "التوصيل",
+                title: "ادارة العناوين",
                 icon: Icons.delivery_dining,
                 onPress: () {
                   showDeliveryOptions(context);
@@ -133,10 +133,7 @@ void showProfileOptions(BuildContext context) {
             leading: const Icon(Icons.edit, color: Colors.blue),
             title: const Text("تعديل البيانات الشخصية"),
             onTap: ()async {
-              CacheService.clearItems();
-              isActiveUser=false;
-              print(isActiveUser);
-              Navigator.pop(context);
+
 
             },
           ),
@@ -152,6 +149,9 @@ void showProfileOptions(BuildContext context) {
             leading: const Icon(Icons.exit_to_app, color: Colors.red),
             title: const Text("تسجيل الخروج"),
             onTap: () {
+              CacheService.clearItems();
+              isActiveUser=false;
+
               Navigator.pop(context); // إغلاق الـ Bottom Sheet
               // أضف وظيفة تسجيل الخروج
             },

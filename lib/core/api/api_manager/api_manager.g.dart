@@ -462,15 +462,15 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<AddressesUserDto?> getAddressesUser(
-    GetUserAddressRequest getUserAddressRequest,
+  Future<GetUserAddressesDto?> fetchAddressesUser(
+    GetUserAddressesRequest getUserAddressRequest,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(getUserAddressRequest.toJson());
-    final _options = _setStreamType<AddressesUserDto>(
+    final _options = _setStreamType<GetUserAddressesDto>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -481,12 +481,12 @@ class _ApiService implements ApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
-    late AddressesUserDto? _value;
+    late GetUserAddressesDto? _value;
     try {
       _value =
           _result.data == null
               ? null
-              : AddressesUserDto.fromJson(_result.data!);
+              : GetUserAddressesDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -613,6 +613,36 @@ class _ApiService implements ApiService {
           _result.data == null
               ? null
               : GetActiveOrdersDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<GetDeliveryAreasDto?> getDeliveryAreas() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<GetDeliveryAreasDto>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'areas/get_delivery_areas',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late GetDeliveryAreasDto? _value;
+    try {
+      _value =
+          _result.data == null
+              ? null
+              : GetDeliveryAreasDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

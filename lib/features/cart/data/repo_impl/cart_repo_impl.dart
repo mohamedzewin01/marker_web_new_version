@@ -42,15 +42,12 @@ class CartRepoImpl extends CartRepo {
 return cartDataSourcesRepo.deleteCart(deleteItemCartRequest);
   }
 
-  @override
-  Future<Result<GetAddressesUserEntity?>> getAddressesUser() {
-return cartDataSourcesRepo.getAddressesUser();
-  }
 
-  @override
-  Future<Result<AddAddressUserEntity?>> addAddressesUser(AddAddressRequest addAddressRequest) {
-    return cartDataSourcesRepo.addAddressesUser(addAddressRequest);
-  }
+
+  // @override
+  // Future<Result<AddAddressUserEntity?>> addAddressesUser(AddAddressRequest addAddressRequest) {
+  //   return cartDataSourcesRepo.addAddressesUser(addAddressRequest);
+  // }
 
 
 

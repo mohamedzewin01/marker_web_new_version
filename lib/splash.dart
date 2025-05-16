@@ -25,12 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: ColorManager.primaryColor,
       body: Stack(
         children: [
-          Image.asset(
-            Assets.welcome,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.fill,
-          ),
 
           Center(
             child: Column(
@@ -38,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 Spacer(),
                 Image.asset(
-                  Assets.logo,
+                  Assets.logo3,
                   scale: 2.5,
                 ),
                 FittedBox(

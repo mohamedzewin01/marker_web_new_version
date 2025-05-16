@@ -1,41 +1,36 @@
-import 'package:fada_alhalij_web/features/cart/domain/entities/cart_entities.dart';
+import 'package:fada_alhalij_web/features/address/domain/entities/address_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'addresses_user_dto.g.dart';
+part 'get_user_dto.g.dart';
 
 @JsonSerializable()
-class AddressesUserDto {
+class GetUserAddressesDto {
   @JsonKey(name: "status")
   final bool? status;
   @JsonKey(name: "message")
   final String? message;
   @JsonKey(name: "data")
-  final List<AddressesData>? data;
+  final List<DataAddresses>? data;
 
-  AddressesUserDto ({
-    this.status,
-    this.message,
-    this.data,
-  });
+  GetUserAddressesDto({this.status, this.message, this.data});
 
-  factory AddressesUserDto.fromJson(Map<String, dynamic> json) {
-    return _$AddressesUserDtoFromJson(json);
+  factory GetUserAddressesDto.fromJson(Map<String, dynamic> json) {
+    return _$GetUserAddressesDtoFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$AddressesUserDtoToJson(this);
+    return _$GetUserAddressesDtoToJson(this);
   }
-  GetAddressesUserEntity toAddressesUserEntity() {
-    return GetAddressesUserEntity(
-      status: status,
-      message: message,
-    addressesData: data,
-    );
-  }
+
+  GetUserAddressEntity toGetUserAddressEntity() => GetUserAddressEntity(
+    status: status,
+    message: message,
+    data: data,
+  ); //GetUserAddressEntity
 }
 
 @JsonSerializable()
-class AddressesData {
+class DataAddresses {
   @JsonKey(name: "id")
   final int? id;
   @JsonKey(name: "user_id")
@@ -57,7 +52,7 @@ class AddressesData {
   @JsonKey(name: "created_at")
   final String? createdAt;
 
-  AddressesData ({
+  DataAddresses({
     this.id,
     this.userId,
     this.title,
@@ -70,13 +65,11 @@ class AddressesData {
     this.createdAt,
   });
 
-  factory AddressesData.fromJson(Map<String, dynamic> json) {
-    return _$AddressesDataFromJson(json);
+  factory DataAddresses.fromJson(Map<String, dynamic> json) {
+    return _$DataAddressesFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$AddressesDataToJson(this);
+    return _$DataAddressesToJson(this);
   }
 }
-
-

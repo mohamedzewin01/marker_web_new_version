@@ -23,7 +23,7 @@ class CartCubit extends Cubit<CartState> {
   final CartUseCase _cartUseCase;
 
   static CartCubit get(context) => BlocProvider.of(context);
-
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int? idUser = CacheService.getData(key: CacheConstants.userId) ?? 0;
   int? idAddress;
   void updateIdAddress(int? newIdAddress) {

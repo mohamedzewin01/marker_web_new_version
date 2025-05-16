@@ -13,6 +13,17 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/address/data/datasources/address_remote_data_source.dart'
+    as _i139;
+import '../../features/address/data/datasources/address_remote_data_source_impl.dart'
+    as _i318;
+import '../../features/address/data/repositories/address_repository_impl.dart'
+    as _i590;
+import '../../features/address/domain/repositories/address_repository.dart'
+    as _i463;
+import '../../features/address/domain/usecases/login_usecase.dart' as _i728;
+import '../../features/address/presentation/blocs/areas/areas_cubit.dart'
+    as _i833;
 import '../../features/auth/data/data_sources/auth_data_sources_repo.dart'
     as _i69;
 import '../../features/auth/data/data_sources/auth_data_sources_rpo_impl.dart'
@@ -81,6 +92,7 @@ import '../../features/products/presentation/cubit/products_cubit.dart'
     as _i911;
 import '../api/api_manager/api_manager.dart' as _i680;
 import '../api/dio_module.dart' as _i784;
+import '../uses_cases/address/address_use_case_repo.dart' as _i194;
 import '../uses_cases/orders/add_order_use_case_repo.dart' as _i529;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -126,6 +138,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i148.BestDealsUseCases>(
       () => _i148.BestDealsUseCases(gh<_i988.BestDealsRepo>()),
     );
+    gh.factory<_i139.AddressRemoteDataSource>(
+      () => _i318.AddressRemoteDataSourceImpl(gh<_i680.ApiService>()),
+    );
     gh.factory<_i117.AuthCubit>(() => _i117.AuthCubit(gh<_i283.AuthUseCase>()));
     gh.factory<_i280.HomeRepo>(
       () => _i886.HomeRepoImpl(gh<_i645.HomeDataSourceRepo>()),
@@ -138,6 +153,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i83.CategoriesZoneRepo>(
       () => _i106.CategoriesZoneRepoImpl(gh<_i426.CategoriesZoneDataSource>()),
+    );
+    gh.factory<_i463.AddressRepository>(
+      () => _i590.AddressRepositoryImpl(gh<_i139.AddressRemoteDataSource>()),
     );
     gh.factory<_i529.AddOrderUseCaseRepo>(
       () => _i35.OrdersUseCasesImpl(gh<_i357.OrdersRepo>()),
@@ -163,6 +181,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i379.CartRepo>(
       () => _i966.CartRepoImpl(gh<_i992.CartDataSourcesRepo>()),
     );
+    gh.factory<_i194.AddressUseCaseRepo>(
+      () => _i728.LoginUseCase(gh<_i463.AddressRepository>()),
+    );
     gh.factory<_i911.ProductsCubit>(
       () => _i911.ProductsCubit(gh<_i258.ProductsUseCase>()),
     );
@@ -176,8 +197,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i886.CartUseCase>(
       () => _i886.CartUseCase(gh<_i379.CartRepo>()),
     );
+    gh.factory<_i833.AreasCubit>(
+      () => _i833.AreasCubit(gh<_i194.AddressUseCaseRepo>()),
+    );
     gh.factory<_i499.AddressCubit>(
-      () => _i499.AddressCubit(gh<_i886.CartUseCase>()),
+      () => _i499.AddressCubit(gh<_i194.AddressUseCaseRepo>()),
     );
     gh.factory<_i499.CartCubit>(() => _i499.CartCubit(gh<_i886.CartUseCase>()));
     return this;

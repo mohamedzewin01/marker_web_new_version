@@ -6,7 +6,7 @@ sealed class AddressState {}
 final class AddressInitial extends AddressState {}
 final class AddressLoading extends AddressState {}
 final class AddressSuccess extends AddressState {
-  final GetAddressesUserEntity addressesUserEntity;
+  final GetUserAddressEntity addressesUserEntity;
 
   AddressSuccess(this.addressesUserEntity);
 }
@@ -17,6 +17,7 @@ final class AddressFailure extends AddressState {
 }
 
 final class AddAddressLoading extends AddressState {}
+final class ChangeIdUserArea extends AddressState {}
 final class AddAddressSuccess extends AddressState {
   final AddAddressUserEntity addAddressUserEntity;
 

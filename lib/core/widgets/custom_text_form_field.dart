@@ -177,12 +177,16 @@ class CustomTextFormFieldRegister extends StatelessWidget {
           contentPadding: const EdgeInsets.all(AppPadding.p18),
           enabledBorder: outLintInputBorderMethod(
             const BorderSide(
-                color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+              color: ColorManager.placeHolderColor,
+              width: AppSize.w1_5,
+            ),
             const BorderRadius.all(Radius.circular(AppSize.s20)),
           ),
           focusedBorder: outLintInputBorderMethod(
             const BorderSide(
-                color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+              color: ColorManager.placeHolderColor,
+              width: AppSize.w1_5,
+            ),
             const BorderRadius.all(Radius.circular(AppSize.s20)),
           ),
           errorBorder: outLintInputBorderMethod(
@@ -195,7 +199,9 @@ class CustomTextFormFieldRegister extends StatelessWidget {
           ),
           disabledBorder: outLintInputBorderMethod(
             const BorderSide(
-                color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+              color: ColorManager.placeHolderColor,
+              width: AppSize.w1_5,
+            ),
             const BorderRadius.all(Radius.circular(AppSize.s20)),
           ),
         ),
@@ -423,13 +429,15 @@ class CustomTextFormField extends StatelessWidget {
     this.inputAction,
     this.onTap,
     this.onToggle,
-    this.isPassword = false, this.onFieldSubmitted,
-
+    this.isPassword = false,
+    this.onFieldSubmitted,
+    this.maxLines, this.textDirection,
   });
 
   final TextEditingController controller;
   final String? labelText;
   final String? hintText;
+  final int? maxLines;
   final bool? obscureText;
   final bool? isPassword;
   final VoidCallback? onToggle;
@@ -439,6 +447,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? prefixIcon;
   final TextInputType? keyboardType;
   final TextInputAction? inputAction;
+  final TextDirection? textDirection;
   final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
   final void Function()? onTap;
@@ -447,33 +456,36 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onTap: onTap,
-
-
+      maxLines: maxLines ?? 1,
       controller: controller,
       cursorColor: ColorManager.placeHolderColor,
       style: getSemiBoldStyle(color: ColorManager.primaryColor, fontSize: 16),
       keyboardType: keyboardType,
       textInputAction: inputAction,
-      textDirection: TextDirection.ltr,
+      textDirection: textDirection??TextDirection.rtl,
       readOnly: enabled ?? false,
       obscureText: obscureText ?? false,
       validator: validator,
       onChanged: onChanged,
+
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      onFieldSubmitted:onFieldSubmitted ,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.grey.shade100,
         errorStyle: const TextStyle(fontSize: 14),
         prefixIcon: prefixIcon,
         prefixIconColor: ColorManager.placeHolderColor,
-        suffixIcon: isPassword==true
-            ? IconButton(
-          icon: Icon(
-            obscureText! ? Icons.visibility : Icons.visibility_off,
-            color: ColorManager.primaryColor,
-          ),
-          onPressed: onToggle,
-        )
-            : suffix,
+        suffixIcon:
+            isPassword == true
+                ? IconButton(
+                  icon: Icon(
+                    obscureText! ? Icons.visibility : Icons.visibility_off,
+                    color: ColorManager.primaryColor,
+                  ),
+                  onPressed: onToggle,
+                )
+                : suffix,
         suffixIconColor: ColorManager.cyanDark,
         labelText: labelText,
         labelStyle: getRegularStyle(
@@ -487,31 +499,44 @@ class CustomTextFormField extends StatelessWidget {
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: const EdgeInsets.symmetric(
-            horizontal: AppPadding.p18, vertical: AppPadding.p18),
+          horizontal: AppPadding.p18,
+          vertical: AppPadding.p18,
+        ),
         enabledBorder: outLintInputBorderMethod(
-           BorderSide(
-              color: ColorManager.black.withAlpha(150), width: AppSize.w1_5),
-          const BorderRadius.all(Radius.circular(AppSize.s40)),
+          BorderSide(
+            color: ColorManager.primaryColor.withAlpha(150),
+            width: AppSize.w1_5,
+          ),
+          const BorderRadius.all(Radius.circular(AppSize.s10)),
         ),
         focusedBorder: outLintInputBorderMethod(
           const BorderSide(
-              color: ColorManager.primaryColor, width: AppSize.w1_5),
-          const BorderRadius.all(Radius.circular(AppSize.s40)),
+            color: ColorManager.primaryColor,
+            width: AppSize.w1_5,
+          ),
+          const BorderRadius.all(Radius.circular(AppSize.s10)),
         ),
         errorBorder: outLintInputBorderMethod(
           const BorderSide(
-              color: ColorManager.primaryColor, width: AppSize.w1_5),
-          const BorderRadius.all(Radius.circular(AppSize.s40)),
+            color: ColorManager.primaryColor,
+            width: AppSize.w1_5,
+          ),
+          const BorderRadius.all(Radius.circular(AppSize.s10)),
         ),
         focusedErrorBorder: outLintInputBorderMethod(
           const BorderSide(
-              color: ColorManager.primaryColor, width: AppSize.w1_5),
-          const BorderRadius.all(Radius.circular(AppSize.s40)),
+            color: ColorManager.primaryColor,
+            width: AppSize.w1_5,
+          ),
+          const BorderRadius.all(Radius.circular(AppSize.s10)),
         ),
         disabledBorder: outLintInputBorderMethod(
-            const BorderSide(
-                color: ColorManager.placeHolderColor, width: AppSize.w1_5),
-            const BorderRadius.all(Radius.circular(AppSize.s40))),
+          const BorderSide(
+            color: ColorManager.placeHolderColor,
+            width: AppSize.w1_5,
+          ),
+          const BorderRadius.all(Radius.circular(AppSize.s10)),
+        ),
       ),
     );
   }

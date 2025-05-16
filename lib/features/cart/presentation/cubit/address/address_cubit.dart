@@ -1,10 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:fada_alhalij_web/core/common/api_result.dart';
+import 'package:fada_alhalij_web/core/uses_cases/address/address_use_case_repo.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
+import 'package:fada_alhalij_web/features/address/domain/entities/address_entity.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_address.dart';
 import 'package:fada_alhalij_web/features/cart/domain/entities/cart_entities.dart';
 import 'package:fada_alhalij_web/features/cart/domain/use_cases/cart_use_case.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
@@ -14,21 +17,23 @@ part 'address_state.dart';
 class AddressCubit extends Cubit<AddressState> {
   AddressCubit(this._cartUseCase) : super(AddressInitial());
 
-  final CartUseCase _cartUseCase;
-
+  final AddressUseCaseRepo _cartUseCase;
+static AddressCubit get(context) => BlocProvider.of(context);
 int? idAddress;
+  final formKeyAddAddress = GlobalKey<FormState>();
+
 
   Future<void> getAddress() async {
     emit(AddressLoading());
-    final result = await _cartUseCase.getAddressesUser();
+    final result = await _cartUseCase.getUserAddress();
     switch (result) {
-      case Success<GetAddressesUserEntity?>():
+      case Success<GetUserAddressEntity?>():
         {
           if (!isClosed) {
             emit(AddressSuccess(result.data!));
           }
         }
-      case Fail<GetAddressesUserEntity?>():
+      case Fail<GetUserAddressEntity?>():
         {
           emit(AddressFailure(result.exception));
         }
@@ -44,9 +49,15 @@ int? idAddress;
 
   int? idUser = CacheService.getData(key: CacheConstants.userId) ?? 0;
 
+  int idUserArea = 0;
+  changeIdUserArea(int id) {
+    idUserArea = id;
+    emit(ChangeIdUserArea());
+  }
+
   Future<void> addAddress() async {
     AddAddressRequest addAddressRequest = AddAddressRequest(
-      deliveryAreaId: 1,
+      deliveryAreaId: idUserArea,
       userId: idUser,
       title: titleController.text,
       street: streetController.text,
@@ -60,6 +71,13 @@ int? idAddress;
       case Success<AddAddressUserEntity?>():
         {
           if (!isClosed) {
+            titleController.clear();
+            streetController.clear();
+            cityController.clear();
+            latController.clear();
+            longController.clear();
+            detailsController.clear();
+
             emit(AddAddressSuccess(result.data!));
           }
         }

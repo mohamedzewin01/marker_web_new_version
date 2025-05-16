@@ -48,6 +48,7 @@ class _SignupFormState extends State<SignupForm> {
             },
 
           ),
+
           // CustomTextFormField(
           //   controller: widget.viewModel.emailController,
           //   labelText: "الايميل",
@@ -61,8 +62,9 @@ class _SignupFormState extends State<SignupForm> {
             },
             child: CustomTextFormField(
               controller: widget.viewModel.phoneController,
+              textDirection: TextDirection.ltr,
               labelText: "رقم الجوال",
-              hintText: "5XXXXXXXX",
+              hintText: "+9665XXXXXXXX",
               keyboardType: TextInputType.phone,
               onTap: () {
                 if (!widget.viewModel.phoneController.text.startsWith('+966')) {
@@ -118,6 +120,7 @@ class _SignupFormState extends State<SignupForm> {
             controller: widget.viewModel.passwordController,
             labelText: "كلمة المرور",
             hintText: "ادخل كلمة المرور",
+            textDirection: TextDirection.ltr,
             isPassword: true,
             obscureText: _obscurePassword,
             onToggle: () {
@@ -128,12 +131,14 @@ class _SignupFormState extends State<SignupForm> {
                 return 'كلمة المرور قصيرة';
               }
               return null;
+
             },
           ),
           CustomTextFormField(
             controller: widget.viewModel.rePasswordController,
             labelText: "تأكيد كلمة المرور",
             hintText: "تاكيد كلمة المرور",
+            textDirection: TextDirection.ltr,
             isPassword: true,
             obscureText: _obscureRePassword,
             onToggle: () {

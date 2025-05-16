@@ -29,11 +29,11 @@ class AppThemes {
     ),
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s40),
-          borderSide: BorderSide(width: 2, color: Color(0xff181842))),
+          borderRadius: BorderRadius.circular(AppSize.s10),
+          borderSide: BorderSide(width: 1, color: Color(0xff181842))),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide(width: 2, color: Color(0xff5e95ac)),
+        borderSide: BorderSide(width: 1, color: Color(0xff5e95ac)),
       ),
       // constraints: BoxConstraints.expand(height: 48),
     ),
@@ -41,14 +41,14 @@ class AppThemes {
         inputDecorationTheme: InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(width: 2, color: Color(0xff2382AA)),
+            borderSide: BorderSide(width: 1, color: Color(0xff2382AA)),
           ),
           isDense: true,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-          constraints: BoxConstraints.tight(const Size.fromHeight(40)),
+          constraints: BoxConstraints.tight(const Size.fromHeight(AppSize.s10)),
         ),
         menuStyle: MenuStyle(
-          backgroundColor: MaterialStatePropertyAll<Color>(
+          backgroundColor: WidgetStatePropertyAll<Color>(
               Color.fromARGB(255, 255, 255, 255)),
         )),
   );

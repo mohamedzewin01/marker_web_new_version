@@ -27,4 +27,5 @@ class ApiConstants {
   static const String addOrders = "orders/orders.php";
   static const String getActiveOrders = "orders/getActiveOrders";
   static const String getCompletedOrder = "orders/getCompletedOrder";
+  static const String getDeliveryAreas = "areas/get_delivery_areas";
 }

@@ -36,6 +36,7 @@ class _CheckOutState extends State<CheckOut> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key:viewModel.scaffoldKey ,
       body:  BlocProvider.value(
         value: viewModel,
         child: Container(

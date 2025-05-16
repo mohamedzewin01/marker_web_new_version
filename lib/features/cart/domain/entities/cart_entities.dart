@@ -1,6 +1,5 @@
 
 
-import 'package:fada_alhalij_web/features/cart/data/models/response/addresses_user_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/cart_dto.dart';
 
 class AddToCartEntity {
@@ -65,22 +64,7 @@ class DelItemCartEntity {
 
 }
 
-class GetAddressesUserEntity {
 
-  final bool? status;
-
-  final String? message;
-
-  final List<AddressesData>? addressesData;
-
-  GetAddressesUserEntity ({
-    this.status,
-    this.message,
-    this.addressesData,
-  });
-
-
-}
 
 class AddAddressUserEntity {
 

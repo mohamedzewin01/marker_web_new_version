@@ -1,15 +1,10 @@
-import 'package:fada_alhalij_web/core/di/di.dart';
+
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
-import 'package:fada_alhalij_web/core/widgets/custom_text_form_field.dart';
 import 'package:fada_alhalij_web/core/widgets/rial_icon.dart';
-import 'package:fada_alhalij_web/features/cart/data/models/response/addresses_user_dto.dart';
-import 'package:fada_alhalij_web/features/cart/presentation/cubit/address/address_cubit.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:fada_alhalij_web/features/cart/presentation/widgets/addresses_view.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/widgets/check_out.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CartSummarySection extends StatelessWidget {

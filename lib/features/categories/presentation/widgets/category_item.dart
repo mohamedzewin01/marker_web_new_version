@@ -51,7 +51,9 @@ class CategoryItem extends StatelessWidget {
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: Dimensions.paddingSizeExtraSmall),
+                    horizontal:8
+                    // Dimensions.paddingSizeExtraSmall
+                ),
                 child: Text(
                   title!,
                   maxLines: 2,

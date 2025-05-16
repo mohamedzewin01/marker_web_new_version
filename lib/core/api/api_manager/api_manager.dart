@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:fada_alhalij_web/core/api/api_constants.dart';
+import 'package:fada_alhalij_web/features/address/data/models/request/get_user_addresses.dart';
+import 'package:fada_alhalij_web/features/address/data/models/response/get_delivery_areas_dto.dart';
+import 'package:fada_alhalij_web/features/address/data/models/response/get_user_dto.dart';
+import 'package:fada_alhalij_web/features/address/domain/entities/address_entity.dart';
 import 'package:fada_alhalij_web/features/analytics/model/device_response.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/request/auth_signin_request.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/request/auth_signup_request.dart';
@@ -12,11 +16,9 @@ import 'package:fada_alhalij_web/features/cart/data/models/request/add_address.d
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_to_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/delete_item_cart_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/get_cart_request.dart';
-import 'package:fada_alhalij_web/features/cart/data/models/request/get_user_address_request.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/update_cart_item.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/add_address_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/add_to_cart_response.dart';
-import 'package:fada_alhalij_web/features/cart/data/models/response/addresses_user_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/cart_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/del_item_cart_dto.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/update_tart_item_response.dart';
@@ -88,46 +90,46 @@ abstract class ApiService {
   );
 
   @POST(ApiConstants.getCart)
-  Future<CartDto?> getCart(
-      @Body() GetCartRequest getCartResponse,
-      );
+  Future<CartDto?> getCart(@Body() GetCartRequest getCartResponse);
+
   @POST(ApiConstants.updateCartItem)
   Future<UpdateCartItemResponseDto?> updateCartItem(
-      @Body() UpdateCartItemRequest updateCartItemRequest,
-      );
+    @Body() UpdateCartItemRequest updateCartItemRequest,
+  );
 
   @POST(ApiConstants.cartDeleteItem)
   Future<DelItemCartDto?> deleteCartItem(
-      @Body() DeleteItemCartRequest deleteItemCartRequest,
-      );
+    @Body() DeleteItemCartRequest deleteItemCartRequest,
+  );
 
   @POST(ApiConstants.fetchBestDeals)
   Future<FetchBestDeals?> fetchBestDeals();
 
-
   @POST(ApiConstants.getUserAddresses)
-  Future<AddressesUserDto?> getAddressesUser(
-      @Body() GetUserAddressRequest getUserAddressRequest,
-      );
+  Future<GetUserAddressesDto?> fetchAddressesUser(
+    @Body() GetUserAddressesRequest getUserAddressRequest,
+  );
+
   @POST(ApiConstants.addAddress)
   Future<AddAddressDto?> addAddressesUser(
-      @Body() AddAddressRequest addAddressRequest,
-      );
+    @Body() AddAddressRequest addAddressRequest,
+  );
 
   @POST(ApiConstants.addOrders)
-  Future<AddOrderDto?> addOrder(
-      @Body() AddOrderRequest addOrderRequest,
-      );
+  Future<AddOrderDto?> addOrder(@Body() AddOrderRequest addOrderRequest);
 
   @POST(ApiConstants.getActiveOrders)
   Future<GetActiveOrdersDto?> getActiveOrders(
-      @Body() GetActiveOrdersRequest getActiveOrdersRequest,
-      );
+    @Body() GetActiveOrdersRequest getActiveOrdersRequest,
+  );
 
   @POST(ApiConstants.getCompletedOrder)
   Future<GetActiveOrdersDto?> getCompletedOrder(
-      @Body() GetActiveOrdersRequest getActiveOrdersRequest,
-      );
+    @Body() GetActiveOrdersRequest getActiveOrdersRequest,
+  );
+
+  @POST(ApiConstants.getDeliveryAreas)
+  Future<GetDeliveryAreasDto?> getDeliveryAreas();
 }
 
 //  @MultiPart()

@@ -31,10 +31,6 @@ class CartUseCase {
     return _cartRepo.deleteCart(deleteItemCartRequest);
   }
 
-  Future<Result<GetAddressesUserEntity?>> getAddressesUser(){
-    return _cartRepo.getAddressesUser();
-  }
-  Future<Result<AddAddressUserEntity?>> addAddressesUser(AddAddressRequest addAddressRequest){
-    return _cartRepo.addAddressesUser(addAddressRequest);
-  }
+
+
 }

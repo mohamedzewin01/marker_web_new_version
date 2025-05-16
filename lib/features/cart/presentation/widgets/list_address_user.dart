@@ -1,6 +1,6 @@
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
-import 'package:fada_alhalij_web/features/cart/data/models/response/addresses_user_dto.dart';
+import 'package:fada_alhalij_web/features/address/data/models/response/get_user_dto.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ListAddressUser extends StatefulWidget {
   const ListAddressUser({super.key, this.addresses});
 
-  final List<AddressesData>? addresses;
+  final List<DataAddresses>? addresses;
 
   @override
   State<ListAddressUser> createState() => _ListAddressUserState();

@@ -2,7 +2,7 @@ import 'package:fada_alhalij_web/features/cart/presentation/cubit/address/addres
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 // import 'package:geolocator_web/geolocator_web.dart';
-void getLocation(AddressCubit viewModel) async {
+Future<void> getLocation(AddressCubit viewModel) async {
   if (kIsWeb) {
     try {
       Position position = await Geolocator.getCurrentPosition(

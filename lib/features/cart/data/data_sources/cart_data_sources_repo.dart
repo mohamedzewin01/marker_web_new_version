@@ -18,6 +18,6 @@ abstract class CartDataSourcesRepo {
 
   Future<Result<CartEntity?>> getCart();
 
-  Future<Result<GetAddressesUserEntity?>> getAddressesUser();
-  Future<Result<AddAddressUserEntity?>>addAddressesUser(AddAddressRequest addAddressRequest);
+
+  // Future<Result<AddAddressUserEntity?>>addAddressesUser(AddAddressRequest addAddressRequest);
 }
