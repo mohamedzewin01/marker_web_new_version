@@ -115,7 +115,7 @@ class LoginUseCase {
 '''
     },
     'lib/features/$featureName/presentation/pages': {
-      'login_page.dart': '''
+      'addresses_view.dart': '''
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -139,7 +139,7 @@ class LoginPage extends StatelessWidget {
     '.': {
       'main.dart': '''
 import 'package:flutter/material.dart';
-import 'lib/features/$featureName/presentation/pages/login_page.dart';
+import 'lib/features/$featureName/presentation/pages/addresses_view.dart';
 
 void main() {
   runApp(const MyApp());

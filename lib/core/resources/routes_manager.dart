@@ -1,3 +1,7 @@
+import 'package:fada_alhalij_web/features/about/about_view.dart';
+import 'package:fada_alhalij_web/features/address/presentation/pages/addresses_view.dart';
+import 'package:fada_alhalij_web/features/auth/presentation/pages/auth_screen.dart';
+import 'package:fada_alhalij_web/features/terms/terms_view.dart';
 import 'package:flutter/material.dart';
 import '../../features/best_deals/presention/pages/best_deals_view.dart';
 import '../../features/home/presentation/pages/home_view.dart';
@@ -14,8 +18,11 @@ class RoutesManager {
   static const String categories = '/categories';
   static const String allBestDealsView = '/AllBestDeals';
   static const String bestDealsAdaptive = '/BestDealsAdaptive';
-  // static const String categoriesAdaptive = '/CategoriesAdaptive';
+  static const String addressPage = '/AddressPage';
+  static const String authScreen = '/AuthScreen';
   static const String bestDealsView = '/BestDeals';
+  static const String termsView = '/TermsView';
+  static const String aboutView = '/AboutView';
 }
 
 class RouteGenerator {
@@ -32,22 +39,31 @@ class RouteGenerator {
           builder: (_) => const BestDealsAdaptive(),
           settings: settings,
         );
-      // case RoutesManager.categoriesAdaptive:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const CategoriesAdaptive(),
-      //     settings: settings,
-      //   );
-      // case RoutesManager.bestDealsView:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const BestDealsView(),
-      //     settings: settings,
-      //   );
+      case RoutesManager.addressPage:
+        return MaterialPageRoute(
+          builder: (_) => const AddressPage(),
+          settings: settings,
+        );
+      case RoutesManager.authScreen:
+        return MaterialPageRoute(
+          builder: (_) => const AuthScreen(),
+          settings: settings,
+        );
       case RoutesManager.allBestDealsView:
         return MaterialPageRoute(
           builder: (_) => const AllBestDealsView(),
           settings: settings,
         );
+      case RoutesManager.termsView:
+        return MaterialPageRoute(
+          builder: (_) => const TermsView(),
 
+        );
+      case RoutesManager.aboutView:
+        return MaterialPageRoute(
+          builder: (_) => const AboutView(),
+
+        );
       default:
         return unDefinedRoute();
     }
