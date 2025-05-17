@@ -1,4 +1,5 @@
 import 'package:fada_alhalij_web/core/di/di.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_sliver_app_bar.dart';
 import 'package:fada_alhalij_web/features/categories/presentation/cubit/categories_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,7 +40,8 @@ class _CategoriesState extends State<Categories> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: CustomScrollView(
               slivers: [
-                SliverToBoxAdapter(child: AppBarCategories()),
+                CustomSliverAppBar(title: 'الاقسام'),
+                // SliverToBoxAdapter(child: AppBarCategories()),
                 CategoryBar(viewModel: viewModel)
               ],
             ),

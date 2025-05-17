@@ -1,7 +1,8 @@
+import 'package:fada_alhalij_web/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../core/resources/values_manager.dart';
+
 
 class AppThemes {
   static final lightTheme1 = ThemeData(

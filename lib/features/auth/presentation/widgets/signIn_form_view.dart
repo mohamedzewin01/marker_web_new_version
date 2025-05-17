@@ -118,6 +118,7 @@ class _SignInFormState extends State<SignInForm> {
             },
             inputAction: TextInputAction.go,
           ),
+          SizedBox(height: 12,),
           CustomElevatedButton(
             onPressed: _submit,
             buttonColor: ColorManager.primaryColor,

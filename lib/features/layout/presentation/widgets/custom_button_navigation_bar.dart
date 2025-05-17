@@ -31,19 +31,23 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
         items: [
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.home, 0, currentIndex),
+            icon: buildIcon(Assets.home2, 0, currentIndex),
             label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.categories, 1, currentIndex),
+            icon: buildIcon(Assets.categories2, 1, currentIndex),
             label: AppLocalizations.of(context)!.categories,
           ),
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.cartIcon, 2, currentIndex),
+            icon: buildIcon(Assets.cart2, 2, currentIndex),
             label: AppLocalizations.of(context)!.cart,
           ),
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.user, 3, currentIndex),
+            icon: buildIcon(Assets.search, 3, currentIndex),
+            label: AppLocalizations.of(context)!.user,
+          ),
+          BottomNavigationBarItem(
+            icon: buildIcon(Assets.settings, 4, currentIndex),
             label: AppLocalizations.of(context)!.user,
           ),
         ],
@@ -53,7 +57,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         currentIndex: currentIndex,
         onTap: onItemTapped,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: ColorManager.black,
+        selectedItemColor: ColorManager.primaryColor,
       ),
     );
   }

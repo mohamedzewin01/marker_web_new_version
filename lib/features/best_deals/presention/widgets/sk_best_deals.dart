@@ -19,12 +19,7 @@ class SkBestDeals extends StatelessWidget {
         slivers: [
           CustomSliverAppBar(
             title: AppLocalizations.of(context)!.bestDeals,
-            leading: Center(
-              child: Text(
-                PromotionalMessages.exclusiveSurprisesOnOrder,
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
+
           ),
           SliverToBoxAdapter(
             child: Column(

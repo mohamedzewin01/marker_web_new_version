@@ -1,3 +1,4 @@
+import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
 import 'package:fada_alhalij_web/core/widgets/permission_service.dart';
 import 'package:flutter/material.dart';
 
@@ -113,7 +114,7 @@ class CustomDialog {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        Future.delayed(const Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 3), () {
           if (context.mounted) {
 
             Navigator.pop(context,true);
@@ -126,7 +127,6 @@ class CustomDialog {
             }
           }
         });
-
         return Dialog(
           backgroundColor: Colors.transparent,
           child: Container(
@@ -138,11 +138,12 @@ class CustomDialog {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
-                  Icons.check_circle,
-                  color: Colors.green,
-                  size: 70,
-                ),
+                Image.asset(Assets.success, height: 70, width: 70),
+                // const Icon(
+                //   Icons.check_circle,
+                //   color: Colors.green,
+                //   size: 70,
+                // ),
                 const SizedBox(height: 10),
                 Text(
                   message?? "Registration Successful!",

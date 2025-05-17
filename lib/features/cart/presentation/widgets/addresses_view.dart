@@ -1,6 +1,7 @@
 import 'package:fada_alhalij_web/core/di/di.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_dialog.dart';
 import 'package:fada_alhalij_web/features/address/data/models/response/get_user_dto.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/address/address_cubit.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
@@ -31,7 +32,17 @@ class _AddressesViewState extends State<AddressesView> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: viewModel,
-      child: BlocBuilder<AddressCubit, AddressState>(
+      child: BlocConsumer<AddressCubit, AddressState>(
+        listener: (context, state) {
+          if (state is AddAddressSuccess) {
+            Navigator.pop(context);
+            Navigator.of(context, rootNavigator: true).pop();
+          }
+          if (state is AddressFailure) {}
+          if (state is AddAddressLoading) {
+            CustomDialog.showLoadingDialog(context);
+          }
+        },
         builder: (context, state) {
           if (state is AddressSuccess) {
             List<DataAddresses>? addresses =
@@ -61,7 +72,9 @@ class _AddressesViewState extends State<AddressesView> {
                       ),
                       InkWell(
                         onTap: () {
-                          CartCubit.get(context).scaffoldKey.currentState?.showBottomSheet(
+                          CartCubit.get(
+                            context,
+                          ).scaffoldKey.currentState?.showBottomSheet(
                             elevation: 5,
                             (context) => AddAddress(viewModel: viewModel),
                           );
@@ -69,7 +82,11 @@ class _AddressesViewState extends State<AddressesView> {
                         child: CircleAvatar(
                           radius: 12,
                           backgroundColor: ColorManager.primaryColor,
-                          child: Icon(Icons.add, color: ColorManager.white,size: 16,),
+                          child: Icon(
+                            Icons.add,
+                            color: ColorManager.white,
+                            size: 16,
+                          ),
                         ),
                       ),
                     ],

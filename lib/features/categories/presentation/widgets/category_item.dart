@@ -2,8 +2,6 @@ import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 
 
-import '../../../../utils/dimensions.dart';
-
 class CategoryItem extends StatelessWidget {
   final String? title;
   final String? icon;

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 void main() {
-  final featureName = 'address';
+  final featureName = 'search';
   final className = capitalize(featureName);
 
   final Map<String, Map<String, String>> structure = {
@@ -115,7 +115,7 @@ class LoginUseCase {
 '''
     },
     'lib/features/$featureName/presentation/pages': {
-      'addresses_view.dart': '''
+      'search_view.dart': '''
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -139,7 +139,7 @@ class LoginPage extends StatelessWidget {
     '.': {
       'main.dart': '''
 import 'package:flutter/material.dart';
-import 'lib/features/$featureName/presentation/pages/addresses_view.dart';
+import 'lib/features/$featureName/presentation/pages/search_view.dart';
 
 void main() {
   runApp(const MyApp());

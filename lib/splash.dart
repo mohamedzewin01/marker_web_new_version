@@ -35,28 +35,30 @@ class _SplashScreenState extends State<SplashScreen> {
                   Assets.logo3,
                   scale: 2.5,
                 ),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    "تموينات فضاء الخليج",
-                    style: getSemiBoldStyle(
-                      color: ColorManager.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 150,),
+
                 Spacer(),
+                Text(
+                  '© جميع الحقوق محفوظة لتموينات فضاء الخليج والعلامة التجارية الخاصة بها',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white70,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20,),
+
               ],
             ),
           ),
+
         ],
       ),
     );
   }
 
   void movedToNextPage() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 4), () {
       if (mounted) {
         Navigator.pushReplacementNamed(context, RoutesManager.layout);
       }

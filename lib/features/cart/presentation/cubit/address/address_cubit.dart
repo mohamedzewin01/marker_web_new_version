@@ -56,6 +56,7 @@ int? idAddress;
   }
 
   Future<void> addAddress() async {
+    emit(AddAddressLoading());
     AddAddressRequest addAddressRequest = AddAddressRequest(
       deliveryAreaId: idUserArea,
       userId: idUser,
@@ -71,14 +72,15 @@ int? idAddress;
       case Success<AddAddressUserEntity?>():
         {
           if (!isClosed) {
+
+
+            emit(AddAddressSuccess(result.data!));
             titleController.clear();
             streetController.clear();
             cityController.clear();
             latController.clear();
             longController.clear();
             detailsController.clear();
-
-            emit(AddAddressSuccess(result.data!));
           }
         }
       case Fail<AddAddressUserEntity?>():

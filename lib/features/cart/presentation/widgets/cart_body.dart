@@ -26,8 +26,7 @@ class CartBody extends StatelessWidget {
     return Column(
       children: [
         BlocConsumer<CartCubit, CartState>(
-          listener: (context, state) {
-            // Handle listener logic here
+          listener: (context, state) {// Handle listener logic here
           },
           builder: (context, state) {
             viewModel.cartItems.clear();
@@ -86,7 +85,9 @@ class CartBody extends StatelessWidget {
                 return SingleChildScrollView(
                   child: Stack(
                     children: [
-                      Image.asset(Assets.cartEmpty),
+                      AspectRatio(
+                          aspectRatio: 1,
+                          child: Image.asset(Assets.cartEmpty)),
                       Positioned(
                         top: 150,
                         left: 0,
@@ -94,7 +95,7 @@ class CartBody extends StatelessWidget {
 
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.sizeOf(context).width * 0.25,
+                            horizontal: MediaQuery.sizeOf(context).width * 0.35,
                           ),
 
                           child: AutoSizeText(
@@ -114,7 +115,9 @@ class CartBody extends StatelessWidget {
                 return SingleChildScrollView(
                   child: Stack(
                     children: [
-                      Image.asset(Assets.cartEmpty),
+                      AspectRatio(
+                          aspectRatio: 1,
+                          child: Image.asset(Assets.cartEmpty)),
                       Positioned(
                         top: 150,
                         left: 0,
@@ -122,7 +125,7 @@ class CartBody extends StatelessWidget {
 
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.sizeOf(context).width * 0.25,
+                            horizontal: MediaQuery.sizeOf(context).width * 0.35,
                           ),
 
                           child: Column(

@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/functions/show_auth_action_sheet.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_app_bar.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_elevated_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -21,99 +25,113 @@ class Profile extends StatelessWidget {
     String mail = CacheService.getData(key: CacheConstants.userEmail) ?? "";
     String phone = CacheService.getData(key: CacheConstants.userPhone) ?? "";
     return Scaffold(
+      appBar: CustomAppBar(title:  "الاعدادت"),
+
+
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              SizedBox(height: 40),
-              Stack(
-                children: [
-                  SizedBox(
-                    width: 120,
-                    height: 120,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Image.asset(Assets.user),
+        child: Column(
+          children: [
+            SizedBox(height: 40),
+            Stack(
+              children: [
+                SizedBox(
+                  width: 120,
+                  height: 120,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: Image.asset(Assets.user),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: ColorManager.primaryColor,
+                    ),
+                    child: const Icon(
+                      Icons.camera_alt_rounded,
+                      color: Colors.white,
+                      size: 20,
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: ColorManager.primaryColor,
-                      ),
-                      child: const Icon(
-                        Icons.camera_alt_rounded,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Text(name, style: Theme.of(context).textTheme.headlineSmall),
-              Text(
-                mail,
-                style: Theme.of(context).textTheme.bodySmall,
-                textDirection: TextDirection.ltr,
-              ),
-              Text(
-                phone,
-                style: Theme.of(context).textTheme.bodySmall,
-                textDirection: TextDirection.ltr,
-              ),
-              const SizedBox(height: 16),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(name, style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              mail,
+              style: Theme.of(context).textTheme.bodySmall,
+              textDirection: TextDirection.ltr,
+            ),
+            Text(
+              phone,
+              style: Theme.of(context).textTheme.bodySmall,
+              textDirection: TextDirection.ltr,
+            ),
+            const SizedBox(height: 16),
 
-              const Divider(thickness: 0.1),
-              const SizedBox(height: 10),
+            const Divider(thickness: 0.1),
+            const SizedBox(height: 10),
 
-              /// -- MENU
-              ProfileMenuWidget(
-                title: "الملف الشخصي",
-                icon: Icons.account_circle,
-                onPress: () {
-                  showProfileOptions(context);
-                },
-              ),
+            /// -- MENU
+            ProfileMenuWidget(
+              title: "الملف الشخصي",
+              icon: Icons.account_circle,
+              onPress: () {
+                showProfileOptions(context);
+              },
+            ),
 
-              ProfileMenuWidget(
-                title: "ادارة العناوين",
-                icon: Icons.delivery_dining,
-                onPress: () {
-                  if (isActiveUser) {
-                    Navigator.pushNamed(context, RoutesManager.addressPage);
-                  } else {
-                    showAuthActionSheet(context);
-                  }
-                },
-              ),
-              const Divider(thickness: 0.1),
-              const SizedBox(height: 10),
-              ProfileMenuWidget(
-                title: "الشروط والأحكام",
-                icon: Icons.info,
-                onPress: () {
+            ProfileMenuWidget(
+              title: "ادارة العناوين",
+              icon: Icons.delivery_dining,
+              onPress: () {
+                if (isActiveUser) {
+                  Navigator.pushNamed(context, RoutesManager.addressPage);
+                } else {
+                  showAuthActionSheet(context);
+                }
+              },
+            ),
+            const Divider(thickness: 0.1),
+            const SizedBox(height: 10),
+            ProfileMenuWidget(
+              title: "الشروط والأحكام",
+              icon: Icons.info,
+              onPress: () {
+                if (kIsWeb) {
+                  Navigator.pushNamed(context, RoutesManager.termsViewWeb);
+                } else {
                   Navigator.pushNamed(context, RoutesManager.termsView);
-                },
-              ),
-              ProfileMenuWidget(
-                title: "من نحن",
-                icon: Icons.developer_mode_rounded,
-                endIcon: false,
-                onPress: () {
+                }
+
+              },
+            ),
+            ProfileMenuWidget(
+              title: "من نحن",
+              icon: Icons.developer_mode_rounded,
+              endIcon: false,
+              onPress: () {
+                if (kIsWeb) {
+                  Navigator.pushNamed(context, RoutesManager.aboutViewWeb);
+                } else {
                   Navigator.pushNamed(context, RoutesManager.aboutView);
-                },
-              ),
-            ],
-          ),
+                }
+
+              },
+            ),
+            const Divider(thickness: 0.1),
+            const SizedBox(height: 10),
+
+            const SizedBox(height: 55),
+          ],
         ),
       ),
     );
@@ -146,7 +164,6 @@ void showProfileOptions(BuildContext context) {
                 title: const Text("تغيير كلمة المرور"),
                 onTap: () {
                   Navigator.pop(context);
-
                 },
               ),
               ListTile(
@@ -163,8 +180,6 @@ void showProfileOptions(BuildContext context) {
         ),
   );
 }
-
-
 
 void showMultipleLocationOptions(BuildContext context) {
   showModalBottomSheet(
