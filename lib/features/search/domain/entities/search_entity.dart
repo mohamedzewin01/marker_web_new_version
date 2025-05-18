@@ -1,6 +1,24 @@
-class SearchEntity {
-  final String email;
-  final String token;
+import 'package:fada_alhalij_web/features/search/data/models/response/search_dto.dart';
 
-  SearchEntity({required this.email, required this.token});
+class SearchEntity {
+  final bool? status;
+
+  final String? message;
+
+  final int? totalCount;
+
+  final int? page;
+
+  final int? limit;
+
+  final List<DataSearch>? data;
+
+  SearchEntity({
+    this.status,
+    this.message,
+    this.totalCount,
+    this.page,
+    this.limit,
+    this.data,
+  });
 }

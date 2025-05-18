@@ -90,10 +90,21 @@ import '../../features/products/domain/use_cases/products_use_case.dart'
     as _i258;
 import '../../features/products/presentation/cubit/products_cubit.dart'
     as _i911;
+import '../../features/search/data/datasources/search_remote_data_source.dart'
+    as _i280;
+import '../../features/search/data/datasources/search_remote_data_source_impl.dart'
+    as _i349;
+import '../../features/search/data/repositories/search_repository_impl.dart'
+    as _i1017;
+import '../../features/search/domain/repositories/search_repository.dart'
+    as _i357;
+import '../../features/search/domain/usecases/search_repo_impl.dart' as _i489;
+import '../../features/search/presentation/blocs/search_cubit.dart' as _i182;
 import '../api/api_manager/api_manager.dart' as _i680;
 import '../api/dio_module.dart' as _i784;
 import '../uses_cases/address/address_use_case_repo.dart' as _i194;
 import '../uses_cases/orders/add_order_use_case_repo.dart' as _i529;
+import '../uses_cases/search/search_use_case_repo.dart' as _i1057;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -105,6 +116,9 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.lazySingleton<_i361.Dio>(() => dioModule.providerDio());
     gh.factory<_i680.ApiService>(() => _i680.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i280.SearchDataSource>(
+      () => _i349.SearchDataSourceImpl(gh<_i680.ApiService>()),
+    );
     gh.factory<_i69.AuthDataSourcesRepo>(
       () => _i552.AuthDataSourcesRpoImpl(gh<_i680.ApiService>()),
     );
@@ -132,11 +146,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i482.ProductsRepo>(
       () => _i249.ProductsRepoImpl(gh<_i645.ProductsDataSource>()),
     );
+    gh.factory<_i357.SearchRepository>(
+      () => _i1017.SearchRepositoryImpl(gh<_i280.SearchDataSource>()),
+    );
     gh.factory<_i74.OrdersDataSourcesRepo>(
       () => _i981.OrdersDataSourcesRepoImpl(gh<_i680.ApiService>()),
     );
     gh.factory<_i148.BestDealsUseCases>(
       () => _i148.BestDealsUseCases(gh<_i988.BestDealsRepo>()),
+    );
+    gh.factory<_i1057.SearchUseCaseRepo>(
+      () => _i489.SearchUseCase(gh<_i357.SearchRepository>()),
     );
     gh.factory<_i139.AddressRemoteDataSource>(
       () => _i318.AddressRemoteDataSourceImpl(gh<_i680.ApiService>()),
@@ -168,6 +188,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i388.CategoriesZoneUseCase>(
       () => _i388.CategoriesZoneUseCase(gh<_i83.CategoriesZoneRepo>()),
+    );
+    gh.factory<_i182.SearchCubit>(
+      () => _i182.SearchCubit(gh<_i1057.SearchUseCaseRepo>()),
     );
     gh.factory<_i258.ProductsUseCase>(
       () => _i258.ProductsUseCase(gh<_i482.ProductsRepo>()),

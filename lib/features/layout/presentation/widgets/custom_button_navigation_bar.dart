@@ -44,7 +44,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: buildIcon(Assets.search, 3, currentIndex),
-            label: AppLocalizations.of(context)!.user,
+            label: AppLocalizations.of(context)!.search,
           ),
           BottomNavigationBarItem(
             icon: buildIcon(Assets.settings, 4, currentIndex),

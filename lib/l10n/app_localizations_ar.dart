@@ -46,4 +46,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get user => 'الحساب';
+
+  @override
+  String get search => 'بحث';
 }

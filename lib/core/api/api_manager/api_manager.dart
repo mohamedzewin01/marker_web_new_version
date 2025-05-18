@@ -29,6 +29,8 @@ import 'package:fada_alhalij_web/features/order/data/models/request/get_active_o
 import 'package:fada_alhalij_web/features/order/data/models/response/add_order_dto.dart';
 import 'package:fada_alhalij_web/features/order/data/models/response/get_active_orders_dto.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
+import 'package:fada_alhalij_web/features/search/data/models/request/search_request.dart';
+import 'package:fada_alhalij_web/features/search/data/models/response/search_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -130,6 +132,11 @@ abstract class ApiService {
 
   @POST(ApiConstants.getDeliveryAreas)
   Future<GetDeliveryAreasDto?> getDeliveryAreas();
+
+  @POST(ApiConstants.search)
+  Future<SearchDto?> search(
+    @Body() SearchRequest searchRequest,
+  );
 }
 
 //  @MultiPart()

@@ -5,6 +5,7 @@ import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/curve_clipper.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -151,6 +152,79 @@ class CustomSliverAppBar extends StatelessWidget {
           child: SvgPicture.asset(
             Assets.share,
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            width: 25,
+            height: 25,
+          ),
+        ),
+      ),
+      actions: showLogo
+          ? [
+        Padding(
+          padding: const EdgeInsets.only(left: 12.0, right: 8.0),
+          child: Image.asset(Assets.logo3, scale: 1),
+        )
+      ]
+          : [],
+      floating: true,
+      snap: true,
+      automaticallyImplyLeading: false,
+
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(24),
+        child: Container(
+          height: 22,
+          decoration: BoxDecoration(
+            color: ColorManager.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class CustomSliverSearchAppBar extends StatelessWidget {
+  final String title;
+  final VoidCallback? onBackTap;
+  final bool showLogo;
+  final bool pinned;
+
+  const CustomSliverSearchAppBar({
+    super.key,
+    required this.title,
+    this.onBackTap,
+    this.showLogo = true,
+    this.pinned = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      pinned: pinned,
+      expandedHeight: 70,
+      backgroundColor: ColorManager.primaryColor,
+      centerTitle: true,
+
+      title: AutoSizeText(
+        title ??
+            '',
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: getSemiBoldStyle(color: ColorManager.white, fontSize: 16),
+      ),
+      leading: GestureDetector(
+        onTap: () async {
+
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Image.asset(
+            Assets.search,
+            color:Colors.white ,
             width: 25,
             height: 25,
           ),

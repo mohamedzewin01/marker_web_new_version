@@ -1,4 +1,5 @@
 import 'package:fada_alhalij_web/features/products/domain/entities/products_entities.dart';
+import 'package:fada_alhalij_web/features/search/data/models/response/search_dto.dart';
 
 class ProductsModelResponse {
   ProductsData? productsData;
@@ -123,4 +124,21 @@ class ProductsRelations {
     data['category_creatAt'] = categoryCreatAt;
     return data;
   }
+  DataSearch toDataSearch() => DataSearch(
+      idProduct: idProduct,
+      productName: productName,
+      productPrice: productPrice,
+      description: description,
+      imageCover: imageCover,
+      productPriceAfterDiscount: productPriceAfterDiscount,
+      category: category,
+      descount: descount,
+      status: status,
+      dateDescount: dateDescount,
+      createdAt: createdAt,
+      categoryId: categoryId,
+      categoryName: categoryName,
+      categoryImage: categoryImage,
+      categoryStatus: categoryStatus,
+      categoryCreatAt: categoryCreatAt);
 }

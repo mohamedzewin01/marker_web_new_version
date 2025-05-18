@@ -18,8 +18,8 @@ class _AboutViewWebState extends State<AboutViewWeb> {
   void initState() {
     super.initState();
 
-
-    IframeView.registerViewFactory(viewId, termsUrl);
+    /// TODO: iframe_view   when web app
+    // IframeView.registerViewFactory(viewId, termsUrl);
 
   }
   @override

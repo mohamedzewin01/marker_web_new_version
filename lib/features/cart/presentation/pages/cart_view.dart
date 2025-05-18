@@ -14,25 +14,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 
-class CartItem {
-  final String id;
-  final String name;
-  final String imageUrl;
-  final double price;
-  final double? originalPrice;
-  final bool isSuggestion;
-  int quantity;
-
-  CartItem({
-    required this.id,
-    required this.name,
-    required this.imageUrl,
-    required this.price,
-    this.originalPrice,
-    this.isSuggestion = false,
-    this.quantity = 1,
-  });
-}
 
 class CartView extends StatefulWidget {
   const CartView({super.key});
@@ -76,17 +57,6 @@ class _CartViewState extends State<CartView>
             ),
             actions: [
               Image.asset(Assets.logo3, ),
-              // Transform.rotate(
-              //   angle: 329 * 3.14159 / 180,
-              //   child: Padding(
-              //     padding: const EdgeInsets.only(left: 0,top: 24),
-              //     child: Image.asset(Assets.logo3, ),
-              //     //
-              //     // SvgPicture.asset(Assets.cart, colorFilter: const ColorFilter.mode(
-              //     //     Colors.white, BlendMode.srcIn) ,),
-              //   ),
-              // ),
-
             ],
             leading: Padding(
               padding: const EdgeInsets.all(4.0),
