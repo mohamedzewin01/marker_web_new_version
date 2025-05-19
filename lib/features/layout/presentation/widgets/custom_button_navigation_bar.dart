@@ -20,14 +20,17 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       decoration: BoxDecoration(
-          color: ColorManager.white,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(16),topRight: Radius.circular(16)))
-      ,
+        color: ColorManager.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
       child: BottomNavigationBar(
-        // elevation: 6,
+        elevation: 6,
         backgroundColor: Colors.white,
+
 
         items: [
           BottomNavigationBarItem(
@@ -56,7 +59,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         unselectedLabelStyle: getSemiBoldStyle(color: ColorManager.lightGrey2),
         currentIndex: currentIndex,
         onTap: onItemTapped,
-        type: BottomNavigationBarType.fixed,
+        type: BottomNavigationBarType.values[1],
         selectedItemColor: ColorManager.primaryColor,
       ),
     );

@@ -31,9 +31,9 @@ class _CategoryBarState extends State<CategoryBar> {
         if (state is CategoriesSuccess) {
           List<Categories>? categoriesZone =
               state.categoriesZoneEntity?.categories ?? [];
-          if (categoriesZone[0].categoryName != 'الكل') {
-            categoriesZone.insert(0, Categories(categoryName: '  الكل',categoryImage: "all.png"));
-          }
+          // if (categoriesZone[0].categoryName != 'الكل') {
+          //   categoriesZone.insert(0, Categories(categoryName: '  الكل',categoryImage: "all.png"));
+          // }
           List<Tab> tabs =
           categoriesZone.asMap().entries.map((entry) {
             int index = entry.key;
@@ -45,17 +45,18 @@ class _CategoryBarState extends State<CategoryBar> {
                   height: 35,
                   padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
                   decoration: BoxDecoration(
-                    color: backgroundColorsCategories[index],
+                    color:ColorManager.indigoLight,
+                    // backgroundColorsCategories[index],
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
-                    mainAxisSize: MainAxisSize.min, // ✅ مهم جدًا
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4),
                         child: Text(
                           tab.categoryName ?? '',
-                          style: getSemiBoldStyle(color: ColorManager.black), // ✅ قلل حجم الخط
+                          style: getSemiBoldStyle(color: ColorManager.white),
                           textAlign: TextAlign.center,
 
                           overflow: TextOverflow.ellipsis,
@@ -63,7 +64,7 @@ class _CategoryBarState extends State<CategoryBar> {
                       ),
                       const SizedBox(height: 4),
                       SizedBox(
-                        height: 35, // ✅ قلل شوية
+                        height: 35,
                         width: 35,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),

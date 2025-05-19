@@ -14,6 +14,62 @@ import 'package:meta/meta.dart';
 part 'search_state.dart';
 
 @injectable
+// class SearchCubit extends Cubit<SearchState> {
+//   SearchCubit(this._searchUseCaseRepo) : super(SearchInitial());
+//
+//   final SearchUseCaseRepo _searchUseCaseRepo;
+//
+//   static SearchCubit get(context) => BlocProvider.of(context);
+//
+//   int? selectedIndex;
+//   TextEditingController searchController = TextEditingController();
+//   List<DataSearch> productsSuggested = [];
+//   int currentPage = 1;
+//   bool isLoadingMore = false;
+//
+//
+//   Future<void> searchProducts({
+//     categoryId,
+//     minPrice,
+//     maxPrice,
+//     sortBy,
+//     order,
+//     limit,
+//     search
+//
+//   }) async {
+//     var result = await _searchUseCaseRepo.search(
+//       SearchRequest(
+//         limit: limit,
+//         search: search,
+//         minPrice: minPrice,
+//         maxPrice: maxPrice,
+//         sortBy: sortBy,
+//         order: order,
+//         categoryId: categoryId,
+//         pagination: true
+//       ),
+//     );
+//     switch (result) {
+//       case Success<SearchEntity?>():
+//         {
+//           if (!isClosed) {
+//             productsSuggested.clear();
+//             productsSuggested.addAll(result.data!.data!);
+//             emit(SearchSuccess(result.data!));
+//           }
+//         }
+//
+//       case Fail<SearchEntity?>():
+//         {
+//           emit(SearchFailure(result.exception));
+//         }
+//     }
+//   }
+//
+//
+// }
+@injectable
 class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this._searchUseCaseRepo) : super(SearchInitial());
 
@@ -21,81 +77,75 @@ class SearchCubit extends Cubit<SearchState> {
 
   static SearchCubit get(context) => BlocProvider.of(context);
 
+  int currentPage = 1;
+
+  int? minPrice;
+  int? maxPrice;
+  String? sortBy;
+  String? order;
+
+  bool isLoadingMore = false;
+  List<DataSearch> allProducts = [];
+  String? lastSearchText;
   int? selectedIndex;
   TextEditingController searchController = TextEditingController();
   List<DataSearch> productsSuggested = [];
 
-  Future<void> suggestedProductsSearch({
-    categoryId,
-    minPrice,
-    maxPrice,
-    sortBy,
-    order,
-    limit,
-    search
-
-  }) async {
-    var result = await _searchUseCaseRepo.search(
-      SearchRequest(
-        limit: 3,
-        search:search,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-        sortBy: sortBy,
-        order: order,
-        categoryId: categoryId,
-        pagination: true
-      ),
-    );
-    switch (result) {
-      case Success<SearchEntity?>():
-        {
-          if (!isClosed) {
-            productsSuggested.clear();
-            productsSuggested.addAll(result.data!.data!);
-            emit(SearchSuccess(result.data!));
-          }
-        }
-
-      case Fail<SearchEntity?>():
-        {
-          emit(SearchFailure(result.exception));
-        }
-    }
-  }
-
   Future<void> searchProducts({
-    categoryId,
-    minPrice,
-    maxPrice,
-    sortBy,
-    order,
-    limit,
+    String? search,
+    int? categoryId,
+    int page = 1,
+
+
+
+
+    int limit = 10,
+    bool isLoadMore = false,
   }) async {
+    if (isLoadingMore) {
+      print("تحميل جاري بالفعل، تجاهل الطلب الجديد");
+      return;
+    }
+
+    if (!isLoadMore) {
+      currentPage = 1;
+      allProducts.clear();
+      lastSearchText = search;
+      emit(SearchLoading());
+    } else {
+      currentPage++;
+      isLoadingMore = true;
+      print("تحميل صفحة جديدة: $currentPage");
+    }
+
     var result = await _searchUseCaseRepo.search(
       SearchRequest(
         limit: limit,
-        search: searchController.text,
+        search: lastSearchText,
         minPrice: minPrice,
         maxPrice: maxPrice,
         sortBy: sortBy,
         order: order,
         categoryId: categoryId,
-        pagination: true
+        pagination: true,
+        page: currentPage,
       ),
     );
-    switch (result) {
-      case Success<SearchEntity?>():
-        {
-          if (!isClosed) {
-            emit(SearchSuccess(result.data!));
-          }
-        }
-
-      case Fail<SearchEntity?>():
-        {
-          emit(SearchFailure(result.exception));
-        }
+    if (result is Success<SearchEntity?>) {
+      if (!isClosed) {
+        allProducts.addAll(result.data!.data!);
+        productsSuggested.clear();
+        productsSuggested.addAll(result.data!.data!);
+        emit(SearchSuccess(SearchEntity(data: allProducts)));
+      }
+      isLoadingMore = false;
+    } else if (result is Fail<SearchEntity?>) {
+      isLoadingMore = false;
+      emit(SearchFailure(result.exception));
     }
+  }
+
+  Future<void> loadNextPage() async {
+    await searchProducts(search: lastSearchText, isLoadMore: true);
   }
 }

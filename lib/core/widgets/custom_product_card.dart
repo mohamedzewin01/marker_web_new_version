@@ -58,8 +58,7 @@ class CustomProductCardWidget extends StatelessWidget {
                 border: Border.all(color: Color(0xffF1F1F5)),
                 borderRadius: BorderRadius.circular(8),
               ),
-              // width: (MediaQuery.of(context).size.width / 2) - 34,
-              // height: (MediaQuery.of(context).size.width / 2) - 34,
+
               child: Column(
                 children: [
                   Stack(

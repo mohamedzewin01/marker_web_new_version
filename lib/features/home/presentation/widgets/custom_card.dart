@@ -39,24 +39,27 @@ class CustomCard extends StatelessWidget {
                       child: Container(
                         height: 130,
                         decoration: BoxDecoration(
+
                           borderRadius: BorderRadius.circular(20),
                         ),
                         width: MediaQuery.sizeOf(context).width,
                         child: Card(
                           elevation: 10,
                           shadowColor: Colors.black26,
+                          color: ColorManager.indigoLight,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
+
                           ),
                           clipBehavior: Clip.antiAlias,
                           child: Stack(
                             clipBehavior: Clip.none,
                             children: [
-                              CustomImage(
-                                url: discount.imageUrl ?? '',
-
-                                boxFit: BoxFit.cover,
-                              ),
+                              // CustomImage(
+                              //   url: discount.imageUrl ?? '',
+                              //
+                              //   boxFit: BoxFit.cover,
+                              // ),
                               Positioned.fill(
                                 child: ShaderMask(
                                   shaderCallback: (rect) {

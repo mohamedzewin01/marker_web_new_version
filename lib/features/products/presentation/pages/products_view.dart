@@ -47,33 +47,35 @@ class _ProductsViewState extends State<ProductsView> {
                 state.productsModelEntity?.productsData?.productsRelations ??
                 [];
             SearchCubit.get(context).searchProducts(products.reversed.toList());
-            return products.isNotEmpty ? ProductsBody(): Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 24,),
-                  Text(
-                    'لا يوجد منتجات',
-                    style: getSemiBoldStyle(
-                      color: ColorManager.indigoDark,
-                      fontSize: 20,
-                    ),
+            return products.isNotEmpty
+                ? ProductsBody()
+                : Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 24),
+                      Text(
+                        'لا يوجد منتجات',
+                        style: getSemiBoldStyle(
+                          color: ColorManager.indigoDark,
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(height: 24),
+                      AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: SvgPicture.asset(Assets.emptyList),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 24),
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: SvgPicture.asset(Assets.emptyList),
-                  ),
-                ],
-              ),
-            );
+                );
           }
 
-          return Center(child: CircularProgressIndicator(color:ColorManager.primaryColor));
+          return Center(
+            child: CircularProgressIndicator(color: ColorManager.primaryColor),
+          );
         },
       ),
     );
   }
 }
-
-

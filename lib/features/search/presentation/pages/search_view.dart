@@ -1,4 +1,7 @@
 import 'package:fada_alhalij_web/core/di/di.dart';
+import 'package:fada_alhalij_web/core/resources/color_manager.dart';
+import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_elevated_button.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_sliver_app_bar.dart';
 import 'package:fada_alhalij_web/features/search/presentation/widget/grid_product_search.dart';
 import 'package:fada_alhalij_web/features/search/presentation/widget/search_bar.dart';
@@ -16,13 +19,36 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   late SearchCubit viewModel;
-  bool isSearching = true;
+  final ScrollController _scrollController = ScrollController();
+  bool showScrollToTopButton = false;
 
   @override
   void initState() {
+    super.initState();
     viewModel = getIt.get<SearchCubit>();
     viewModel.searchProducts(limit: 10);
-    super.initState();
+    _scrollController.addListener(() {
+      final isScrolling = _scrollController.position.pixels > 500;
+
+      // إظهار أو إخفاء زر الرجوع للأعلى بناءً على التمرير
+      if (isScrolling != showScrollToTopButton) {
+        setState(() {
+          showScrollToTopButton = isScrolling;
+        });
+      }
+
+      // تحميل المزيد عند الاقتراب من نهاية القائمة
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 200) {
+        viewModel.loadNextPage();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -30,20 +56,48 @@ class _SearchPageState extends State<SearchPage> {
     return BlocProvider.value(
       value: viewModel,
       child: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            CustomSliverAppBar(title: 'البحث'),
-            CustomSearchBar(viewModel: viewModel),
-            SliverToBoxAdapter(child: WrapList()),
-            GridProductSearch(),
-          ],
+        body: GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+          child: Stack(
+            children: [
+              CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  CustomSliverAppBar(title: 'البحث'),
+                  CustomSearchBar(viewModel: viewModel),
+                  const SliverToBoxAdapter(child: SizedBox(height: 16)),
+                  SliverPadding(
+                    padding: EdgeInsets.only(bottom: kBottomNavigationBarHeight, left: 16, right: 16),
+                    sliver: GridProductSearch(),
+                  ),
+                ],
+              ),
+              if (showScrollToTopButton)
+                Positioned(
+                  bottom: 80,
+                  right: 20,
+                  child: FloatingActionButton(
+                    mini: true,
+                    onPressed: () {
+                      _scrollController.animateTo(
+                        0,
+                        duration: Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    backgroundColor: ColorManager.indigoLight,
+                    elevation: 6,  // ظل خفيف
+                    tooltip: 'Scroll to top',  // لون الخلفية
+                    child: Icon(
+                      Icons.arrow_upward,  // سهم لأعلى
+                      color: Colors.white,  // لون الأيقونة أبيض عادة
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-
-
-
-

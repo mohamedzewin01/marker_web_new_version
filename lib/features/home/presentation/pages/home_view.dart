@@ -74,10 +74,7 @@ class _HomeViewState extends State<HomeView> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          // SizedBox(height: 8),
-                          //  SearchTextFiled(),
                           CustomCard(discounts: discount),
-
                           Column(
                             children: [
                               SizedBox(height: 8),
@@ -96,7 +93,6 @@ class _HomeViewState extends State<HomeView> {
                                 padding: const EdgeInsets.only(top: 12),
                                 child: Carousel(banners: banners),
                               ),
-
                               SizedBox(height: 16),
                               SeeAllView(
                                 context: context,

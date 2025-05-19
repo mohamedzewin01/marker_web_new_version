@@ -23,5 +23,7 @@ class Assets {
   static const String success = 'assets/images/success.png';
   static const String settings = 'assets/images/settings.png';
   static const String cart2 = 'assets/images/cart.png';
+  // static const String filter = 'assets/images/filter.png';
+  static const String filter = 'assets/images/filter.svg';
 
 }
