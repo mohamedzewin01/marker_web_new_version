@@ -25,5 +25,9 @@ class Assets {
   static const String cart2 = 'assets/images/cart.png';
   // static const String filter = 'assets/images/filter.png';
   static const String filter = 'assets/images/filter.svg';
+  static const String categoriesSvg = 'assets/images/categories.svg';
+  static const String homeSvg = 'assets/images/home.svg';
+  static const String profileSvg = 'assets/images/profile.svg';
+  static const String searchSvg = 'assets/images/searchIcon.svg';
 
 }

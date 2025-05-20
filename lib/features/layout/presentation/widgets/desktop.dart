@@ -19,7 +19,7 @@ class DesktopLayout extends StatelessWidget {
               backgroundColor: ColorManager.primaryColor,
               body: Center(
                 child: Image.asset(
-                  Assets.logo,
+                  Assets.logo3,
                   scale: 2.5,
                 ),
               ),
@@ -32,7 +32,7 @@ class DesktopLayout extends StatelessWidget {
               backgroundColor: ColorManager.primaryColor,
               body: Center(
                 child: Image.asset(
-                  Assets.logo,
+                  Assets.logo3,
                   scale: 2.5,
                 ),
               ),

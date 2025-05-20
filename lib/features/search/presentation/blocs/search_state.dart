@@ -5,6 +5,7 @@ sealed class SearchState {}
 
 final class SearchInitial extends SearchState {}
 final class SearchLoading extends SearchState {}
+
 final class SearchFailure extends SearchState {
   final Exception exception;
 
@@ -12,6 +13,12 @@ final class SearchFailure extends SearchState {
 }
 final class SearchSuccess extends SearchState {
   final SearchEntity searchEntity;
+  final String? sortBy;
+  final String? order;
 
-  SearchSuccess(this.searchEntity);
+  SearchSuccess(
+      this.searchEntity, {
+        this.sortBy,
+        this.order,
+      });
 }

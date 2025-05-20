@@ -3,6 +3,7 @@ import 'package:fada_alhalij_web/core/resources/app_constants.dart';
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_sliver_app_bar.dart';
 import 'package:fada_alhalij_web/features/home/presentation/widgets/custom_card.dart';
+import 'package:fada_alhalij_web/features/home/presentation/widgets/sek_home.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +64,6 @@ class _HomeViewState extends State<HomeView> {
                       state.homeEntity?.data?.bestDeals?.productsBestDeals?.reversed
                           .toList() ??
                           [];
-                  Store? store = state.homeEntity?.data!.store;
                   List<Banners> banners =
                       state.homeEntity?.data?.banner?.banners ?? [];
                   List<Discounts>? discount =
@@ -126,11 +126,7 @@ class _HomeViewState extends State<HomeView> {
                   );
                 }
                 if (state is HomeLoading) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: ColorManager.primaryColor,
-                    ),
-                  );
+                  return SkeHome();
                 }
                 if (state is HomeFail) {}
 

@@ -30,14 +30,12 @@ class _SearchPageState extends State<SearchPage> {
     _scrollController.addListener(() {
       final isScrolling = _scrollController.position.pixels > 500;
 
-      // إظهار أو إخفاء زر الرجوع للأعلى بناءً على التمرير
       if (isScrolling != showScrollToTopButton) {
         setState(() {
           showScrollToTopButton = isScrolling;
         });
       }
 
-      // تحميل المزيد عند الاقتراب من نهاية القائمة
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 200) {
         viewModel.loadNextPage();
@@ -67,7 +65,7 @@ class _SearchPageState extends State<SearchPage> {
                   CustomSearchBar(viewModel: viewModel),
                   const SliverToBoxAdapter(child: SizedBox(height: 16)),
                   SliverPadding(
-                    padding: EdgeInsets.only(bottom: kBottomNavigationBarHeight, left: 16, right: 16),
+                    padding: EdgeInsets.only(bottom: kBottomNavigationBarHeight*3, left: 16, right: 16),
                     sliver: GridProductSearch(),
                   ),
                 ],

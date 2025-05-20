@@ -7,6 +7,55 @@ import 'package:flutter/material.dart';
 
 import '../api/api_constants.dart';
 
+// class CategoriesView extends StatelessWidget {
+//   const CategoriesView({
+//     super.key,
+//     required this.imagePath,
+//     required this.catName,
+//   });
+//
+//   final String imagePath;
+//   final String catName;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       // color: Colors.pink,
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//
+//
+//           Card(
+//             elevation: 6,
+//             clipBehavior: Clip.antiAlias,
+//
+//             child: Padding(
+//               padding: const EdgeInsets.all(2.0),
+//               child: CustomImage(url: imagePath,height: 50,width: 50,),
+//             ),
+//           ),
+//
+//           SizedBox(height: 4),
+//           Center(
+//             child: FittedBox(
+//               fit: BoxFit.contain,
+//               child: AutoSizeText(
+//                 catName,
+//                 overflow: TextOverflow.ellipsis,
+//                 maxLines: 2,
+//                 style: getSemiBoldStyle(color: ColorManager.black, fontSize: 12),
+//                 textAlign: TextAlign.center,
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
 class CategoriesView extends StatelessWidget {
   const CategoriesView({
     super.key,
@@ -17,40 +66,41 @@ class CategoriesView extends StatelessWidget {
   final String imagePath;
   final String catName;
 
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: Colors.pink,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          
-
-          Card(
-            elevation: 6,
-            clipBehavior: Clip.antiAlias,
-
+    return Column(
+      children: [
+        Material(
+          elevation: 6.0,
+          shape: const CircleBorder(),
+          shadowColor: Colors.black45, // تقدر تعدل عليه
+          child: CircleAvatar(
+            backgroundColor: ColorManager.indigoLight.withOpacity(0.2),
+            radius: 35,
             child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: CustomImage(url: imagePath,height: 50,width: 50,),
+              padding: const EdgeInsets.all(8.0),
+              child: CustomImage(url: imagePath),
             ),
           ),
+        ),
 
-          SizedBox(height: 4),
-          Center(
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: AutoSizeText(
-                catName,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: getSemiBoldStyle(color: ColorManager.black, fontSize: 12),
-                textAlign: TextAlign.center,
-              ),
+        SizedBox(
+          height: 4,
+        ),
+        Center(
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: AutoSizeText(
+              catName,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: getSemiBoldStyle(color: ColorManager.black, fontSize: 12),
+              textAlign: TextAlign.center,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

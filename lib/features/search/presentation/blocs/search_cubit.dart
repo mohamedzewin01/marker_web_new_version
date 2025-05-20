@@ -81,8 +81,10 @@ class SearchCubit extends Cubit<SearchState> {
 
   int? minPrice;
   int? maxPrice;
-  String? sortBy;
-  String? order;
+  String? sortBy ;
+  String order = "desc";
+
+
 
   bool isLoadingMore = false;
   List<DataSearch> allProducts = [];

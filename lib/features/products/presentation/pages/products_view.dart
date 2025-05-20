@@ -1,14 +1,15 @@
 import 'package:fada_alhalij_web/core/di/di.dart';
 import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
-import 'package:fada_alhalij_web/core/widgets/custom_product_card.dart';
 import 'package:fada_alhalij_web/features/app_search/presentation/bloc/search_cubit.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:fada_alhalij_web/features/products/presentation/cubit/products_cubit.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/products_body.dart';
+import 'package:fada_alhalij_web/core/widgets/ske_grid_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+
 
 import '../../../../core/resources/style_manager.dart';
 
@@ -69,6 +70,10 @@ class _ProductsViewState extends State<ProductsView> {
                     ],
                   ),
                 );
+          }
+
+          if (state is ProductsLoading) {
+            return SkeGridProduct();
           }
 
           return Center(

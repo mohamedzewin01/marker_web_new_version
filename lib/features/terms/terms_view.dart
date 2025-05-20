@@ -7,7 +7,11 @@ class TermsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomWebViewMobile(url: "https://nextlaunch.artawiya.com/terms.html");
+    return Scaffold(
+      body:  CustomWebViewMobile(url: "https://nextlaunch.artawiya.com/terms.html")
+    );
+
+
   }
 }
 

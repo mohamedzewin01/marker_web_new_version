@@ -34,23 +34,23 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
         items: [
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.home2, 0, currentIndex),
+            icon: buildIcon(Assets.homeSvg, 0, currentIndex),
             label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.categories2, 1, currentIndex),
+            icon: buildIcon(Assets.categoriesSvg, 1, currentIndex),
             label: AppLocalizations.of(context)!.categories,
           ),
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.cart2, 2, currentIndex),
+            icon: buildIcon(Assets.cart, 2, currentIndex),
             label: AppLocalizations.of(context)!.cart,
           ),
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.search, 3, currentIndex),
+            icon: buildIcon(Assets.searchSvg, 3, currentIndex),
             label: AppLocalizations.of(context)!.search,
           ),
           BottomNavigationBarItem(
-            icon: buildIcon(Assets.settings, 4, currentIndex),
+            icon: buildIcon(Assets.profileSvg, 4, currentIndex),
             label: AppLocalizations.of(context)!.user,
           ),
         ],

@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/api/api_constants.dart';
+import 'package:fada_alhalij_web/core/widgets/ske_grid_product.dart';
+import 'package:fada_alhalij_web/features/categories/presentation/widgets/ske_categories.dart';
 import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:fada_alhalij_web/features/products/presentation/pages/products_view.dart';
 import 'package:flutter/material.dart';
@@ -35,59 +37,61 @@ class _CategoryBarState extends State<CategoryBar> {
           //   categoriesZone.insert(0, Categories(categoryName: '  الكل',categoryImage: "all.png"));
           // }
           List<Tab> tabs =
-          categoriesZone.asMap().entries.map((entry) {
-            int index = entry.key;
-            var tab = entry.value;
-            return Tab(
-              icon: Card(
-                elevation: 4,
-                child: Container(
-                  height: 35,
-                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                  decoration: BoxDecoration(
-                    color:ColorManager.indigoLight,
-                    // backgroundColorsCategories[index],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: Text(
-                          tab.categoryName ?? '',
-                          style: getSemiBoldStyle(color: ColorManager.white),
-                          textAlign: TextAlign.center,
+              categoriesZone.asMap().entries.map((entry) {
+                int index = entry.key;
+                var tab = entry.value;
+                return Tab(
+                  icon: Card(
+                    elevation: 4,
+                    child: Container(
+                      height: 35,
+                      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: ColorManager.indigoLight,
+                        // backgroundColorsCategories[index],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            child: Text(
+                              tab.categoryName ?? '',
+                              style: getSemiBoldStyle(
+                                color: ColorManager.white,
+                              ),
+                              textAlign: TextAlign.center,
 
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      SizedBox(
-                        height: 35,
-                        width: 35,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            '${ApiConstants.baseUrlImage}${tab.categoryImage ?? ''}',
-                            fit: BoxFit.cover,
-                            errorBuilder:
-                                (context, error, stackTrace) =>
-                                Icon(Icons.broken_image, size: 18),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
+                          const SizedBox(height: 4),
+                          SizedBox(
+                            height: 35,
+                            width: 35,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                '${ApiConstants.baseUrlImage}${tab.categoryImage ?? ''}',
+                                fit: BoxFit.cover,
+                                errorBuilder:
+                                    (context, error, stackTrace) =>
+                                        Icon(Icons.broken_image, size: 18),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            );
-          }).toList();
+                );
+              }).toList();
           return SliverFillRemaining(
             hasScrollBody: true,
             child: DefaultTabController(
               length: tabs.length,
-              initialIndex:LayoutCubit.get(context).initialTabIndex ,
+              initialIndex: LayoutCubit.get(context).initialTabIndex,
               child: Column(
                 children: [
                   TabBar(
@@ -102,7 +106,7 @@ class _CategoryBarState extends State<CategoryBar> {
                     ),
                     unselectedLabelColor: ColorManager.placeHolderColor2,
                     unselectedLabelStyle: getSemiBoldStyle(
-                      color: ColorManager.offwhite,
+                      color: ColorManager.offWhite,
                       fontSize: AppSize.s16,
                     ),
                     labelStyle: getSemiBoldStyle(
@@ -148,22 +152,7 @@ class _CategoryBarState extends State<CategoryBar> {
           );
         }
         if (state is CategoriesLoading) {
-          return SliverToBoxAdapter(
-            child: Skeletonizer(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  spacing: 12,
-                  children: [
-                    Expanded(child: AutoSizeText('الكل')),
-                    Expanded(child: AutoSizeText('الكلالكلالكل')),
-                    Expanded(child: AutoSizeText('الكلالكل')),
-                    Expanded(child: AutoSizeText('الكلالكل')),
-                  ],
-                ),
-              ),
-            ),
-          );
+          return SkeCategories();
         }
         if (state is CategoriesFail) {}
         return SliverToBoxAdapter(child: Center(child: AutoSizeText('error')));

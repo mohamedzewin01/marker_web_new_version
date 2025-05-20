@@ -1,110 +1,53 @@
 import 'dart:ui';
 
 class ColorManager {
-  // static const Color orange = Color(0xffFF6A00);
-  // static const Color orange = Color(0xffe91e63);
+
+
+
+
   static const Color primaryColor = Color(0xff303f9f);
-  static const Color primaryGreen = Color(0xff009a38);
+  static const Color primaryLight = Color(0xff536dfe);
+  static const Color background = Color(0xfff5f5f5);
+  static const Color backgroundSecondary = Color(0xffe8eaf6);
+  static const Color white = Color(0xffFFFFFF);
+
+  static const Color textSecondary = Color(0xffc5cae9);
+  static const Color textDark = Color(0xff212121);
+
+  static const Color buttonDisabled = Color(0xff9fa8da);
+
+  static const Color success = Color(0xff4caf50);
+  static const Color error = Color(0xfff44336);
+  static const Color warning = Color(0xffffc107);
+
+  static const Color iconPrimary = Color(0xff303f9f);
+  static const Color iconSecondary = Color(0xff536dfe);
+  static const Color cartBackground = Color(0xff303f9f);
+  static const Color cartBadge = Color(0xfff44336);
   static const Color secondaryColor = Color(0xff0b21af);
-  //  static const Color secondaryColor = Color(0xff53e187);
   static const Color black = Color(0xff000000);
   static const Color darkGrey = Color(0xff262626);
   static const Color grey = Color(0xff8F8F8F);
-  static const Color lightGrey = Color(0xffC7C7C7);
   static const Color indigoDark = Color(0xFF1A237E);
-  static const Color white = Color(0xffFFFFFF);
   static const Color placeHolderColor = Color(0xffD9D9D9);
   static const Color placeHolderColor2 = Color(0xff979899);
-  static const Color error = Color(0xffFF0000);
   static const Color primary = Color(0xff98A2B3);
   static const Color fieldTextBorder = Color(0xffD3D3D3);
-  static const Color basicColor = Color(0xffFF4100);
-  static const Color offwhite = Color(0xffD9D9D9);
-  // static const Color primaryColor =Color(0xffe91e63);
-  // static const Color primaryColor = Color(0xff303f9f);
+  static const Color offWhite = Color(0xffD9D9D9);
   static const Color cardColor = Color(0xffE9F5FA);
   static const Color lightGrey2 = Color(0xff7D7D7D);
-
-  static const Color accentColor = Color(0xffFF9E40);
-  static const Color backgroundColor = Color(0xffF5F9FC);
-  static const Color textColor = Color(0xff1A1A1A);
-  static const Color successColor = Color(0xff4CAF50);
-  static const Color warningColor = Color(0xffFFC107);
-  static const Color errorColor = Color(0xffD32F2F);
-  static const Color white2 = Color(0xDBDBDBFF);
-  static const Color primaryDark = Color(0xff1B5C7D);
-  static const Color primaryLight = Color(0xff62A8C9);
-  static const Color orangeDark = Color(0xffCC5500);
-  static const Color orangeLight = Color(0xffFF9E40);
-  static const Color dividerColor = Color(0xffC5D6E0);
-  static const Color textSecondaryColor = Color(0xff5A5A5A);
-  static const Color infoColor = Color(0xff1976D2);
-  static const Color highlightColor = Color(0xffFFD700);
-  static const Color shadowColor = Color(0xffB0BEC5);
-
   static const Color darkTextColor = Color(0xFF333333);
   static const Color lightTextColor = Color(0xFF757575);
-
   static const Color red = Color(0xfff44336);
   static const Color blue = Color(0xff2196f3);
   static const Color green = Color(0xff4caf50);
-  static const Color purple = Color(0xff9c27b0);
-  static const Color teal = Color(0xff009688);
-  // static const Color pink = Color(0xffe91e63);
-  // static const Color primaryColor = Color(0xff303f9f);
-  static const Color cyan = Color(0xff00bcd4);
-  static const Color indigo = Color(0xff3f51b5);
-  static const Color lime = Color(0xffcddc39);
-  static const Color deepOrange = Color(0xffff5722);
-  static const Color deepPurple = Color(0xff673ab7);
-  static const Color lightGreen = Color(0xff8bc34a);
-  static const Color lightBlue = Color(0xff03a9f4);
-  static const Color brown = Color(0xff795548);
-
   static const Color redDark = Color(0xffd32f2f);
   static const Color redLight = Color(0xffef5350);
-
   static const Color blueDark = Color(0xff1976d2);
-  static const Color blueLight = Color(0xff64b5f6);
-
-  static const Color greenDark = Color(0xff388e3c);
-  static const Color greenLight = Color(0xff81c784);
-
-  static const Color purpleDark = Color(0xff7b1fa2);
-  static const Color purpleLight = Color(0xffba68c8);
-
-  static const Color tealDark = Color(0xff00796b);
-  static const Color tealLight = Color(0xff4db6ac);
-
-  static const Color pinkDark = Color(0xffc2185b);
-  static const Color pinkLight = Color(0xfff06292);
-
   static const Color cyanDark = Color(0xff00838f);
-  static const Color cyanLight = Color(0xff4dd0e1);
-
   static const Color indigoDark2 = Color(0xff303f9f);
   static const Color indigoLight = Color(0xff7986cb);
 
-  static const Color limeDark = Color(0xffafb42b);
-  static const Color limeLight = Color(0xffdce775);
-
-  static const Color deepOrangeDark = Color(0xffe64a19);
-  static const Color deepOrangeLight = Color(0xffff8a65);
-
-  static const Color deepPurpleDark = Color(0xff512da8);
-  static const Color deepPurpleLight = Color(0xff9575cd);
-
-  static const Color lightGreenDark = Color(0xff689f38);
-  static const Color lightGreenLight = Color(0xffaed581);
-
-  static const Color lightBlueDark = Color(0xff0288d1);
-  static const Color lightBlueLight = Color(0xff4fc3f7);
-
-  static const Color brownDark = Color(0xff5d4037);
-  static const Color brownLight = Color(0xffa1887f);
-
-  static const Color greyDark = Color(0xff616161);
-  static const Color greyLight = Color(0xffbdbdbd);
 }
 class PromotionalMessages {
   static const String shopNowBeforeStockRunsOut = "🛍️";

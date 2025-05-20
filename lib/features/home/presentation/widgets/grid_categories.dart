@@ -14,7 +14,7 @@ class GridCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180,
+      height: 200,
       // color: ColorManager.primaryColor,
       child:categories.isNotEmpty? GridView.builder(
         scrollDirection: Axis.horizontal,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 
 import '../resources/color_manager.dart';
@@ -83,7 +84,31 @@ Widget passwordHidden({
     onPressed: onPressed,
   );
 }
-
+//
+// Widget buildIcon(String assetPath, int index, int currentIndex) {
+//   bool isSelected = index == currentIndex;
+//
+//   return Container(
+//     padding: const EdgeInsets.symmetric(
+//         horizontal: AppPadding.p20, vertical: AppPadding.p4),
+//     decoration: BoxDecoration(
+//       color: isSelected
+//           ? ColorManager.indigoDark2.withAlpha(100)
+//           : Colors.transparent,
+//       borderRadius: BorderRadius.circular(12),
+//     ),
+//     child: Image.asset(
+//       assetPath,
+//       width: 24,
+//       height: 24,
+//       color:isSelected ? ColorManager.primaryColor : ColorManager.placeHolderColor2,
+//       // colorFilter: ColorFilter.mode(
+//       //   isSelected ? ColorManager.orange : ColorManager.placeHolderColor,
+//       //   BlendMode.srcIn,
+//       // ),
+//     ),
+//   );
+// }
 Widget buildIcon(String assetPath, int index, int currentIndex) {
   bool isSelected = index == currentIndex;
 
@@ -91,20 +116,16 @@ Widget buildIcon(String assetPath, int index, int currentIndex) {
     padding: const EdgeInsets.symmetric(
         horizontal: AppPadding.p20, vertical: AppPadding.p4),
     decoration: BoxDecoration(
-      color: isSelected
-          ? ColorManager.indigoDark2.withAlpha(100)
-          : Colors.transparent,
       borderRadius: BorderRadius.circular(12),
     ),
-    child: Image.asset(
+    child: SvgPicture.asset(
       assetPath,
       width: 24,
       height: 24,
-      color:isSelected ? ColorManager.primaryColor : ColorManager.placeHolderColor2,
-      // colorFilter: ColorFilter.mode(
-      //   isSelected ? ColorManager.orange : ColorManager.placeHolderColor,
-      //   BlendMode.srcIn,
-      // ),
+      colorFilter: ColorFilter.mode(
+        isSelected ? ColorManager.primaryColor : ColorManager.lightGrey2,
+        BlendMode.srcIn,
+      ),
     ),
   );
 }
