@@ -1,3 +1,4 @@
+import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -52,7 +53,7 @@ class SkeHome extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         image: DecorationImage(
-                          image: NetworkImage('https://via.placeholder.com/150'),
+                          image:AssetImage(Assets.logo3),
                         )
                       ),
 

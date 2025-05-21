@@ -1,3 +1,4 @@
+import 'package:fada_alhalij_web/core/api/api_constants.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_product_card.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class SkeGridProduct extends StatelessWidget {
             idProduct: 1,
             productPrice: 1,
             imageCover:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png',
+            '7987resized_1744890678567.jpeg',
             productPriceAfterDiscount: 0,
           ),
         ),

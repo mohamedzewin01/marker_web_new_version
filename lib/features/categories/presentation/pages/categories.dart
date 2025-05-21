@@ -41,7 +41,7 @@ class _CategoriesState extends State<Categories> {
             child: CustomScrollView(
               slivers: [
                 CustomSliverAppBar(title: 'الاقسام'),
-                // SliverToBoxAdapter(child: AppBarCategories()),
+
                 CategoryBar(viewModel: viewModel)
               ],
             ),

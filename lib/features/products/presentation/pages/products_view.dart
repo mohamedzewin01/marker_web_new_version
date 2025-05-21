@@ -45,11 +45,11 @@ class _ProductsViewState extends State<ProductsView> {
         builder: (context, state) {
           if (state is ProductsSuccess) {
             List<ProductsRelations> products =
-                state.productsModelEntity?.productsData?.productsRelations ??
+                state.productsModelEntity?.productsData?.productsRelations?.reversed.toList() ??
                 [];
             SearchCubit.get(context).searchProducts(products.reversed.toList());
             return products.isNotEmpty
-                ? ProductsBody()
+                ? ProductsBody(products: products,)
                 : Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

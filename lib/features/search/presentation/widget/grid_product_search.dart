@@ -1,4 +1,5 @@
-
+import 'package:fada_alhalij_web/core/resources/color_manager.dart';
+import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_product_card.dart';
 import 'package:fada_alhalij_web/core/widgets/ske_grid_product.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,12 @@ class _GridProductSearchState extends State<GridProductSearch> {
           );
         } else if (state is SearchFailure) {
           return SliverToBoxAdapter(
-            child: Center(child: Text("خطأ في التحميل: }")),
+            child: Center(
+              child: Text(
+                " خطأ في التحميل ",
+                style: getSemiBoldStyle(color: ColorManager.red),
+              ),
+            ),
           );
         } else if (state is SearchLoading) {
           return SliverToBoxAdapter(child: SkeGridProduct());

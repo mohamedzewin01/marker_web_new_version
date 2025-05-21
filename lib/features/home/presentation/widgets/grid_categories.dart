@@ -14,7 +14,7 @@ class GridCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 180,
       // color: ColorManager.primaryColor,
       child:categories.isNotEmpty? GridView.builder(
         scrollDirection: Axis.horizontal,
@@ -29,7 +29,7 @@ class GridCategories extends StatelessWidget {
             (context, index) => GestureDetector(
               onTap: () {
                 if(context.mounted) {
-                  LayoutCubit.get(context).changeIndex(1,tabIndex: index+1);
+                  LayoutCubit.get(context).changeIndex(1,tabIndex: index);
                 }
               },
               child: CategoriesView(
