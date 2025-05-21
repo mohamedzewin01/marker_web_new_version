@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:fada_alhalij_web/core/common/api_result.dart';
 import 'package:fada_alhalij_web/core/uses_cases/address/address_use_case_repo.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
+import 'package:fada_alhalij_web/features/address/data/models/request/edit_address_request.dart';
 import 'package:fada_alhalij_web/features/address/domain/entities/address_entity.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/request/add_address.dart';
 import 'package:fada_alhalij_web/features/cart/domain/entities/cart_entities.dart';
@@ -18,10 +19,12 @@ class AddressCubit extends Cubit<AddressState> {
   AddressCubit(this._cartUseCase) : super(AddressInitial());
 
   final AddressUseCaseRepo _cartUseCase;
-static AddressCubit get(context) => BlocProvider.of(context);
-int? idAddress;
-  final formKeyAddAddress = GlobalKey<FormState>();
 
+  static AddressCubit get(context) => BlocProvider.of(context);
+  int? idAddress;
+  final formKeyAddAddress = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKeyAreas = GlobalKey<FormState>();
 
   Future<void> getAddress() async {
     emit(AddressLoading());
@@ -50,6 +53,7 @@ int? idAddress;
   int? idUser = CacheService.getData(key: CacheConstants.userId) ?? 0;
 
   int idUserArea = 0;
+int deliveryAreaId = 0;
   changeIdUserArea(int id) {
     idUserArea = id;
     emit(ChangeIdUserArea());
@@ -72,8 +76,6 @@ int? idAddress;
       case Success<AddAddressUserEntity?>():
         {
           if (!isClosed) {
-
-
             emit(AddAddressSuccess(result.data!));
             titleController.clear();
             streetController.clear();
@@ -99,4 +101,42 @@ int? idAddress;
     }
   }
 
+  void deleteAddress({required int idAddress,required int deliveryAreaId }) async {
+
+    int? userId = await CacheService.getData(key: CacheConstants.userId) ?? 0;
+    final result = await _cartUseCase.editAddressesUser(
+      EditAddressRequest(isActive: 0,userId: userId,id: idAddress,deliveryAreaId: deliveryAreaId,),
+    );
+    switch (result) {
+      case Success<EditAddressEntity?>():
+        {
+          if (!isClosed) {
+            getAddress();
+          }
+        }
+      case Fail<EditAddressEntity?>():
+        {
+
+        }
+    }
+  }
+
+
+  Future<void> editAddress({required  EditAddressRequest editAddressRequest}) async {
+
+
+    final result = await _cartUseCase.editAddressesUser(editAddressRequest);
+    switch (result) {
+      case Success<EditAddressEntity?>():
+        {
+          if (!isClosed) {
+            getAddress();
+          }
+        }
+      case Fail<EditAddressEntity?>():
+        {
+          // emit(EditAddressFailure(result.exception));
+        }
+    }
+  }
 }

@@ -3,7 +3,7 @@ import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_dialog.dart';
 import 'package:fada_alhalij_web/features/address/data/models/response/get_user_dto.dart';
-import 'package:fada_alhalij_web/features/cart/presentation/cubit/address/address_cubit.dart';
+import 'package:fada_alhalij_web/features/address/presentation/blocs/my_address/address_cubit.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,14 +11,14 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../address/presentation/widgets/add_address.dart';
 import 'list_address_user.dart';
 
-class AddressesView extends StatefulWidget {
-  const AddressesView({super.key});
+class ShowAddressesUser extends StatefulWidget {
+  const ShowAddressesUser({super.key});
 
   @override
-  State<AddressesView> createState() => _AddressesViewState();
+  State<ShowAddressesUser> createState() => _ShowAddressesUserState();
 }
 
-class _AddressesViewState extends State<AddressesView> {
+class _ShowAddressesUserState extends State<ShowAddressesUser> {
   late AddressCubit viewModel;
 
   @override

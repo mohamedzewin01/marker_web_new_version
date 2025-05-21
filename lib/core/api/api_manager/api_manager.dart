@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:fada_alhalij_web/core/api/api_constants.dart';
+import 'package:fada_alhalij_web/features/address/data/models/request/edit_address_request.dart';
 import 'package:fada_alhalij_web/features/address/data/models/request/get_user_addresses.dart';
+import 'package:fada_alhalij_web/features/address/data/models/response/edit_address_dto.dart';
 import 'package:fada_alhalij_web/features/address/data/models/response/get_delivery_areas_dto.dart';
 import 'package:fada_alhalij_web/features/address/data/models/response/get_user_dto.dart';
-import 'package:fada_alhalij_web/features/address/domain/entities/address_entity.dart';
 import 'package:fada_alhalij_web/features/analytics/model/device_response.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/request/auth_signin_request.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/request/auth_signup_request.dart';
@@ -137,6 +138,11 @@ abstract class ApiService {
   Future<SearchDto?> search(
     @Body() SearchRequest searchRequest,
   );
+
+  @POST(ApiConstants.editAddress)
+  Future<EditAddressDto?> editAddress(
+      @Body() EditAddressRequest editAddressRequest,
+      );
 }
 
 //  @MultiPart()

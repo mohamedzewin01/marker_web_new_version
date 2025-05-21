@@ -40,3 +40,16 @@ class OrdersWithAddress extends AddressState {
     );
   }
 }
+
+
+final class EditAddressLoading extends AddressState {}
+final class EditAddressSuccess extends AddressState {
+  final EditAddressEntity editAddressEntity;
+
+  EditAddressSuccess(this.editAddressEntity);
+}
+final class EditAddressFailure extends AddressState {
+  final Exception exception;
+
+  EditAddressFailure(this.exception);
+}

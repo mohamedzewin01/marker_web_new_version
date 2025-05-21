@@ -33,3 +33,17 @@ class DeliveryAreasEntity {
 
 
 }
+
+class EditAddressEntity {
+
+  final bool? status;
+
+  final String? message;
+
+  EditAddressEntity ({
+    this.status,
+    this.message,
+  });
+
+
+}

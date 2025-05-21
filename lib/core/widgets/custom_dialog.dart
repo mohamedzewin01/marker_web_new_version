@@ -39,7 +39,7 @@ class CustomDialog {
     );
   }
 
-  static void showExitDialog(BuildContext context) {
+  static void showDeleteDialog(BuildContext context,{required void Function()? onPressed}) {
     showDialog(
       context: context,
       builder: (context) {
@@ -55,7 +55,7 @@ class CustomDialog {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Are You Sure To Close The Application?",
+                  "هل تريد حذف العنوان ",
                   textAlign: TextAlign.center,
                   style: getBoldStyle(color: ColorManager.white, fontSize: 18),
                 ),
@@ -77,16 +77,16 @@ class CustomDialog {
                         ),
                       ),
                       child: const Text(
-                        "NO",
+                        "الغاء",
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
 
                     // زر YES
                     ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed:onPressed,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange,
+                        backgroundColor: ColorManager.primaryColor,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
                         shape: RoundedRectangleBorder(
@@ -94,7 +94,7 @@ class CustomDialog {
                         ),
                       ),
                       child: const Text(
-                        "Yes",
+                        "تاكيد",
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),

@@ -25,54 +25,34 @@ class Profile extends StatelessWidget {
     String mail = CacheService.getData(key: CacheConstants.userEmail) ?? "";
     String phone = CacheService.getData(key: CacheConstants.userPhone) ?? "";
     return Scaffold(
-      appBar: CustomAppBar(title:  "الاعدادت"),
-
+      appBar: CustomAppBar(title: "الاعدادت"),
 
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 40),
-            Stack(
-              children: [
-                SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Image.asset(Assets.user),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: ColorManager.primaryColor,
-                    ),
-                    child: const Icon(
-                      Icons.camera_alt_rounded,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ],
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Icon(Icons.person, size: 100, color: ColorManager.primaryColor),
             ),
-            const SizedBox(height: 12),
-            Text(name, style: Theme.of(context).textTheme.headlineSmall),
             Text(
-              mail,
-              style: Theme.of(context).textTheme.bodySmall,
-              textDirection: TextDirection.ltr,
+              name,
+              style: getSemiBoldStyle(
+                color: ColorManager.secondaryColor,
+                fontSize: 16,
+              ),
             ),
+            mail.isEmpty
+                ? const SizedBox()
+                : Text(
+                  mail,
+                  style: getSemiBoldStyle(color: ColorManager.secondaryColor, fontSize: 16),
+                  textDirection: TextDirection.ltr,
+                ),
             Text(
               phone,
-              style: Theme.of(context).textTheme.bodySmall,
+              style:getSemiBoldStyle(color: ColorManager.placeHolderColor2, fontSize: 14),
               textDirection: TextDirection.ltr,
             ),
             const SizedBox(height: 16),
@@ -111,7 +91,6 @@ class Profile extends StatelessWidget {
                 } else {
                   Navigator.pushNamed(context, RoutesManager.termsView);
                 }
-
               },
             ),
             ProfileMenuWidget(
@@ -124,7 +103,6 @@ class Profile extends StatelessWidget {
                 } else {
                   Navigator.pushNamed(context, RoutesManager.aboutView);
                 }
-
               },
             ),
             const Divider(thickness: 0.1),

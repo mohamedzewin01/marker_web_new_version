@@ -5,12 +5,14 @@ import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/widgets/rial_icon.dart';
 import 'package:fada_alhalij_web/features/address/data/models/response/get_delivery_areas_dto.dart';
 import 'package:fada_alhalij_web/features/address/presentation/blocs/areas/areas_cubit.dart';
-import 'package:fada_alhalij_web/features/cart/presentation/cubit/address/address_cubit.dart';
+import 'package:fada_alhalij_web/features/address/presentation/blocs/my_address/address_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DropDownDeliveryAreas extends StatefulWidget {
-  const DropDownDeliveryAreas({super.key});
+  const DropDownDeliveryAreas({super.key, this.initialAreaId});
+
+  final int? initialAreaId;
 
   @override
   State<DropDownDeliveryAreas> createState() => _DropDownDeliveryAreasState();
@@ -37,6 +39,11 @@ class _DropDownDeliveryAreasState extends State<DropDownDeliveryAreas> {
           if (state is AreasSuccess) {
             List<DataAreas>? deliveryAreas =
                 state.deliveryAreasEntity.dataAreas?.reversed.toList() ?? [];
+            if (selectedArea == null && widget.initialAreaId != null) {
+              selectedArea = deliveryAreas.firstWhere(
+                (area) => area.id == widget.initialAreaId,
+              );
+            }
 
             return Form(
               key: viewModel.formKeyAreas,
@@ -118,7 +125,8 @@ class _DropDownDeliveryAreasState extends State<DropDownDeliveryAreas> {
                   setState(() {
                     selectedArea = value;
                     context.read<AddressCubit>().idUserArea = value?.id ?? 0;
-                    context.read<AddressCubit>().cityController.text = value?.areaName ?? '';
+                    context.read<AddressCubit>().cityController.text =
+                        value?.areaName ?? '';
                   });
                 },
               ),

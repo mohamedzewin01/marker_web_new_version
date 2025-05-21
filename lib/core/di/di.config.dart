@@ -13,10 +13,10 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../features/address/data/datasources/address_remote_data_source.dart'
-    as _i139;
-import '../../features/address/data/datasources/address_remote_data_source_impl.dart'
-    as _i318;
+import '../../features/address/data/datasources/address_data_source.dart'
+    as _i397;
+import '../../features/address/data/datasources/address_data_source_impl.dart'
+    as _i595;
 import '../../features/address/data/repositories/address_repository_impl.dart'
     as _i590;
 import '../../features/address/domain/repositories/address_repository.dart'
@@ -24,6 +24,8 @@ import '../../features/address/domain/repositories/address_repository.dart'
 import '../../features/address/domain/usecases/login_usecase.dart' as _i728;
 import '../../features/address/presentation/blocs/areas/areas_cubit.dart'
     as _i833;
+import '../../features/address/presentation/blocs/my_address/address_cubit.dart'
+    as _i603;
 import '../../features/auth/data/data_sources/auth_data_sources_repo.dart'
     as _i69;
 import '../../features/auth/data/data_sources/auth_data_sources_rpo_impl.dart'
@@ -50,8 +52,6 @@ import '../../features/cart/data/data_sources/cart_data_sources_repo_impl.dart'
 import '../../features/cart/data/repo_impl/cart_repo_impl.dart' as _i966;
 import '../../features/cart/domain/repo/cart_repo.dart' as _i379;
 import '../../features/cart/domain/use_cases/cart_use_case.dart' as _i886;
-import '../../features/cart/presentation/cubit/address/address_cubit.dart'
-    as _i499;
 import '../../features/cart/presentation/cubit/cart_cubit.dart' as _i499;
 import '../../features/categories/data/data_sources/categorieS_zone_data_sourse.dart'
     as _i426;
@@ -158,10 +158,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1057.SearchUseCaseRepo>(
       () => _i489.SearchUseCase(gh<_i357.SearchRepository>()),
     );
-    gh.factory<_i139.AddressRemoteDataSource>(
-      () => _i318.AddressRemoteDataSourceImpl(gh<_i680.ApiService>()),
-    );
     gh.factory<_i117.AuthCubit>(() => _i117.AuthCubit(gh<_i283.AuthUseCase>()));
+    gh.factory<_i397.AddressDataSource>(
+      () => _i595.AddressRemoteDataSourceImpl(gh<_i680.ApiService>()),
+    );
     gh.factory<_i280.HomeRepo>(
       () => _i886.HomeRepoImpl(gh<_i645.HomeDataSourceRepo>()),
     );
@@ -173,9 +173,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i83.CategoriesZoneRepo>(
       () => _i106.CategoriesZoneRepoImpl(gh<_i426.CategoriesZoneDataSource>()),
-    );
-    gh.factory<_i463.AddressRepository>(
-      () => _i590.AddressRepositoryImpl(gh<_i139.AddressRemoteDataSource>()),
     );
     gh.factory<_i529.AddOrderUseCaseRepo>(
       () => _i35.OrdersUseCasesImpl(gh<_i357.OrdersRepo>()),
@@ -194,6 +191,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i258.ProductsUseCase>(
       () => _i258.ProductsUseCase(gh<_i482.ProductsRepo>()),
+    );
+    gh.factory<_i463.AddressRepository>(
+      () => _i590.AddressRepositoryImpl(gh<_i397.AddressDataSource>()),
     );
     gh.factory<_i933.HomeUseCase>(
       () => _i933.HomeUseCase(gh<_i280.HomeRepo>()),
@@ -223,8 +223,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i833.AreasCubit>(
       () => _i833.AreasCubit(gh<_i194.AddressUseCaseRepo>()),
     );
-    gh.factory<_i499.AddressCubit>(
-      () => _i499.AddressCubit(gh<_i194.AddressUseCaseRepo>()),
+    gh.factory<_i603.AddressCubit>(
+      () => _i603.AddressCubit(gh<_i194.AddressUseCaseRepo>()),
     );
     gh.factory<_i499.CartCubit>(() => _i499.CartCubit(gh<_i886.CartUseCase>()));
     return this;
