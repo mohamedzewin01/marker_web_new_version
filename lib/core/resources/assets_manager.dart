@@ -18,12 +18,12 @@ class Assets {
   static const String cartIcon = 'assets/images/cart_icon.png';
   static const String user = 'assets/images/user.png';
   static const String search = 'assets/images/search.png';
-  static const String cartEmpty = 'assets/images/cart_empty.png';
+  static const String cartEmpty = 'assets/images/cartEmpty.png';
   static const String orderEmpty = 'assets/images/order_empty.png';
   static const String success = 'assets/images/success.png';
   static const String settings = 'assets/images/settings.png';
   static const String cart2 = 'assets/images/cart.png';
-  // static const String filter = 'assets/images/filter.png';
+
   static const String filter = 'assets/images/filter.svg';
   static const String categoriesSvg = 'assets/images/categories.svg';
   static const String homeSvg = 'assets/images/home.svg';

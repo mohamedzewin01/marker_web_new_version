@@ -7,6 +7,7 @@ import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_elevated_button.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_empty.dart';
 import 'package:fada_alhalij_web/core/widgets/rial_icon.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/widgets/cart_order_item_card.dart';
 import 'package:fada_alhalij_web/features/order/data/models/response/get_active_orders_dto.dart';
@@ -51,11 +52,11 @@ class _ActiveOrderViewState extends State<ActiveOrderView> {
                     slivers: [
                       SliverToBoxAdapter(
                         child: Container(
-                          margin:   EdgeInsets.only(
-                          top: 8,
-                          right: 8,
-                          left: 8,
-                          bottom: 65,),
+                          margin: EdgeInsets.only(
+                            top: 8,
+                            right: 8,
+                            left: 8,
+                            bottom: 65,),
                           padding: EdgeInsets.symmetric(
                             horizontal: 8,
                             vertical: 8,
@@ -86,7 +87,8 @@ class _ActiveOrderViewState extends State<ActiveOrderView> {
                                     ),
 
                                     TextSpan(
-                                      text: '${cartItems [0].createdAt?.split(' ')[0]}',
+                                      text: '${cartItems [0].createdAt?.split(
+                                          ' ')[0]}',
                                       style: getSemiBoldStyle(
                                         color: ColorManager.primaryColor,
                                         fontSize: 14,
@@ -120,76 +122,20 @@ class _ActiveOrderViewState extends State<ActiveOrderView> {
               ],
             );
           }
-          if(state is OrdersActiveFail){
+          if (state is OrdersActiveFail) {
             if (isActiveUser) {
-              return SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    Image.asset(Assets.orderEmpty),
-                    Positioned(
-                      top: 150,
-                      left: 0,
-                      right: 0,
-
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.sizeOf(context).width * 0.25,
-                        ),
-
-                        child: AutoSizeText(
-                          'لا يوجد طلبات',
-                          textAlign: TextAlign.center,
-                          style: getSemiBoldStyle(
-                            color: ColorManager.primaryColor,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              return CustomEmpty(
+                text: ' لا يوجد طلبات نشطة',
+                activeButton: false,
               );
+
             } else {
-              return SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    Image.asset(Assets.orderEmpty),
-
-                    Positioned(
-                      top: 150,
-                      left: 0,
-                      right: 0,
-
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.sizeOf(context).width * 0.25,
-                        ),
-
-                        child: Column(
-                          children: [
-                            AutoSizeText(
-                              'قم بالتسجيل الدخول للمتابعة',
-                              textAlign: TextAlign.center,
-                              style: getSemiBoldStyle(
-                                color: ColorManager.primaryColor,
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(height: 20,),
-                            CustomElevatedButton(
-                              buttonColor: ColorManager.primaryColor,
-                              title: "تسجيل دخول",
-                              onPressed: () {
-                                showAuthOrAddToCartDialog(context);
-                              },
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              return CustomEmpty(
+                text: 'قم بالتسجيل الدخول للمتابعة',
+                textButton: 'تسجيل دخول',
+                onTap: () {
+                  showAuthOrAddToCartDialog(context);
+                },);
             }
           }
 

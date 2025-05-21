@@ -10,7 +10,7 @@ import 'package:fada_alhalij_web/features/order/presention/pages/completed_order
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
 
 

@@ -6,11 +6,14 @@ import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_elevated_button.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_empty.dart';
 import 'package:fada_alhalij_web/features/cart/data/models/response/cart_dto.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/widgets/cart_items_list_section.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/widgets/cart_summary_section.dart';
 import 'package:fada_alhalij_web/features/cart/presentation/widgets/skeletonizer_cart.dart';
+import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
+import 'package:fada_alhalij_web/localization/locale_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,13 +24,11 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         BlocConsumer<CartCubit, CartState>(
-          listener: (context, state) {// Handle listener logic here
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             viewModel.cartItems.clear();
             if (state is CartSuccess) {
@@ -37,121 +38,46 @@ class CartBody extends StatelessWidget {
               viewModel.myCart = state.cartEntity?.cart?.copyWith(
                 finalPrice: state.cartEntity?.cart?.finalPrice,
               );
-              return cartItems.isNotEmpty ? Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomScrollView(
-                    slivers: [
-                      CartItemsListSection(viewModel: viewModel),
-                      CartSummarySection(viewModel: viewModel),
-                    ],
-                  ),
-                ),
-              ):SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    Image.asset(Assets.cartEmpty),
-                    Positioned(
-                      top: 150,
-                      left: 0,
-                      right: 0,
-
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.sizeOf(context).width * 0.25,
-                        ),
-
-                        child: AutoSizeText(
-                          'لا يوجد عناصر في السلة',
-                          textAlign: TextAlign.center,
-                          style: getSemiBoldStyle(
-                            color: ColorManager.primaryColor,
-                            fontSize: 20,
-                          ),
-                        ),
+              return cartItems.isNotEmpty
+                  ? Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomScrollView(
+                        slivers: [
+                          CartItemsListSection(viewModel: viewModel),
+                          CartSummarySection(viewModel: viewModel),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              );
+                  )
+                  : CustomEmpty(
+                    text: 'لا يوجد عناصر في السلة',
+                    textButton: 'تسوق الان',
+                    onTap: () {
+                      LayoutCubit.get(context).changeIndex(0);
+                    },
+                  );
+
             }
             if (state is CartLoading) {
               return SkeCart();
             }
             if (state is CartFail) {
-
-              print('44444444444444444444444$isActiveUser');
               if (isActiveUser) {
-                return SingleChildScrollView(
-                  child: Stack(
-                    children: [
-                      AspectRatio(
-                          aspectRatio: 1,
-                          child: Image.asset(Assets.cartEmpty)),
-                      Positioned(
-                        top: 150,
-                        left: 0,
-                        right: 0,
-
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.sizeOf(context).width * 0.35,
-                          ),
-
-                          child: AutoSizeText(
-                            'لا يوجد عناصر في السلة',
-                            textAlign: TextAlign.center,
-                            style: getSemiBoldStyle(
-                              color: ColorManager.primaryColor,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                return CustomEmpty(
+                  onTap: () {
+                    LayoutCubit.get(context).changeIndex(0);
+                  },
+                  text: 'السله فارغة',
+                  textButton: 'تسوق الان',
                 );
               } else {
-                return SingleChildScrollView(
-                  child: Stack(
-                    children: [
-                      AspectRatio(
-                          aspectRatio: 1,
-                          child: Image.asset(Assets.cartEmpty)),
-                      Positioned(
-                        top: 150,
-                        left: 0,
-                        right: 0,
-
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.sizeOf(context).width * 0.35,
-                          ),
-
-                          child: Column(
-                            children: [
-                              AutoSizeText(
-                                'قم بالتسجيل الدخول للمتابعة',
-                                textAlign: TextAlign.center,
-                                style: getSemiBoldStyle(
-                                  color: ColorManager.primaryColor,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              SizedBox(height: 20,),
-                              CustomElevatedButton(
-                                buttonColor: ColorManager.primaryColor,
-                                title: "تسجيل دخول",
-                                onPressed: () {
-                                  showAuthOrAddToCartDialog(context);
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                return CustomEmpty(
+                  text: 'قم بالتسجيل الدخول للمتابعة',
+                  textButton: 'تسجيل دخول',
+                  onTap: () {
+                    showAuthOrAddToCartDialog(context);
+                  },
                 );
               }
             }
