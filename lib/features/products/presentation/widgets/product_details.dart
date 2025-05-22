@@ -1,14 +1,22 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fada_alhalij_web/core/di/di.dart';
 import 'package:fada_alhalij_web/core/functions/is_user_logged_in.dart';
 import 'package:fada_alhalij_web/core/functions/launch_url.dart';
 import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
+import 'package:fada_alhalij_web/core/resources/values_manager.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_icon_share.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_sliver_app_bar.dart';
 import 'package:fada_alhalij_web/core/widgets/rial_icon.dart';
+import 'package:fada_alhalij_web/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
+import 'package:fada_alhalij_web/features/products/presentation/widgets/button_add_to_cart_details.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/products_relation.dart';
 import 'package:fada_alhalij_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/curve_clipper.dart';
@@ -29,49 +37,20 @@ class ProductDetails extends StatelessWidget {
             flex: 2,
             child: CustomScrollView(
               slivers: [
-                SliverAppBar(
-                  backgroundColor: ColorManager.primaryColor.withAlpha(200),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(4),
-                    ),
-                  ),
-                  title: AutoSizeText(
-                    ' ${PromotionalMessages.buyTwoGetThirdFree}  ${product.productName}' ??
-                        '',
-                    style: getSemiBoldStyle(
-                      color: ColorManager.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                  actions: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 22,
-                        color: ColorManager.white,
-                      ),
-                    ),
-                  ],
-                  centerTitle: true,
-                  floating: true,
-                  snap: true,
-                  automaticallyImplyLeading: false,
-                  flexibleSpace: ClipPath(
-                    clipper: InwardCurveClipper(),
-                    child: Container(color: ColorManager.primaryColor),
-                  ),
+                CustomSliverAppBar(
+                  title: product.productName ?? '',
+                  onBackTap: Navigator.of(context).pop,
+
+                  isBack: true,
                 ),
+
                 SliverToBoxAdapter(
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Hero(
-                        tag: '${product.idProduct}55',
+                        tag: '${product.idProduct}00.00',
                         child: Stack(
                           children: [
                             AspectRatio(
@@ -79,31 +58,35 @@ class ProductDetails extends StatelessWidget {
                               child: CustomImage(url: product.imageCover ?? ''),
                             ),
                             Positioned(
-                              right: 0,
-                              bottom: 0,
-                              child: IconButton(
-                                onPressed: () {
-                                  showAuthOrAddToCartDialog(
-                                    context,
-                                    idProduct: product.idProduct ?? 0,
-                                  );
-                                },
-                                icon: Container(
-                                  padding: EdgeInsets.all(7),
-                                  margin: EdgeInsets.all(4),
 
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: ColorManager.primaryColor,
-                                  ),
-                                  child: Icon(
-                                    size: 20,
-                                    Icons.add,
-                                    color: ColorManager.white,
-                                  ),
-                                ),
+                              bottom: 0,
+                              top: 0,
+                              child: Column(
+                                children: [
+                                  ButtonAddToCartDetails(product: product),
+                                  SizedBox(height: 10),
+                                  Container(
+                                    height: 35,
+                                    width: 35,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: ColorManager.primaryColor,
+                                    ),
+
+                                    child: CustomIconShare(
+                                      title: product.productName ?? '',
+                                      urlPreview: product.imageCover ?? '',
+                                      details: product.description ?? '',
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
+                            // Positioned(
+                            //   right: 10,
+                            //   bottom: 0,
+                            //   child: ,
+                            // ),
                           ],
                         ),
                       ),
@@ -137,17 +120,35 @@ class ProductDetails extends StatelessWidget {
                           product.productName ?? "????",
                           style: getSemiBoldStyle(
                             color: ColorManager.primaryColor,
-                            fontSize: 22,
+                            fontSize: 18,
                           ),
                         ),
                         SizedBox(height: 14),
                         Align(
                           alignment: Alignment.centerRight,
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'تفاصيل المنتج',
+                                style: getSemiBoldStyle(
+                                  color: ColorManager.blueDark,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
                           child: Text(
                             product.description ?? "????",
+                            textDirection: TextDirection.rtl,
+                            textAlign: TextAlign.justify,
+
                             style: getSemiBoldStyle(
                               color: ColorManager.placeHolderColor2,
-                              fontSize: 22,
+                              fontSize: 18,
                             ),
                           ),
                         ),
@@ -163,102 +164,112 @@ class ProductDetails extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 16),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                ' منتج مشابة 🛍️',
-                                style: getSemiBoldStyle(
-                                  color: ColorManager.black,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
                       ],
                     ),
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child:  ProductsRelation(
-                    idCategory: product.categoryId.toString(),
-                    idProduct: product.idProduct,
+                  child: Container(
+                    color: ColorManager.primaryColor.withAlpha(200),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12, right: 12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            ' منتج مشابة 🛍️',
+                            style: getSemiBoldStyle(
+                              color: ColorManager.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                )
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    color: ColorManager.primaryColor.withAlpha(200),
+                    child: ProductsRelation(
+                      idCategory: product.categoryId.toString(),
+                      idProduct: product.idProduct,
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(child: SizedBox(height: 16)),
               ],
             ),
           ),
-          Expanded(
-            flex: 0,
-
-            child: Container(
-              height: 50,
-              color: ColorManager.primaryColor.withAlpha(200),
-              clipBehavior: Clip.none,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    product.productPriceAfterDiscount == 0
-                                        ? "${product.productPrice ?? 0.00} ريال "
-                                        : "${product.productPriceAfterDiscount ?? 0.00} ريال ",
-                                    style: getSemiBoldStyle(
-                                      color: ColorManager.white,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                child: IconButton(
-                                  onPressed: () {
-                                    CustomLaunchUrl.launchUrlShareApp(
-                                      title: product.productName ?? '',
-                                      urlPreview: product.imageCover ?? '',
-                                      details: product.description ?? '',
-                                    );
-                                  },
-                                  icon: SvgPicture.asset(
-                                    Assets.share,
-                                    colorFilter: const ColorFilter.mode(
-                                      Colors.white,
-                                      BlendMode.srcIn,
-                                    ),
-                                    width: 20,
-                                    height: 20,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Expanded(
+          //   flex: 0,
+          //
+          //   child: Container(
+          //     height: 50,
+          //     color: ColorManager.placeHolderColor2.withAlpha(200),
+          //     clipBehavior: Clip.none,
+          //     child: Stack(
+          //       clipBehavior: Clip.none,
+          //       children: [
+          //         Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 16),
+          //           child: Column(
+          //             children: [
+          //               Expanded(
+          //                 child: Row(
+          //                   crossAxisAlignment: CrossAxisAlignment.center,
+          //                   children: [
+          //                     Column(
+          //                       crossAxisAlignment: CrossAxisAlignment.start,
+          //                       mainAxisAlignment: MainAxisAlignment.center,
+          //                       children: [
+          //                         Text(
+          //                           product.productPriceAfterDiscount == 0
+          //                               ? "${product.productPrice ?? 0.00} ريال "
+          //                               : "${product.productPriceAfterDiscount ?? 0.00} ريال ",
+          //                           style: getSemiBoldStyle(
+          //                             color: ColorManager.white,
+          //                             fontSize: 18,
+          //                           ),
+          //                         ),
+          //                       ],
+          //                     ),
+          //                     Spacer(),
+          //                     Container(
+          //                       padding: EdgeInsets.all(8),
+          //                       child: IconButton(
+          //                         onPressed: () {
+          //                           CustomLaunchUrl.launchUrlShareApp(
+          //                             title: product.productName ?? '',
+          //                             urlPreview: product.imageCover ?? '',
+          //                             details: product.description ?? '',
+          //                           );
+          //                         },
+          //                         icon: SvgPicture.asset(
+          //                           Assets.share,
+          //                           colorFilter: const ColorFilter.mode(
+          //                             Colors.white,
+          //                             BlendMode.srcIn,
+          //                           ),
+          //                           width: 20,
+          //                           height: 20,
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   ],
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
   }
 }
+
+

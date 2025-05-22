@@ -1,5 +1,6 @@
 import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
 import 'package:fada_alhalij_web/core/widgets/permission_service.dart';
+import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
 
 
@@ -108,22 +109,20 @@ class CustomDialog {
     );
   }
 
-  static void showSuccessDialog(BuildContext context, {Widget? goto, String? message}) {
+  static void showSuccessDialog(BuildContext context, {  VoidCallback? onDialogClose, String? message}) {
     Navigator.pop(context,true);
     showDialog(
       context: context,
       barrierDismissible: false,
+
       builder: (context) {
         Future.delayed(const Duration(seconds: 3), () {
           if (context.mounted) {
 
-            Navigator.pop(context,true);
-            if (goto != null) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => goto,
-                  ));
+            Navigator.pop(context);
+            if (onDialogClose != null) {
+
+              // onDialogClose();
             }
           }
         });

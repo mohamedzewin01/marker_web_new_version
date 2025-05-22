@@ -40,8 +40,7 @@ class _CategoriesState extends State<Categories> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: CustomScrollView(
               slivers: [
-                CustomSliverAppBar(title: 'الاقسام'),
-
+                CustomSliverAppBar(title: 'الاقسام',isBack: true,),
                 CategoryBar(viewModel: viewModel)
               ],
             ),

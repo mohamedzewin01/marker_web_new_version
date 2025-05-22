@@ -94,7 +94,7 @@ class CategoriesView extends StatelessWidget {
             child: AutoSizeText(
               catName,
               overflow: TextOverflow.ellipsis,
-              maxLines: 2,
+              maxLines: 1,
               style: getSemiBoldStyle(color: ColorManager.black, fontSize: 12),
               textAlign: TextAlign.center,
             ),

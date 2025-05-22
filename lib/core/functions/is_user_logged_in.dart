@@ -48,7 +48,10 @@ void showAuthOrAddToCartDialog(BuildContext context, {int? idProduct}) async {
         ),
       ).then((value) {
         if (value==true) {
-          CartCubit.get(context).getCart();
+          if(context.mounted){
+            CartCubit.get(context).getCart();
+          }
+
         }
       });
     },

@@ -30,4 +30,6 @@ class ApiConstants {
   static const String getCompletedOrder = "orders/getCompletedOrder";
   static const String getDeliveryAreas = "areas/get_delivery_areas";
   static const String search = "search/search_paginationV2";
+  static const String editProfile = "profile/editProfile";
+  static const String getUserInfo = "profile/getUserInfo";
 }

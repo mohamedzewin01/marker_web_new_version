@@ -6,6 +6,7 @@ import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_dialog.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_elevated_button.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_empty.dart';
 import 'package:fada_alhalij_web/core/widgets/rial_icon.dart';
@@ -38,7 +39,10 @@ class _ActiveOrderViewState extends State<ActiveOrderView> {
       value: viewModel..getActiveOrders(),
       child: BlocConsumer<ActiveOrdersCubit, ActiveOrdersState>(
         listener: (context, state) {
-          // Handle listener logic here
+          if (state is OrdersActiveFail){
+            // CustomDialog.showErrorDialog(context, message: state.exception.toString());
+          }
+
         },
         builder: (context, state) {
           if (state is OrdersActiveSuccess) {

@@ -62,6 +62,7 @@ dependencies:
   url_launcher: ^6.3.1
   flutter_typeahead: ^5.2.0
   syncfusion_flutter_sliders: ^29.2.4
+  connectivity_plus: ^6.1.4
 #  geolocator_web: ^4.1.3
 
 

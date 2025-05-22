@@ -8,8 +8,10 @@ import 'package:fada_alhalij_web/features/address/data/models/response/get_user_
 import 'package:fada_alhalij_web/features/analytics/model/device_response.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/request/auth_signin_request.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/request/auth_signup_request.dart';
+import 'package:fada_alhalij_web/features/auth/data/models/request/edit_profile_request.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/responses/auth_signup_response_dto.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/responses/auth_singin_response_dto.dart';
+import 'package:fada_alhalij_web/features/auth/data/models/responses/edit_profile_dto.dart';
 import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_categories_model.dart';
 import 'package:fada_alhalij_web/features/best_deals/data/models/best_deals_by_discount.dart';
 import 'package:fada_alhalij_web/features/best_deals/data/models/fetch_best_deals.dart';
@@ -30,6 +32,8 @@ import 'package:fada_alhalij_web/features/order/data/models/request/get_active_o
 import 'package:fada_alhalij_web/features/order/data/models/response/add_order_dto.dart';
 import 'package:fada_alhalij_web/features/order/data/models/response/get_active_orders_dto.dart';
 import 'package:fada_alhalij_web/features/products/data/models/products_model_response.dart';
+import 'package:fada_alhalij_web/features/profile/data/models/request/get_user_info_request.dart';
+import 'package:fada_alhalij_web/features/profile/data/models/response/get_user_info_dto.dart';
 import 'package:fada_alhalij_web/features/search/data/models/request/search_request.dart';
 import 'package:fada_alhalij_web/features/search/data/models/response/search_dto.dart';
 import 'package:injectable/injectable.dart';
@@ -143,6 +147,17 @@ abstract class ApiService {
   Future<EditAddressDto?> editAddress(
       @Body() EditAddressRequest editAddressRequest,
       );
+
+  @POST(ApiConstants.editProfile)
+  Future<EditProfileDto?> editProfile(
+      @Body() EditProfileRequest editProfileRequest,
+      );
+
+  @POST(ApiConstants.getUserInfo)
+  Future<GetProfileUserInfoDto?> getUserInfo(
+      @Body() GetUserInfoRequest getUserInfoRequest,
+      );
+
 }
 
 //  @MultiPart()

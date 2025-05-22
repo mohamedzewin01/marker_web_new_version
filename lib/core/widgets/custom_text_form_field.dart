@@ -431,7 +431,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onToggle,
     this.isPassword = false,
     this.onFieldSubmitted,
-    this.maxLines, this.textDirection,
+    this.maxLines, this.textDirection, this.isRequired,
   });
 
   final TextEditingController controller;
@@ -440,6 +440,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final bool? obscureText;
   final bool? isPassword;
+  final bool? isRequired;
   final VoidCallback? onToggle;
   final bool? enabled;
   final String? Function(String?)? validator;
@@ -451,6 +452,7 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
   final void Function()? onTap;
+  // final Widget? label;
 
   @override
   Widget build(BuildContext context) {
@@ -487,7 +489,19 @@ class CustomTextFormField extends StatelessWidget {
                 )
                 : suffix,
         suffixIconColor: ColorManager.cyanDark,
-        labelText: labelText,
+        label:RichText(
+          text: TextSpan(
+            text: labelText ?? '',
+            style: getSemiBoldStyle(color: ColorManager.blueDark, fontSize: 14),
+            children: [
+              if(isRequired??false)  TextSpan(
+                text: '*',
+                style: getSemiBoldStyle(color: ColorManager.error, fontSize: 16),
+              ),
+            ],
+          ),
+        )??Container() ,
+        // labelText: labelText,
         labelStyle: getRegularStyle(
           color: ColorManager.black,
           fontSize: FontSize.s16,

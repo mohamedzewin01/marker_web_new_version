@@ -31,7 +31,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
             emit(CategoriesSuccess(result.data));
           }
         }
-      case Fail<CategoriesZoneEntity>():
+      case Fail<CategoriesZoneEntity?>():
         {
           emit(CategoriesFail(result.exception));
         }

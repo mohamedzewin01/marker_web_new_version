@@ -4,8 +4,10 @@ import 'package:fada_alhalij_web/features/products/data/models/products_model_re
 import 'package:fada_alhalij_web/features/products/presentation/cubit/products_cubit.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/custom_product_card.dart';
 import 'package:fada_alhalij_web/features/products/presentation/widgets/product_details.dart';
+import 'package:fada_alhalij_web/features/products/presentation/widgets/ske_products_relation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductsRelation extends StatefulWidget {
   const ProductsRelation({
@@ -51,37 +53,39 @@ class _ProductsRelationState extends State<ProductsRelation> {
                     (constraints.maxWidth > 500) ? 300 : 200;
                 return SizedBox(
                   height: 310,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: GridView.builder(
-                      itemCount: products.length,
-                      scrollDirection: Axis.horizontal,
-                      // shrinkWrap: true,
-                      // physics: NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12,
-                        childAspectRatio: 0.80,
-                        mainAxisExtent: mainAxisExtent,
-                      ),
-                      itemBuilder:
-                          (context, index) => GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: CustomProductCardWidget(
-                              product: products[index],
-                            ),
+                  child: GridView.builder(
+                    itemCount: products.length,
+                    scrollDirection: Axis.horizontal,
+                    // shrinkWrap: true,
+                    // physics: NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      mainAxisSpacing: 12,
+                      crossAxisSpacing: 12,
+                      childAspectRatio: 0.80,
+                      mainAxisExtent: mainAxisExtent,
+                    ),
+                    itemBuilder:
+                        (context, index) => GestureDetector(
+
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: CustomProductCardWidget(
+                            product: products[index],
                           ),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8,
-                      ), // تأكد من إزالة أي padding
+                        ),
+                    padding: EdgeInsets.symmetric(
+
+                      vertical: 16,
                     ),
                   ),
                 );
               },
             );
+          }
+          if(state is ProductsLoading){
+          return  SkeProductsRelation();
           }
           return SizedBox();
         },

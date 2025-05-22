@@ -35,7 +35,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       providers: [
         BlocProvider(create: (context) => LayoutCubit()),
         BlocProvider(create: (context) => SearchCubit()),
-        BlocProvider(create: (context) => GetIt.instance<CartCubit>()),
+        // BlocProvider.value(value: GetIt.instance<CartCubit>()),
       ],
 
       child: AdaptiveLayout(

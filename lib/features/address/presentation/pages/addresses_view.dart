@@ -7,7 +7,6 @@ import 'package:fada_alhalij_web/features/address/data/models/response/get_user_
 import 'package:fada_alhalij_web/features/address/presentation/widgets/add_address.dart';
 import 'package:fada_alhalij_web/features/address/presentation/blocs/my_address/address_cubit.dart';
 import 'package:fada_alhalij_web/features/address/presentation/widgets/address_item.dart';
-import 'package:fada_alhalij_web/features/address/presentation/widgets/edit_address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -51,7 +51,7 @@ class HomeCubit extends Cubit<HomeState> {
 
         }
 
-      case Fail<HomeEntity>():
+      case Fail<HomeEntity?>():
         {
           emit(HomeFail(result.exception));
         }

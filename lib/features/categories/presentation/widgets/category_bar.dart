@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/api/api_constants.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_dialog.dart';
 import 'package:fada_alhalij_web/core/widgets/ske_grid_product.dart';
 import 'package:fada_alhalij_web/features/categories/presentation/widgets/ske_categories.dart';
+import 'package:fada_alhalij_web/features/home/presentation/pages/home_view.dart';
 import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:fada_alhalij_web/features/products/presentation/pages/products_view.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,13 @@ class _CategoryBarState extends State<CategoryBar> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CategoriesCubit, CategoriesState>(
+    return BlocConsumer<CategoriesCubit, CategoriesState>(
+      listener: (context, state) {
+        if(state is CategoriesFail){
+
+          CustomDialog.showErrorDialog(context, message: state.exception.toString());
+        }
+      },
       builder: (context, state) {
         if (state is CategoriesSuccess) {
           List<Categories>? categoriesZone =
@@ -154,8 +162,8 @@ class _CategoryBarState extends State<CategoryBar> {
         if (state is CategoriesLoading) {
           return SkeCategories();
         }
-        if (state is CategoriesFail) {}
-        return SliverToBoxAdapter(child: Center(child: AutoSizeText('error')));
+
+        return SliverToBoxAdapter(child: CustomErrorWidget());
       },
     );
   }

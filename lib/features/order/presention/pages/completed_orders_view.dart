@@ -5,6 +5,7 @@ import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_dialog.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_elevated_button.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_empty.dart';
 import 'package:fada_alhalij_web/features/order/data/models/response/get_active_orders_dto.dart';
@@ -36,13 +37,15 @@ class _CompletedOrdersViewState extends State<CompletedOrdersView> {
       value: viewModel..getCompletedOrder(),
       child: BlocConsumer<ActiveOrdersCubit, ActiveOrdersState>(
         listener: (context, state) {
-          // Handle listener logic here
+          if (state is OrdersCompletedFail) {
+            // CustomDialog.showErrorDialog(context, message: state.exception.toString());
+          }
         },
         builder: (context, state) {
           if (state is OrdersCompletedSuccess) {
             List<ActiveOrder>? cartItems =
                 state.getActiveOrdersEntity.orders ?? [];
-            print(cartItems.length);
+
             return Column(
               children: [
                 Expanded(

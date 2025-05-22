@@ -23,3 +23,5 @@ final class AuthSignInFail extends AuthState {
   final Exception exception;
   AuthSignInFail(this.exception);
 }
+
+final class  AuthEditProfileLoading extends AuthState {}

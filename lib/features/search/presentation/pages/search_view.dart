@@ -61,7 +61,7 @@ class _SearchPageState extends State<SearchPage> {
               CustomScrollView(
                 controller: _scrollController,
                 slivers: [
-                  CustomSliverAppBar(title: 'البحث'),
+                  CustomSliverAppBar(title: 'البحث',isBack: true,),
                   CustomSearchBar(viewModel: viewModel),
                   const SliverToBoxAdapter(child: SizedBox(height: 16)),
                   SliverPadding(

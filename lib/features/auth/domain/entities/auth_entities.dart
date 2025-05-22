@@ -31,3 +31,17 @@ class AuthSingInEntity {
 
 
 }
+
+class EditProfileEntity {
+
+  final bool? status;
+
+  final String? message;
+
+  EditProfileEntity ({
+    this.status,
+    this.message,
+  });
+
+
+}

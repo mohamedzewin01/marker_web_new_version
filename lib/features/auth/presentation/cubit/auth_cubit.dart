@@ -3,6 +3,7 @@ import 'package:fada_alhalij_web/core/common/api_result.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/request/auth_signin_request.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/request/auth_signup_request.dart';
+import 'package:fada_alhalij_web/features/auth/data/models/request/edit_profile_request.dart';
 import 'package:fada_alhalij_web/features/auth/data/models/responses/auth_singin_response_dto.dart';
 import 'package:fada_alhalij_web/features/auth/domain/entities/auth_entities.dart';
 import 'package:fada_alhalij_web/features/auth/domain/use_cases/auth_use_case.dart';
@@ -36,23 +37,23 @@ class AuthCubit extends Cubit<AuthState> {
       case Success<AuthSingInEntity?>():
         {
           if (!isClosed) {
-           await CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.userId,
               value: result.data?.user?.id,
             );
-           await  CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.userName,
               value: result.data?.user?.username,
             );
-           await  CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.userEmail,
               value: result.data?.user?.email,
             );
-           await   CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.userPhone,
               value: result.data?.user?.phone,
             );
-           await  CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.isActive,
               value: true,
             );
@@ -83,15 +84,15 @@ class AuthCubit extends Cubit<AuthState> {
       case Success<AuthSignupEntity?>():
         {
           if (!isClosed) {
-            await  CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.userId,
               value: result.data?.user?.id,
             );
-            await  CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.userName,
               value: result.data?.user?.name,
             );
-            await  CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.userEmail,
               value: result.data?.user?.email,
             );
@@ -99,7 +100,7 @@ class AuthCubit extends Cubit<AuthState> {
               key: CacheConstants.userPhone,
               value: result.data?.user?.phone,
             );
-            await  CacheService.setData(
+            await CacheService.setData(
               key: CacheConstants.isActive,
               value: true,
             );
@@ -112,6 +113,8 @@ class AuthCubit extends Cubit<AuthState> {
         }
     }
   }
+
+
+
+
 }
-
-

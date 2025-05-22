@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fada_alhalij_web/core/resources/app_constants.dart';
 import 'package:fada_alhalij_web/core/resources/routes_manager.dart';
+import 'package:fada_alhalij_web/core/widgets/custom_dialog.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_sliver_app_bar.dart';
 import 'package:fada_alhalij_web/features/home/presentation/widgets/custom_card.dart';
 import 'package:fada_alhalij_web/features/home/presentation/widgets/sek_home.dart';
@@ -55,7 +56,16 @@ class _HomeViewState extends State<HomeView> {
           },
           body: BlocProvider.value(
             value: viewModel..getHomeData(),
-            child: BlocBuilder<HomeCubit, HomeState>(
+            child: BlocConsumer<HomeCubit, HomeState>(
+              listener: (context, state) {
+                if(state is HomeFail){
+
+                  final errorMessage = state.exception.toString();
+                  print(errorMessage);
+                  CustomDialog.showErrorDialog(context, message: errorMessage);
+                }
+              },
+
               builder: (context, state) {
                 if (state is HomeSuccess){
                   List<Categories>? categories =
@@ -128,9 +138,11 @@ class _HomeViewState extends State<HomeView> {
                 if (state is HomeLoading) {
                   return SkeHome();
                 }
-                if (state is HomeFail) {}
+                if (state is HomeFail) {
 
-                return Text('error');
+                }
+
+                return CustomErrorWidget();
 
               },
             ),
@@ -140,5 +152,21 @@ class _HomeViewState extends State<HomeView> {
     );
 
 
+  }
+}
+
+
+class CustomErrorWidget extends StatelessWidget {
+  const CustomErrorWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.error,size: 30,color: ColorManager.red,),
+        Text('حدث خطاء',style: getSemiBoldStyle(color: ColorManager.red,fontSize: 20),),
+      ],
+    ));
   }
 }

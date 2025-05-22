@@ -37,6 +37,9 @@ class CustomProductCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      clipBehavior: Clip.antiAlias,
+      animationDuration: Duration(milliseconds: 500),
+      borderRadius: BorderRadius.circular(12),
       child: GestureDetector(
         onTap: () {
           AnalyticsHelper.sendProductVisit(productId: product?.idProduct ?? 0);
@@ -51,152 +54,151 @@ class CustomProductCardWidget extends StatelessWidget {
         },
         child: Hero(
           tag: '${product?.idProduct}0',
-          child: IntrinsicHeight(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Color(0xffF1F1F5)),
-                borderRadius: BorderRadius.circular(8),
-              ),
+          child: Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              color: Colors.white60,
+              border: Border.all(color: Color(0xffF1F1F5)),
+              borderRadius: BorderRadius.circular(12),
+            ),
 
-              child: Column(
-                children: [
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8,
-                                horizontal: 8,
-                              ),
-                              child: Container(
-                                height: 120,
-                                width: double.infinity,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: CustomImage(
-                                  url: product?.imageCover ?? '',
-
-
-                                ),
-                              ),
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8,
+                              horizontal: 8,
                             ),
-                            SizedBox(height: 8),
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: AutoSizeText(
-                                product?.productPriceAfterDiscount != 0
-                                    ? product?.productPriceAfterDiscount
-                                            .toString() ??
-                                        ''
-                                    : product?.productPrice.toString() ?? '',
-                                style: TextStyle(
-                                  color: Color(0xffFF324B),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            product?.productPriceAfterDiscount == 0
-                                ? SizedBox(height: 10)
-                                : Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    AutoSizeText(
-                                      product?.productPrice.toString() ?? '',
-                                      style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: Get.theme.colorScheme.primary,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(width: 8),
-                                    AutoSizeText(
-                                      "${product?.descount}%",
-                                      style: TextStyle(
-                                        color: Color.fromARGB(
-                                          255,
-                                          27,
-                                          133,
-                                          185,
-                                        ),
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: AutoSizeText(
-                                product?.productName ?? "????",
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: getSemiBoldStyle(
-                                  color: ColorManager.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                            AutoSizeText(
-                              product?.description ?? "",
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: getSemiBoldStyle(
-                                color: ColorManager.placeHolderColor2,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      product?.productPriceAfterDiscount == 0
-                          ? SizedBox()
-                          : Positioned(
-                            top: 0, // to shift little up
-                            left: 0,
                             child: Container(
+                              height: 120,
+                              width: double.infinity,
+                              clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
-                                color: ColorManager.error,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(8),
-                                ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              padding: EdgeInsets.all(4),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
+                              child: CustomImage(
+                                url: product?.imageCover ?? '',
+
+
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: AutoSizeText(
+                              product?.productPriceAfterDiscount != 0
+                                  ? product?.productPriceAfterDiscount
+                                          .toString() ??
+                                      ''
+                                  : product?.productPrice.toString() ?? '',
+                              style: TextStyle(
+                                color: Color(0xffFF324B),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          product?.productPriceAfterDiscount == 0
+                              ? SizedBox(height: 10)
+                              : Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   AutoSizeText(
-                                    "${product?.descount}%",
-                                    style: getSemiBoldStyle(
-                                      color: ColorManager.white,
-                                      fontSize: 14,
+                                    product?.productPrice.toString() ?? '',
+                                    style: TextStyle(
+                                      decoration: TextDecoration.lineThrough,
+                                      color: Get.theme.colorScheme.primary,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  SizedBox(width: 8),
                                   AutoSizeText(
-                                    AppLocalizations.of(context)!.discount,
-                                    style: getSemiBoldStyle(
-                                      color: ColorManager.white,
+                                    "${product?.descount}%",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(
+                                        255,
+                                        27,
+                                        133,
+                                        185,
+                                      ),
                                       fontSize: 10,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
                               ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: AutoSizeText(
+                              product?.productName ?? "????",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: getSemiBoldStyle(
+                                color: ColorManager.black,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
-                    ],
-                  ),
-                  Spacer(),
-                  ButtonAddToCart(product: product),
-                ],
-              ),
+                          AutoSizeText(
+                            product?.description ?? "",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: getSemiBoldStyle(
+                              color: ColorManager.placeHolderColor2,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    product?.productPriceAfterDiscount == 0
+                        ? SizedBox()
+                        : Positioned(
+                          top: 0, // to shift little up
+                          left: 0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: ColorManager.error,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                              ),
+                            ),
+                            padding: EdgeInsets.all(4),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                AutoSizeText(
+                                  "${product?.descount}%",
+                                  style: getSemiBoldStyle(
+                                    color: ColorManager.white,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                AutoSizeText(
+                                  AppLocalizations.of(context)!.discount,
+                                  style: getSemiBoldStyle(
+                                    color: ColorManager.white,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                  ],
+                ),
+                Spacer(),
+                ButtonAddToCart(product: product),
+              ],
             ),
           ),
         ),
@@ -222,6 +224,11 @@ class _ButtonAddToCartState extends State<ButtonAddToCart> {
     viewModel = getIt.get<CartCubit>();
     super.initState();
   }
+  @override
+  void dispose() {
+    viewModel.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -231,8 +238,6 @@ class _ButtonAddToCartState extends State<ButtonAddToCart> {
         listener: (context, state) {
           if (state is CartAddSuccess) {
 
-
-// داخل دالة العرض
             Flushbar(
               message: "تمت إضافة المنتج إلى السلة",
               icon: const Icon(
@@ -246,43 +251,6 @@ class _ButtonAddToCartState extends State<ButtonAddToCart> {
               borderRadius: BorderRadius.circular(12),
             ).show(context);
 
-//             final messenger = ScaffoldMessenger.of(context);
-//
-// // إخفاء أي SnackBar مفتوح حالياً قبل إظهار الجديد
-//             messenger.hideCurrentSnackBar();
-//
-//             messenger.showSnackBar(
-//               SnackBar(
-//                 content: Row(
-//                   children: const [
-//                     Icon(
-//                       Icons.check_circle,
-//                       color: Colors.white,
-//                     ),
-//                     SizedBox(width: 10),
-//                     Expanded(
-//                       child: Text(
-//                         "تمت إضافة المنتج إلى السلة",
-//                         style: TextStyle(
-//                           color: Colors.white,
-//                           fontSize: 16,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 backgroundColor: Colors.green,
-//                 behavior: SnackBarBehavior.floating,
-//                 margin: const EdgeInsets.all(16),
-//                 shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.circular(12),
-//                 ),
-//                 duration: const Duration(seconds: 2),
-//               ),
-//             );
-//
-
           }
         },
         builder: (context, state) {
@@ -295,7 +263,7 @@ class _ButtonAddToCartState extends State<ButtonAddToCart> {
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(12),
                     bottomRight: Radius.circular(12),
-                  ), // يمكنك تعديل الرقم لتغيير الانحناء
+                  ),
                 ),
               ),
               onPressed: () {
@@ -311,14 +279,19 @@ class _ButtonAddToCartState extends State<ButtonAddToCart> {
                         FadeTransition(opacity: animation, child: child),
                 child:
                     state is CartAddLoading
-                        ? const SizedBox(
-                          key: ValueKey("loading"),
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ),
+                        ? Row(
+                          key: const ValueKey("loading"),
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            ),
+                          ],
                         )
                         : Row(
                           key: const ValueKey("button"),
@@ -353,61 +326,4 @@ class _ButtonAddToCartState extends State<ButtonAddToCart> {
   }
 }
 
-// class CustomProductCardWidget extends StatelessWidget {
-//   final ProductsRelations? product;
-//
-//   const CustomProductCardWidget({super.key, required this.product});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Card(
-//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-//       elevation: 4,
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           Image.network("${ApiConstants.baseUrlImage}${product?.imageCover}", height: 100, fit: BoxFit.cover),
-//           const SizedBox(height: 8),
-//           Text(
-//             product?.productName ?? "",
-//             textAlign: TextAlign.center,
-//             style: const TextStyle(fontSize: 14),
-//           ),
-//           const SizedBox(height: 4),
-//           Text(
-//             '${product?.productPrice ?? 0} جم',
-//             style: const TextStyle(
-//               fontWeight: FontWeight.bold,
-//               color: Colors.red,
-//               fontSize: 16,
-//             ),
-//           ),
-//           if (product?.productPrice != null)
-//             Text(
-//               '${product?.productPrice} جم',
-//               style: const TextStyle(
-//                 decoration: TextDecoration.lineThrough,
-//                 color: Colors.grey,
-//               ),
-//             ),
-//           const Spacer(),
-//           ElevatedButton.icon(
-//             onPressed: () {},
-//             icon: const Icon(Icons.shopping_cart),
-//             label: Text(product?.descount != null
-//                 ? 'إغلفة خصم ${product?.descount}%'
-//                 : 'إضافة للسلة'),
-//             style: ElevatedButton.styleFrom(
-//               backgroundColor: Colors.redAccent,
-//               minimumSize: const Size(double.infinity, 40),
-//               shape: RoundedRectangleBorder(
-//                 borderRadius: BorderRadius.circular(8),
-//               ),
-//             ),
-//           ),
-//           const SizedBox(height: 8),
-//         ],
-//       ),
-//     );
-//   }
-// }
+

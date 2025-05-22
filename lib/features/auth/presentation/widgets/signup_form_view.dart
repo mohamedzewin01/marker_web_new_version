@@ -28,9 +28,10 @@ class _SignupFormState extends State<SignupForm> {
       key: _formKey,
       child: Column(
         // mainAxisSize: MainAxisSize.min,
-        spacing: 12,
+        spacing: 16,
         children: [
           CustomTextFormField(
+            isRequired: true,
             controller: widget.viewModel.nameController,
             labelText: "الاسم",
             validator: (value) {
@@ -49,11 +50,11 @@ class _SignupFormState extends State<SignupForm> {
 
           ),
 
-          // CustomTextFormField(
-          //   controller: widget.viewModel.emailController,
-          //   labelText: "الايميل",
-          //   keyboardType: TextInputType.emailAddress,
-          // ),
+          CustomTextFormField(
+            controller: widget.viewModel.emailController,
+            labelText: "الايميل",
+            keyboardType: TextInputType.emailAddress,
+          ),
           Focus(
             onFocusChange: (hasFocus) {
               if (hasFocus && widget.viewModel.phoneController.text.isEmpty) {
@@ -61,6 +62,7 @@ class _SignupFormState extends State<SignupForm> {
               }
             },
             child: CustomTextFormField(
+              isRequired: true,
               controller: widget.viewModel.phoneController,
               textDirection: TextDirection.ltr,
               labelText: "رقم الجوال",
@@ -117,6 +119,7 @@ class _SignupFormState extends State<SignupForm> {
             ),
           ),
           CustomTextFormField(
+            isRequired: true,
             controller: widget.viewModel.passwordController,
             labelText: "كلمة المرور",
             hintText: "ادخل كلمة المرور",
@@ -135,6 +138,7 @@ class _SignupFormState extends State<SignupForm> {
             },
           ),
           CustomTextFormField(
+            isRequired: true,
             controller: widget.viewModel.rePasswordController,
             labelText: "تأكيد كلمة المرور",
             hintText: "تاكيد كلمة المرور",

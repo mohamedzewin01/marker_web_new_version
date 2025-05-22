@@ -28,7 +28,7 @@ class _SignInFormState extends State<SignInForm> {
     return Form(
       key: _formKey,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+       spacing: 8,
         children: [
           Focus(
             onFocusChange: (hasFocus) {
@@ -37,6 +37,7 @@ class _SignInFormState extends State<SignInForm> {
               }
             },
             child:CustomTextFormField(
+              isRequired: true,
               controller: widget.viewModel.loginController,
               textDirection: TextDirection.ltr,
               labelText: "رقم الجوال",
@@ -99,6 +100,7 @@ class _SignInFormState extends State<SignInForm> {
           ),
           SizedBox(height: 12,),
           CustomTextFormField(
+            isRequired: true,
             controller:  widget.viewModel.passwordSignInController,
             textDirection: TextDirection.ltr,
             labelText: "كلمة المرور",

@@ -2,6 +2,7 @@ import 'package:fada_alhalij_web/features/about/about_view.dart';
 import 'package:fada_alhalij_web/features/about/about_view_web.dart';
 import 'package:fada_alhalij_web/features/address/presentation/pages/addresses_view.dart';
 import 'package:fada_alhalij_web/features/auth/presentation/pages/auth_screen.dart';
+import 'package:fada_alhalij_web/features/profile/presentation/widgets/edit_info_user_form_view.dart';
 import 'package:fada_alhalij_web/features/terms/terms_view.dart';
 import 'package:fada_alhalij_web/features/terms/terms_view_web.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class RoutesManager {
   static const String aboutView = '/AboutView';
   static const String termsViewWeb = '/termsViewWeb';
   static const String aboutViewWeb = '/aboutViewWeb';
+  static const String editInfoUserForm = '/EditInfoUserForm';
 }
 
 class RouteGenerator {
@@ -76,6 +78,12 @@ class RouteGenerator {
       case RoutesManager.aboutViewWeb:
         return MaterialPageRoute(
           builder: (_) => const AboutViewWeb(),
+
+        );
+
+      case RoutesManager.editInfoUserForm:
+        return MaterialPageRoute(
+          builder: (_) => const EditInfoUserForm( ),
 
         );
       default:
