@@ -1,3 +1,6 @@
+import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
+import 'package:fada_alhalij_web/core/resources/color_manager.dart';
+import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/iframe_view.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +12,6 @@ class AboutViewWeb extends StatefulWidget {
 }
 
 class _AboutViewWebState extends State<AboutViewWeb> {
-
   final String termsUrl = "https://nextlaunch.artawiya.com/about.html";
 
   final String viewId = 'iframeElement';
@@ -19,18 +21,54 @@ class _AboutViewWebState extends State<AboutViewWeb> {
     super.initState();
 
     /// TODO: iframe_view   when web app
-    // IframeView.registerViewFactory(viewId, termsUrl);
-
+    IframeView.registerViewFactory(viewId, termsUrl);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('الشروط والأحكام'),
-          backgroundColor: const Color(0xFF009688),
+      appBar: AppBar(
+        centerTitle: true,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              // height: 30,
+              // width: 30,
+              padding: EdgeInsets.only(right: 6),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.grey.shade200),
+                  color:ColorManager.white
+              ),
+              child: Center(
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 22,
+                  color: Colors.grey.shade700,
+                ),
+              ),
+            ),
+          ),
         ),
-        body: HtmlElementView(viewType: viewId)
-
+        actions: [
+          Container(
+            padding: EdgeInsets.only(right: 7),
+            child: Center(
+              child: Image.asset(Assets.logo3, ),
+            ),
+          ),
+        ],
+        title: Text(
+          'معلومات عننا',
+          style: getSemiBoldStyle(color: ColorManager.white, fontSize: 16),
+        ),
+        backgroundColor: ColorManager.primaryColor,
+      ),
+      body: HtmlElementView(viewType: viewId),
     );
   }
 }

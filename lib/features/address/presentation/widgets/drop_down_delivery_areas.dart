@@ -44,17 +44,21 @@ class _DropDownDeliveryAreasState extends State<DropDownDeliveryAreas> {
                 (area) => area.id == widget.initialAreaId,
               );
             }
-
+            if (selectedArea == null && deliveryAreas.isNotEmpty) {
+              selectedArea = deliveryAreas.first;
+            }
             return Form(
               key: viewModel.formKeyAreas,
               child: DropdownButtonFormField<DataAreas>(
                 isExpanded: true,
+
                 hint: const Text('اختر منطقة التوصيل'),
 
                 value: selectedArea,
 
                 validator: (value) {
                   if (value == null) {
+
                     return 'الرجاء اختيار منطقة التوصيل';
                   }
                   return null;
@@ -64,6 +68,7 @@ class _DropDownDeliveryAreasState extends State<DropDownDeliveryAreas> {
                   isDense: false,
                   fillColor: Colors.grey.shade100,
                   labelText: 'اختر منطقة التوصيل',
+
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: 16,
