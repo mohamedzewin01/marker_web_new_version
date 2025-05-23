@@ -3,7 +3,6 @@ import 'package:fada_alhalij_web/core/widgets/permission_service.dart';
 import 'package:fada_alhalij_web/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
 
-
 import '../resources/color_manager.dart';
 import '../resources/style_manager.dart';
 
@@ -24,9 +23,7 @@ class CustomDialog {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CircularProgressIndicator(
-                  color: ColorManager.primaryColor,
-                ),
+                CircularProgressIndicator(color: ColorManager.primaryColor),
                 const SizedBox(height: 20),
                 Text(
                   "Loading...",
@@ -40,7 +37,10 @@ class CustomDialog {
     );
   }
 
-  static void showDeleteDialog(BuildContext context,{required void Function()? onPressed}) {
+  static void showDeleteDialog(
+    BuildContext context, {
+    required void Function()? onPressed,
+  }) {
     showDialog(
       context: context,
       builder: (context) {
@@ -70,9 +70,13 @@ class CustomDialog {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         side: const BorderSide(
-                            color: ColorManager.primaryColor, width: 2),
+                          color: ColorManager.primaryColor,
+                          width: 2,
+                        ),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -85,11 +89,13 @@ class CustomDialog {
 
                     // زر YES
                     ElevatedButton(
-                      onPressed:onPressed,
+                      onPressed: onPressed,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.primaryColor,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -109,8 +115,12 @@ class CustomDialog {
     );
   }
 
-  static void showSuccessDialog(BuildContext context, {  VoidCallback? onDialogClose, String? message}) {
-    Navigator.pop(context,true);
+  static void showSuccessDialog(
+    BuildContext context, {
+    VoidCallback? onDialogClose,
+    String? message,
+  }) {
+    Navigator.pop(context, true);
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -118,11 +128,9 @@ class CustomDialog {
       builder: (context) {
         Future.delayed(const Duration(seconds: 3), () {
           if (context.mounted) {
-
-            Navigator.pop(context);
+            Navigator.pop(context, true);
             if (onDialogClose != null) {
-
-              // onDialogClose();
+              onDialogClose();
             }
           }
         });
@@ -145,7 +153,7 @@ class CustomDialog {
                 // ),
                 const SizedBox(height: 10),
                 Text(
-                  message?? "Registration Successful!",
+                  message ?? "Registration Successful!",
                   style: getBoldStyle(color: ColorManager.white, fontSize: 20),
                 ),
                 const SizedBox(height: 10),
@@ -156,6 +164,7 @@ class CustomDialog {
       },
     );
   }
+
   static void showErrorDialog(BuildContext context, {String? message}) {
     showDialog(
       context: context,
@@ -205,9 +214,13 @@ class CustomDialog {
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Text("رجوع",
-                        style: getBoldStyle(
-                            color: ColorManager.white, fontSize: 18)),
+                    child: Text(
+                      "رجوع",
+                      style: getBoldStyle(
+                        color: ColorManager.white,
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -280,8 +293,10 @@ class CustomDialog {
   //   );
   // }
 
-  static void showIncompleteDataDialog(BuildContext context,
-      {void Function()? onPressed}) {
+  static void showIncompleteDataDialog(
+    BuildContext context, {
+    void Function()? onPressed,
+  }) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -328,9 +343,13 @@ class CustomDialog {
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Text("Complete Data",
-                        style: getBoldStyle(
-                            color: ColorManager.white, fontSize: 18)),
+                    child: Text(
+                      "Complete Data",
+                      style: getBoldStyle(
+                        color: ColorManager.white,
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -340,11 +359,12 @@ class CustomDialog {
       },
     );
   }
+
   static Future<dynamic> showDialogAddImage(
-      BuildContext context, {
-        required Function gallery,
-        required Function camera,
-      }) async {
+    BuildContext context, {
+    required Function gallery,
+    required Function camera,
+  }) async {
     return showDialog(
       context: context,
       barrierDismissible: true,
@@ -358,7 +378,7 @@ class CustomDialog {
           title: Text(
             "Choose Image Source",
             textAlign: TextAlign.center,
-            style:getBoldStyle(color: ColorManager.white, fontSize: 20),
+            style: getBoldStyle(color: ColorManager.white, fontSize: 20),
           ),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -389,8 +409,12 @@ class CustomDialog {
       },
     );
   }
-  static Widget _buildOption(
-      {required IconData icon, required String label, required Function onTap}) {
+
+  static Widget _buildOption({
+    required IconData icon,
+    required String label,
+    required Function onTap,
+  }) {
     return GestureDetector(
       onTap: () => onTap(),
       child: Column(
@@ -398,7 +422,10 @@ class CustomDialog {
         children: [
           Icon(icon, size: 40, color: ColorManager.primaryColor),
           SizedBox(height: 8),
-          Text(label, style:getBoldStyle(color: ColorManager.white, fontSize: 16)),
+          Text(
+            label,
+            style: getBoldStyle(color: ColorManager.white, fontSize: 16),
+          ),
         ],
       ),
     );

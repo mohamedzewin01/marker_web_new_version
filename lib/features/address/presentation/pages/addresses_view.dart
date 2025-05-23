@@ -64,14 +64,21 @@ class _AddressPageState extends State<AddressPage> {
                                 ),
                             itemCount: addresses.length,
                           )
-                          : Center(
-                            child: Text(
-                              'لا يوجد عناوين',
-                              style: getSemiBoldStyle(
-                                color: ColorManager.primaryColor,
-                                fontSize: 14,
+                          : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            spacing: 18,
+                            children: [
+                              Icon(Icons.event_note,color: ColorManager.primaryColor,size: 45,),
+                              Center(
+                                child: Text(
+                                  'لا يوجد عناوين',
+                                  style: getSemiBoldStyle(
+                                    color: ColorManager.primaryColor,
+                                    fontSize: 14,
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           );
                     }
                     if(state is AddressLoading){

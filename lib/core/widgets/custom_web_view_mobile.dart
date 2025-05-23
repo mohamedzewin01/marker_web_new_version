@@ -6,26 +6,42 @@ import '../resources/assets_manager.dart';
 class CustomWebViewMobile extends StatefulWidget {
   const CustomWebViewMobile({super.key, required this.url});
   final String url;
+
   @override
   State<CustomWebViewMobile> createState() => _CustomWebViewMobileState();
 }
 
 class _CustomWebViewMobileState extends State<CustomWebViewMobile> {
   late final WebViewController _controller;
+
+  String addTimestampToUrl(String url) {
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    if (url.contains('?')) {
+      return "$url&v=$timestamp";
+    } else {
+      return "$url?v=$timestamp";
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    _controller =
-    WebViewController()
+    final urlWithTimestamp = addTimestampToUrl(widget.url);
+
+    _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(widget.url));
+      ..loadRequest(Uri.parse(urlWithTimestamp));
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          WebViewWidget(controller: _controller),
+          Container(
+              color: ColorManager.primaryColor,
+              child: WebViewWidget(controller: _controller)),
           Positioned(
             top: 15,
             right: 15,

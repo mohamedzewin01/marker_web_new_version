@@ -53,9 +53,10 @@ class _AuthScreenState extends State<AuthScreen> {
                   message: "تم تسجيل الدخول بنجاح",
                 );
               }
+
               if (state is AuthSignUpSuccess) {
                 isActiveUser = true;
-                Navigator.pop(context, true);
+
                 CustomDialog.showSuccessDialog(
                   context,
                   message: "تم تسجيل الدخول بنجاح",
@@ -91,7 +92,10 @@ class _AuthScreenState extends State<AuthScreen> {
                 CustomSliverAppBar(
                   title: 'تسجيل الدخول',
                   isBack: false,
-                  onBackTap: () => Navigator.pop(context),
+                  onBackTap: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  }
                 ),
                 SliverToBoxAdapter(
                   child: Padding(

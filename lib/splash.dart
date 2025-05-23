@@ -35,7 +35,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   Assets.logo3,
                   scale: 2.5,
                 ),
-
+                SizedBox(height: 16,),
+                CircularProgressIndicator(color: ColorManager.white,),
+                SizedBox(height: 16,),
                 Spacer(),
                 Text(
                   '© جميع الحقوق محفوظة لتموينات فضاء الخليج والعلامة التجارية الخاصة بها',

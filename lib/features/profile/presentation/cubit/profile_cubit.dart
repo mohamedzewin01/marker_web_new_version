@@ -31,18 +31,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       case Success<GetUserInfoEntity?>():
         {
           if (!isClosed) {
-            await CacheService.setData(
-              key: CacheConstants.userName,
-              value: editNameController,
-            );
-            await CacheService.setData(
-              key: CacheConstants.userEmail,
-              value: editEmailController.text,
-            );
-            await CacheService.setData(
-              key: CacheConstants.userPhone,
-              value: editPhoneController.text,
-            );
+
 
             emit(ProfileSuccess(result.data!));
           }
@@ -57,23 +46,15 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
 
-  TextEditingController editEmailController = TextEditingController(
-    text: CacheService.getData(key: CacheConstants.userEmail),
-  );
-  TextEditingController editNameController = TextEditingController(
-    text: CacheService.getData(key: CacheConstants.userName),
-  );
 
-  TextEditingController editPhoneController = TextEditingController(
-    text: CacheService.getData(key: CacheConstants.userPhone),
-  );
-  Future<void> editProfile() async {
+
+  Future<void> editProfile({required String email,required String name,required String phone}) async {
     emit(EditProfileLoading());
     EditProfileRequest editProfileRequest = EditProfileRequest(
       id: CacheService.getData(key: CacheConstants.userId),
-      email: editEmailController.text,
-      name: editNameController.text,
-      phone: editPhoneController.text,
+      email: email,
+      name: name,
+      phone: phone
     );
     var result = await _profileUseCaseRepo.editProfile(editProfileRequest);
 
@@ -81,20 +62,9 @@ class ProfileCubit extends Cubit<ProfileState> {
       case Success<EditProfileEntity?>():
         {
           if (!isClosed) {
-            await CacheService.setData(
-              key: CacheConstants.userName,
-              value: editNameController,
-            );
-            await CacheService.setData(
-              key: CacheConstants.userEmail,
-              value: editEmailController.text,
-            );
-            await CacheService.setData(
-              key: CacheConstants.userPhone,
-              value: editPhoneController.text,
-            );
 
             emit(EditProfileSuccess(result.data!));
+            await getProfile();
           }
         }
       case Fail<EditProfileEntity?>():
