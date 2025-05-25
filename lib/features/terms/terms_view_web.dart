@@ -23,7 +23,7 @@ class _TermsViewWebState extends State<TermsViewWeb> {
     super.initState();
 
     /// TODO: iframe_view   when web app
-    IframeView.registerViewFactory(viewId, termsUrl);
+    // IframeView.registerViewFactory(viewId, termsUrl);
 
   }
   @override

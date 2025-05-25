@@ -46,6 +46,9 @@ class _DropDownDeliveryAreasState extends State<DropDownDeliveryAreas> {
             }
             if (selectedArea == null && deliveryAreas.isNotEmpty) {
               selectedArea = deliveryAreas.first;
+              context.read<AddressCubit>().idUserArea = deliveryAreas.first.id ?? 0;
+              context.read<AddressCubit>().cityController.text =
+                  deliveryAreas.first.areaName ?? '';
             }
             return Form(
               key: viewModel.formKeyAreas,

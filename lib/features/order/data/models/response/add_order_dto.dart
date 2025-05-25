@@ -7,12 +7,27 @@ part 'add_order_dto.g.dart';
 class AddOrderDto {
   @JsonKey(name: "message")
   final String? message;
-  @JsonKey(name: "order")
-  final Order? order;
+  @JsonKey(name: "order_id")
+  final int? orderId;
+  @JsonKey(name: "order_number")
+  final String? orderNumber;
+  @JsonKey(name: "order_date")
+  final String? orderDate;
+  @JsonKey(name: "delivery_time")
+  final String? deliveryTime;
+  @JsonKey(name: "total_price")
+  final int? totalPrice;
+  @JsonKey(name: "orderItems")
+  final List<OrderItems>? orderItems;
 
   AddOrderDto ({
     this.message,
-    this.order,
+    this.orderId,
+    this.orderNumber,
+    this.orderDate,
+    this.deliveryTime,
+    this.totalPrice,
+    this.orderItems,
   });
 
   factory AddOrderDto.fromJson(Map<String, dynamic> json) {
@@ -22,54 +37,15 @@ class AddOrderDto {
   Map<String, dynamic> toJson() {
     return _$AddOrderDtoToJson(this);
   }
-  AddOrderEntity toAddOrderEntity() {
-    return AddOrderEntity(message: message,order: order);
-  }
-}
-
-@JsonSerializable()
-class Order {
-  @JsonKey(name: "user")
-  final int? user;
-  @JsonKey(name: "orderItems")
-  final List<OrderItems>? orderItems;
-  @JsonKey(name: "totalPrice")
-  final int? totalPrice;
-  @JsonKey(name: "paymentType")
-  final String? paymentType;
-  @JsonKey(name: "isPaid")
-  final bool? isPaid;
-  @JsonKey(name: "isDelivered")
-  final bool? isDelivered;
-  @JsonKey(name: "state")
-  final String? state;
-  @JsonKey(name: "orderNumber")
-  final String? orderNumber;
-  @JsonKey(name: "createdAt")
-  final String? createdAt;
-  @JsonKey(name: "updatedAt")
-  final String? updatedAt;
-
-  Order ({
-    this.user,
-    this.orderItems,
-    this.totalPrice,
-    this.paymentType,
-    this.isPaid,
-    this.isDelivered,
-    this.state,
-    this.orderNumber,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  factory Order.fromJson(Map<String, dynamic> json) {
-    return _$OrderFromJson(json);
-  }
-
-  Map<String, dynamic> toJson() {
-    return _$OrderToJson(this);
-  }
+  AddOrderEntity toAddOrderEntity() => AddOrderEntity(
+    message: message,
+    orderId: orderId,
+    orderNumber: orderNumber,
+    orderDate: orderDate,
+    deliveryTime: deliveryTime,
+    totalPrice: totalPrice,
+    orderItems: orderItems,
+  );
 }
 
 @JsonSerializable()

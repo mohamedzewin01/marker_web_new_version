@@ -92,6 +92,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 CustomSliverAppBar(
                   title: 'تسجيل الدخول',
                   isBack: false,
+
                   onBackTap: () {
                     Navigator.pop(context);
                     Navigator.pop(context);

@@ -8,43 +8,27 @@ part of 'add_order_dto.dart';
 
 AddOrderDto _$AddOrderDtoFromJson(Map<String, dynamic> json) => AddOrderDto(
   message: json['message'] as String?,
-  order:
-      json['order'] == null
-          ? null
-          : Order.fromJson(json['order'] as Map<String, dynamic>),
-);
-
-Map<String, dynamic> _$AddOrderDtoToJson(AddOrderDto instance) =>
-    <String, dynamic>{'message': instance.message, 'order': instance.order};
-
-Order _$OrderFromJson(Map<String, dynamic> json) => Order(
-  user: (json['user'] as num?)?.toInt(),
+  orderId: (json['order_id'] as num?)?.toInt(),
+  orderNumber: json['order_number'] as String?,
+  orderDate: json['order_date'] as String?,
+  deliveryTime: json['delivery_time'] as String?,
+  totalPrice: (json['total_price'] as num?)?.toInt(),
   orderItems:
       (json['orderItems'] as List<dynamic>?)
           ?.map((e) => OrderItems.fromJson(e as Map<String, dynamic>))
           .toList(),
-  totalPrice: (json['totalPrice'] as num?)?.toInt(),
-  paymentType: json['paymentType'] as String?,
-  isPaid: json['isPaid'] as bool?,
-  isDelivered: json['isDelivered'] as bool?,
-  state: json['state'] as String?,
-  orderNumber: json['orderNumber'] as String?,
-  createdAt: json['createdAt'] as String?,
-  updatedAt: json['updatedAt'] as String?,
 );
 
-Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
-  'user': instance.user,
-  'orderItems': instance.orderItems,
-  'totalPrice': instance.totalPrice,
-  'paymentType': instance.paymentType,
-  'isPaid': instance.isPaid,
-  'isDelivered': instance.isDelivered,
-  'state': instance.state,
-  'orderNumber': instance.orderNumber,
-  'createdAt': instance.createdAt,
-  'updatedAt': instance.updatedAt,
-};
+Map<String, dynamic> _$AddOrderDtoToJson(AddOrderDto instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'order_id': instance.orderId,
+      'order_number': instance.orderNumber,
+      'order_date': instance.orderDate,
+      'delivery_time': instance.deliveryTime,
+      'total_price': instance.totalPrice,
+      'orderItems': instance.orderItems,
+    };
 
 OrderItems _$OrderItemsFromJson(Map<String, dynamic> json) => OrderItems(
   orderId: (json['order_id'] as num?)?.toInt(),
