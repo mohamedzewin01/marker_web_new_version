@@ -74,9 +74,9 @@ class CategoriesView extends StatelessWidget {
         Material(
           elevation: 6.0,
           shape: const CircleBorder(),
-          shadowColor: Colors.black45, // تقدر تعدل عليه
+          shadowColor: Colors.black45,
           child: CircleAvatar(
-            backgroundColor: ColorManager.indigoLight.withOpacity(0.2),
+            backgroundColor: ColorManager.primary3.withOpacity(.6),
             radius: 35,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -84,6 +84,7 @@ class CategoriesView extends StatelessWidget {
             ),
           ),
         ),
+
 
         SizedBox(
           height: 4,

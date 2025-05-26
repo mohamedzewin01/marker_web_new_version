@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fada_alhalij_web/core/api/model/order_firebase_model.dart';
 import 'package:fada_alhalij_web/core/di/di.dart';
 import 'package:fada_alhalij_web/core/functions/is_user_logged_in.dart';
 import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
@@ -6,6 +7,8 @@ import 'package:fada_alhalij_web/core/resources/cashed_image.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:fada_alhalij_web/core/utils/cashed_data_shared_preferences.dart';
+import 'package:fada_alhalij_web/core/utils/constants.dart';
+import 'package:fada_alhalij_web/core/utils/firebase_utils.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_dialog.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_elevated_button.dart';
 import 'package:fada_alhalij_web/core/widgets/custom_empty.dart';
@@ -18,6 +21,8 @@ import 'package:fada_alhalij_web/features/order/presention/widgets/order_details
 import 'package:fada_alhalij_web/features/order/presention/widgets/order_summary_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 class ActiveOrderView extends StatefulWidget {
   const ActiveOrderView({super.key});
@@ -48,7 +53,6 @@ class _ActiveOrderViewState extends State<ActiveOrderView> {
         builder: (context, state) {
           if (state is OrdersActiveSuccess) {
             List<ActiveOrder>? order = state.getActiveOrdersEntity.orders ?? [];
-
             return Column(
               children: [
                 Expanded(
@@ -81,10 +85,6 @@ class _ActiveOrderViewState extends State<ActiveOrderView> {
                                 itemBuilder: (context, index) {
                                   return Column(
                                     children: [
-                                      // CartActiveOrderItemCard(
-                                      //   index: index,
-                                      //   cartItem: order[index],
-                                      // ),
                                       InkWell(
                                         onTap: () {
                                           Navigator.push(
@@ -97,16 +97,28 @@ class _ActiveOrderViewState extends State<ActiveOrderView> {
                                             ),
                                           );
                                         },
-                                        child: OrderSummaryCard(
-                                          orderNumber:
-                                              order[index].orderNumber ?? '',
-                                          orderDate:
-                                              order[index].createdAt ?? '',
-                                          itemsCount:
-                                              order[index].orderItems?.length ??
-                                              0,
-                                          totalAmount:
-                                              order[index].totalPrice ?? 0,
+                                        child: Column(
+                                          children: [
+                                            OrderSummaryCard(
+                                              orderNumber:
+                                                  order[index].orderNumber ??
+                                                  '',
+                                              orderDate:
+                                                  order[index].createdAt ?? '',
+                                              itemsCount:
+                                                  order[index]
+                                                      .orderItems
+                                                      ?.length ??
+                                                  0,
+                                              totalAmount:
+                                                  order[index].totalPrice ?? 0,
+                                            ),
+                                            SizedBox(height: 16),
+                                            TrackOrder(
+                                              idOrder:
+                                                  order[index].idOrder ?? 0,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -118,8 +130,6 @@ class _ActiveOrderViewState extends State<ActiveOrderView> {
                           ),
                         ),
                       ),
-
-                      TrackOrder(),
                     ],
                   ),
                 ),
@@ -151,193 +161,191 @@ class _ActiveOrderViewState extends State<ActiveOrderView> {
 }
 
 class TrackOrder extends StatelessWidget {
-  // Define colors used in the design
-  final Color primaryGreen = Color(
-    0xFFC8FFB9,
-  ); // Light green background for active icons
-  final Color secondaryGreen = Color(0xFF6AC92A); // Green icon color
-  final Color activeLineColor = Color(
-    0xFFD3D3D3,
-  ); // Grey line color for active stages
-  final Color inactiveColor =
-      Colors.grey[400]!; // Grey color for inactive icons and text
-  final Color lightGreyBackground = Color(
-    0xFFF2F2F2,
-  ); // Background color of the body
-  final Color darkTextColor = Colors.black87; // Dark text color
-  final Color lightTextColor = Colors.grey[600]!;
+  const TrackOrder({super.key, required this.idOrder});
 
-  TrackOrder({super.key}); // Light grey text color
+  final int idOrder;
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.only(
-          bottom: kBottomNavigationBarHeight + 100,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-
-              _buildTimeline(),
-            ],
-          ),
-        ),
-      ),
-    );
+    return _buildOrderTimeline();
   }
 
+  Widget _buildOrderTimeline() {
+    print(idOrder);
+    DateTime now = DateTime.now();
 
+    return StreamBuilder<OrdersFirebaseModel?>(
+      stream: FirebaseUtils.getOrders(idOrder: idOrder.toString()),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+        if (!snapshot.hasData || snapshot.data == null) {
+          return Text(
+            "بانتظار قبول الطلب",
+            style: getSemiBoldStyle(color: ColorManager.error),
+          );
+        }
 
-  Widget _buildTimeline() {
-    return IntrinsicHeight(
-      // Use IntrinsicHeight to make the Column take the height of its children
+        OrdersFirebaseModel? orderData = snapshot.data;
+        String status = orderData?.status ?? 'Pending';
+        print(status);
+        if (!Constants.orderStages.contains(status)) {
+          print("Warning: Unknown order state - $status");
+          status = "Order Accepted";
+        }
+
+        return Column(
+          children:
+              Constants.orderStages.map((state) {
+                int index = Constants.orderStages.indexOf(state);
+                bool isActive = index <= Constants.orderStages.indexOf(status);
+                DateTime currentTime = now.add(Duration(minutes: 30 * index));
+                return _buildOrderStatus(
+                  acceptedAt:orderData?.acceptedAt ?? '',
+                  preparingAt:orderData?.preparingAt ?? '',
+                  outDeliveryAt:orderData?.outDeliveryAt ?? '',
+                  createdAt:orderData?.createdAt ?? '',
+                  status: state,
+                  date: orderData?.updatedAt ?? '',
+                  index: index,
+                  isActive: isActive,
+                );
+              }).toList(),
+        );
+      },
+    );
+    ;
+  }
+
+  Widget _buildOrderStatus({
+    required String status,
+    required int index,
+    required String date,
+    required String acceptedAt,
+    required String preparingAt,
+    required String outDeliveryAt,
+    required String createdAt,
+    bool isActive = false,
+  }) {
+    String getDateForStatus() {
+      switch (status) {
+        case 'Pending':
+          return createdAt;
+        case 'Order Accepted':
+          return acceptedAt;
+        case 'Preparing':
+          return preparingAt;
+        case 'Out for Delivery':
+          return outDeliveryAt;
+        default:
+          return '';
+      }
+    }
+    final parsedDate = DateTime.tryParse(getDateForStatus());
+    return Padding(
+      padding: const EdgeInsets.only(left: 30),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        // Stretch children vertically
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              // Space out the timeline items vertically
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildTimelineText(
-                  'Order Placed',
-                  'October 21 2021',
-                  isActive: true,
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      isActive
+                          ? SizedBox()
+                          : SizedBox(
+                            height: 10,
+                            width: 18,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: CircularProgressIndicator(
+                                color: Colors.grey,
+                                strokeWidth: 1,
+                                // padding: EdgeInsets.all(12),
+                              ),
+                            ),
+                          ),
+
+                      Text(
+                        Constants.getButtonLabel(status),
+                        style: getSemiBoldStyle(
+
+                          color: isActive ? ColorManager.primary : Colors.grey,
+                          fontSize: isActive ? 12 : 10,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                _buildTimelineText(
-                  'Order Confirmed',
-                  'October 21 2021',
-                  isActive: true,
+                SizedBox(height: 4),
+                Text(
+                  parsedDate != null
+                      ? DateFormat('EEEE d MMMM - HH:mm a', 'ar').format(parsedDate)
+                      : '',
+
+                  style: getSemiBoldStyle(
+                    color: isActive ? ColorManager.grey : Colors.white,
+                    fontSize: isActive ? 12 : 12,
+                  ),
                 ),
-                _buildTimelineText(
-                  'Order Shipped',
-                  'October 21 2021',
-                  isActive: true,
-                ),
-                _buildTimelineText(
-                  'Out for Delivery',
-                  'Pending',
-                  isActive: false,
-                ),
-                _buildTimelineText(
-                  'Order Delivered',
-                  'Pending',
-                  isActive: false,
-                ),
+
               ],
             ),
           ),
-          SizedBox(width: 16),
+
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // Top spacing (aligns first icon with top of text)
-              SizedBox(height: 10),
-              // Adjust this based on title text height
-              _buildTimelineIcon(isActive: true, icon: Icons.archive_outlined),
-              _buildTimelineConnector(isActive: true),
-              _buildTimelineIcon(
-                isActive: true,
-                icon: Icons.check_circle_outline,
+              Container(
+                width: 50,
+                height: 50,
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: isActive ? ColorManager.primary3 : Colors.white,
+                  border: Border.all(
+                    color:
+                        isActive
+                            ? ColorManager.primary
+                            : Colors.grey.withAlpha(200),
+                    width: 2,
+                  ),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    Constants.imageOrder[index],
+                    height: 20,
+                    width: 20,
+                    fit: BoxFit.contain,
+                    colorFilter: ColorFilter.mode(
+                      isActive
+                          ? ColorManager.primary
+                          : Colors.grey.withAlpha(200),
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
               ),
-              _buildTimelineConnector(isActive: true),
-              _buildTimelineIcon(
-                isActive: true,
-                icon: Icons.location_on_outlined,
-              ),
-              _buildTimelineConnector(isActive: false),
-              _buildTimelineIcon(
-                isActive: false,
-                icon: Icons.local_shipping_outlined,
-              ),
-              _buildTimelineConnector(isActive: false, isLast: true),
-              // isLast true for the last connector
-              _buildTimelineIcon(
-                isActive: false,
-                icon: Icons.shopping_cart_outlined,
-              ),
-              // Bottom spacing (aligns last icon with bottom of text)
-              SizedBox(height: 10),
-              // Adjust this based on subtitle text height
+
+              if (status != "Delivered")
+                Container(
+                  width: 2,
+                  height: 30,
+                  color:
+                      isActive
+                          ? ColorManager.primary3
+                          : Colors.grey.withAlpha(200),
+                ),
             ],
-          ),
-
-          // Right side: Timeline text details
-
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTimelineIcon({required bool isActive, required IconData icon}) {
-    return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        color: isActive ? primaryGreen : Colors.grey[200],
-        shape: BoxShape.circle,
-        border: isActive ? null : Border.all(color: inactiveColor, width: 1.5),
-      ),
-      child: Icon(
-        icon,
-        color: isActive ? secondaryGreen : inactiveColor,
-        size: 20,
-      ),
-    );
-  }
-
-  Widget _buildTimelineConnector({
-    required bool isActive,
-    bool isLast = false,
-  }) {
-    if (isLast) {
-      return Container(); // Don't draw a line after the last item
-    }
-    return Expanded(
-      child: Container(
-        width: 2, // Thickness of the line
-        color: isActive ? activeLineColor : inactiveColor,
-      ),
-    );
-  }
-
-  Widget _buildTimelineText(
-    String title,
-    String subtitle, {
-    required bool isActive,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      // Add vertical padding to space out the text
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: isActive ? darkTextColor : inactiveColor,
-            ),
-          ),
-          SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: TextStyle(
-              fontSize: 14,
-              color: isActive ? lightTextColor : inactiveColor,
-            ),
           ),
         ],
       ),
     );
   }
 }
-
-

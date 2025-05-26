@@ -32,5 +32,7 @@ class Assets {
   static const String orderDeliverySvg = 'assets/images/orderDelivererd.svg';
   static const String orderOutForDeliverySvg = 'assets/images/orderOutForDelivery.svg';
   static const String orderShippedSvg = 'assets/images/orderShipped.svg';
+  static const String orderSvg = 'assets/images/order.svg';
+  static const String orderPlacedSvg = 'assets/images/orderPlaced.svg';
 
 }

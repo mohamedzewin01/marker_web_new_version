@@ -7,6 +7,8 @@ class ColorManager {
 
   static const Color primaryColor = Color(0xff303f9f);
   static const Color primary2 = Color(0xFF5C6BC0 );
+  static const Color primary = Color(0xFF5666f5 );
+  static const Color primary3 = Color(0xFFd8dbfc );
   static const Color primaryLight = Color(0xff536dfe);
   static const Color background = Color(0xfff5f5f5);
   static const Color backgroundSecondary = Color(0xffe8eaf6);
@@ -32,7 +34,7 @@ class ColorManager {
   static const Color indigoDark = Color(0xFF1A237E);
   static const Color placeHolderColor = Color(0xffD9D9D9);
   static const Color placeHolderColor2 = Color(0xff979899);
-  static const Color primary = Color(0xff98A2B3);
+  // static const Color primary = Color(0xff98A2B3);
   static const Color fieldTextBorder = Color(0xffD3D3D3);
   static const Color offWhite = Color(0xffD9D9D9);
   static const Color cardColor = Color(0xffE9F5FA);

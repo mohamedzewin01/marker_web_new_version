@@ -1,6 +1,9 @@
+import 'package:fada_alhalij_web/core/resources/assets_manager.dart';
 import 'package:fada_alhalij_web/core/resources/color_manager.dart';
 import 'package:fada_alhalij_web/core/resources/style_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 class OrderSummaryCard extends StatelessWidget {
   const OrderSummaryCard({
@@ -41,7 +44,7 @@ class OrderSummaryCard extends StatelessWidget {
               children: [
                 Text(
                   'رقم الاوردر  $orderNumber',
-                  textDirection: TextDirection.rtl,
+                  // textDirection: TextDirection.rtl,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -50,21 +53,29 @@ class OrderSummaryCard extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                    orderDate,
-                    style:getSemiBoldStyle(color:ColorManager.black)
-
+                  DateFormat(
+                    'EEEE d MMMM - HH:mm a',
+                    'ar',
+                  ).format(DateTime.parse(orderDate)),
+                  style: getSemiBoldStyle(color: ColorManager.black),
                 ),
                 SizedBox(height: 8),
                 Row(
                   children: [
                     Text(
-                        ' عدد المنتجات : $itemsCount',
-                        style:getSemiBoldStyle(color:ColorManager.black,fontSize: 14)
+                      ' عدد المنتجات : $itemsCount',
+                      style: getSemiBoldStyle(
+                        color: ColorManager.black,
+                        fontSize: 14,
+                      ),
                     ),
                     SizedBox(width: 16),
                     Text(
-                        'اجمالي المبلغ : $totalAmount',
-                        style:getSemiBoldStyle(color:ColorManager.black,fontSize: 14)
+                      'اجمالي المبلغ : $totalAmount',
+                      style: getSemiBoldStyle(
+                        color: ColorManager.black,
+                        fontSize: 14,
+                      ),
                     ),
                   ],
                 ),
@@ -73,19 +84,38 @@ class OrderSummaryCard extends StatelessWidget {
           ),
 
           SizedBox(width: 16),
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: ColorManager.primary,
-              shape: BoxShape.circle,
+          ClipOval(
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: ColorManager.primary3,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+
+              ),
+
+              child: Center(
+                child: SvgPicture.asset(
+                  Assets.orderSvg,
+                  height: 24,
+                  width: 24,
+                  fit: BoxFit.scaleDown,
+                  colorFilter: ColorFilter.mode(
+                    ColorManager.primary,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
             ),
-            child: Icon(
-              Icons.archive_outlined,
-              color: ColorManager.primaryColor,
-              size: 30,
-            ),
-          ),
+          )
 
           // Order Details
         ],
