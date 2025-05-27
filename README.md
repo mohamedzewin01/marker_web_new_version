@@ -41,9 +41,7 @@ A comprehensive Flutter web application for an online store featuring product li
 </tr>
 <tr>
   <td><img src="https://github.com/user-attachments/assets/929e9013-832f-4ee2-9bca-6c3687172d6c" width="150" /></td>
-  <td></td>
-  <td></td>
-  <td></td>
+
 </tr>
 
 </table>
