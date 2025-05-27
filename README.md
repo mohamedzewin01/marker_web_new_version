@@ -33,12 +33,19 @@ A comprehensive Flutter web application for an online store featuring product li
     <td><img src="https://github.com/user-attachments/assets/0f1b89ad-a40e-4281-83c0-50983af7ec8f" width="150" /></td>
     <td><img src="https://github.com/user-attachments/assets/f19a3cd4-249d-46aa-9bb2-10746e46b430" width="150" /></td>
   </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/2752006a-3815-4306-ad32-fcbee1f4dbc7" width="150" /></td>
-    <td><img src="https://github.com/user-attachments/assets/d140639e-b1d5-4852-943b-d598287961e3" width="150" /></td>
-    <td></td>
-    <td></td>
-  </tr>
+<tr>
+  <td><img src="https://github.com/user-attachments/assets/2752006a-3815-4306-ad32-fcbee1f4dbc7" width="150" /></td>
+  <td><img src="https://github.com/user-attachments/assets/d140639e-b1d5-4852-943b-d598287961e3" width="150" /></td>
+  <td><img src="https://github.com/user-attachments/assets/d37afe14-b373-4900-b24d-7d5ec00c7a37" width="150" /></td>
+  <td><img src="https://github.com/user-attachments/assets/f31cbc83-47da-4061-9a16-b89585e2534b" width="150" /></td>
+</tr>
+<tr>
+  <td><img src="https://github.com/user-attachments/assets/929e9013-832f-4ee2-9bca-6c3687172d6c" width="150" /></td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+
 </table>
 
 
