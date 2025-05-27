@@ -171,8 +171,7 @@ class TrackOrder extends StatelessWidget {
   }
 
   Widget _buildOrderTimeline() {
-    print(idOrder);
-    DateTime now = DateTime.now();
+
 
     return StreamBuilder<OrdersFirebaseModel?>(
       stream: FirebaseUtils.getOrders(idOrder: idOrder.toString()),
@@ -200,7 +199,6 @@ class TrackOrder extends StatelessWidget {
               Constants.orderStages.map((state) {
                 int index = Constants.orderStages.indexOf(state);
                 bool isActive = index <= Constants.orderStages.indexOf(status);
-                DateTime currentTime = now.add(Duration(minutes: 30 * index));
                 return _buildOrderStatus(
                   acceptedAt:orderData?.acceptedAt ?? '',
                   preparingAt:orderData?.preparingAt ?? '',
@@ -215,7 +213,7 @@ class TrackOrder extends StatelessWidget {
         );
       },
     );
-    ;
+
   }
 
   Widget _buildOrderStatus({
