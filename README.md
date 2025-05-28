@@ -46,6 +46,9 @@ A comprehensive Flutter web application for an online store featuring product li
 
 </table>
 
+[Visit the website](https://fadaalkhalij2.artawiya.com/)
+
+[![Watch on YouTube](https://img.youtube.com/vi/GKbq3iGuUgU/0.jpg)](https://youtu.be/GKbq3iGuUgU?si=O-dbKofHiqHkdhc1)
 
 ## Features
 
